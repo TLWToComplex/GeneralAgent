@@ -1,0 +1,223 @@
+##############################################################################
+# GA 应用系统 Docker Compose 部署文件
+# 适用环境：Ubuntu 22.04 LTS + Docker 29.1.0+ / Compose v2.40.0+
+# 使用方式：sudo bash import-and-start.sh（推荐）或 docker compose up -d
+#
+# 服务清单（8 个）：
+#   中间件层:   mid-mysql, mid-neo4j, mid-elasticsearch
+#   应用层:     app-GA-kb-chat, app-GA-service-backend,
+#               app-ai-doc-processor, app-GA-frontend-v2
+#   MCP 层:     app-mcp-server-chart (图表渲染 MCP)
+#
+# 说明：GPU 模型服务（LLM/Embedding/Reranker/MinerU 文档解析）已拆分至独立的 model-service 部署包，
+#       部署方式见 ../model-service/deployment_guide.md；本栈经 ai-doc-processor 通过 HTTP(18002) 与 MinerU 对接。
+#       Langfuse 监控为独立部署包，见 ../langfuse/deployment_guide.md。
+##############################################################################
+
+networks:
+  GA-net:
+    driver: bridge
+
+services:
+
+  ############################################################################
+  # 中间件层
+  ############################################################################
+
+  # ---- MySQL 8.0.45 ----
+  mid-mysql:
+    image: mid/mysql:8.0.45
+    container_name: mid-mysql
+    restart: unless-stopped
+    ports:
+      - "13306:3306"
+    volumes:
+      - /data/mysql:/var/lib/mysql
+      - /data/mysql-init/ai_service.sql:/docker-entrypoint-initdb.d/ai_service.sql:ro
+    environment:
+      MYSQL_ROOT_PASSWORD: "GA@123456"
+      MYSQL_DATABASE: "ai_service"
+    networks:
+      - GA-net
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-pGA@123456" ]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+
+  # ---- Neo4j ----
+  mid-neo4j:
+    image: mid/neo4j:2026-05-15
+    container_name: mid-neo4j
+    restart: unless-stopped
+    ports:
+      - "17474:7474"
+      - "17687:7687"
+    volumes:
+      - /data/neo4j/data:/data
+      - /data/neo4j/logs:/logs
+      - /data/neo4j/import:/import
+      - /data/neo4j/plugins:/plugins
+    environment:
+      NEO4J_AUTH: "neo4j/GA@123456"
+      # 自动安装插件：2025.12+ 镜像内置 apoc / graph-data-science 离线包，无需联网；
+      # entrypoint 每次启动会用内置版本覆盖 /plugins 下同名 jar（分发的 jar 仅作兜底）
+      NEO4J_PLUGINS: '["apoc", "graph-data-science"]'
+      # 允许 APOC / GDS 运行不受限的过程
+      NEO4J_dbms_security_procedures_unrestricted: "apoc.*,gds.*"
+      NEO4J_dbms_security_procedures_allowlist: "apoc.*,gds.*"
+      # APOC 文件读写权限（use_neo4j_config 令其遵循 Neo4j import 目录限制）
+      NEO4J_apoc_import_file_enabled: "true"
+      NEO4J_apoc_export_file_enabled: "true"
+      NEO4J_apoc_import_file_use__neo4j__config: "true"
+      # 内存配置（GDS 需要较大堆）：宿主机需为 neo4j 预留 ≥ 7G 内存，不足请调小
+      NEO4J_server_memory_heap_max__size: "4G"
+      NEO4J_server_memory_pagecache_size: "2G"
+    networks:
+      - GA-net
+    # 首次创建容器时 entrypoint 可能因 apoc.conf 权限崩溃并自动重启一次（可自愈，
+    # 见 deployment_guide.md Q7），且 GDS/APOC 插件首次加载较慢；
+    # 放宽 start_period 以免 compose 等待 service_healthy 过早判定失败
+    healthcheck:
+      test: [ "CMD-SHELL", "wget -qO- http://localhost:7474 || exit 1" ]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 120s
+
+  # ---- Elasticsearch 9.1.6 ----
+  mid-elasticsearch:
+    image: mid/elasticsearch:9.1.6
+    container_name: mid-elasticsearch
+    restart: unless-stopped
+    privileged: true
+    ports:
+      - "19200:9200"
+      - "19300:9300"
+    volumes:
+      - /data/elasticsearch/data:/usr/share/elasticsearch/data
+      - /data/elasticsearch/plugins:/usr/share/elasticsearch/plugins
+    environment:
+      xpack.security.enabled: "true"
+      ELASTIC_PASSWORD: "GA@123456"
+      discovery.type: "single-node"
+      ES_JAVA_OPTS: "-Xms4g -Xmx4g"
+    networks:
+      - GA-net
+    healthcheck:
+      test: [ "CMD-SHELL", "curl -sf -u elastic:GA@123456 http://localhost:9200/_cluster/health || exit 1" ]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 40s
+
+  ############################################################################
+  # 应用服务层
+  ############################################################################
+
+  # ---- GA-kb-chat (知识库对话) ----
+  app-GA-kb-chat:
+    image: app/ga-kb-chat:2026-05-15
+    container_name: app-GA-kb-chat
+    restart: unless-stopped
+    ports:
+      - "17861:7861"
+    volumes:
+      - /data/GA-kb-chat/kb_config.yaml:/root/Langchain-Chatchat/libs/chatchat/kb_config.yaml
+      - /data/GA-kb-chat/data/knowledge_base:/root/Langchain-Chatchat/libs/chatchat/data/knowledge_base
+    environment:
+      # 向量化由远程 model-service 完成，本地无需大量 BLAS 线程；
+      # 限流可避免多核机器上 OpenBLAS 启动时批量建线程失败、加快 numpy 导入
+      OPENBLAS_NUM_THREADS: "4"
+      OMP_NUM_THREADS: "4"
+    # 旧版 Docker 宿主机 seccomp 会拦截 clone3 等系统调用，导致 OpenBLAS
+    # pthread_create 报 Operation not permitted、Manager 子进程起不来，故放开
+    security_opt:
+      - seccomp:unconfined
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    networks:
+      - GA-net
+    depends_on:
+      mid-mysql:
+        condition: service_healthy
+      mid-elasticsearch:
+        condition: service_healthy
+
+  # ---- GA-service-backend (业务后端) ----
+  app-GA-service-backend:
+    image: app/ga-service-backend:2026-05-15
+    container_name: app-GA-service-backend
+    restart: unless-stopped
+    ports:
+      - "18038:8038"
+    volumes:
+      - /data/GA-service-backend/config.yaml:/code/config.yaml
+      - /data/GA-service-backend/skills_repo:/code/skills_repo
+      - /data/GA-service-backend/agent_memory:/code/agent_memory:rw
+      - /data/GA-service-backend/chat_record_files:/code/chat_record_files
+      - /data/GA-service-backend/deepagent.db:/code/deepagent.db
+      - /data/GA-service-backend/deepagent.db-shm:/code/deepagent.db-shm
+      - /data/GA-service-backend/deepagent.db-wal:/code/deepagent.db-wal
+      - /var/run/docker.sock:/var/run/docker.sock
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    networks:
+      - GA-net
+    depends_on:
+      mid-mysql:
+        condition: service_healthy
+      mid-neo4j:
+        condition: service_healthy
+
+  # ---- ai-doc-processor (AI 文档处理) ----
+  app-ai-doc-processor:
+    image: app/ga-document-processor:2026-05-15
+    container_name: app-ai-doc-processor
+    restart: unless-stopped
+    ports:
+      - "18200:8200"
+    volumes:
+      - /data/GA-document-processor/config.yaml:/app/config.yaml
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    networks:
+      - GA-net
+    depends_on:
+      mid-mysql:
+        condition: service_healthy
+
+  # ---- GA-frontend-v2 (前端) ----
+  app-GA-frontend-v2:
+    image: app/ga-frontend-v2:2026-05-15
+    container_name: app-GA-frontend-v2
+    restart: unless-stopped
+    ports:
+      - "15174:5174"
+    volumes:
+      - /data/GA-frontend-v2/runtime-config.json:/usr/share/nginx/html/runtime-config.json:ro
+    networks:
+      - GA-net
+    depends_on:
+      - app-GA-service-backend
+
+  ############################################################################
+  # MCP 层
+  ############################################################################
+
+  # ---- mcp-server-chart (图表渲染 MCP，Streamable HTTP) ----
+  # MCP 端点:      http://<服务器IP>:1122/mcp
+  # 图表渲染服务:  http://<服务器IP>:8999/render-chart
+  # 环境变量统一由 /data/GA-mcp/.docker.env 提供（脚本自动分发，可修改后重启生效）
+  app-mcp-server-chart:
+    image: mcp-server-chart-streamable-http:1.0.0
+    container_name: app-mcp-server-chart
+    restart: unless-stopped
+    ports:
+      - "8999:8999"
+      - "1122:1122"
+    env_file:
+      - /data/GA-mcp/.docker.env
+    networks:
+      - GA-net

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="256" height="256" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- 文件主体 -->
+  <path
+    d="M594.944 0L930 341V904c0 66-53 120-117 120H210c-65 0-118-54-118-120V120C92 54 145 0 210 0H595Z"
+    fill="#4A6FD8"/>
+  <!-- 折角 -->
+  <path
+    d="M930 341H718c-65 0-123-59-123-125V0L930 341Z"
+    fill="#8FB0FF"/>
+  <!-- </> 标识 -->
+  <g transform="translate(512 560)" fill="none" stroke="#FFFFFF" stroke-width="52" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M-110 -130 L-230 0 L-110 130"/>
+    <path d="M110 -130 L230 0 L110 130"/>
+    <path d="M55 -165 L-55 165"/>
+  </g>
+</svg>

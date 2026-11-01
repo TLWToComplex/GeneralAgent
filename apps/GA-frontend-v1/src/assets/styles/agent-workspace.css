@@ -1,0 +1,1265 @@
+.agent-workspace {
+  /* 与交付中心 / 知识库共用同一套浅色纸面配色 */
+  --aw-ink: #34415a;
+  --aw-muted: #8490a5;
+  --aw-accent: #566bb4;
+  --aw-line: #dde4ef;
+  position: relative;
+  height: 100%;
+  min-height: 0;
+  color: var(--aw-ink);
+  background: transparent;
+  border-radius: 22px;
+  overflow: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Microsoft YaHei', sans-serif;
+}
+
+/* 页首与筛选栏固定，滚动条只出现在卡片网格区域 */
+.aw-scroll {
+  height: 100%;
+  overflow: hidden;
+}
+
+.aw-content {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  height: 100%;
+  min-height: 0;
+  margin: 0 auto;
+  padding: 0px 70px 20px 70px;
+}
+
+.aw-library {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
+
+.agent-workspace button,.agent-workspace input {
+  font: inherit;
+}
+
+.agent-workspace button {
+  cursor: pointer;
+}
+
+.agent-workspace button:disabled {
+  cursor: not-allowed;
+  opacity: .5;
+}
+
+.agent-workspace button:focus-visible,.agent-workspace input:focus-visible {
+  outline: 2px solid #869acb;
+  outline-offset: 3px;
+}
+
+.agent-workspace h1,.agent-workspace h3,.agent-workspace p {
+  margin: 0;
+}
+
+/* 页首重做成「指挥台」：左侧是带节奏的宣言，右侧是暗色状态面板，
+   用真实数据撑起气质，而不是只摆一个普通标题条 */
+.aw-masthead {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0,1.15fr) minmax(280px,.55fr);
+  gap: 18px;
+  align-items: stretch;
+  flex-shrink: 0;
+  margin-bottom: 14px;
+  padding-top: 50px;
+}
+
+.aw-masthead::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: url('@/assets/image/png/agent-banner-nav.png') left 110px center / min(890px, 100%) auto no-repeat;
+  transition: background-position .35s cubic-bezier(.25, .1, .25, 1), background-size .35s cubic-bezier(.25, .1, .25, 1);
+  -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 calc(100% - 34px), rgba(0,0,0,.4) calc(100% - 10px), transparent 100%);
+  mask-image: linear-gradient(180deg, #000 0%, #000 calc(100% - 34px), rgba(0,0,0,.4) calc(100% - 10px), transparent 100%);
+  pointer-events: none;
+}
+
+/* 左侧历史侧栏收起后容器变宽，banner 需要右移并放大以撑住视觉重心 */
+.main-container:not(.with-history-rail) .aw-masthead::before {
+  background-position: left 140px center;
+  background-size: min(1050px, 100%) auto;
+}
+
+.aw-heading {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.aw-heading h1 {
+  max-width: none;
+  font-family: 'SmileySansOblique', 'Microsoft YaHei', sans-serif;
+  font-size: clamp(28px,3.4vw,40px);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 1px;
+  color: #2f3a56;
+  text-shadow: 0 6px 18px #d7e1f5;
+}
+
+.aw-lead {
+  max-width: 28ch;
+  font-size: 13px;
+  line-height: 1.55;
+  color: #66748f;
+}
+
+.aw-stage {
+  --aw-disc-size: 126px;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 12px;
+  /* 固定最小高度：启用/未启用两种状态切换时页首高度不跳动 */
+  min-height: 124px;
+  padding: 16px 18px;
+  border: 1px solid #dbe4f5;
+  border-radius: 18px;
+  /* 与 .history-rail 保持一致的背景配色：白底 + 右上蓝 / 左下紫双径向光 */
+  background:
+    radial-gradient(circle 260px at top right, rgba(59, 130, 246, 0.22) 0%, rgba(59, 130, 246, 0.1) 45%, rgba(59, 130, 246, 0) 100%),
+    radial-gradient(circle 240px at left bottom, rgba(124, 58, 237, 0.18) 0%, rgba(124, 58, 237, 0.08) 45%, rgba(124, 58, 237, 0) 100%),
+    #ffffff;
+  color: #496089;
+  box-shadow: inset 0 1px 0 #ffffffa6, 0 10px 20px #8ea3ce1a;
+  overflow: hidden;
+}
+
+/* 右上角圆盘：中心柔白、外缘过渡到一丝蓝，避免在新白底上形成生硬的白色实心块 */
+.aw-stage-action::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+  width: var(--aw-disc-size);
+  height: var(--aw-disc-size);
+  border-radius: 50%;
+  border: 1px solid rgb(158 195 255 / 20%);
+  background: radial-gradient(circle, rgba(255,255,255,.6) 0%, rgba(255,255,255,.18) 46%, rgba(59,130,246,.08) 70%, rgba(59,130,246,0) 80%);
+  pointer-events: none;
+}
+
+/* 面板内容改为「当前正在使用的智能体」：上排头像与名称，下排三项关键信息 */
+.aw-stage-head {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  min-width: 0;
+  padding-right: 5px;
+}
+
+.aw-stage-avatar {
+  --aw-avatar-bg: #566bb4;
+  display: grid;
+  place-items: center;
+  flex: 0 0 40px;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--aw-avatar-bg);
+  border-radius: 50%;
+  background: var(--aw-avatar-bg);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  box-shadow: 0 4px 10px #8ea3ce2e;
+}
+
+.aw-stage-avatar.has-image {
+  border-color: #e3e8f2;
+  background: #fff;
+}
+
+.aw-stage-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.aw-stage-identity {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 0;
+  gap: 1px;
+}
+
+.aw-stage-name {
+  max-width: 100%;
+  min-width: 0;
+  color: #2f3a56;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: .2px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* 智能体描述：与 .aw-stage-idle-tip 同一套次级文本样式，单行省略并由 title 承载全文 */
+.aw-stage-desc {
+  max-width: 100%;
+  color: #6f81a6;
+  font-size: 11px;
+  line-height: 18px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Keep the action slot stable when no agent is selected. */
+.aw-stage-action {
+  position: relative;
+  isolation: isolate;
+  width: 88px;
+  height: 31px;
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+/* 按钮本体全透明，渐变只画在 1px 描边环上（伪元素 + mask 挖空内部） */
+.agent-workspace .aw-stage-exit {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 2px;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  color: #7182a3;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+  box-shadow: none;
+  transition: color .18s ease;
+}
+
+.agent-workspace .aw-stage-exit::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  padding: 1px;
+  border-radius: inherit;
+  background: linear-gradient(130deg, #7f9ce8, #b3c1ef 48%, #967fe0);
+  background-size: 200% 100%;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+  z-index: 1; /* 描边压在 hover 淡底之上，避免被冲淡 */
+}
+
+/* hover 时才浮现的淡蓝底，静止状态按钮依旧全透明 */
+.agent-workspace .aw-stage-exit::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(130deg, #7f9ce81f, #967fe026);
+  opacity: 0;
+  transition: opacity .22s ease;
+  pointer-events: none;
+}
+
+.agent-workspace .aw-stage-exit:not(:disabled):hover::after {
+  opacity: 1;
+}
+
+/* 描边渐变沿环流动一圈，位移一个整周期（200%）保证循环无跳变 */
+.agent-workspace .aw-stage-exit:not(:disabled):hover::before {
+  animation: aw-stage-exit-ring 1.8s linear infinite;
+}
+
+@keyframes aw-stage-exit-ring {
+  to {
+    background-position: 200% 0;
+  }
+}
+
+.aw-stage-exit:not(:disabled):hover {
+  color: #3f5fa2;
+}
+
+.aw-stage-exit:not(:disabled):active {
+  color: #2f4c87;
+}
+
+.aw-stage-exit:disabled {
+  cursor: not-allowed;
+}
+
+/* 关键信息四等分：顶部细分隔线代替色块，弱化「贴片」感 */
+.aw-stage-stats {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  padding-top: 10px;
+  background-image: linear-gradient(to right, transparent, var(--aw-line) 10%, var(--aw-line) 90%, transparent);
+  background-size: 100% 1px;
+  background-repeat: no-repeat;
+  background-position: top;
+  text-align: center;
+}
+
+.aw-stage-stats > div {
+  flex: 1;
+  box-sizing: border-box;
+  min-width: 0;
+  padding: 0 8px;
+}
+
+.aw-stage-stats > div + div {
+  border-left: 1px solid #e4eaf6;
+}
+
+.aw-stage-stats span {
+  display: block;
+  color: #98a3b8;
+  font-size: 10px;
+  line-height: 15px;
+  letter-spacing: .6px;
+  white-space: nowrap;
+}
+
+.aw-stage-stats strong {
+  display: block;
+  margin-top: 2px;
+  color: #3c4a66;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 17px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* 未启用智能体时的空状态：沿用头部结构，仅头像与状态改为占位样式 */
+.aw-stage-avatar.is-idle {
+  border: 1px dashed #c7d4ec;
+  background: #f7faff;
+  box-shadow: none;
+}
+
+.aw-stage-idle-tip {
+  max-width: 100%;
+  color: #6f81a6;
+  font-size: 12px;
+  height: 18px;
+  line-height: 18px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* 与知识库 .kw-create-button、交付中心 .dc-download 同一套浅蓝描边视觉 */
+.aw-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 9px 14px;
+  border: 1px solid #c6daff;
+  border-radius: 12px;
+  background: linear-gradient(130deg,#fffdfd,#e6ecfd);
+  color: #5a6caa;
+  font-size: 12px!important;
+  box-shadow: 0 3px 9px #627bad0d,inset 0 1px 1px #fff;
+  white-space: nowrap;
+  transition: box-shadow .2s;
+}
+
+.aw-primary:hover {
+  box-shadow: 0 5px 15px #627bad1c;
+}
+
+/* 单条控制台：归属与类型共用滑动分段控件，检索与操作靠右，
+   替代原先两行工具栏/筛选行，保持纸面极简的细线语言 */
+.aw-console {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  flex-shrink: 0;
+  padding-bottom: 12px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--aw-line);
+}
+
+.aw-console-filters {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 14px;
+  min-width: 0;
+}
+
+/* 凹陷轨道 + 白色滑块：选中项是一个圆角块，切换时平滑滑动到新位置 */
+.aw-segment {
+  --aw-seg-pad: 3px;
+  position: relative;
+  display: flex;
+  padding: var(--aw-seg-pad);
+  background: #eef2fa;
+  border: 1px solid #e6ecf7;
+  border-radius: 10px;
+}
+
+.aw-segment-thumb {
+  position: absolute;
+  top: var(--aw-seg-pad);
+  bottom: var(--aw-seg-pad);
+  left: var(--aw-seg-pad);
+  box-sizing: border-box;
+  width: calc((100% - var(--aw-seg-pad) * 2) / var(--aw-seg-count, 2));
+  background: #fff;
+  border: 1px solid #d8e0f0;
+  border-radius: 7px;
+  box-shadow: 0 1px 3px #34415a14;
+  transform: translateX(calc(var(--aw-seg-index, 0) * 100%));
+  transition: transform .35s cubic-bezier(.3, .9, .3, 1);
+  pointer-events: none;
+}
+
+.aw-segment button {
+  position: relative;
+  z-index: 1;
+  flex: 1 1 0;
+  min-width: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  height: 28px;
+  border: 0;
+  background: transparent;
+  padding: 0 13px;
+  font-size: 12px;
+  line-height: 1;
+  color: #8894aa;
+  white-space: nowrap;
+  border-radius: 7px;
+  cursor: pointer;
+  transition: color .25s ease;
+}
+
+.aw-segment button:hover {
+  color: #5c6f96;
+}
+
+.aw-segment button.active {
+  color: #3d4d78;
+}
+
+/* 裸上标计数与交付中心保持一致 */
+.aw-segment button sup {
+  display: inline-block;
+  margin-left: 4px;
+  font-size: 9px;
+  font-weight: 400;
+  line-height: 1;
+  transform: translateY(-3px);
+  color: #9ba9c1;
+  transition: color .25s ease;
+}
+
+.aw-segment button.active sup {
+  color: #7f92c4;
+}
+
+/* 两组分段控件之间的细竖线，延续纸面细线语言 */
+.aw-console-rule {
+  width: 1px;
+  height: 20px;
+  background: #e2e8f4;
+  flex-shrink: 0;
+}
+
+.aw-tally {
+  font-size: 11px;
+  color: #98a3b6;
+  white-space: nowrap;
+}
+
+.aw-tally b {
+  margin-right: 2px;
+  color: var(--aw-accent);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.aw-console-tools {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+/* 检索与刷新对齐交付中心归档态：下划线式搜索 + 方形图标按钮 */
+.aw-search {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 32px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #7183a3;
+  transition: color .18s ease;
+}
+
+.aw-search::after {
+  content: '';
+  position: absolute;
+  inset: auto 0 0;
+  height: 1px;
+  background: #c5d0e3;
+  pointer-events: none;
+  transition: background .18s ease;
+}
+
+.aw-search:hover::after {
+  background: #95a8cb;
+}
+
+.aw-search:hover,
+.aw-search:focus-within {
+  color: #4e67a2;
+}
+
+.aw-search input {
+  outline: none;
+  border: none;
+  min-width: 0;
+  width: 150px;
+  height: 20px;
+  padding: 0;
+  background: transparent;
+  font-size: 12px;
+  line-height: 20px;
+  color: var(--aw-ink);
+}
+
+.aw-search input:focus-visible {
+  outline: none;
+}
+
+.aw-search input::placeholder {
+  color: #78869e;
+}
+
+.aw-search>.anticon,
+.aw-console-tools .aw-icon-button>.anticon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 12px;
+  width: 12px;
+  height: 12px;
+  font-size: 12px;
+  line-height: 0;
+  vertical-align: middle;
+}
+
+/* 清除内联 SVG 的基线空隙，让图标按实际尺寸居中 */
+.aw-search>.anticon :deep(svg),
+.aw-console-tools .aw-icon-button>.anticon :deep(svg) {
+  display: block;
+  width: 12px;
+  height: 12px;
+}
+
+.aw-icon-button {
+  border: 0;
+  background: transparent;
+  width: 30px;
+  height: 30px;
+  border-radius: 9px;
+  color: #9aa5b8;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.aw-icon-button:hover {
+  background: #e9eef8;
+  color: #5265a5;
+}
+
+.aw-console-tools .aw-icon-button {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  color: #657ca8;
+  font-size: 13px;
+  transition: background .18s ease, color .18s ease;
+}
+
+.aw-console-tools .aw-icon-button:hover:not(:disabled) {
+  background: #e9eef8;
+  color: #4e67a2;
+}
+
+.aw-console-tools .aw-icon-button:active:not(:disabled) {
+  background: #d3def2;
+}
+
+.aw-console-tools .aw-primary {
+  margin-left: 4px;
+}
+
+.aw-grid {
+  display: grid;
+  grid-template-columns: repeat(4,minmax(0,1fr));
+  align-content: start;
+  gap: 16px;
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: #cfd7e4 transparent;
+  /* 常驻预留滚动条槽位：出现或消失都不改变内容宽度，卡片不再跳宽 */
+  scrollbar-gutter: stable;
+  padding-right: 6px;
+}
+
+/* 纸面名册：头像是身份锚点，类型像档案索引一样贴在姓名下方。 */
+.aw-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  box-sizing: border-box;
+  border: 1px solid #e3e8f2;
+  border-radius: 18px;
+  background: #fff;
+  padding: 12px 16px;
+  transition: border-color .2s, box-shadow .2s, background .2s;
+}
+
+.aw-card:hover,
+.aw-card:focus-within {
+  border-color: #cfe1ff;
+  box-shadow: 0 4px 12px #34415a0d;
+}
+
+/* 选中卡片沿用 .aw-stage 的背景配色：白底 + 右上蓝 / 左下紫双径向光（按卡片尺寸收窄光斑半径） */
+.aw-card.is-current {
+  border-color: #dbe4f5;
+  background:
+    radial-gradient(circle 140px at top right, rgba(59, 130, 246, 0.22) 0%, rgba(59, 130, 246, 0.1) 45%, rgba(59, 130, 246, 0) 100%),
+    radial-gradient(circle 120px at left bottom, rgba(124, 58, 237, 0.18) 0%, rgba(124, 58, 237, 0.08) 45%, rgba(124, 58, 237, 0) 100%),
+    #ffffff;
+}
+
+.aw-card-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+  min-height: 44px;
+}
+
+/* 头像底色来自接口的 themeColor，通过 --aw-avatar-bg 内联注入 */
+.aw-avatar {
+  --aw-avatar-bg: #566bb4;
+  position: relative;
+  display: grid;
+  place-items: center;
+  align-self: center;
+  flex: 0 0 42px;
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--aw-avatar-bg);
+  border-radius: 50%;
+  background: var(--aw-avatar-bg);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+/* 有图片头像时让底色退场，避免透明 PNG 压在饱和色上 */
+.aw-avatar.has-image {
+  border-color: #e3e8f2;
+  background: #fff;
+}
+
+.aw-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.aw-card-identity {
+  flex: 1;
+  min-width: 0;
+  padding-top: 1px;
+}
+
+.agent-workspace .aw-card-name {
+  min-width: 0;
+  margin: 0;
+  line-height: 21px;
+}
+
+.aw-card-name button {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: #33405c;
+  text-align: left;
+  cursor: default;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 21px;
+  letter-spacing: .2px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.aw-card-kicker {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  margin-top: 4px;
+}
+
+/* 卡片内的类型说明：纯文本展示，不再用胶囊标签 */
+.aw-card-type {
+  min-width: 0;
+  color: #7d8bab;
+  font-size: 11px;
+  line-height: 16px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.aw-card-status {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  gap: 5px;
+  padding-left: 8px;
+  border-left: 1px solid #dde4ef;
+  color: var(--aw-accent);
+  font-size: 10px;
+  line-height: 16px;
+  white-space: nowrap;
+}
+
+.aw-card .aw-more {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  margin: 0 -4px 0 auto;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #6c7a94;
+}
+
+.aw-card button:focus-visible {
+  outline: 2px solid var(--aw-accent);
+  outline-offset: 3px;
+}
+
+/* 卡片"更多操作"下拉菜单：浮层挂在 body 下且菜单项拿不到 scoped 属性，
+   故通过 overlay-class-name 挂 aw-more-menu 类，用 :global 限定作用范围。
+   antd 运行时注入的样式选择器为 .ant-dropdown .ant-dropdown-menu .ant-dropdown-menu-item，
+   这里再叠一层类名与嵌套，用更高优先级确保覆盖生效 */
+:global(.ant-dropdown.aw-more-menu .ant-dropdown-menu) {
+  padding: 5px;
+  border-radius: 10px;
+}
+
+:global(.ant-dropdown.aw-more-menu .ant-dropdown-menu .ant-dropdown-menu-item) {
+  border-radius: 7px;
+  font-size: 13px;
+}
+
+/* 下拉菜单里的 svg 图标（开启新对话）：
+   与历史侧栏菜单共用同一套图标资源，尺寸对齐 13px 文字 */
+.aw-menu-icon {
+  width: 13px;
+  height: 13px;
+  vertical-align: -1px;
+}
+
+/* 三项信息：细竖线分隔，内容居中对称 */
+.aw-fields {
+  display: flex;
+  align-items: stretch;
+  margin: auto 0 5px;
+  padding: 5px 0 5px;
+  text-align: center;
+  background: #dfebff70;
+  border-radius: 12px;
+}
+
+.aw-fields > div {
+  flex: 1;
+  min-width: 0;
+  padding: 0 16px;
+}
+
+.aw-fields > div + div {
+  border-left: 1px solid #e6ebf5;
+}
+
+/* 知识库信息较长，给其列分配更宽空间 */
+.aw-fields > .aw-field-kb {
+  flex: 1.6;
+}
+
+.aw-fields span {
+  display: block;
+  color: #98a3b8;
+  font-size: 10px;
+  line-height: 16px;
+  letter-spacing: .7px;
+  white-space: nowrap;
+}
+
+.aw-fields strong {
+  display: block;
+  margin-top: 3px;
+  color: #3c4a66;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 18px;
+  letter-spacing: .1px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* 底部信息栏：通栏分隔线贴住卡片底边，模型信息靠左 */
+.aw-card-bar {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  margin: 12px -16px -12px;
+  padding: 9px 16px 11px;
+  /* 柔和渐变分割线：两端渐隐，视觉更轻 */
+  background-image: linear-gradient(to right, transparent, var(--aw-line) 30%, var(--aw-line) 70%, transparent);
+  background-size: 100% 1px;
+  background-repeat: no-repeat;
+  background-position: top;
+}
+
+.aw-card-bar-model {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  flex: 1;
+  min-width: 0;
+  color: #5c6f96;
+  font-size: 12px;
+  line-height: 18px;
+}
+
+/* 模型徽标：llm svg 原样直出，无圆底无内边距，尺寸由这里的字号控制 */
+.aw-model-icon {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  color: #566bb4;
+  font-size: 18px;
+  line-height: 1;
+}
+
+/* 无品牌徽标时退回首字母文字徽标 */
+.aw-model-icon em {
+  font-style: normal;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* 名称限宽：超出栏宽六成即省略，避免长模型名占满整条底栏 */
+.aw-model-name {
+  min-width: 0;
+  max-width: 60%;
+  letter-spacing: .2px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.aw-card-bar .aw-bar-launch {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  background:
+    radial-gradient(circle 70px at top right, rgba(59, 130, 246, 0.22) 0%, rgba(59, 130, 246, 0.1) 45%, rgba(59, 130, 246, 0) 100%),
+    radial-gradient(circle 60px at left bottom, rgba(124, 58, 237, 0.18) 0%, rgba(124, 58, 237, 0.08) 45%, rgba(124, 58, 237, 0) 100%),
+    #ffffff;
+  color: #5a6caa;
+  font-size: 11px;
+  line-height: 18px;
+  white-space: nowrap;
+  transition: box-shadow .2s, border-color .2s, color .2s;
+}
+
+.aw-card-bar .aw-bar-launch::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 200%;
+  z-index: -1;
+  border-radius: inherit;
+  background-image: linear-gradient(90deg,
+    rgba(59, 130, 246, 0) 0%,
+    rgba(99, 102, 241, 0.14) 30%,
+    rgba(168, 85, 247, 0.18) 50%,
+    rgba(99, 102, 241, 0.14) 70%,
+    rgba(59, 130, 246, 0) 100%);
+  background-size: 50% 100%;
+  background-repeat: repeat-x;
+  opacity: 0;
+  transition: opacity .25s ease;
+  pointer-events: none;
+  will-change: transform;
+}
+
+.aw-card-bar .aw-bar-launch .aw-bar-launch-icon {
+  width: 16px;
+  height: 15px;
+  display: block;
+}
+
+.aw-card-bar .aw-bar-launch:hover {
+  color: #4e62a4;
+  box-shadow: 0 5px 15px #627bad1c;
+}
+
+.aw-card-bar .aw-bar-launch:hover::before {
+  opacity: 1;
+  animation: aw-launch-flow 2.6s linear infinite;
+}
+
+@keyframes aw-launch-flow {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-50%, 0, 0); }
+}
+
+/* 描述文字紧跟头部，作为卡片的第一段说明。 */
+.aw-meta-full {
+  display: flex;
+  align-items: baseline;
+  min-width: 0;
+  margin-top: 10px;
+}
+
+/* 描述默认两行，超出部分省略；完整内容悬停 title 可见 */
+.aw-meta-full em {
+  flex: 1;
+  min-width: 0;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  /* 固定两行高度：不足两行也留白占位，保证卡片纵向节奏一致 */
+  min-height: 36px;
+  color: #5c6f96;
+  font-size: 13px;
+  font-style: normal;
+  line-height: 18px;
+  overflow: hidden;
+}
+
+@media (max-width: 560px) {
+  .aw-fields { flex-direction: column; text-align: left; }
+  .aw-fields > div { flex: none; padding: 0; }
+  .aw-fields > .aw-field-kb { flex: none; }
+  .aw-fields > div + div { border-left: 0; border-top: 1px solid #e6ebf5; margin-top: 8px; padding-top: 8px; }
+}
+
+/* 创建入口：名册里一个安静的虚线空位——与 .aw-card 同尺寸节奏（18px 圆角、12px 16px 内边距），
+   内容水平居中；不加渐变、光晕与按钮装饰，仅 hover 时向 .aw-card:hover 的反馈靠拢 */
+.aw-create-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  box-sizing: border-box;
+  border: 1px dashed #d7deeb;
+  border-radius: 18px;
+  background: #fcfdff;
+  color: #7f8ba3;
+  text-align: center;
+  padding: 12px 16px;
+  transition: border-color .2s, box-shadow .2s, background .2s;
+}
+
+.aw-create-card:hover {
+  border-color: #c9d4e6;
+  background: #fff;
+  box-shadow: 0 4px 12px #34415a0d;
+}
+
+/* 加号占位：呼应邻居卡片的 42px 圆形头像，用 .aw-stage-avatar.is-idle 同款的虚线空位写法 */
+.aw-create-card>span {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border: 1px dashed #c7d4ec;
+  border-radius: 50%;
+  background: #f7faff;
+  color: #8d9ab5;
+  font-size: 15px;
+  transition: color .2s, border-color .2s;
+}
+
+.aw-create-card:hover>span {
+  border-color: #a9b8e0;
+  color: var(--aw-accent);
+}
+
+.aw-create-card>strong {
+  margin-top: 12px;
+  color: #4a5878;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 21px;
+}
+
+.aw-create-card>p {
+  margin: 5px 0 0;
+  color: #93a0b8;
+  font-size: 12px;
+  line-height: 18px;
+}
+
+.aw-notice {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background: #fdf6e9;
+  color: #8d7240;
+  padding: 12px 16px;
+  border-radius: 10px;
+  font-size: 12px;
+  flex-shrink: 0;
+  margin-bottom: 16px;
+}
+
+.aw-notice button {
+  border: 0;
+  background: transparent;
+  color: #8d7240;
+  text-decoration: underline;
+  white-space: nowrap;
+}
+
+.aw-empty {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: 220px;
+  padding: 28px;
+  border: 1px dashed #dde3ef;
+  border-radius: 16px;
+  background: #ffffff;
+}
+
+.aw-empty>.anticon {
+  font-size: 22px;
+  color: #798cb7;
+  margin-bottom: 12px;
+}
+
+.aw-empty h3 {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: .3px;
+  margin: 0 0 8px;
+  color: #33405c;
+}
+
+.aw-empty p {
+  font-size: 12px;
+  color: #929daf;
+  margin-bottom: 18px;
+}
+
+@media(max-width:1150px) {
+  .aw-content {
+    padding: 18px 18px 20px;
+  }
+  .aw-masthead {
+    grid-template-columns: minmax(0,1fr) minmax(280px,.86fr);
+    padding: 18px 20px;
+  }
+  .aw-grid {
+    grid-template-columns: repeat(3,minmax(0,1fr));
+  }
+  .aw-console {
+    gap: 12px;
+  }
+  .aw-console-filters {
+    gap: 10px;
+  }
+}
+
+@media(max-width:850px) {
+  .aw-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+}
+
+@media(max-width:800px) {
+  .aw-masthead {
+    grid-template-columns: 1fr;
+    gap: 14px;
+    padding: 18px;
+  }
+  .aw-heading h1 {
+    font-size: 30px;
+  }
+  .aw-lead {
+    max-width: none;
+    font-size: 12px;
+  }
+  .aw-stage {
+    min-height: 118px;
+    gap: 10px;
+    padding: 14px 16px;
+  }
+  .aw-stage-head {
+    padding-right: 20px;
+  }
+  .aw-stage-avatar {
+    flex-basis: 36px;
+    width: 36px;
+    height: 36px;
+    font-size: 13px;
+  }
+  .aw-console {
+    align-items: stretch;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .aw-segment-types {
+    flex: 1;
+  }
+  .aw-search input {
+    width: 100%;
+  }
+  .aw-search {
+    flex: 1;
+  }
+  .aw-console-tools {
+    width: 100%;
+    padding-bottom: 12px;
+  }
+}
+
+@media(max-width:560px) {
+  .agent-workspace {
+    margin-left: 48px;
+    border-radius: 15px;
+  }
+  .aw-content {
+    padding: 14px 14px 18px;
+  }
+  .aw-masthead {
+    padding: 16px 14px;
+    border-radius: 18px;
+  }
+  .aw-heading h1 {
+    font-size: 26px;
+  }
+  .aw-lead {
+    display: none;
+  }
+  .aw-stage {
+    gap: 9px;
+    padding: 14px;
+    border-radius: 16px;
+  }
+  .aw-stage-head {
+    padding-right: 12px;
+  }
+  .aw-stage-name {
+    font-size: 14px;
+  }
+  .aw-stage-idle-tip {
+    font-size: 11px;
+  }
+  .aw-grid {
+    grid-template-columns: 1fr;
+  }
+  .aw-console-filters {
+    gap: 8px;
+  }
+  .aw-console-rule {
+    display: none;
+  }
+  .aw-segment button {
+    font-size: 10px;
+    padding: 0 8px;
+  }
+  .aw-segment-types {
+    flex-basis: 100%;
+  }
+  .aw-tally {
+    display: none;
+  }
+}
+
+@media(prefers-reduced-motion:reduce) {
+  .agent-workspace * {
+    transition: none!important;
+    scroll-behavior: auto!important;
+  }
+}

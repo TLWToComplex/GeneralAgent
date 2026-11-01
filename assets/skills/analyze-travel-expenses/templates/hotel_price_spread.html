@@ -1,0 +1,9 @@
+<section class="cr-section" id="ext-hotel-price-spread">
+<h2>酒店自身偏离度 Top{{TOP_N}}（同一酒店内最高/最低单晚价差）</h2>
+<p class="cr-meta">{{NOTE}}。共 {{HOTEL_TOTAL}} 家酒店存在≥2条有效记录参与计算；最大单晚价差 {{MAX_SPREAD}} 元。本章节由 <b>hotel_price_spread</b> 模块渲染，纯 HTML/CSS。</p>
+<table>
+<thead><tr><th>排名</th><th>酒店</th><th>城市</th><th>记录数</th><th>总间夜</th><th>平均房价（元/晚）</th><th>最高单晚（元）</th><th>最低单晚（元）</th><th>偏离度（元）</th><th>价差幅度</th></tr></thead>
+<tbody>{{HOTEL_ROWS}}</tbody>
+</table>
+<p class="cr-meta">明细行列出该酒店最高/最低单晚价订单的全部信息：乘机人 / 部门 / 城市 / 入住→离店 / 预订时间 / 实收实付（票面、服务费）/ 住宿标准 / 订单号 / 消费记录唯一值（前8位）/ 退改签类型；参与关注人员交叉的组合 {{PAIR_COUNT}} 个。生成时间：{{GENERATED_AT}}。</p>
+</section>

@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="none" viewBox="0 0 24 24">
+  <defs>
+    <linearGradient id="history-person-gradient" x1="3" y1="2" x2="20" y2="22" gradientUnits="userSpaceOnUse"><stop stop-color="#6885ff"/><stop offset="0.48" stop-color="#6879f4"/><stop offset="1" stop-color="#9589f4"/></linearGradient>
+    <linearGradient id="history-orbit-gradient" x1="1" y1="2" x2="22" y2="22" gradientUnits="userSpaceOnUse"><stop stop-color="#5274ff"/><stop offset="0.52" stop-color="#7583f5"/><stop offset="1" stop-color="#a49bfa"/></linearGradient>
+    <linearGradient id="history-lens-gradient" x1="13" y1="7" x2="20" y2="17" gradientUnits="userSpaceOnUse"><stop stop-color="#7487f6"/><stop offset="1" stop-color="#9a8df2"/></linearGradient>
+    <style>
+      .agent-anim-fill { fill: url(#history-person-gradient); }
+      .agent-anim-stroke {
+        stroke: url(#history-lens-gradient);
+        stroke-width: 1.5;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        fill: none;
+      }
+      .agent-anim-soft { opacity: 0.96; }
+      .agent-orbit { fill: url(#history-orbit-gradient); }
+      .agent-gaze .agent-eye { fill: #7487f6; }
+      /* Shared timing keeps the gaze, blink and hand in one gesture. */
+      .agent-face, .agent-magnifier, .agent-gaze, .agent-eye {
+        transform-box: view-box;
+        animation-duration: 3.4s;
+        animation-iteration-count: infinite;
+        animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      .agent-face { transform-origin: 12px 12px; animation-name: agent-peek; }
+      .agent-magnifier { transform-origin: 20px 15px; animation-name: agent-inspect; }
+      .agent-gaze { animation-name: agent-look; }
+      .agent-eye { transform-origin: 8px 9px; animation-name: agent-blink; }
+      .agent-eye-right { transform-origin: 16px 9px; }
+      @keyframes agent-peek {
+        0%, 100% { transform: translateY(0.25px) rotate(-3deg); }
+        22%, 38% { transform: translateY(-0.45px) rotate(3deg); }
+        52%, 65% { transform: translateY(-0.25px) rotate(-2deg); }
+        82% { transform: translateY(0.35px) rotate(-3deg); }
+      }
+      @keyframes agent-inspect {
+        0%, 100% { transform: translate(0.6px, 2.2px) rotate(-12deg); }
+        22%, 38% { transform: translate(-0.65px, -0.65px) rotate(5deg); }
+        52%, 65% { transform: translate(-1.4px, -0.25px) rotate(-3deg); }
+        82% { transform: translate(0.6px, 2.4px) rotate(-14deg); }
+      }
+      @keyframes agent-look {
+        0%, 100% { transform: translateX(0); }
+        22%, 38% { transform: translateX(0.35px); }
+        52%, 65% { transform: translateX(-0.35px); }
+        82% { transform: translateX(0); }
+      }
+      @keyframes agent-blink {
+        0%, 29%, 36%, 69%, 76%, 100% { transform: scaleY(1); }
+        32%, 72% { transform: scaleY(0.12); }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .agent-face, .agent-magnifier, .agent-gaze, .agent-eye { animation: none; }
+      }
+    </style>
+  </defs>
+
+  <!-- Inset the original artwork so the leaning pose stays inside the image. -->
+  <g transform="translate(0.6 0.6) scale(0.94)">
+    <g class="agent-face">
+      <path class="agent-anim-fill agent-anim-soft agent-orbit" d="M1.25 12C1.25 6.063 6.063 1.25 12 1.25a10.72 10.72 0 0 1 7.677 3.225.75.75 0 0 1-1.072 1.05 9.25 9.25 0 1 0-.13 13.08.75.75 0 0 1 1.05 1.072A10.72 10.72 0 0 1 12 22.75C6.063 22.75 1.25 17.937 1.25 12"/>
+      <path class="agent-anim-fill" style="fill:#8994dd;stroke:#8994dd;stroke-width:0.18;stroke-linejoin:round" d="M7.55 14.4a.75.75 0 0 1 1.05.15 4.24 4.24 0 0 0 3.4 1.7c.606 0 1.18-.127 1.7-.354a.75.75 0 0 1 .6 1.375 5.7 5.7 0 0 1-2.3.479 5.74 5.74 0 0 1-4.6-2.3.75.75 0 0 1 .15-1.05"/>
+      <g class="agent-gaze">
+        <ellipse class="agent-anim-fill agent-eye" cx="8.004" cy="9" rx="1.004" ry="1"/>
+        <ellipse class="agent-anim-fill agent-eye agent-eye-right" cx="16" cy="9" rx="0.9" ry="1"/>
+      </g>
+      <!-- One handle joins the lens to a small grip, clear of the rim. -->
+      <g class="agent-magnifier">
+        <path class="agent-anim-stroke" d="M18.5 12.5 19.45 14.2"/>
+        <path class="agent-anim-fill" d="M18.25 10a2.25 2.25 0 1 0-4.5 0 2.25 2.25 0 0 0 4.5 0m1.5 0a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0"/>
+        <ellipse class="agent-anim-stroke" cx="20.15" cy="14.9" rx="1.45" ry="1" transform="rotate(-45 20.15 14.9)" style="stroke-width: 1.1"/>
+      </g>
+    </g>
+</g>
+</svg>
+
+
+
+
+

@@ -1,0 +1,117 @@
+# MirrorHub 运行时编排（内网离线部署）
+#
+# 只引用已加载的镜像，不做任何构建，不需要外网。
+# 用法：./scripts/start.sh   或   docker compose up -d
+#
+# 镜像需先通过 scripts/start.sh 自动加载，或手动 docker load -i images/*.tar
+
+services:
+  nginx:
+    image: nginx:1.28.0
+    container_name: mirrorhub-nginx
+    ports:
+      - "${NGINX_PORT:-80}:80"
+    volumes:
+      - ./config/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./frontend:/usr/share/nginx/html:ro
+      - ./data/logs/nginx:/var/log/nginx
+    depends_on:
+      - backend
+    restart: unless-stopped
+    networks:
+      - mirror-net
+
+  backend:
+    image: mirrorhub-backend:latest
+    container_name: mirrorhub-backend
+    environment:
+      MIRRORHUB_ENV: production
+      DATABASE_URL: postgresql+psycopg://${POSTGRES_USER:-mirrorhub}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB:-mirrorhub}
+      DEVPI_URL: http://devpi:3141
+      VERDACCIO_URL: http://verdaccio:4873
+      DEVPI_USER: ${DEVPI_USER:-root}
+      DEVPI_PASSWORD: ${DEVPI_PASSWORD}
+      VERDACCIO_USER: ${VERDACCIO_USER:-root}
+      VERDACCIO_PASSWORD: ${VERDACCIO_PASSWORD}
+      AUTH_MODE: ${AUTH_MODE:-local}
+      ADMIN_TOKENS: ${ADMIN_TOKENS}
+      SECRET_KEY: ${SECRET_KEY}
+      OIDC_ISSUER_URL: ${OIDC_ISSUER_URL:-}
+      OIDC_CLIENT_ID: ${OIDC_CLIENT_ID:-}
+      OIDC_CLIENT_SECRET: ${OIDC_CLIENT_SECRET:-}
+      OIDC_REDIRECT_URI: ${OIDC_REDIRECT_URI:-}
+      CORS_ORIGINS: ${CORS_ORIGINS:-*}
+    volumes:
+      - ./data/logs/nginx:/var/log/nginx:ro
+      - ./data/devpi:/data/devpi:ro
+      - ./data/verdaccio:/verdaccio/storage:ro
+      - ./data/app:/app/data
+    depends_on:
+      postgres:
+        condition: service_healthy
+      devpi:
+        condition: service_started
+      verdaccio:
+        condition: service_started
+    restart: unless-stopped
+    networks:
+      - mirror-net
+
+  postgres:
+    image: postgres:16
+    container_name: mirrorhub-postgres
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-mirrorhub}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB:-mirrorhub}
+    volumes:
+      - ./data/postgres:/var/lib/postgresql/data
+    healthcheck:
+      # 需真正能接受连接（而非仅 pg_isready 返回）才算就绪，
+      # 否则后端会在 "database system is starting up" 阶段启动失败。
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-mirrorhub} -d ${POSTGRES_DB:-mirrorhub} && psql -U ${POSTGRES_USER:-mirrorhub} -d ${POSTGRES_DB:-mirrorhub} -c 'SELECT 1' >/dev/null 2>&1"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+      start_period: 30s
+    restart: unless-stopped
+    networks:
+      - mirror-net
+
+  devpi:
+    image: mirrorhub-devpi:latest
+    container_name: mirrorhub-devpi
+    ports:
+      - "${DEVPI_PORT:-3141}:3141"
+    volumes:
+      - ./data/devpi:/data
+    environment:
+      DEVPI_SERVERDIR: /data
+    healthcheck:
+      test: ["CMD-SHELL", "python -c \"import urllib.request,sys; sys.exit(0 if urllib.request.urlopen('http://127.0.0.1:3141/+status', timeout=5).status==200 else 1)\""]
+      interval: 10s
+      timeout: 10s
+      retries: 12
+      start_period: 40s
+    restart: unless-stopped
+    networks:
+      - mirror-net
+
+  verdaccio:
+    image: mirrorhub-verdaccio:latest
+    container_name: mirrorhub-verdaccio
+    ports:
+      - "${VERDACCIO_PORT:-4873}:4873"
+    environment:
+      # 元数据里的 tarball 地址会改写为该入口，保证客户端拿到的下载地址永远可用
+      VERDACCIO_PUBLIC_URL: http://${SERVER_IP:-localhost}:${NGINX_PORT:-80}/npm/
+    volumes:
+      - ./config/verdaccio/config.yaml:/verdaccio/conf/config.yaml:ro
+      - ./data/verdaccio:/verdaccio/storage
+    restart: unless-stopped
+    networks:
+      - mirror-net
+
+networks:
+  mirror-net:
+    driver: bridge

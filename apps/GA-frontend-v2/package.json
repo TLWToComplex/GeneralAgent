@@ -1,0 +1,33 @@
+{
+  "name": "ga-frontend-v2",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "description": "GeneralAgent V2 通用智能体构建与服务平台",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc --noEmit && vite build",
+    "build:only": "vite build",
+    "preview": "vite preview",
+    "typecheck": "vue-tsc --noEmit",
+    "typecheck:fast": "node tools/typecheck.mjs",
+    "serve:dist": "node tools/serve-dist.mjs",
+    "check:sidebar-lock": "node tools/check-sidebar-lock.mjs",
+    "check:tool-tabs": "node tools/check-tool-tabs.mjs",
+    "check:login-layout": "node tools/check-login-layout.mjs",
+    "check:kpi-breakpoints": "node tools/check-kpi-breakpoints.mjs",
+    "check:ai-tools": "node tools/check-ai-tools.mjs"
+  },
+  "dependencies": {
+    "pinia": "^2.3.1",
+    "vue": "^3.5.13",
+    "vue-router": "^4.5.0"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.2",
+    "@vitejs/plugin-vue": "^5.2.1",
+    "typescript": "~5.7.3",
+    "vite": "^6.0.11",
+    "vue-tsc": "^2.2.0"
+  }
+}

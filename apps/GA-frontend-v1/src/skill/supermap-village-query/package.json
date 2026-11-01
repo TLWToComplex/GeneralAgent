@@ -1,0 +1,23 @@
+{
+  "name": "supermap-village-query",
+  "version": "2.0.0",
+  "description": "SuperMap 村庄数据查询与地图可视化综合服务，支持数据查询、条件筛选、地图上图和属性展示",
+  "main": "index.js",
+  "scripts": {
+    "query": "node scripts/query-village.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "supermap",
+    "village",
+    "gis",
+    "map",
+    "query",
+    "visualization"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.13.6"
+  }
+}

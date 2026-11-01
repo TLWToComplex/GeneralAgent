@@ -1,0 +1,35 @@
+# 全局通用设置
+litellm_settings:
+  # 允许 Prometheus 无鉴权抓取 /metrics（新版默认要求鉴权，会导致抓取 401）
+  require_auth_for_metrics_endpoint: false
+  drop_params: True
+  set_verbose: False
+  callbacks: ["prometheus"]               # 全局触发器
+  success_callback: ["database"]        # 成功日志入库
+  failure_callback: ["database"]        # 失败日志入库
+  request_timeout: 600
+  allow_user_auth: true                 # 允许在日志中包含详细的请求信息
+  turn_off_message_logging: False       # 开启对话内容记录（messages/response）
+
+# 智能路由状态显示
+router_settings:
+  routing_strategy: "usage-based-routing" # 开启后才会显示 current_usage
+  enable_pre_call_checks: true           # 请求前自检
+  num_retries: 3                         # 失败换节点重试
+  retry_after_detection: true            # 429 自动重试
+  allowed_fails: 3                       # 熔断阈值
+  cooldown_time: 60                      # 熔断冷却
+  allow_unknown_models: true             # 模型映射检查
+general_settings:
+  health_check_interval: 30              # 开启后才会显示 status: healthy
+  health_check_timeout: 2000        # 健康检查超时 2 秒
+  health_check_max_parallel: 10     # 并行检查 10 个模型
+  master_key: sk-master-1234
+  database_url: "postgresql://admin:1qaz2wsx3edc@postgres:15432/litellm"
+  allow_config_updates: True
+  allow_unsupported_models: true
+  disable_model_check: true
+  allow_any_model: true
+  disable_model_name_check: true
+  store_prompts_in_spend_logs: true     # 将对话内容（messages/response）写入日志数据库
+

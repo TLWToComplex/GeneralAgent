@@ -1,0 +1,439 @@
+/* 工具按钮样式 - 与复制按钮保持一致 */
+.tool-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 32px;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.03) 0%, rgba(0, 0, 0, 0.05) 100%);
+  color: #494949;
+  font-size: 13px;
+  font-weight: 500;
+  white-space: nowrap;
+  box-shadow: 
+    0 1px 2px rgba(0, 0, 0, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.tool-btn:hover {
+  background: linear-gradient(135deg, #ebebeb 0%, #ebebeb 100%);
+  color: #494949;
+  transform: translateY(-1px);
+  box-shadow: 
+    0 2px 6px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.tool-btn:active {
+  transform: translateY(0);
+  background: linear-gradient(135deg, #e0e0e0 0%, #e0e0e0 100%);
+  box-shadow: 
+    0 1px 2px rgba(0, 0, 0, 0.1),
+    inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: all 0.1s ease;
+}
+
+.export-tool-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.02) 0%, rgba(0, 0, 0, 0.03) 100%);
+  color: #999;
+  transform: none;
+  box-shadow: 
+    0 1px 2px rgba(0, 0, 0, 0.03),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.export-tool-btn:disabled:hover {
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.02) 0%, rgba(0, 0, 0, 0.03) 100%);
+  color: #999;
+  transform: none;
+  box-shadow: 
+    0 1px 2px rgba(0, 0, 0, 0.03),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.tool-icon {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+}
+
+.tool-text {
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.3px;
+}
+
+.export-button {
+  height: 40px;
+  width: 40px;
+  border-radius: 12px;
+  background-color: rgba(0, 0, 0, 0.06);
+  transition: background-color 0.5s ease;
+}
+
+.export-modal .ant-modal-content { border-radius: 22px !important; }
+.ant-modal-wrap.full-modal .export-modal .ant-modal-content { border-radius: 0 !important; }
+
+.export-action-btn {
+  min-width: 75px;
+  border-radius: 10px;
+  height: 31px;
+  font-size: 13px;
+  font-weight: 400;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: none;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.export-cancel-btn {
+  background-color: #f5f5f5 !important;
+  border: none !important;
+  color: #1a1a1a !important;
+}
+
+.export-cancel-btn:hover {
+  background-color: #e6e6e6 !important;
+  color: #1a1a1a !important;
+  border-color: transparent !important;
+}
+
+.export-preview-btn {
+  background-color: #f5f5f5 !important;
+  border: none !important;
+  color: #1a1a1a !important;
+}
+
+.export-preview-btn:hover {
+  background-color: #e6e6e6 !important;
+  color: #1a1a1a !important;
+  border-color: transparent !important;
+}
+
+.export-confirm-btn {
+  background: #1677ff !important;
+  color: #ffffff !important;
+  border: none !important;
+}
+
+.export-confirm-btn:hover {
+  background-color: #4096ff !important;
+  color: #ffffff !important;
+}
+
+.export-button:hover {
+  background-color: rgba(0, 0, 0, 0.18) !important;
+}
+
+/* 自定义标题样式 */
+.modal-custom-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: #050505;
+  padding-bottom: 8px;
+}
+
+.export-description {
+  margin-bottom: 20px;
+  color: #666;
+  font-size: 14px;
+}
+
+.export-description strong {
+  color: #1890ff;
+  font-weight: 600;
+}
+
+.export-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.format-selector {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 5px;
+}
+
+.format-group {
+  width: 100%;
+  display: flex;
+}
+
+.option-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  padding: 15px;
+  border: 1px solid #f0f0f0;
+}
+
+.format-options {
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  padding: 15px;
+  border: 1px solid #f0f0f0;
+}
+
+.format-specific-options {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.option-row {
+  display: flex;
+  align-items: center;
+}
+
+.option-label {
+  width: 60px;
+  font-size: 14px;
+  color: #666;
+}
+
+.option-control {
+  flex: 1;
+}
+
+.scale-control {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.scale-slider {
+  flex: 1;
+}
+
+.scale-input {
+  width: 100px;
+}
+
+.paper-select {
+  width: 100% !important;
+}
+
+.export-tips {
+  margin-bottom: -5px;
+}
+
+.progress-container {
+  margin: 20px 0;
+}
+
+.progress-text {
+  text-align: center;
+  margin-top: 8px;
+  color: #1890ff;
+  font-size: 14px;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.preview-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  padding: 0;
+  gap: 20px;
+  height: 100%;
+}
+
+.preview-loading {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f0f0f0;
+  border-radius: 12px;
+  z-index: 10;
+}
+
+.preview-content-area {
+  position: relative;
+  width: 100%;
+  height: calc(100vh - 95px);
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+.preview-content {
+  width: 100%;
+  height: 100%;
+}
+
+.preview-canvas-container {
+  height: calc(100vh - 95px);
+  width: 100%;
+  position: relative;
+  background-color: #e0e0e0;
+  overflow-y: auto;
+  border-radius: 12px;
+  padding: 30px 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+.preview-canvas-container::-webkit-scrollbar {
+  width: 10px;
+}
+
+.preview-canvas-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.preview-canvas-container::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 6px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+.preview-canvas {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0;
+  overflow: visible;
+  position: relative;
+}
+
+.paper-size-label {
+  position: fixed;
+  bottom: 45px;
+  right: 50px;
+  background-color: rgba(0, 0, 0, 0.08);
+  color: #666;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  pointer-events: none;
+  z-index: 100;
+}
+
+.preview-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  background-color: #f9f9f9;
+  border-top: 1px solid #eee;
+}
+
+.preview-nav span {
+  font-size: 14px;
+  color: #333;
+}
+
+.preview-controls {
+  display: flex;
+  gap: 10px;
+}
+
+.nav-icon {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.preview-actions-header .ant-btn {
+  min-width: 80px;
+}
+
+.preview-container .modal-custom-title {
+  font-size: 20px;
+  text-align: center;
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.preview-header {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.preview-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: #000000;
+  text-align: left;
+  width: 150px;
+}
+
+.preview-info {
+  font-size: 13px;
+  color: #131313;
+  flex-grow: 1;
+  text-align: center;
+  font-weight: normal;
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid #e8e8e8;
+  border-radius: 8px;
+  padding: 5px 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  display: inline-block;
+  margin: 0 auto;
+  max-width: 275px;
+  white-space: nowrap;
+  letter-spacing: 0.5px;
+}
+
+.preview-actions-header {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  min-width: 180px;
+}
+
+.spin-content {
+  display: flex;
+  align-items: center;
+}
+
+.spin-content .anticon {
+  margin-right: 8px;
+}
+
+.export-button-wrapper {
+  display: contents;
+}

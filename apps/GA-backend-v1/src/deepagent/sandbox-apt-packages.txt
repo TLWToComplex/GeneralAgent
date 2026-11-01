@@ -1,0 +1,36 @@
+# 沙箱镜像系统工具（apt）依赖清单 —— 单一事实来源
+#
+# 本文件同时被两处使用，加/删包只改这一处，然后重建镜像即可，无需改任何代码：
+#   1) Dockerfile：RUN apt-get install -y $(sed 's/#.*//' sandbox-apt-packages.txt | ...)
+#   2) 系统提示词第 6 条（package_mode=preinstalled 时）：动态读取本文件生成"系统工具"列表
+#
+# 格式：每行一个 apt 包名；以 # 开头的行为注释，空行忽略。
+# 注意：
+#   - 本清单只含"模型会直接调用的文档/图像/OCR 工具"，不含 ca-certificates/curl/gnupg/sudo/nodejs/gcc
+#     等基础设施（那些在 Dockerfile 的 Node.js 安装段单独处理，不列入提示词，避免噪音）。
+#   - package_mode=mirror（内网镜像源）时提示词不再列举本清单，但镜像仍可用本文件预装。
+
+# 文档转换
+pandoc
+libreoffice
+
+# 中文字体（soffice 渲染中文 PPT/DOC、缩略图、PDF 交付件必需）
+# python-slim 镜像默认无 CJK 字体 + Dockerfile 用 --no-install-recommends，缺它中文会显示为豆腐块。
+# 注：提供的是思源黑体 Noto Sans CJK，与技能写死的 "Microsoft YaHei"/宋体字形不同但可正常显示中文；
+#     如需像素级还原雅黑/宋体，须另行 COPY Windows 的 msyh.ttc/simsun.ttc 到 /usr/share/fonts 并 fc-cache -fv，
+#     微软字体有版权、不能走 apt。fontconfig 作为 fonts-noto-cjk 的硬依赖会被自动装入。
+fonts-noto-cjk
+
+# PDF 处理
+poppler-utils
+qpdf
+pdftk-java
+ghostscript
+
+# 图像 / .NET 渲染支持
+libgdiplus
+
+# OCR
+tesseract-ocr
+# 简体中文 OCR 语言包（tesseract-ocr 默认只带英文 eng；pdf 技能用 pytesseract 识别中文扫描件需要它）
+tesseract-ocr-chi-sim

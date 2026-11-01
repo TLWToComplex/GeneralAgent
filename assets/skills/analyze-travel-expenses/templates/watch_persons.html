@@ -1,0 +1,21 @@
+<section class="cr-section" id="ext-watch-persons">
+<h2>关注人员交叉分析（同时命中≥{{THRESHOLD}}张表）</h2>
+<p class="cr-meta">{{DEFINITION}}。四张表覆盖的组合规模：{{SET_SIZES}}。本章节为交叉模块 <b>watch_persons</b>，在全部模块完成后运行。</p>
+<div class="cr-kpis">
+  <div><span>关注人员数</span><b>{{PERSON_COUNT}}</b></div>
+  <div><span>命中组合数</span><b>{{PAIR_COUNT}}</b></div>
+  <div><span>判定阈值</span><b>≥{{THRESHOLD}}张表</b></div>
+  <div><span>参与表数</span><b>4</b></div>
+</div>
+<h3>一、按人汇总（按命中酒店数降序）</h3>
+<table>
+<thead><tr><th>排名</th><th>姓名</th><th>命中酒店数</th><th>命中酒店（前6）</th><th>命中表</th></tr></thead>
+<tbody>{{PERSON_ROWS}}</tbody>
+</table>
+<h3>二、（人,酒店）命中组合明细</h3>
+<table>
+<thead><tr><th>姓名</th><th>酒店</th><th>命中表数</th><th>命中表</th></tr></thead>
+<tbody>{{PAIR_ROWS}}</tbody>
+</table>
+<p class="cr-meta">若无人同时命中≥{{THRESHOLD}}张表，两表均为空属正常结果，不代表数据缺失。生成时间：{{GENERATED_AT}}。</p>
+</section>

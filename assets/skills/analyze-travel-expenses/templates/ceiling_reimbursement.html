@@ -1,0 +1,33 @@
+<section class="cr-section" id="ext-ceiling-reimbursement">
+<h2>住宿费顶格报销情况（按{{DEPT_COL}}统计 · 按人统计前{{TOP_N}}人）</h2>
+<p class="cr-meta">统计口径：{{NOTE}}金额字段按配置优先级取（实收实付 → 企业支付金额 → 票面价）；
+“95%以上”指单晚住宿费达到住宿标准 95%（含）以上，依此类推；次数占比为分段次数占该{{DEPT_COL}}总次数之比，
+金额占比为分段金额占该{{DEPT_COL}}总金额之比。本章节由固定处理流程 <b>ceiling_reimbursement</b> 模块结果渲染，纯 HTML/CSS 展示，无图表库依赖。</p>
+<div class="cr-kpis">
+  <div><span>{{DEPT_COL}}数</span><b>{{DEPT_COUNT}}</b></div>
+  <div><span>有效住宿记录（次）</span><b>{{GRAND_COUNT}}</b></div>
+  <div><span>有效住宿金额（元）</span><b>{{GRAND_AMOUNT}}</b></div>
+  <div><span>95%以上分段 次数占比 / 金额占比</span><b>{{TOP95_SHARE}}</b></div>
+</div>
+
+<h3>一、总体分段分布</h3>
+<table>
+<thead><tr><th>标准使用率分段</th><th>次数</th><th>次数占比</th><th>金额（元）</th><th>金额占比</th></tr></thead>
+<tbody>{{OVERALL_ROWS}}</tbody>
+</table>
+
+<h3>二、按{{DEPT_COL}}分段明细（部门按有效住宿金额合计降序）</h3>
+<table>
+<thead><tr><th>{{DEPT_COL}}</th><th>分段</th><th>次数</th><th>次数占比</th><th>金额（元）</th><th>金额占比</th></tr></thead>
+<tbody>{{DEPT_ROWS}}</tbody>
+</table>
+
+<h3>三、按人统计前{{TOP_N}}人（按住宿金额合计降序）</h3>
+<table>
+<thead><tr><th>排名</th><th>姓名</th><th>{{DEPT_COL}}</th><th>总次数</th><th>总金额（元）</th><th>95%以上</th><th>90%-95%</th><th>80%-90%</th><th>70%-80%</th><th>70%以下</th></tr></thead>
+<tbody>{{TOP50_ROWS}}</tbody>
+</table>
+
+<p class="cr-meta">注：小计行为该{{DEPT_COL}}全部有效住宿记录合计；红色数字为该人员 95%以上（顶格）报销次数；
+顶格报销（95%以上与90%-95%）合计次数 {{CEIL90_COUNT}}（占 {{CEIL90_COUNT_SHARE}}），金额 {{CEIL90_AMOUNT}} 元（占 {{CEIL90_AMOUNT_SHARE}}）。生成时间：{{GENERATED_AT}}。</p>
+</section>

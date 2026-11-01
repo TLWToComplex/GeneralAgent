@@ -1,0 +1,32 @@
+{
+  "pixel": {
+    "title": "Pixel Art",
+    "creator": "DiceBear",
+    "source": "https://www.figma.com/community/file/1198754108850888330",
+    "homepage": "https://www.dicebear.com",
+    "license": {
+      "name": "CC0 1.0",
+      "url": "https://creativecommons.org/publicdomain/zero/1.0/"
+    }
+  },
+  "adventure": {
+    "title": "Adventurer",
+    "creator": "Lisa Wischofsky",
+    "source": "https://www.figma.com/community/file/1184595184137881796",
+    "homepage": "https://www.instagram.com/lischi_art/",
+    "license": {
+      "name": "CC BY 4.0",
+      "url": "https://creativecommons.org/licenses/by/4.0/"
+    }
+  },
+  "lorelei": {
+    "title": "Lorelei",
+    "creator": "Lisa Wischofsky",
+    "source": "https://www.figma.com/community/file/1198749693280469639",
+    "homepage": "https://www.instagram.com/lischi_art/",
+    "license": {
+      "name": "CC0 1.0",
+      "url": "https://creativecommons.org/publicdomain/zero/1.0/"
+    }
+  }
+}

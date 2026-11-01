@@ -1,0 +1,109 @@
+{
+  "version": "1.0.0",
+  "dimensions": [
+    {
+      "id": "liability",
+      "name": "Liability & Indemnity",
+      "description": "Assess liability caps, indemnity scope, and exclusions.",
+      "risk_level": "high",
+      "signals": [
+        "unlimited liability",
+        "uncapped indemnity",
+        "broad exclusions",
+        "no carve-outs for gross negligence or willful misconduct"
+      ],
+      "recommendation": "Negotiate a mutually acceptable liability cap and limit indemnity to third-party IP, confidentiality, and data breaches."
+    },
+    {
+      "id": "termination",
+      "name": "Termination",
+      "description": "Review termination for convenience, notice periods, and cure rights.",
+      "risk_level": "medium",
+      "signals": [
+        "termination for convenience with short notice",
+        "no cure period for breach",
+        "no return or destruction obligations upon termination",
+        "ambiguous effects of termination"
+      ],
+      "recommendation": "Add a reasonable cure period and clarify post-termination obligations."
+    },
+    {
+      "id": "payment",
+      "name": "Payment Terms",
+      "description": "Evaluate invoicing, milestones, late payment, and currency terms.",
+      "risk_level": "medium",
+      "signals": [
+        "payment terms longer than net-60",
+        "no late payment interest",
+        "ambiguous acceptance criteria",
+        "advance payment without milestones"
+      ],
+      "recommendation": "Shorten payment terms, tie payments to milestones, and add late interest."
+    },
+    {
+      "id": "ip",
+      "name": "Intellectual Property",
+      "description": "Check IP ownership, license grants, and background IP.",
+      "risk_level": "high",
+      "signals": [
+        "broad IP assignment",
+        "no license-back",
+        "ambiguous work-for-hire language",
+        "background IP not retained"
+      ],
+      "recommendation": "Clarify ownership of deliverables, retain background IP, and grant narrow licenses."
+    },
+    {
+      "id": "data",
+      "name": "Data Protection",
+      "description": "Review personal data handling, cross-border transfers, and security.",
+      "risk_level": "high",
+      "signals": [
+        "no data processing addendum",
+        "broad data rights",
+        "cross-border transfer without safeguards",
+        "insufficient security commitments"
+      ],
+      "recommendation": "Add a DPA, specify lawful basis, and include standard contractual clauses for transfers."
+    },
+    {
+      "id": "confidentiality",
+      "name": "Confidentiality",
+      "description": "Assess NDA scope, exceptions, and survival period.",
+      "risk_level": "medium",
+      "signals": [
+        "perpetual confidentiality",
+        "overly broad definition of confidential information",
+        "exceptions that swallow the obligation",
+        "no return/destruction provision"
+      ],
+      "recommendation": "Limit survival to a reasonable period and narrow the definition of confidential information."
+    },
+    {
+      "id": "noncompete",
+      "name": "Non-compete / Exclusivity",
+      "description": "Evaluate non-compete, exclusivity, and non-solicit clauses.",
+      "risk_level": "medium",
+      "signals": [
+        "broad non-compete",
+        "long exclusivity period",
+        "wide geographic scope",
+        "non-solicit of employees or customers"
+      ],
+      "recommendation": "Narrow scope, duration, and geography to what is reasonably necessary."
+    },
+    {
+      "id": "governing_law",
+      "name": "Governing Law & Dispute Resolution",
+      "description": "Review choice of law, venue, and dispute resolution.",
+      "risk_level": "medium",
+      "signals": [
+        "unfavorable foreign law",
+        "mandatory arbitration with unbalanced rules",
+        "jurisdiction far from own operations",
+        "absence of governing law clause"
+      ],
+      "recommendation": "Select neutral governing law and a convenient dispute resolution forum."
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg t="1762252850056" class="icon" viewBox="0 0 1024 1024" version="1.1"
+     xmlns="http://www.w3.org/2000/svg"
+     p-id="6385"
+     xmlns:xlink="http://www.w3.org/1999/xlink"
+     width="256"
+     height="256">
+
+  <!-- 主体背景：CAD 使用青蓝色，与 Word/PDF/Excel/PPT 区分 -->
+  <path d="M594.944 0l335.12448 341.31968v563.2c0 65.9968-52.50048 119.48032-117.29408 119.48032H209.54624c-64.7936 0-117.2992-53.5296-117.2992-119.48032V119.48032C92.25216 53.48352 144.75776 0 209.55136 0H594.944z"
+        fill="#0E7490"
+        p-id="6386">
+  </path>
+
+  <!-- 右上折角 -->
+  <path d="M930.06848 341.31968h-211.9168c-64.74752 0-123.20768-59.48928-123.20768-125.4912V0l335.12448 341.31968z"
+        fill="#22A0BE"
+        fill-opacity=".75"
+        p-id="6388">
+  </path>
+
+  <!-- 圆规：铰接点 -->
+  <circle cx="512" cy="416" r="52" fill="#FFFFFF"/>
+
+  <!-- 圆规：左右两脚 -->
+  <path d="M486 456 L348 764" stroke="#FFFFFF" stroke-width="58" stroke-linecap="round" fill="none"/>
+  <path d="M538 456 L676 764" stroke="#FFFFFF" stroke-width="58" stroke-linecap="round" fill="none"/>
+
+  <!-- 圆规：绘出的弧线 -->
+  <path d="M395 660 A140 140 0 0 0 629 660" stroke="#FFFFFF" stroke-width="42" stroke-linecap="round" fill="none"/>
+
+</svg>

@@ -1,0 +1,28 @@
+groups:
+  - name: litellm_api_alerts
+    rules:
+      # 1. API 错误率 - 对应界面：API.ErrorRate(50x) > 5% FOR 1m
+      - alert: APIHighErrorRate
+        expr: |
+          sum(rate(litellm_proxy_total_requests_metric_total{status_code!="200"}[5m]))
+          /
+          (sum(rate(litellm_proxy_total_requests_metric_total[5m])) or on() vector(0)) > 0.05
+        for: 0m
+        labels:
+          severity: warning
+        annotations:
+          summary: "API 非200状态码错误率 > 5%"
+          description: "当前错误率：{{ $value | humanizePercentage }}"
+
+  - name: litellm_model_alerts
+    rules:
+      # 2. 推理延迟超限 - 对应界面：Model.AvgLatency > 10s
+      - alert: ModelHighLatency
+        expr: |
+          histogram_quantile(0.95, sum(rate(litellm_request_total_latency_metric_bucket[5m])) by (le, model)) > 10
+        for: 10s
+        labels:
+          severity: warning
+        annotations:
+          summary: "模型 {{ $labels.model }} 推理延迟过高"
+          description: "模型 {{ $labels.model }} P95 推理延迟超过 10s，当前值：{{ $value | humanizeDuration }}。"

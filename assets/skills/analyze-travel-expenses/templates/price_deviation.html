@@ -1,0 +1,21 @@
+<section class="cr-section" id="ext-price-deviation">
+<h2>住宿价格偏离分析（平均每间夜价 vs 总体）</h2>
+<p class="cr-meta">{{NOTE}}。总体平均每间夜价 <b>{{OVERALL_NIGHTLY}}</b> 元/晚，共 {{DEPT_COUNT}} 个部门、Top {{PERSON_COUNT}} 人员参与偏离排名。</p>
+<h3>部门偏离排名</h3>
+<table>
+<thead><tr><th>排名</th><th>部门</th><th>订单数</th><th>平均每间夜（元）</th><th>偏离总体（元）</th><th>偏离幅度</th></tr></thead>
+<tbody>{{DEPT_ROWS}}</tbody>
+</table>
+<h3>偏离幅度 Top {{PERSON_COUNT}} 人员</h3>
+<table>
+<thead><tr><th>排名</th><th>乘机人</th><th>部门</th><th>订单数</th><th>平均每间夜（元）</th><th>偏离总体（元）</th><th>偏离幅度</th></tr></thead>
+<tbody>{{PERSON_ROWS}}</tbody>
+</table>
+<h3>关注交叉名单（Top50 人员 × 使用酒店）</h3>
+<p class="cr-meta">Top{{PERSON_COUNT}} 人员共使用 {{HOTEL_UNIQUE}} 家酒店，形成 {{PAIR_TOTAL}} 个“人员 × 酒店”组合；下表按使用酒店数取前 20 人（仅展示前 5 家）。</p>
+<table>
+<thead><tr><th>排名</th><th>乘机人</th><th>使用酒店数</th><th>使用酒店（前5）</th></tr></thead>
+<tbody>{{PH_ROWS}}</tbody>
+</table>
+<p class="cr-meta">本章节由 <b>price_deviation</b> 模块渲染，纯 HTML/CSS。生成时间：{{GENERATED_AT}}。</p>
+</section>

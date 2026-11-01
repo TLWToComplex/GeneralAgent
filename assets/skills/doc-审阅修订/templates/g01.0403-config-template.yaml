@@ -1,0 +1,252 @@
+# =============================================================================
+# G01.0403 V2.0 技术文件格式要求 — 参数化模板
+# =============================================================================
+# 此模板定义了所有格式参数。修改此文件可以适配不同的格式规范，
+# 无需修改代码。每个参数都标注了对应的 G01.0403 条款和含义。
+# =============================================================================
+
+meta:
+  name: "中电科GA北斗技术文件格式要求"
+  version: "V2.0"
+  description: "基于 G01.0403_V2.0《技术文件格式要求》"
+  standard_ref: "G01.0403 V2.0"
+
+# ── 1. 页面布局 (G01.0403 2.1) ──
+page:
+  size: "A4"                    # A4 / Letter / A3
+  orientation: "portrait"        # portrait / landscape
+  margins:
+    top_cm: 2.54                 # 上边距
+    bottom_cm: 2.54              # 下边距
+    left_cm: 1.91                # 左边距
+    right_cm: 1.91               # 右边距
+    gutter_cm: 0                 # 装订线 (不设置)
+  header_distance_cm: 1.5        # 页眉顶端距离
+  footer_distance_cm: 1.75       # 页脚底端距离
+
+# ── 2. 字体配置 (G01.0403 2.2) ──
+fonts:
+  # 每个区域/元素类型独立配置
+  cover_title:     { cjk: "宋体", latin: "Times New Roman" }
+  cover_subtitle:  { cjk: "宋体", latin: "Times New Roman" }
+  cover_info:      { cjk: "宋体", latin: "Times New Roman" }
+  body:            { cjk: "宋体", latin: "Times New Roman" }
+  h1:              { cjk: "宋体", latin: "Times New Roman" }
+  h2:              { cjk: "宋体", latin: "Times New Roman" }
+  h3:              { cjk: "宋体", latin: "Times New Roman" }
+  h4:              { cjk: "宋体", latin: "Times New Roman" }
+  toc_title:       { cjk: "宋体", latin: "Times New Roman" }
+  toc_body:        { cjk: "宋体", latin: "Times New Roman" }
+  revision_title:  { cjk: "宋体", latin: "Times New Roman" }
+  revision_header: { cjk: "宋体", latin: "Times New Roman" }
+  revision_body:   { cjk: "宋体", latin: "Times New Roman" }
+  page_number:     { cjk: "宋体", latin: "Times New Roman" }
+  table_caption:   { cjk: "宋体", latin: "Times New Roman" }
+  figure_caption:  { cjk: "宋体", latin: "Times New Roman" }
+
+# ── 3. 字号配置 (G01.0403 2.5.1+2.6+2.4+2.10) ──
+sizes:
+  cover_title_pt: 22             # 二号 (封面项目/产品名称)
+  cover_subtitle_pt: 22          # 二号 (封面文件名称, 加粗)
+  cover_info_pt: 14              # 四号 (封面项目令号/密级/拟制等信息)
+  body_pt: 12                    # 小四 (正文+标题+列表)
+  table_body_pt: 10.5            # 五号 (表体和表标题)
+  h1_pt: 12                      # 小四 (1级标题)
+  h2_pt: 12                      # 小四 (2级标题)
+  h3_pt: 12                      # 小四 (3级标题)
+  h4_pt: 12                      # 小四 (4级标题)
+  toc_title_pt: 12               # 小四 (目录标题)
+  toc_body_pt: 12                # 小四 (目录正文)
+  revision_title_pt: 10.5        # 五号 (修订记录标题)
+  revision_header_pt: 10.5       # 五号 (修订记录表头)
+  revision_body_pt: 12           # 小四 (修订记录内容)
+  header_pt: 10.5                # 五号 (页眉)
+  page_number_pt: 9              # 小五 (页脚页码)
+  table_caption_pt: 10.5         # 五号 (表标题)
+  figure_caption_pt: 10.5        # 五号 (图标题)
+
+# ── 4. 段落间距 (G01.0403 2.3) ──
+spacing:
+  body_line_spacing_mode: "multiple"   # multiple / fixed / atLeast
+  body_line_spacing_value: 1.5         # 正文1.5倍行距
+  title_line_spacing_mode: "multiple"
+  title_line_spacing_value: 1.5        # 标题1.5倍行距
+  header_line_spacing_mode: "multiple"
+  header_line_spacing_value: 1.0       # 页眉页脚单倍行距
+  first_line_indent_chars: 2           # 正文首行缩进2字符 (中文)
+  heading_indent_chars: 0              # 标题不缩进
+  paragraph_before_pt: 0               # 段前0行
+  paragraph_after_pt: 0                # 段后0行
+
+# ── 5. 对齐方式 ──
+alignment:
+  cover_title: "center"
+  cover_subtitle: "center"
+  cover_info: "center"
+  body: "both"                     # 两端对齐
+  toc_title: "center"
+  revision_title: "center"
+  revision_header: "center"
+  revision_body: "center"
+  header: "center"
+  page_number: "center"
+
+# ── 6. 列表配置 (G01.0403 2.5.2) ──
+list:
+  default_font_size_pt: 12         # 列表字号小四
+  levels:
+    - level: 1
+      type: "ordered"              # 有序列表
+      numbering: "a)b)c)"          # a), b), c)... (半角括号)
+      num_id: 100
+      left_cm: 0.0                 # 文本之前缩进0
+      hanging_cm: 0.74             # 悬挂缩进0.74cm
+      detection_regex: "^[a-zA-Z][)]\\s*"  # a) 开头的段落
+    - level: 2
+      type: "ordered"
+      numbering: "1)2)3)"          # 1), 2), 3)... (半角括号)
+      num_id: 101
+      left_cm: 0.74                # 文本之前缩进0.74cm
+      hanging_cm: 0.74
+      detection_regex: "^\\d+[)\\uff09]\\s*"
+    - level: 3
+      type: "unordered"            # 无序列表
+      symbol: "-"                  # 短横
+      num_id: 102
+      left_cm: 1.48
+      hanging_cm: 0.74
+      detection_regex: "^[-\\u2013\\u2014]\\s+"
+    - level: 4
+      type: "unordered"
+      symbol: "●"                  # 黑色圆 (U+25CF)
+      num_id: 103
+      left_cm: 2.22
+      hanging_cm: 0.74
+      detection_regex: "^[\\u25CF\\u25A0\\u25A1\\u25CB\\u25AA\\u25B8\\u25E2\\u2022\\u00B7]\\s*"
+    - level: 5
+      type: "unordered"
+      symbol: "○"                  # 白色圆 (U+25CB)
+      num_id: 104
+      left_cm: 2.96
+      hanging_cm: 0.74
+      detection_regex: "^[\\u25CB\\u25C7\\u25C6]\\s*"
+
+# ── 7. 标题配置 (G01.0403 2.5.1) ──
+heading:
+  max_level: 4                     # 标题级别不超过4级
+  indent_chars: 0                  # 全部标题不缩进
+  font_size_pt: 12                 # 标题字号小四
+  detection:
+    # 各级标题的检测正则 (按优先级匹配)
+    h1: "^1\\s+[\\u4e00-\\u9fff]"           # "1 目的和范围"
+    h2: "^\\d+\\.\\d+\\s+[\\u4e00-\\u9fff]"   # "2.1 页面布局"
+    h3: "^\\d+\\.\\d+\\.\\d+\\s+[\\u4e00-\\u9fff]"
+    h4: "^\\d+\\.\\d+\\.\\d+\\.\\d+\\s+[\\u4e00-\\u9fff]"
+
+# ── 8. 图标题配置 (G01.0403 2.8) ──
+figure_caption:
+  font_size_pt: 10.5               # 五号
+  alignment: "center"
+  detection_regex: "^(图\\s*\\d+(-\\d+)?|Figure\\s*\\d+|Fig\\.?\\s*\\d+)"
+
+# ── 9. 表标题配置 (G01.0403 2.9) ──
+table_caption:
+  font_size_pt: 10.5               # 五号
+  alignment: "center"
+  detection_regex: "^(表\\s*\\d+(-\\d+)?|Table\\s*\\d+)"
+
+# ── 10. 页眉配置 (G01.0403 2.4) ──
+header:
+  content_format: "{file_number}  {version}"  # 文件编号 + 2空格 + 版本号
+  font_size_pt: 10.5                            # 五号
+  alignment: "center"
+  line_spacing: "single"
+
+# ── 11. 页脚配置 (G01.0403 2.4) ──
+footer:
+  content_format: "X/Y"                         # 页码 X/Y 格式
+  font_size_pt: 9                               # 小五
+  alignment: "center"
+
+# ── 12. 封面配置 (G01.0403 2.10.1) ──
+cover:
+  detection_by: "center"                  # 通过居中段落检测封面
+  max_pages: 2
+  title_font_size_pt: 22                   # 二号
+  title_bold: true
+  subtitle_font_size_pt: 22               # 二号 (文件名称)
+  subtitle_bold: true
+  info_font_size_pt: 14                   # 四号
+  info_fields:                             # 封面信息字段
+    - "项目令号"
+    - "密级"
+    - "文件编号"
+    - "版本"
+    - "阶段标记"
+    - "拟制"
+    - "审核"
+    - "会签"
+    - "批准"
+    - "日期"
+
+# ── 13. 修订记录配置 (G01.0403 2.10.2) ──
+revision_history:
+  enabled: true
+  detection_keywords:
+    - "修订记录"
+    - "版本历史"
+    - "修订历史"
+    - "Revision History"
+    - "变更记录"
+  table_columns:
+    - "版本号"
+    - "修订日期"
+    - "修订内容"
+    - "修订人"
+    - "审核人"
+  column_widths_cm: [2.0, 2.5, 8.0, 2.0, 2.0]
+  header_bold: true
+  border_style: "single"
+
+# ── 14. 目录配置 (G01.0403 2.10.3) ──
+toc:
+  enabled: true
+  min_pages_to_generate: 10           # 超过10页生成目录
+  detection_keywords:
+    - "目录"
+    - "目  录"
+    - "Table of Contents"
+
+# ── 15. 表格配置 (G01.0403 2.9) ──
+table:
+  auto_fit_window: true               # 与窗口等宽
+  header_repeat: true                 # 表头重复标题行
+  body_font_size_pt: 10.5             # 五号
+  header_font_size_pt: 10.5
+  header_bold: true
+
+# ── 16. 校验规则配置 ──
+validation:
+  strict_mode: true
+  max_retries: 5
+  checks:
+    - page_margins
+    - page_size
+    - cover_fonts
+    - body_fonts
+    - heading_fonts
+    - revision_section
+    - toc_section
+    - line_spacing
+    - paragraph_alignment
+    - first_line_indent
+    - page_numbers
+    - table_borders
+    - table_header_fonts
+    - table_body_fonts
+    - header_fonts
+    - footer_fonts
+    - list_indent
+    - heading_indent
+    - figure_caption
+    - table_caption

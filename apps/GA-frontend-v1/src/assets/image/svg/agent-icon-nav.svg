@@ -1,0 +1,10 @@
+<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- same size, larger corner radius -->
+  <rect x="0.75" y="0.75" width="14.5" height="14.5" rx="3.4"
+        stroke="#1A1A1A" stroke-width="1.5"/>
+  <!-- eyes unchanged -->
+  <rect x="4.2" y="6.1" width="2.3" height="2.3" rx="0.55"
+        fill="#1A1A1A"/>
+  <rect x="9.5" y="6.1" width="2.3" height="2.3" rx="0.55"
+        fill="#1A1A1A"/>
+</svg>

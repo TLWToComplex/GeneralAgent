@@ -1,0 +1,64 @@
+# GeneralAgent V2 · 身份认证与实例路由服务配置
+# 键名与老项目 ai-service-backend 的 config.yaml 保持一致，便于迁移比对。
+# 环境变量优先于本文件（对应关系见 .env.example 与 app/config.py）。
+
+# 服务器配置
+server:
+  host: "0.0.0.0"            # 监听地址
+  port: 8038                 # 监听端口（与老项目一致）
+  reload: false              # Uvicorn 热重载，容器环境建议 false
+
+# 数据库配置
+database:
+  url: "mysql+pymysql://root:123456@localhost:3306/GA-v2?charset=utf8mb4"
+
+# 日志配置
+logging:
+  level: "INFO"              # DEBUG / INFO / WARNING / ERROR / CRITICAL
+  simplified: true           # 简化日志格式，仅输出关键信息
+
+# JWT 配置
+jwt:
+  secret_key: ""             # 生产环境请通过 JWT_SECRET_KEY 注入，勿提交到仓库
+  access_token_expires_seconds: 3600   # 与老项目一致：token 有效期 1 小时
+
+# 认证模式
+sso:
+  url: "LOCAL_NO_AUTHZ"      # 本地账号登录模式；V2 未迁移远程 SSO 校验
+
+# 跨域配置
+cors:
+  allow_origins:
+    - "*"
+
+# 图形验证码
+captcha:
+  ttl_seconds: 300           # 验证码有效期（秒），与老项目一致
+  max_size: 1000             # 内存缓存容量上限
+  length: 4                  # 字符数
+  width: 140
+  height: 40
+
+# 账号安全策略（默认值与老项目硬编码值一致）
+auth:
+  max_login_failures: 5              # 连续失败次数达到该值锁定账号
+  lock_minutes: 5                    # 锁定时长（分钟）
+  inactive_lock_days: 30             # 超过该天数未登录自动锁定
+  password_expire_days: 90           # 密码超期提醒天数
+  admin_password_expire_days: 60     # admin 密码超期提醒天数
+  password_history_keep: 5           # 禁止复用近 N 次历史密码
+
+# 默认管理员账号（首次启动自动创建，登录功能开箱可用）
+default_admin:
+  enabled: true
+  username: "admin"
+  password: "Aa123456"
+  realname: "管理员"
+  email: "admin@qq.com"
+
+# dsh 实例映射（用户 ↔ dsh 容器；表结构见 sql/003_init_dsh_instance.sql）
+dsh:
+  # 前置代理调用内部接口 GET /internal/dsh/route 时携带的共享密钥（请求头 X-Internal-Token）。
+  # 留空 = 内部接口不启用（请求返回 503）。该接口会下发容器回环地址、端口与令牌文件名，
+  # 属于内网凭据级信息，生产环境请显式配置强随机值，且只让代理所在主机/内网可达。
+  internal_secret: ""

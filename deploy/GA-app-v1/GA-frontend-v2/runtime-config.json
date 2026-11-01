@@ -1,0 +1,28 @@
+{
+  "API_BASE_URL": "http://172.16.234.96:18038",
+  "KB_BASE_URL": "http://172.16.234.96:17861",
+  "COPYRIGHT": "GeneralAgent",
+  "SYSTEM_NAME": "GeneralAgent",
+  "APP_VERSION": "1.0.0",
+  "FILE_UPLOAD_MAX_SIZE": 200,
+  "KB_UPLOAD_DEFAULT_CHUNK_SIZE": 30000,
+  "ASR_SERVER": "ws://172.16.234.96:10095/",
+  "TTS_SERVER": "ws://172.16.234.96:8778",
+  "KB_EMBEDDING_MODELS": [
+    "Qwen3-Embedding-4B"
+  ],
+  "KB_VECTOR_STORE_TYPES": [
+    "es"
+  ],
+  "DEFAULT_USER_GROUP_IDS": [
+    "测试用户组"
+  ],
+  "MAP_SERVICE_URL": "",
+  "MAP_CHINA_URL": "",
+  "MAP_BOUNDARY_URL": "",
+  "MAP_SHANXI_URL": "",
+  "MAP_DATA_URL": "",
+  "MAP_QINLING_DATA_URL": "",
+  "MAP_NETWORK_ANALYST_URL": "",
+  "MAP_VIDEO_STREAM_API": ""
+}

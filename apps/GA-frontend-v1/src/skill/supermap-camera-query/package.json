@@ -1,0 +1,9 @@
+{
+  "name": "supermap-camera-query",
+  "version": "2.1.0",
+  "description": "SuperMap 摄像头周边查询与地图可视化",
+  "main": "index.js",
+  "dependencies": {
+    "axios": "^1.6.0"
+  }
+}

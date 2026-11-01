@@ -1,0 +1,738 @@
+{
+	"info": {
+		"_postman_id": "9ace55b8-2290-4b02-a680-aba1dd496747",
+		"name": "Aisix-admin",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32049164"
+	},
+	"item": [
+		{
+			"name": "Add Person Info",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"Guid\": \"a unique GUID string, such as 123e4567-e89b-12d3-a456-426614174000\",\r\n  \"Code\": 304,\r\n  \"Name\": \"苏云缨304\",\r\n  \"Sex\": 1,\r\n  \"DateOfBirth\": \"1991-06-14\",\r\n  \"Company\": \"某科技公司\",\r\n  \"Title\": \"上尉\",\r\n  \"Introduction\": \"专业方向是智能化指挥，在读3年的研究生...\",\r\n  \"AdditionalInfo\": {\r\n    \"Hobby\": \"Reading\",\r\n    \"Skill\": \"Programming\"\r\n  },\r\n  \"CreatedBy\": \"Admin\",\r\n  \"UpdatedBy\": \"Admin\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseurl}}/personInfo/add",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"personInfo",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Hello Log",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"codes\": [301, 302, 305]\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseurl}}/helloLog/add",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"helloLog",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Hello Log By Code",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"Code\": 305\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseurl}}/helloLog/getByCode?code=301",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"helloLog",
+						"getByCode"
+					],
+					"query": [
+						{
+							"key": "code",
+							"value": "301"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List Person Infos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseurl}}/personInfo/list?take=1000",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"personInfo",
+						"list"
+					],
+					"query": [
+						{
+							"key": "skip",
+							"value": "0",
+							"disabled": true
+						},
+						{
+							"key": "take",
+							"value": "1000"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Person Info By Codes -- no token",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseurl}}/personInfo/byCodes?codes=301,302,303",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"personInfo",
+						"byCodes"
+					],
+					"query": [
+						{
+							"key": "codes",
+							"value": "301,302,303"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Person Info By Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseurl}}/personInfo/1",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"personInfo",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Person Info By Code",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseurl}}/personInfo/code/302",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"personInfo",
+						"code",
+						"302"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Query Person Info",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseurl}}/personInfo/query?code=30&skip=0&take=10",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"personInfo",
+						"query"
+					],
+					"query": [
+						{
+							"key": "code",
+							"value": "30"
+						},
+						{
+							"key": "skip",
+							"value": "0"
+						},
+						{
+							"key": "take",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Person Info",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"Guid\": \"a unique GUID string, such as 123e4567-e89b-12d3-a456-426614174000\",\r\n  \"Code\": 301,\r\n  \"Name\": \"苏云缨\",\r\n  \"Sex\": 0,\r\n  \"DateOfBirth\": \"1991-08-14\",\r\n  \"Company\": \"某科技公司\",\r\n  \"Title\": \"国服第一曹操\",\r\n  \"Introduction\": \"专业方向是智能化指挥，在读3年的研究生\",\r\n  \"AdditionalInfo\": {\r\n    \"Hobby\": \"Reading\",\r\n    \"Skill\": \"Programming\",\r\n    \"AdditionalHelloMessage\":\"快来打王者荣耀\"\r\n  },\r\n  \"CreatedBy\": \"Admin\",\r\n  \"UpdatedBy\": \"Admin\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseurl}}/personInfo/update/1",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"personInfo",
+						"update",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Remove Person Info",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"305\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseurl}}/personInfo/4",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"personInfo",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"pm.collectionVariables.set(\"access_token\", jsonData.access_token);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"username\": \"admin\",\r\n  \"password\": \"qazwsxedc\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseurl}}/login",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Configurations",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseurl}}/configurations",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"configurations"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Configuration",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Resources\",\r\n    \"description\": \"Address parameters for videos and web view\",\r\n    \"value\": [\r\n        {\r\n            \"item\": {\r\n                \"打开大模型视频\": \"07.25 艾武大模型 最终版500m.mp4\",\r\n                \"打开实验室情况汇报视频\": \"反控制信息工程教育部重点实验室情况汇报.mp4\",\r\n                \"播放大模型视频\": \"07.25 艾武大模型 最终版500m.mp4\",\r\n                \"播放实验室情况汇报视频\": \"反控制信息工程教育部重点实验室情况汇报.mp4\"\r\n            },\r\n            \"keyword\": [\r\n                \"关闭视频\",\r\n                \"请关闭视频\"\r\n            ],\r\n            \"name\": \"Video\"\r\n        },\r\n        {\r\n            \"item\": {\r\n                \"我想添加人员信息\": \"http://192.168.1.203:8099/Table\",\r\n                \"添加人员信息\": \"http://192.168.1.203:8099/Table\"\r\n            },\r\n            \"keyword\": [\r\n                \"关闭网页\",\r\n                \"请关闭网页\"\r\n            ],\r\n            \"name\": \"WebView\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseurl}}/configurations/update",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"configurations",
+						"update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Configuration",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Resources\",\r\n    \"description\": \"Address parameters for videos and web view\",\r\n    \"value\": [\r\n        {\r\n            \"item\": {\r\n                \"介绍下艾武大模型\": \"07.25 艾武大模型 最终版500m.mp4\",\r\n                \"打开大模型视频\": \"07.25 艾武大模型 最终版500m.mp4\",\r\n                \"打开实验室情况汇报视频\": \"反控制信息工程教育部重点实验室情况汇报.mp4\",\r\n                \"播放大模型视频\": \"07.25 艾武大模型 最终版500m.mp4\",\r\n                \"播放实验室情况汇报视频\": \"反控制信息工程教育部重点实验室情况汇报.mp4\"\r\n            },\r\n            \"keyword\": [\r\n                \"关闭视频\"\r\n            ],\r\n            \"name\": \"Video\"\r\n        },\r\n        {\r\n            \"item\": {\r\n                \"我想添加人员信息\": \"http://127.0.0.1:5173/Table\",\r\n                \"添加人员信息\": \"http://127.0.0.1:5173/Table\"\r\n            },\r\n            \"keyword\": [\r\n                \"关闭网页\"\r\n            ],\r\n            \"name\": \"WebView\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseurl}}/configurations/add",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"configurations",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Configuration",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"FaceRecognition\",\r\n  \"value\": {\r\n    \"score\": 0.45\r\n  },\r\n  \"description\": \"Parameters for face recognition threshold.\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseurl}}/configurations/delete?name=Test",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"configurations",
+						"delete"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Test"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Prompt Group",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"Name\": \"TestGroup\",\r\n  \"Description\": \"This is a test group for API testing.\",\r\n  \"IconPath\": \"/path/to/icon.png\",\r\n  \"AdditionalData\": {\r\n    \"key1\": \"value1\",\r\n    \"key2\": \"value2\"\r\n  },\r\n  \"CreatedBy\": \"TestUser\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseurl}}/promptGroup/add",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"promptGroup",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List Prompt Groups",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseurl}}/promptGroup/list",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"promptGroup",
+						"list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Prompt Group By Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseurl}}/promptGroup/3",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"promptGroup",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Prompt Group",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"Name\": \"Updated Test Group\",\r\n  \"Description\": \"This group has been updated.\",\r\n  \"IconPath\": \"/path/to/new/icon.png\",\r\n  \"AdditionalData\": {\r\n    \"key1\": \"updatedValue1\",\r\n    \"key3\": \"newValue3\"\r\n  },\r\n  \"UpdatedBy\": \"TestUser2\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseurl}}/promptGroup/update/3",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"promptGroup",
+						"update",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Prompt Group",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseurl}}/promptGroup/3",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"promptGroup",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Prompt",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"GroupId\": 3,\r\n  \"Code\": \"example2313\",\r\n  \"Name\": \"ExampleAPrompt3231\",\r\n  \"Content\": \"This is an example prompt content.\",\r\n  \"Variables\": [\"var1\", \"var2\", \"var3\"],\r\n  \"Tags\": [\"tag1\", \"tag2\", \"tag3\"],\r\n  \"AdditionalData\": {\"key\": \"value\"},\r\n  \"CreatedBy\": \"testuser\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseurl}}/prompt/add",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"prompt",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List Prompts",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseurl}}/prompt/list",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"prompt",
+						"list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List Prompt By Group Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseurl}}/prompt/list/3",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"prompt",
+						"list",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List Prompt By Group Name",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseurl}}/prompt/list/Updated Test Group",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"prompt",
+						"list",
+						"Updated Test Group"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Prompt By Id",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"Name\": \"Test Group\",\r\n  \"Description\": \"This is a test group for API testing.\",\r\n  \"IconPath\": \"/path/to/icon.png\",\r\n  \"AdditionalData\": {\r\n    \"key1\": \"value1\",\r\n    \"key2\": \"value2\"\r\n  },\r\n  \"CreatedBy\": \"TestUser\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseurl}}/prompt/6",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"prompt",
+						"6"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Prompt",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"Name\": \"Updated Example Prompt\",\r\n  \"Code\":\"hshwk\",\r\n  \"Variables\": [\"var1\", \"var2\", \"var3\"],\r\n  \"Tags\": [\"tag1\", \"tag8\", \"tag3\"],\r\n  \"AdditionalData\": {\"key\": \"newvalue\"},\r\n  \"UpdatedBy\": \"testuser\",\r\n  \"GroupId\": 3\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseurl}}/prompt/update/6",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"prompt",
+						"update",
+						"6"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Prompt",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"Name\": \"Test Group\",\r\n  \"Description\": \"This is a test group for API testing.\",\r\n  \"IconPath\": \"/path/to/icon.png\",\r\n  \"AdditionalData\": {\r\n    \"key1\": \"value1\",\r\n    \"key2\": \"value2\"\r\n  },\r\n  \"CreatedBy\": \"TestUser\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseurl}}/prompt/6",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"prompt",
+						"6"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{access_token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseurl",
+			"value": "http://localhost:5001",
+			"type": "string"
+		},
+		{
+			"key": "access_token",
+			"value": "{{access_token}}"
+		}
+	]
+}

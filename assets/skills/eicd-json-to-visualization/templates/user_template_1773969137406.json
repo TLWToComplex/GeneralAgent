@@ -1,0 +1,256 @@
+{
+  "templateName": "new4",
+  "templateId": "user_template_1773969137406",
+  "description": "",
+  "version": "1.0",
+  "createdAt": "2026-03-20T01:12:17.406Z",
+  "canvas": {
+    "width": 1200,
+    "height": 800,
+    "backgroundColor": "#ffffff",
+    "gridSize": 20,
+    "showGrid": true
+  },
+  "layout": {
+    "type": "fixed",
+    "direction": "horizontal"
+  },
+  "styles": {
+    "device": {
+      "fill": "white",
+      "stroke": "black",
+      "strokeWidth": 1.5,
+      "fontFamily": "Arial",
+      "fontSize": 11
+    },
+    "connection": {
+      "stroke": "black",
+      "strokeWidth": 1,
+      "style": "orthogonal"
+    }
+  },
+  "positions": {
+    "RPDU1": {
+      "x": 80,
+      "y": 100
+    },
+    "RPDU2": {
+      "x": 80,
+      "y": 380
+    },
+    "2501U2201": {
+      "x": 650,
+      "y": 80
+    },
+    "2501U2203": {
+      "x": 650,
+      "y": 360
+    },
+    "GND-601": {
+      "x": 150,
+      "y": 240
+    },
+    "GND-600": {
+      "x": 150,
+      "y": 290
+    },
+    "GND-602": {
+      "x": 150,
+      "y": 520
+    },
+    "GND-603": {
+      "x": 150,
+      "y": 570
+    }
+  },
+  "connections": [
+    {
+      "id": "conn_0",
+      "from": {
+        "device": "",
+        "pin": ""
+      },
+      "to": {
+        "device": "",
+        "pin": ""
+      },
+      "waypoints": [
+        [
+          215,
+          145
+        ],
+        [
+          280,
+          145
+        ],
+        [
+          280,
+          125
+        ],
+        [
+          625,
+          125
+        ]
+      ],
+      "label": "1LN ESS D N"
+    },
+    {
+      "id": "conn_1",
+      "from": {
+        "device": "",
+        "pin": ""
+      },
+      "to": {
+        "device": "",
+        "pin": ""
+      },
+      "waypoints": [
+        [
+          150,
+          265
+        ],
+        [
+          300,
+          265
+        ],
+        [
+          300,
+          150
+        ],
+        [
+          625,
+          150
+        ]
+      ],
+      "label": "1LN ESS D N"
+    },
+    {
+      "id": "conn_2",
+      "from": {
+        "device": "",
+        "pin": ""
+      },
+      "to": {
+        "device": "",
+        "pin": ""
+      },
+      "waypoints": [
+        [
+          150,
+          315
+        ],
+        [
+          320,
+          315
+        ],
+        [
+          320,
+          175
+        ],
+        [
+          625,
+          175
+        ]
+      ],
+      "label": "CG ESS Z N"
+    },
+    {
+      "id": "conn_3",
+      "from": {
+        "device": "",
+        "pin": ""
+      },
+      "to": {
+        "device": "",
+        "pin": ""
+      },
+      "waypoints": [
+        [
+          215,
+          425
+        ],
+        [
+          280,
+          425
+        ],
+        [
+          280,
+          405
+        ],
+        [
+          625,
+          405
+        ]
+      ],
+      "label": "1LN ESS D N"
+    },
+    {
+      "id": "conn_4",
+      "from": {
+        "device": "",
+        "pin": ""
+      },
+      "to": {
+        "device": "",
+        "pin": ""
+      },
+      "waypoints": [
+        [
+          150,
+          545
+        ],
+        [
+          300,
+          545
+        ],
+        [
+          300,
+          430
+        ],
+        [
+          625,
+          430
+        ]
+      ],
+      "label": "1LN ESS D N"
+    },
+    {
+      "id": "conn_5",
+      "from": {
+        "device": "",
+        "pin": ""
+      },
+      "to": {
+        "device": "",
+        "pin": ""
+      },
+      "waypoints": [
+        [
+          150,
+          595
+        ],
+        [
+          320,
+          595
+        ],
+        [
+          320,
+          455
+        ],
+        [
+          625,
+          455
+        ]
+      ],
+      "label": "CG ESS Z N"
+    }
+  ],
+  "metadata": {
+    "author": "user",
+    "isDefault": false,
+    "tags": [
+      "custom",
+      "user"
+    ]
+  }
+}

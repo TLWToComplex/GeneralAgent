@@ -1,0 +1,60 @@
+# AI文档处理器服务配置文# Docker部署时可以通过挂载卷来修改此文件，无需重新构建镜像
+
+# 服务器配
+server:
+  # 服务监听地址
+  # - "0.0.0.0" 允许所有外部访  # - "127.0.0.1" 仅允许本地访  
+  host: "0.0.0.0"
+
+  # 服务监听端口
+  port: 8200
+
+# 文件处理配置
+file_processing:
+  # 单个文件最大大小（字节  # 50MB = 52428800 -> 200MB
+  max_file_size: 209715200
+
+  # 文档分片大小（字符数  # 每个chunk包含的最大字符数
+  chunk_size: 1000
+
+  # 分片重叠大小（字符数  # 相邻chunk之间重叠的字符数，保证上下文连续  
+  chunk_overlap: 0
+
+  # 是否启用tiktoken进行精确token计算
+  # - true: 使用tiktoken库进行精确计算（更准确但较慢  # - false: 使用字符数估算（更快但较粗略）离线环境使  
+  enable_tiktoken: false
+
+  # 每个conversation_id的累计文件大小限制（字节  # 防止单个对话占用过多资源
+  # 100MB = 104857600
+  max_conversation_file_size: 104857600
+
+  # 默认处理类型
+  # - "mineru": 使用MinerU异步解析服务（推荐，支持复杂格式  # - "langchain": 使用LangChain本地加载器（简单快速）
+  default_process_type: "mineru"
+
+# LibreOffice配置（仅Windows本地开发需要，Docker中自动可用）
+libreoffice:
+  # Windows下安装的LibreOffice的program目录路径
+  # Docker环境中此项会被忽  
+  windows_path: "D:\\software\\LibreOffice\\program"
+
+# NLTK 数据目录（必填：运行前必须预先下载数据包到此目录# Windows: python -c "import nltk; nltk.download('punkt_tab', download_dir='D:/nltk_data'); nltk.download('averaged_perceptron_tagger_eng', download_dir='D:/nltk_data')"
+# Linux/Docker: 构建镜像时已预下载到 /usr/share/nltk_data,docker环境下不用关注这个
+nltk_data_path: "C:\\Users\\Administrator\\nltk_data"
+#python -c "import nltk; nltk.download('punkt_tab'); nltk.download('averaged_perceptron_tagger_eng')"后会字段安装到这个路
+# MinerU解析服务配置
+mineru:
+  # MinerU服务地址
+  base_url: "http://127.0.0.1:18002"
+  # 最长等待任务完成的秒数，超时返04
+  timeout: 300
+  # 轮询任务状态的间隔秒数S
+  poll_interval: 3
+  # 解析后端：pipeline（无GPU环境）或 hybrid-auto-engine（有GPU时推荐，速度更快、效果更好）
+  backend: "hybrid-auto-engine"
+
+llm:
+  enable: false
+  base_url: "http://127.0.0.1:8666/v1"
+  api_key: ""
+  model_name: "qwen3.6-27b"

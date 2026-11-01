@@ -1,0 +1,16 @@
+<section class="cr-section" id="ext-cancel-rebook-gap">
+<h2>退订后重定价差（先退订后新订的住宿）</h2>
+<p class="cr-meta">{{DEFINITION}}。本章节由 <b>cancel_rebook_gap</b> 模块渲染，纯 HTML/CSS。</p>
+<div class="cr-kpis">
+  <div><span>匹配到重订的记录</span><b>{{MATCHED}}</b></div>
+  <div><span>其中同日重订</span><b>{{SAME_DAY}}</b></div>
+  <div><span>加价 / 降价</span><b>{{UP_COUNT}} / {{DOWN_COUNT}}</b></div>
+  <div><span>天数缺失被排除</span><b>{{EXCLUDED}}</b></div>
+</div>
+<h3>明细（按单晚价差绝对值降序，最多{{MATCHED}}条）</h3>
+<table>
+<thead><tr><th>乘机人</th><th>部门</th><th>城市</th><th>入住日期</th><th>被退订单</th><th>新订订单</th><th>间隔</th><th>单晚价差</th></tr></thead>
+<tbody>{{DETAIL_ROWS}}</tbody>
+</table>
+<p class="cr-meta">间隔为两单预订日期差（源数据预订时间精确到天）；单晚价=|实收实付|/住宿天数；红色为价差金额。生成时间：{{GENERATED_AT}}。</p>
+</section>

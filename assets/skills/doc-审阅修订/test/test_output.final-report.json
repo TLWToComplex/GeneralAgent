@@ -1,0 +1,148 @@
+{
+  "filepath": "C:\\Users\\D\\.workbuddy\\skills\\docx-spec-formatter\\test\\test_output.docx",
+  "summary": {
+    "total": 17,
+    "passed": 15,
+    "failed": 0,
+    "warned": 2,
+    "skipped": 0
+  },
+  "results": [
+    {
+      "check_id": "page_margins",
+      "status": "PASS",
+      "message": "上边距通过",
+      "actual": "1.46cm",
+      "expected": "3.7cm",
+      "location": "Section[0]"
+    },
+    {
+      "check_id": "page_margins",
+      "status": "PASS",
+      "message": "下边距通过",
+      "actual": "1.38cm",
+      "expected": "3.5cm",
+      "location": "Section[0]"
+    },
+    {
+      "check_id": "page_margins",
+      "status": "PASS",
+      "message": "左边距通过",
+      "actual": "1.10cm",
+      "expected": "2.8cm",
+      "location": "Section[0]"
+    },
+    {
+      "check_id": "page_margins",
+      "status": "PASS",
+      "message": "右边距通过",
+      "actual": "1.02cm",
+      "expected": "2.6cm",
+      "location": "Section[0]"
+    },
+    {
+      "check_id": "page_size",
+      "status": "PASS",
+      "message": "页面宽度通过",
+      "actual": "21.0cm",
+      "expected": "21.0cm",
+      "location": "Section[0]"
+    },
+    {
+      "check_id": "page_size",
+      "status": "PASS",
+      "message": "页面高度通过",
+      "actual": "29.7cm",
+      "expected": "29.7cm",
+      "location": "Section[0]"
+    },
+    {
+      "check_id": "cover_fonts",
+      "status": "PASS",
+      "message": "封面字体通过",
+      "actual": "方正小标宋简体",
+      "expected": "方正小标宋简体",
+      "location": null
+    },
+    {
+      "check_id": "body_fonts",
+      "status": "PASS",
+      "message": "正文 CJK 字体通过",
+      "actual": "仿宋_GB2312",
+      "expected": "仿宋_GB2312",
+      "location": null
+    },
+    {
+      "check_id": "heading_fonts",
+      "status": "PASS",
+      "message": "标题字体通过",
+      "actual": null,
+      "expected": null,
+      "location": null
+    },
+    {
+      "check_id": "revision_section",
+      "status": "PASS",
+      "message": "修订记录标题字体通过: \"修订记录\"",
+      "actual": "黑体",
+      "expected": "黑体",
+      "location": null
+    },
+    {
+      "check_id": "toc_section",
+      "status": "PASS",
+      "message": "目录标题字体通过: \"目  录\"",
+      "actual": "黑体",
+      "expected": "黑体",
+      "location": null
+    },
+    {
+      "check_id": "line_spacing",
+      "status": "PASS",
+      "message": "行距通过",
+      "actual": "28pt",
+      "expected": null,
+      "location": null
+    },
+    {
+      "check_id": "paragraph_alignment",
+      "status": "WARN",
+      "message": "对齐方式不符",
+      "actual": "4 处",
+      "expected": "both",
+      "location": null
+    },
+    {
+      "check_id": "first_line_indent",
+      "status": "PASS",
+      "message": "首行缩进通过",
+      "actual": "2字符",
+      "expected": null,
+      "location": null
+    },
+    {
+      "check_id": "page_numbers",
+      "status": "WARN",
+      "message": "未检测到页脚内容，可能需要手动添加页码",
+      "actual": null,
+      "expected": null,
+      "location": null
+    },
+    {
+      "check_id": "table_borders",
+      "status": "PASS",
+      "message": "表格边框通过",
+      "actual": "1 个表格",
+      "expected": null,
+      "location": null
+    },
+    {
+      "check_id": "table_header_fonts",
+      "status": "PASS",
+      "message": "表头字体通过",
+      "actual": "黑体",
+      "expected": null,
+      "location": null
+    }
+  ]
+}

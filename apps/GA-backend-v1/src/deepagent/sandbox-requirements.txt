@@ -1,0 +1,51 @@
+# 沙箱镜像 Python 依赖清单 —— 单一事实来源
+#
+# 本文件同时被两处使用，加/删包只改这一处，然后重建镜像即可，无需改任何代码：
+#   1) Dockerfile：RUN pip install -r sandbox-requirements.txt
+#   2) 系统提示词第 6 条（package_mode=preinstalled 时）：动态读取本文件生成"已预装 Python 包"列表
+#
+# 格式：每行一个包名，可带版本约束（如 pandas>=2.0）；以 # 开头的行为注释，空行忽略。
+# 注意：package_mode=mirror（内网镜像源）时提示词不再列举本清单，但镜像仍可用本文件预装基础包。
+
+# 智能体框架 / LLM
+deepagents
+openai
+
+# Office 文档
+python-pptx
+python-docx
+openpyxl
+pandas
+docx2txt
+xlrd
+
+# PDF
+pypdf
+PyPDF2
+pdfplumber
+reportlab
+pdf2image
+
+# 文档转换 / 解析
+markitdown
+
+# 图像
+Pillow
+
+# OCR
+pytesseract
+
+# 浏览器自动化
+playwright
+DrissionPage
+
+# 数据 / 科学计算
+scipy
+matplotlib
+seaborn
+
+# 中文分词
+jieba
+
+# XML 安全解析（防 XXE/XML 炸弹）
+defusedxml

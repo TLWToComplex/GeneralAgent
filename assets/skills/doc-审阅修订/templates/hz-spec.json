@@ -1,0 +1,237 @@
+{
+  "version": "2.0",
+  "meta": {
+    "name": "航天射频产品技术文件格式",
+    "description": "基于《格式规则.docx》编制，适用于射频前端等产品技术文件的格式规范",
+    "author": ""
+  },
+  "page": {
+    "_comment": "A4幅面，左右边距30mm，上下边距25mm（文档未明确给定，取合理值）",
+    "size": "A4",
+    "orientation": "portrait",
+    "margin_top_cm": 2.5,
+    "margin_bottom_cm": 2.5,
+    "margin_left_cm": 3.0,
+    "margin_right_cm": 3.0,
+    "header_distance_cm": 1.5,
+    "footer_distance_cm": 1.75
+  },
+  "fonts": {
+    "_comment": "全文字体配置（按表1 技术文件字体及段落格式）",
+    "cover_title":      { "cjk": "黑体", "latin": "Times New Roman" },
+    "cover_subtitle":   { "cjk": "黑体", "latin": "Times New Roman" },
+    "cover_info":       { "cjk": "宋体", "latin": "Times New Roman" },
+    "cover_docnum":     { "cjk": "", "latin": "Times New Roman" },
+    "cover_company":    { "cjk": "仿宋", "latin": "Times New Roman" },
+    "body":             { "cjk": "宋体", "latin": "Times New Roman" },
+    "h1":               { "cjk": "黑体", "latin": "Times New Roman" },
+    "h2":               { "cjk": "黑体", "latin": "Times New Roman" },
+    "h3":               { "cjk": "黑体", "latin": "Times New Roman" },
+    "h4":               { "cjk": "黑体", "latin": "Times New Roman" },
+    "toc_title":        { "cjk": "黑体", "latin": "Times New Roman" },
+    "toc_body":         { "cjk": "宋体", "latin": "Times New Roman" },
+    "revision_title":   { "cjk": "黑体", "latin": "Times New Roman" },
+    "revision_header":  { "cjk": "宋体", "latin": "Times New Roman" },
+    "revision_body":    { "cjk": "宋体", "latin": "Times New Roman" },
+    "header":           { "cjk": "宋体", "latin": "Times New Roman" },
+    "footer":           { "cjk": "宋体", "latin": "Times New Roman" },
+    "page_number":      { "cjk": "宋体", "latin": "Times New Roman" },
+    "table_caption":    { "cjk": "黑体", "latin": "Times New Roman" },
+    "figure_caption":   { "cjk": "黑体", "latin": "Times New Roman" },
+    "note_example":     { "cjk": "宋体", "latin": "Times New Roman" },
+    "table_body":       { "cjk": "宋体", "latin": "Times New Roman" }
+  },
+  "sizes": {
+    "_comment": "字号配置（pt），字号名→pt：二号=22,小二号=18,三号=16,四号=14,小四=12,五号=10.5",
+    "cover_title_pt": 22,
+    "cover_subtitle_pt": 22,
+    "cover_info_pt": 14,
+    "cover_docnum_pt": 16,
+    "cover_company_pt": 16,
+    "body_pt": 12,
+    "table_body_pt": 10.5,
+    "h1_pt": 12,
+    "h2_pt": 12,
+    "h3_pt": 12,
+    "h4_pt": 12,
+    "toc_title_pt": 18,
+    "toc_body_pt": 12,
+    "revision_title_pt": 18,
+    "revision_header_pt": 10.5,
+    "revision_body_pt": 10.5,
+    "header_pt": 10.5,
+    "footer_pt": 10.5,
+    "page_number_pt": 10.5,
+    "table_caption_pt": 12,
+    "figure_caption_pt": 12,
+    "note_example_pt": 10.5
+  },
+  "spacing": {
+    "_comment": "全文固定值25磅行距（500twips=25pt*20），章标题段前段后0.5行(=12.5pt)",
+    "body_line_spacing_pt": 25,
+    "body_line_spacing_mode": "fixed",
+    "title_line_spacing_pt": 25,
+    "title_line_spacing_mode": "fixed",
+    "header_line_spacing_pt": 25,
+    "header_line_spacing_mode": "fixed",
+    "first_line_indent_chars": 2,
+    "english_first_line_indent_chars": 4,
+    "heading_indent_chars": 0,
+    "paragraph_before_pt": 0,
+    "paragraph_after_pt": 0,
+    "h1_before_pt": 12.5,
+    "h1_after_pt": 12.5,
+    "snap_to_grid": false,
+    "contextual_spacing": false
+  },
+  "list": {
+    "_comment": "列项缩进：L1 左缩进0.85cm(482twips) 悬挂0.85cm；L2 左缩进1.7cm(964twips) 悬挂0.85cm。注意：当前L1(a))和L2(1))使用独立编号实例(100/101)，不支持上下文内层级嵌套",
+    "levels": [
+      { "level": 1, "type": "ordered", "num_id": 100, "left_twips": 482, "hanging_twips": 482, "desc": "L1: a)b)c) 左0.85cm" },
+      { "level": 2, "type": "ordered", "num_id": 101, "left_twips": 964, "hanging_twips": 482, "desc": "L2: 1)2)3) 左1.7cm" }
+    ],
+    "detection": {
+      "_comment": "L1: a)/b)/c) 字母列项；L2: 1)/2) 数字列项",
+      "L1": "^[a-zA-Z][)]\\s*",
+      "L2": "^\\d+[)\\uff09]\\s*"
+    },
+    "numbering_defs": {
+      "_comment": "编号定义：L1 lowerLetter a)b)c)，L2 decimal 1)2)3)",
+      "100": { "numFmt": "lowerLetter", "lvlText": "%1)", "start": 1 },
+      "101": { "numFmt": "decimal", "lvlText": "%1)", "start": 1 }
+    }
+  },
+  "heading": {
+    "_comment": "章标题（h1）段前段后0.5行；条标题（h2）正常间距",
+    "bold": false,
+    "alignment": "left",
+    "set_outline_level": true,
+    "detection": {
+      "h1": "^\\d+\\s+[\\u4e00-\\u9fff]",
+      "h2": "^\\d+\\.\\d+\\s+[\\u4e00-\\u9fff]",
+      "h3": "^\\d+\\.\\d+\\.\\d+\\s+[\\u4e00-\\u9fff]",
+      "h4": "^\\d+\\.\\d+\\.\\d+\\.\\d+\\s+[\\u4e00-\\u9fff]"
+    },
+    "level_bold": {
+      "h1": false,
+      "h2": false,
+      "h3": false,
+      "h4": false
+    },
+    "level_spacing": {
+      "h1_before_pt": 12.5,
+      "h1_after_pt": 12.5
+    },
+    "fallback_detection": {
+      "_comment": "文本正则未命中时的回退检测模式",
+      "cn_numeral": "^[一二三四五六七八九十]+、",
+      "cn_paren": "^（[一二三四五]）",
+      "digit_dot": "^[1-9]\\.",
+      "paren_digit": "^（[1-5]）"
+    }
+  },
+  "figure_caption": {
+    "_comment": "图标题：小四黑体居中，25磅行距",
+    "detection_regex": "^(图\\s*\\d+(-\\d+)?|Figure\\s*\\d+|Fig\\.?\\s*\\d+)"
+  },
+  "table_caption": {
+    "_comment": "表标题：小四黑体居中，25磅行距",
+    "detection_regex": "^(表\\s*\\d+(-\\d+)?|Table\\s*\\d+)"
+  },
+  "numbering_reset": {
+    "_comment": "列表编号重置：标题后/正文后/级别变化时重置为a)/1)开始",
+    "enabled": true,
+    "triggers": {
+      "after_heading": true,
+      "after_body_text": true,
+      "on_level_change": true
+    },
+    "levels": [1, 2]
+  },
+  "alignment": {
+    "_comment": "对齐方式：正文左对齐(两端对齐)，封面居中，图/表标题居中，页脚居中",
+    "cover_title": "center",
+    "cover_subtitle": "center",
+    "cover_info": "left",
+    "cover_docnum": "center",
+    "cover_company": "center",
+    "body": "both",
+    "toc_title": "center",
+    "revision_title": "center",
+    "revision_header": "center",
+    "revision_body": "left",
+    "header": "center",
+    "footer": "center",
+    "page_number": "center",
+    "figure_caption": "center",
+    "table_caption": "center",
+    "note_example": "left"
+  },
+  "special_sections": {
+    "revision_history": {
+      "enabled": true,
+      "detection_keywords": ["修订记录", "修改记录", "版本历史", "Revision History"],
+      "table_columns": ["版本号", "修订日期", "修订内容", "修订人", "审核人"],
+      "column_widths_cm": [2.0, 2.5, 8.0, 2.0, 2.0],
+      "header_bold": false,
+      "header_shading": "D9E2F3",
+      "border_style": "single",
+      "row_height_cm": 0.8
+    },
+    "toc": {
+      "enabled": true,
+      "detection_keywords": ["目次", "目  次", "目录", "Table of Contents"],
+      "auto_generate": false
+    },
+    "cover": {
+      "enabled": true,
+      "detection_by": "first_section_titlePg",
+      "max_pages": 3,
+      "title_bold": false,
+      "subtitle_bold": false,
+      "detection_keywords": ["密级", "文件编号", "编号", "版本", "阶段", "拟制", "审核", "会签", "批准", "日期", "共  页", "单位名称"]
+    }
+  },
+  "table_format": {
+    "_comment": "表格边框格式：上下左右+表头1.5磅粗实线，其余0.5磅细实线",
+    "border_top_pt": 1.5,
+    "border_bottom_pt": 1.5,
+    "border_left_pt": 1.5,
+    "border_right_pt": 1.5,
+    "header_border_pt": 1.5,
+    "inner_border_pt": 0.5,
+    "empty_cell_marker": "-"
+  },
+  "validation": {
+    "strict_mode": true,
+    "max_retries": 5,
+    "tolerances": {
+      "first_line_indent_pt": 3,
+      "list_indent_cm": 0.25,
+      "heading_indent_pt": 1.0,
+      "line_spacing_pt": 1.0
+    },
+    "checks": [
+      "page_margins",
+      "page_size",
+      "cover_fonts",
+      "body_fonts",
+      "heading_fonts",
+      "revision_section",
+      "toc_section",
+      "line_spacing",
+      "paragraph_alignment",
+      "first_line_indent",
+      "page_numbers",
+      "table_borders",
+      "table_header_fonts",
+      "table_body_fonts",
+      "header_fonts",
+      "footer_fonts",
+      "list_indent",
+      "heading_indent",
+      "figure_caption",
+      "table_caption"
+    ]
+  }
+}

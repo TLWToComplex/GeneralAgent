@@ -1,0 +1,1029 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<title>__FORM_TITLE__</title>
+<style>
+  :root {
+    --primary: #4f46e5;
+    --primary-soft: #eef2ff;
+    --text: #1f2937;
+    --muted: #6b7280;
+    --border: #e5e7eb;
+    --success: #16a34a;
+    --warning: #d97706;
+    --danger: #dc2626;
+    --info: #0284c7;
+    --bg: #f8fafc;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, "PingFang SC", "Microsoft YaHei", Segoe UI, Roboto, sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+  .container {
+    max-width: 1400px;
+    margin: 24px auto;
+    padding: 0 20px 48px;
+  }
+  header.app {
+    background: linear-gradient(135deg, var(--primary), #7c3aed);
+    color: #fff;
+    border-radius: 14px;
+    padding: 24px 28px;
+    box-shadow: 0 8px 24px -12px rgba(79,70,229,.5);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  header.app h1 { margin: 0 0 6px; font-size: 22px; font-weight: 600; }
+  header.app .meta { font-size: 13px; opacity: .85; }
+  header.app .meta span + span::before { content: " · "; }
+  header.app .head-actions { display: flex; gap: 8px; }
+  header.app .head-actions button.primary {
+    background: #fff;
+    color: var(--primary);
+  }
+  .panel {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-top: 20px;
+    padding: 20px 24px;
+  }
+  .panel h2 {
+    margin: 0 0 14px;
+    font-size: 16px;
+    color: var(--primary);
+    border-left: 4px solid var(--primary);
+    padding-left: 10px;
+  }
+  /* toolbar */
+  .toolbar {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 14px;
+  }
+  .toolbar input[type=text],
+  .toolbar select {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 6px 10px;
+    font-size: 13px;
+    font-family: inherit;
+    min-width: 140px;
+  }
+  .toolbar .grow { flex: 1; min-width: 180px; }
+  /* multi-select filter */
+  .multi-select {
+    position: relative;
+    min-width: 140px;
+  }
+  .multi-select .ms-trigger {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 6px 28px 6px 10px;
+    font-size: 13px;
+    font-family: inherit;
+    background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E") no-repeat right 8px center;
+    cursor: pointer;
+    user-select: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: var(--text);
+  }
+  .multi-select .ms-trigger:hover { border-color: var(--primary); }
+  .multi-select .ms-panel {
+    display: none;
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    box-shadow: 0 4px 12px -4px rgba(0,0,0,.12);
+    z-index: 20;
+    min-width: 100%;
+    padding: 4px 0;
+    max-height: 240px;
+    overflow-y: auto;
+  }
+  .multi-select .ms-panel.open { display: block; }
+  .multi-select .ms-toggle {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 12px;
+    font-size: 12px;
+    color: var(--primary);
+    cursor: pointer;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 2px;
+  }
+  .multi-select .ms-toggle:hover { background: var(--primary-soft); }
+  .multi-select .ms-option {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px;
+    font-size: 13px;
+    cursor: pointer;
+  }
+  .multi-select .ms-option:hover { background: var(--primary-soft); }
+  .multi-select .ms-option input[type=checkbox] {
+    accent-color: var(--primary);
+    width: 14px;
+    height: 14px;
+    cursor: pointer;
+  }
+  /* table */
+  table.feedback {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    table-layout: fixed;
+  }
+  table.feedback th, table.feedback td {
+    border-bottom: 1px solid var(--border);
+    padding: 8px 6px;
+    vertical-align: top;
+    text-align: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  table.feedback th:nth-child(1) { width: 40px; }
+  table.feedback th:nth-child(3) { width: 60px; }
+  table.feedback th:nth-child(4) { width: 78px; }
+  table.feedback th:nth-child(5) { width: 100px; }
+  table.feedback th:nth-child(7) { width: 120px; }
+  table.feedback th:nth-child(8) { width: 110px; }
+  table.feedback th:nth-child(9) { width: 100px; }
+  table.feedback th:nth-child(10) { width: 100px; }
+  table.feedback th:nth-child(11) { width: 120px; }
+  /* user-mode table: fewer columns */
+  table.feedback[data-mode=user] { table-layout: auto; }
+  table.feedback[data-mode=user] th:nth-child(1) { width: 40px; }
+  table.feedback[data-mode=user] th:nth-child(3) { width: 120px; }
+  table.feedback[data-mode=user] th:nth-child(4) { width: 160px; }
+  table.feedback[data-mode=user] th:nth-child(5) { width: 110px; }
+  table.feedback[data-mode=user] th {
+    background: var(--primary-soft);
+    color: var(--primary);
+    font-weight: 600;
+    white-space: nowrap;
+    position: sticky;
+    top: 0;
+  }
+  table.feedback td.content { overflow: hidden; text-overflow: ellipsis; }
+  table.feedback td.actions-cell {
+    white-space: nowrap;
+    width: 1%;
+  }
+  .badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-size: 12px;
+    line-height: 1.4;
+    background: var(--primary-soft);
+    color: var(--primary);
+    white-space: nowrap;
+  }
+  .badge.priority-高 { background: #fee2e2; color: #b91c1c; }
+  .badge.priority-中 { background: #fef3c7; color: #b45309; }
+  .badge.priority-低 { background: #dcfce7; color: #166534; }
+  .badge.status-已上线 { background: #dcfce7; color: var(--success); }
+  .badge.status-开发中 { background: #e0f2fe; color: var(--info); }
+  .badge.status-需求确认 { background: #fef3c7; color: var(--warning); }
+  .badge.status-已关闭 { background: #f3f4f6; color: #6b7280; }
+  .progress {
+    position: relative;
+    height: 8px;
+    background: var(--border);
+    border-radius: 999px;
+    overflow: hidden;
+    min-width: 80px;
+  }
+  .progress > span {
+    display: block;
+    height: 100%;
+    background: var(--success);
+    border-radius: 999px;
+  }
+  .progress-text { font-size: 12px; color: var(--muted); margin-top: 2px; }
+  .empty { color: var(--muted); text-align: center; padding: 32px 0; }
+  /* buttons */
+  button {
+    border: none;
+    border-radius: 8px;
+    padding: 7px 14px;
+    font-size: 13px;
+    font-family: inherit;
+    cursor: pointer;
+    transition: transform .05s, box-shadow .15s;
+  }
+  button:active { transform: translateY(1px); }
+  button.primary { background: var(--primary); color: #fff; }
+  button.primary:hover { box-shadow: 0 4px 12px -4px rgba(79,70,229,.5); }
+  button.danger { background: var(--danger); color: #fff; }
+  button.danger:hover { box-shadow: 0 4px 12px -4px rgba(220,38,38,.5); }
+  button.ghost { background: #f3f4f6; color: var(--text); }
+  button.ghost:hover { background: #e5e7eb; }
+  button.link {
+    background: transparent;
+    color: var(--primary);
+    padding: 4px 6px;
+  }
+  button.link.danger-text { color: var(--danger); }
+  button[disabled] { opacity: .55; cursor: not-allowed; }
+  /* modal */
+  .modal-mask {
+    display: none;
+    position: fixed; inset: 0;
+    background: rgba(15, 23, 42, 0.45);
+    z-index: 50;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 40px 16px;
+    overflow-y: auto;
+  }
+  .modal-mask.show { display: flex; }
+  .modal {
+    background: #fff;
+    border-radius: 14px;
+    width: 100%;
+    max-width: 760px;
+    box-shadow: 0 20px 60px -20px rgba(15,23,42,.4);
+    overflow: hidden;
+  }
+  .modal header {
+    padding: 16px 22px;
+    background: linear-gradient(135deg, var(--primary), #7c3aed);
+    color: #fff;
+  }
+  .modal.mode-delete header {
+    background: linear-gradient(135deg, var(--danger), #991b1b);
+  }
+  .modal header h3 { margin: 0; font-size: 17px; font-weight: 600; }
+  .modal header .sub { font-size: 12px; opacity: .85; margin-top: 2px; }
+  .modal .body { padding: 20px 22px; }
+  .modal .footer {
+    padding: 14px 22px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+  }
+  .field { margin-bottom: 14px; }
+  .field label {
+    display: block;
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+  .field label .req { color: var(--danger); margin-left: 4px; }
+  .field input[type=text],
+  .field input[type=number],
+  .field input[type=datetime-local],
+  .field select,
+  .field textarea {
+    width: 100%;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 8px 10px;
+    font-size: 14px;
+    font-family: inherit;
+    color: var(--text);
+    background: #fff;
+  }
+  .field textarea { min-height: 80px; resize: vertical; }
+  .field input:focus, .field select:focus, .field textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(79,70,229,.15);
+  }
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  @media (max-width: 600px) { .grid-2 { grid-template-columns: 1fr; } }
+  .alert {
+    display: none;
+    padding: 10px 12px;
+    border-radius: 8px;
+    font-size: 13px;
+    margin-bottom: 12px;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+  .alert.show { display: block; }
+  .alert.success { background: #dcfce7; color: #166534; border: 1px solid #bbf7d0; }
+  .alert.error { background: #fee2e2; color: #991b1b; border: 1px solid #fecaca; }
+  .alert.info { background: #e0f2fe; color: #075985; border: 1px solid #bae6fd; }
+  /* readonly list (delete) */
+  .readonly-list { list-style: none; padding: 0; margin: 0; }
+  .readonly-list li {
+    display: grid;
+    grid-template-columns: 130px 1fr;
+    gap: 10px;
+    padding: 8px 0;
+    border-bottom: 1px dashed var(--border);
+    font-size: 13px;
+  }
+  .readonly-list li:last-child { border-bottom: none; }
+  .readonly-list .k { color: var(--muted); }
+  .readonly-list .v { word-break: break-word; white-space: pre-wrap; }
+  /* config bar */
+  .config-bar {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex-wrap: wrap;
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px dashed var(--border);
+  }
+  .config-bar input {
+    flex: 1;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 4px 8px;
+    font-size: 12px;
+    font-family: monospace;
+    min-width: 200px;
+  }
+  .hint { color: var(--muted); font-size: 12px; }
+  .global-alert { margin-top: 12px; }
+  /* pagination */
+  .pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    margin-top: 16px;
+    flex-wrap: wrap;
+  }
+  .pagination button {
+    min-width: 32px;
+    height: 32px;
+    padding: 0 8px;
+    font-size: 13px;
+    background: #fff;
+    border: 1px solid var(--border);
+    color: var(--text);
+  }
+  .pagination button:hover:not([disabled]) {
+    border-color: var(--primary);
+    color: var(--primary);
+  }
+  .pagination button.active {
+    background: var(--primary);
+    color: #fff;
+    border-color: var(--primary);
+  }
+  .pagination .page-info {
+    font-size: 13px;
+    color: var(--muted);
+    margin: 0 8px;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <header class="app">
+    <div>
+      <h1>__FORM_TITLE__</h1>
+      <div class="meta">
+        <span>新增 / 编辑 / 删除 一站式操作</span>
+        <span id="r-generated"></span>
+      </div>
+    </div>
+    <div class="head-actions">
+      <button class="primary" id="btn-new">＋ 新增反馈</button>
+      <button class="ghost" id="btn-refresh">⟳ 刷新</button>
+    </div>
+  </header>
+
+  <section class="panel">
+    <h2>反馈记录</h2>
+    <div class="toolbar">
+      <input type="text" id="search-box" class="grow" placeholder="按反馈内容 / 改进措施 / 需求来源 /备注 关键字过滤" />
+      <div class="multi-select" id="filter-status-wrap">
+        <div class="ms-trigger" id="filter-status-trigger">全部状态</div>
+        <div class="ms-panel" id="filter-status-panel"></div>
+      </div>
+      <div class="multi-select" id="filter-priority-wrap">
+        <div class="ms-trigger" id="filter-priority-trigger">全部优先级</div>
+        <div class="ms-panel" id="filter-priority-panel"></div>
+      </div>
+      <span class="hint" id="count-hint">--</span>
+    </div>
+    <div id="table-wrap"></div>
+    <div class="pagination" id="pagination"></div>
+    <div class="alert global-alert" id="global-alert"></div>
+    <div class="config-bar" style="display:none">
+      <input type="hidden" id="backend-url" />
+      <input type="hidden" id="backend-token" />
+    </div>
+  </section>
+</div>
+
+<!-- 编辑/新增 模态框 -->
+<div class="modal-mask" id="edit-mask">
+  <div class="modal" id="edit-modal">
+    <header>
+      <h3 id="edit-title">新增反馈</h3>
+      <div class="sub" id="edit-sub"></div>
+    </header>
+    <div class="body">
+      <div class="alert" id="edit-alert"></div>
+      <div id="edit-fields"></div>
+    </div>
+    <div class="footer">
+      <button class="ghost" id="edit-cancel">取消</button>
+      <button class="primary" id="edit-submit">保存</button>
+    </div>
+  </div>
+</div>
+
+<!-- 删除确认模态框 -->
+<div class="modal-mask" id="delete-mask">
+  <div class="modal mode-delete" id="delete-modal">
+    <header>
+      <h3>删除反馈</h3>
+    </header>
+    <div class="body">
+      <div class="alert" id="delete-alert"></div>
+      <ul class="readonly-list" id="delete-detail"></ul>
+    </div>
+    <div class="footer">
+      <button class="ghost" id="delete-cancel">取消</button>
+      <button class="danger" id="delete-submit">确认删除</button>
+    </div>
+  </div>
+</div>
+
+<script id="form-data" type="application/x-form-data">__FORM_DATA_JSON__</script>
+<script>
+(function () {
+  const payload = JSON.parse(document.getElementById('form-data').textContent || '{}');
+  document.getElementById('r-generated').textContent = '生成时间 ' + (payload.generatedAt || '');
+  document.getElementById('backend-url').value = payload.backendUrl || '';
+  document.getElementById('backend-token').value = payload.backendToken || '';
+
+  const isAdmin = payload.isAdmin !== false;
+  const currentUser = payload.currentUser || 'admin';
+  const STATUS_OPTIONS = ['需求确认', '开发中', '已上线', '已暂停', '待排期', '测试中', '已关闭'];
+  const PRIORITY_OPTIONS = ['高', '中', '低'];
+
+  // ---------- 多选过滤器 ----------
+  const selectedStatus = new Set();
+  const selectedPriority = new Set();
+
+  function buildMultiSelect(panelId, triggerId, wrapId, options, placeholder, selectedSet) {
+    const panel = document.getElementById(panelId);
+    const trigger = document.getElementById(triggerId);
+    const wrap = document.getElementById(wrapId);
+
+    // 全选/清空 切换
+    const toggle = document.createElement('div');
+    toggle.className = 'ms-toggle';
+    toggle.textContent = '全选 / 清空';
+    toggle.addEventListener('click', e => {
+      e.stopPropagation();
+      const allChecked = panel.querySelectorAll('input[type=checkbox]');
+      const allSelected = [...allChecked].every(cb => cb.checked);
+      allChecked.forEach(cb => { cb.checked = !allSelected; });
+      syncSelection(panel, selectedSet);
+      updateTrigger(trigger, selectedSet, placeholder);
+      currentPage = 1;
+      renderTable();
+    });
+    panel.appendChild(toggle);
+
+    // 选项
+    options.forEach(opt => {
+      const label = document.createElement('label');
+      label.className = 'ms-option';
+      const cb = document.createElement('input');
+      cb.type = 'checkbox';
+      cb.value = opt;
+      cb.addEventListener('change', e => {
+        e.stopPropagation();
+        if (cb.checked) selectedSet.add(opt); else selectedSet.delete(opt);
+        updateTrigger(trigger, selectedSet, placeholder);
+        currentPage = 1;
+        renderTable();
+      });
+      label.appendChild(cb);
+      label.appendChild(document.createTextNode(opt));
+      panel.appendChild(label);
+    });
+
+    // 点击 trigger 切换面板
+    trigger.addEventListener('click', e => {
+      e.stopPropagation();
+      const isOpen = panel.classList.toggle('open');
+      // 关闭其他面板
+      document.querySelectorAll('.ms-panel.open').forEach(p => {
+        if (p !== panel) p.classList.remove('open');
+      });
+    });
+
+    // 点击外部关闭
+    document.addEventListener('click', () => panel.classList.remove('open'));
+    panel.addEventListener('click', e => e.stopPropagation());
+  }
+
+  function syncSelection(panel, selectedSet) {
+    selectedSet.clear();
+    panel.querySelectorAll('input[type=checkbox]').forEach(cb => {
+      if (cb.checked) selectedSet.add(cb.value);
+    });
+  }
+
+  function updateTrigger(trigger, selectedSet, placeholder) {
+    if (selectedSet.size === 0) {
+      trigger.textContent = placeholder;
+    } else if (selectedSet.size <= 2) {
+      trigger.textContent = [...selectedSet].join('、');
+    } else {
+      trigger.textContent = `已选 ${selectedSet.size} 项`;
+    }
+  }
+
+  if (isAdmin) {
+    buildMultiSelect('filter-status-panel', 'filter-status-trigger', 'filter-status-wrap', STATUS_OPTIONS, '全部状态', selectedStatus);
+    buildMultiSelect('filter-priority-panel', 'filter-priority-trigger', 'filter-priority-wrap', PRIORITY_OPTIONS, '全部优先级', selectedPriority);
+  } else {
+    document.getElementById('filter-status-wrap').style.display = 'none';
+    document.getElementById('filter-priority-wrap').style.display = 'none';
+    document.getElementById('search-box').placeholder = '按反馈内容 / 需求来源 / 备注 关键字过滤';
+  }
+
+  let allItems = payload.items || [];
+  let editingUuid = null;   // null = 新增, 否则 = 编辑某 uuid
+  const PAGE_SIZE = 20;
+  let currentPage = 1;
+
+  // 普通用户只能编辑的字段
+  const USER_EDITABLE_FIELDS = ['feedback_content', 'source', 'remark', 'start_time'];
+
+  // ---------- 工具 ----------
+  function el(tag, attrs, ...children) {
+    const node = document.createElement(tag);
+    if (attrs) for (const [k, v] of Object.entries(attrs)) {
+      if (k === 'class') node.className = v;
+      else if (k === 'html') node.innerHTML = v;
+      else if (v !== null && v !== undefined) node.setAttribute(k, v);
+    }
+    for (const c of children.flat()) {
+      if (c === null || c === undefined) continue;
+      node.append(c.nodeType ? c : document.createTextNode(c));
+    }
+    return node;
+  }
+  function toLocalDt(value) {
+    if (!value) return '';
+    return String(value).replace(' ', 'T').slice(0, 16);
+  }
+  function fromLocalDt(value) {
+    if (!value) return null;
+    return value.length === 16 ? value + ':00' : value;
+  }
+  function fmtDt(value) {
+    if (!value) return '-';
+    return String(value).replace('T', ' ').slice(0, 19);
+  }
+  function showAlert(node, kind, text) {
+    node.className = 'alert show ' + kind;
+    node.textContent = text;
+  }
+  function clearAlert(node) {
+    node.className = 'alert' + (node.classList.contains('global-alert') ? ' global-alert' : '');
+    node.textContent = '';
+  }
+
+  // ---------- 后端调用 ----------
+  function backendBase() {
+    return (document.getElementById('backend-url').value || '').replace(/\/$/, '');
+  }
+  function backendToken() {
+    return document.getElementById('backend-token').value || '';
+  }
+  async function call(method, path, body) {
+    const url = backendBase() + path;
+    const opts = {
+      method,
+      headers: {
+        'Authorization': 'Bearer ' + backendToken(),
+      },
+    };
+    if (body !== undefined) {
+      opts.headers['Content-Type'] = 'application/json';
+      opts.body = JSON.stringify(body);
+    }
+    const resp = await fetch(url, opts);
+    let json;
+    try { json = await resp.json(); }
+    catch (_) { throw new Error('HTTP ' + resp.status + ': 响应非 JSON'); }
+    if (!resp.ok || (json.code && json.code !== 200)) {
+      throw new Error(json.message || ('HTTP ' + resp.status));
+    }
+    return json;
+  }
+
+  // ---------- 列表 ----------
+  async function loadList() {
+    const wrap = document.getElementById('table-wrap');
+    wrap.innerHTML = '<div class="empty">加载中…</div>';
+    clearAlert(document.getElementById('global-alert'));
+    try {
+      const json = await call('GET', '/aiUserFeedback/list?skip=0&take=1000');
+      const data = json.data || {};
+      let items = data.items || [];
+      if (!isAdmin) {
+        items = items.filter(it => (it.create_by || '').toLowerCase() === currentUser.toLowerCase());
+      }
+      allItems = items;
+      renderTable();
+    } catch (e) {
+      wrap.innerHTML = '';
+      showAlert(document.getElementById('global-alert'), 'error',
+        '加载反馈列表失败：' + (e.message || e));
+    }
+  }
+
+  function getFilteredItems() {
+    const kw = (document.getElementById('search-box').value || '').trim().toLowerCase();
+    return allItems.filter(it => {
+      if (selectedStatus.size && !selectedStatus.has(it.status)) return false;
+      if (selectedPriority.size && !selectedPriority.has(it.priority)) return false;
+      if (kw) {
+        const searchFields = isAdmin
+          ? [it.feedback_content, it.improvement_plan, it.verify_result, it.remark, it.source]
+          : [it.feedback_content, it.remark, it.source];
+        const hay = searchFields.filter(Boolean).join(' ').toLowerCase();
+        if (!hay.includes(kw)) return false;
+      }
+      return true;
+    });
+  }
+
+  function renderPagination(totalFiltered) {
+    const pag = document.getElementById('pagination');
+    pag.innerHTML = '';
+    const totalPages = Math.max(1, Math.ceil(totalFiltered / PAGE_SIZE));
+    if (currentPage > totalPages) currentPage = totalPages;
+
+    const prevBtn = el('button', { disabled: currentPage <= 1 ? '' : null }, '‹ 上一页');
+    prevBtn.addEventListener('click', () => { if (currentPage > 1) { currentPage--; renderTable(); } });
+    pag.appendChild(prevBtn);
+
+    // Page number buttons: show up to 7 pages with ellipsis
+    const maxVisible = 7;
+    let startPage = Math.max(1, currentPage - Math.floor(maxVisible / 2));
+    let endPage = Math.min(totalPages, startPage + maxVisible - 1);
+    if (endPage - startPage < maxVisible - 1) startPage = Math.max(1, endPage - maxVisible + 1);
+
+    if (startPage > 1) {
+      const btn1 = el('button', null, '1');
+      btn1.addEventListener('click', () => { currentPage = 1; renderTable(); });
+      pag.appendChild(btn1);
+      if (startPage > 2) pag.appendChild(el('span', { class: 'page-info' }, '…'));
+    }
+    for (let p = startPage; p <= endPage; p++) {
+      const btn = el('button', p === currentPage ? { class: 'active' } : {}, String(p));
+      btn.addEventListener('click', () => { currentPage = p; renderTable(); });
+      pag.appendChild(btn);
+    }
+    if (endPage < totalPages) {
+      if (endPage < totalPages - 1) pag.appendChild(el('span', { class: 'page-info' }, '…'));
+      const btnLast = el('button', null, String(totalPages));
+      btnLast.addEventListener('click', () => { currentPage = totalPages; renderTable(); });
+      pag.appendChild(btnLast);
+    }
+
+    const nextBtn = el('button', { disabled: currentPage >= totalPages ? '' : null }, '下一页 ›');
+    nextBtn.addEventListener('click', () => { if (currentPage < totalPages) { currentPage++; renderTable(); } });
+    pag.appendChild(nextBtn);
+
+    pag.appendChild(el('span', { class: 'page-info' }, `共 ${totalFiltered} 条 / ${totalPages} 页`));
+  }
+
+  function renderTable() {
+    const wrap = document.getElementById('table-wrap');
+    wrap.innerHTML = '';
+    const filtered = getFilteredItems();
+    const totalFiltered = filtered.length;
+
+    document.getElementById('count-hint').textContent =
+      `共 ${allItems.length} 条，过滤后 ${totalFiltered} 条`;
+
+    if (!totalFiltered) {
+      wrap.appendChild(el('div', { class: 'empty' }, '没有符合条件的反馈记录'));
+      renderPagination(0);
+      return;
+    }
+
+    // Paginate
+    const startIdx = (currentPage - 1) * PAGE_SIZE;
+    const pageItems = filtered.slice(startIdx, startIdx + PAGE_SIZE);
+
+    const table = el('table', { class: 'feedback', 'data-mode': isAdmin ? 'admin' : 'user' });
+    const theadRow = el('tr');
+    if (isAdmin) {
+      ['#', '反馈内容', '优先级', '状态', '进度', '改进措施', '需求来源', '备注', '提出时间', '完成时间', '操作']
+        .forEach(t => theadRow.appendChild(el('th', null, t)));
+    } else {
+      ['#', '反馈内容', '需求来源', '备注', '提出时间', '操作']
+        .forEach(t => theadRow.appendChild(el('th', null, t)));
+    }
+    table.appendChild(el('thead', null, theadRow));
+
+    const tbody = el('tbody');
+    pageItems.forEach((it, idx) => {
+      const btnEdit = el('button', { class: 'link' }, '编辑');
+      btnEdit.addEventListener('click', () => openEdit(it));
+
+      const globalIdx = startIdx + idx;
+      if (isAdmin) {
+        const progressPct = Math.round((Number(it.progress) || 0) * 100);
+        const btnDel = el('button', { class: 'link danger-text' }, '删除');
+        btnDel.addEventListener('click', () => openDelete(it));
+        tbody.appendChild(el('tr', null,
+          el('td', null, String(globalIdx + 1)),
+          el('td', { class: 'content' }, it.feedback_content || ''),
+          el('td', null, it.priority
+            ? el('span', { class: 'badge priority-' + it.priority }, it.priority)
+            : '-'),
+          el('td', null, it.status
+            ? el('span', { class: 'badge status-' + it.status }, it.status)
+            : '-'),
+          el('td', null,
+            el('div', { class: 'progress' }, el('span', { style: `width:${progressPct}%` })),
+            el('div', { class: 'progress-text' }, progressPct + '%'),
+          ),
+          el('td', { class: 'content' }, it.improvement_plan || '-'),
+          el('td', null, it.source || '-'),
+          el('td', { class: 'content' }, it.remark || '-'),
+          el('td', null, fmtDt(it.start_time)),
+          el('td', null, fmtDt(it.finish_time)),
+          el('td', { class: 'actions-cell' }, btnEdit, ' ', btnDel),
+        ));
+      } else {
+        const btnDel = el('button', { class: 'link danger-text' }, '删除');
+        btnDel.addEventListener('click', () => openDelete(it));
+        tbody.appendChild(el('tr', null,
+          el('td', null, String(globalIdx + 1)),
+          el('td', { class: 'content' }, it.feedback_content || ''),
+          el('td', null, it.source || '-'),
+          el('td', { class: 'content' }, it.remark || '-'),
+          el('td', null, fmtDt(it.start_time)),
+          el('td', { class: 'actions-cell' }, btnEdit, ' ', btnDel),
+        ));
+      }
+    });
+    table.appendChild(tbody);
+    wrap.appendChild(table);
+    renderPagination(totalFiltered);
+  }
+
+  // ---------- 新增 / 编辑 ----------
+  function openEdit(record) {
+    editingUuid = record ? record.uuid : null;
+    const isEdit = !!record;
+    document.getElementById('edit-title').textContent = isEdit ? '编辑反馈' : '新增反馈';
+    document.getElementById('edit-sub').textContent = isEdit
+      ? 'uuid: ' + (record.uuid || '')
+      : '空表单 · 提交后写入 /aiUserFeedback/add';
+    clearAlert(document.getElementById('edit-alert'));
+    renderEditFields(record || {});
+    document.getElementById('edit-mask').classList.add('show');
+  }
+  function closeEdit() {
+    document.getElementById('edit-mask').classList.remove('show');
+    editingUuid = null;
+  }
+  function renderEditFields(record) {
+    const body = document.getElementById('edit-fields');
+    body.innerHTML = '';
+
+    function input(name, label, type='text', opts={}) {
+      const isEditable = isAdmin || USER_EDITABLE_FIELDS.includes(name);
+      if (!isEditable) return document.createDocumentFragment();
+      const id = 'e-' + name;
+      const wrap = el('div', { class: 'field' });
+      const lab = el('label', { for: id }, label);
+      if (opts.required) lab.appendChild(el('span', { class: 'req' }, '*'));
+      wrap.appendChild(lab);
+      let node;
+      if (type === 'textarea') {
+        node = el('textarea', { id, name, rows: opts.rows || 3 });
+        node.value = record[name] != null ? String(record[name]) : '';
+      } else if (type === 'select') {
+        node = el('select', { id, name });
+        (opts.options || []).forEach(o => {
+          const op = el('option', { value: o }, o || '(未选择)');
+          if (String(record[name] || '') === String(o)) op.selected = true;
+          node.appendChild(op);
+        });
+      } else if (type === 'datetime-local') {
+        node = el('input', { id, name, type });
+        node.value = toLocalDt(record[name]);
+      } else if (type === 'number') {
+        node = el('input', { id, name, type: 'number',
+          step: opts.step || '0.01', min: opts.min, max: opts.max });
+        node.value = record[name] != null && record[name] !== '' ? String(record[name]) : '';
+      } else {
+        node = el('input', { id, name, type: 'text', maxlength: opts.maxlength });
+        node.value = record[name] != null ? String(record[name]) : '';
+      }
+      if (opts.placeholder) node.setAttribute('placeholder', opts.placeholder);
+      if (!node.value && opts.defaultValue && !editingUuid) node.value = opts.defaultValue;
+      wrap.appendChild(node);
+      if (opts.hint) wrap.appendChild(el('div', { class: 'hint' }, opts.hint));
+      return wrap;
+    }
+
+    // 当两个字段都可见时才用 grid-2 并排，否则各自全宽显示
+    function appendFields(...fields) {
+      const visible = fields.filter(f => f.childNodes && f.childNodes.length > 0);
+      if (!visible.length) return;
+      if (visible.length >= 2) {
+        body.appendChild(el('div', { class: 'grid-2' }, ...visible));
+      } else {
+        body.appendChild(visible[0]);
+      }
+    }
+
+    body.appendChild(input('feedback_content', '反馈内容', 'textarea',
+      { required: true, rows: 4, placeholder: '请描述用户反馈或需求…' }));
+
+    appendFields(
+      input('priority', '优先级', 'select', { options: ['', ...PRIORITY_OPTIONS] }),
+      input('status', '状态', 'select', { options: ['', ...STATUS_OPTIONS] }),
+    );
+
+    body.appendChild(input('improvement_plan', '改进措施 / 解决方案', 'textarea', { rows: 3 }));
+
+    appendFields(
+      input('source', '需求来源', 'text', { maxlength: 100, placeholder: '如：用户访谈、培训会…', defaultValue: currentUser }),
+      input('progress', '进度 (0~1)', 'number',
+        { step: '0.01', min: '0', max: '1', hint: '小数：0.5 表示 50%' }),
+    );
+
+    const shanghaiParts = new Date().toLocaleString('zh-CN', { timeZone: 'Asia/Shanghai', hour12: false }).replace(/\//g, '-').split(' ');
+    const datePart = shanghaiParts[0].split('-').map(p => p.padStart(2, '0')).join('-');
+    const nowLocal = datePart + 'T' + shanghaiParts[1].slice(0, 5);
+    appendFields(
+      input('start_time', '提出时间', 'datetime-local', { defaultValue: editingUuid ? '' : nowLocal }),
+      input('finish_time', '完成时间', 'datetime-local'),
+    );
+
+    body.appendChild(input('remark', '备注', 'textarea', { rows: 2 }));
+  }
+
+  function collectEditPayload() {
+    const fields = isAdmin
+      ? ['feedback_content', 'priority', 'improvement_plan', 'source',
+         'status', 'progress', 'start_time', 'finish_time',
+         'verify_result', 'remark']
+      : USER_EDITABLE_FIELDS;
+    const data = {};
+    // 非 admin 新增反馈时，默认把 create_by 设为当前用户名
+    if (!isAdmin && !editingUuid) data.create_by = currentUser;
+    fields.forEach(name => {
+      const node = document.querySelector(`#edit-fields [name="${name}"]`);
+      if (!node) return;
+      let v = node.value;
+      if (v === '') v = null;
+      else if (name === 'progress') v = Number(v);
+      else if (name === 'start_time' || name === 'finish_time') v = fromLocalDt(v);
+      data[name] = v;
+    });
+    return data;
+  }
+
+  async function submitEdit() {
+    const alertBox = document.getElementById('edit-alert');
+    clearAlert(alertBox);
+    const data = collectEditPayload();
+    if (!data.feedback_content) {
+      showAlert(alertBox, 'error', '反馈内容为必填字段');
+      return;
+    }
+    const btn = document.getElementById('edit-submit');
+    btn.disabled = true;
+    const txt = btn.textContent;
+    btn.textContent = '提交中…';
+    try {
+      if (editingUuid) {
+        await call('POST', '/aiUserFeedback/update', { ...data, uuid: editingUuid });
+        showAlert(alertBox, 'success', '更新成功');
+      } else {
+        await call('POST', '/aiUserFeedback/add', data);
+        showAlert(alertBox, 'success', '新增成功');
+      }
+      await loadList();
+      setTimeout(closeEdit, 600);
+    } catch (e) {
+      showAlert(alertBox, 'error', '提交失败：' + (e.message || e));
+    } finally {
+      btn.disabled = false;
+      btn.textContent = txt;
+    }
+  }
+
+  // ---------- 删除 ----------
+  let deletingUuid = null;
+  function openDelete(record) {
+    deletingUuid = record.uuid;
+    clearAlert(document.getElementById('delete-alert'));
+    const ul = document.getElementById('delete-detail');
+    ul.innerHTML = '';
+    const rows = [
+      ['uuid', 'UUID'],
+      ['feedback_content', '反馈内容'],
+      ['priority', '优先级'],
+      ['status', '状态'],
+      ['progress', '进度'],
+      ['source', '需求来源'],
+      ['improvement_plan', '改进措施'],
+      ['start_time', '提出时间'],
+      ['finish_time', '完成时间'],
+      ['create_by', '创建人'],
+      ['create_time', '创建时间'],
+    ];
+    rows.forEach(([k, lbl]) => {
+      let v = record[k];
+      if (v == null || v === '') v = '-';
+      if (k === 'progress' && v !== '-') v = (Number(v) * 100).toFixed(0) + '%';
+      if (k.endsWith('_time') && v !== '-') v = fmtDt(v);
+      ul.appendChild(el('li', null,
+        el('span', { class: 'k' }, lbl),
+        el('span', { class: 'v' }, String(v)),
+      ));
+    });
+    document.getElementById('delete-mask').classList.add('show');
+  }
+  function closeDelete() {
+    document.getElementById('delete-mask').classList.remove('show');
+    deletingUuid = null;
+  }
+  async function submitDelete() {
+    if (!deletingUuid) return;
+    const alertBox = document.getElementById('delete-alert');
+    clearAlert(alertBox);
+    const btn = document.getElementById('delete-submit');
+    btn.disabled = true;
+    const txt = btn.textContent;
+    btn.textContent = '删除中…';
+    try {
+      await call('POST', '/aiUserFeedback/delete', { uuid: deletingUuid });
+      showAlert(alertBox, 'success', '删除成功');
+      await loadList();
+      setTimeout(closeDelete, 600);
+    } catch (e) {
+      showAlert(alertBox, 'error', '删除失败：' + (e.message || e));
+    } finally {
+      btn.disabled = false;
+      btn.textContent = txt;
+    }
+  }
+
+  // ---------- 绑定 ----------
+  document.getElementById('btn-new').addEventListener('click', () => openEdit(null));
+  document.getElementById('btn-refresh').addEventListener('click', () => { currentPage = 1; loadList(); });
+  document.getElementById('search-box').addEventListener('input', () => { currentPage = 1; renderTable(); });
+
+  document.getElementById('edit-cancel').addEventListener('click', closeEdit);
+  document.getElementById('edit-submit').addEventListener('click', submitEdit);
+  document.getElementById('delete-cancel').addEventListener('click', closeDelete);
+  document.getElementById('delete-submit').addEventListener('click', submitDelete);
+
+  // 点击遮罩关闭
+  document.getElementById('edit-mask').addEventListener('click', e => {
+    if (e.target.id === 'edit-mask') closeEdit();
+  });
+  document.getElementById('delete-mask').addEventListener('click', e => {
+    if (e.target.id === 'delete-mask') closeDelete();
+  });
+
+  loadList();
+})();
+</script>
+</body>
+</html>

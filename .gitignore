@@ -1,0 +1,77 @@
+﻿# 依赖与构建产物
+node_modules/
+dist/
+build/
+out/
+target/
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.log
+
+# 环境变量、本地数据与日志
+.env
+.env.*
+!.env.example
+logs/
+
+# 编辑器、系统文件与工具目录
+.idea/
+.vscode/
+.kilo/
+.DS_Store
+Thumbs.db
+
+# 部署物料：镜像归档与导出的部署包不入库
+deploy/**/images/*
+!deploy/**/images/.gitkeep
+*.tar
+*.tar.gz
+*.tgz
+*.zip
+*.7z
+
+# 本地运行状态与会话数据
+*.db
+*.db-shm
+*.db-wal
+*.sqlite
+*.sqlite3
+agent_memory/
+chat_record_files/
+screenshots/
+.pytest_cache/
+coverage/
+
+# 部署者自己的配置；公共示例仍保留
+config.local.yaml
+config.local.yml
+runtime-config.local.json
+
+# 前端导入的第三方运行时产物需要随源码保留
+!apps/GA-frontend-v1/src/vendors/**/dist/
+!apps/GA-frontend-v1/src/vendors/**/dist/**
+*.map
+
+# 本地运行状态与会话数据
+*.db
+*.db-shm
+*.db-wal
+*.sqlite
+*.sqlite3
+agent_memory/
+chat_record_files/
+screenshots/
+.pytest_cache/
+coverage/
+
+# 部署者自己的配置；公共示例仍保留
+config.local.yaml
+config.local.yml
+runtime-config.local.json
+
+# 前端导入的第三方运行时产物需要随源码保留
+!apps/GA-frontend-v1/src/vendors/**/dist/
+!apps/GA-frontend-v1/src/vendors/**/dist/**
+*.map

@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="11.8 12.8 14.46 14.31" fill="none">
+  <g stroke="#1a1a1a" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+    <!-- left book -->
+    <rect x="12.5" y="13.5" width="3.2" height="12.8" rx="1" ry="1"/>
+    <!-- middle book -->
+    <rect x="15.7" y="13.5" width="3.2" height="12.8" rx="1" ry="1"/>
+    <!-- tilted book: enlarged corner radii -->
+    <path d="M19.9 13.5
+             H20.328
+             Q21.228 13.5 21.543 14.343
+             L25.465 24.837
+             Q25.78 25.68 24.93 25.975
+             L23.884 26.339
+             Q23.034 26.634 22.72 25.791
+             L19.109 16.095
+             Q18.9 15.533 18.9 14.933
+             V14.5
+             Q18.9 13.5 19.9 13.5Z"/>
+  </g>
+</svg>

@@ -1,0 +1,36 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="256" height="256">
+
+  <!-- 未知类型文件：灰色虚线描边的文档轮廓 + 中间问号 -->
+  <g transform="translate(32 32) scale(0.9375)">
+    <!-- 文档主体 -->
+    <path d="M594.944 0l335.12448 341.31968v563.2c0 65.9968-52.50048 119.48032-117.29408 119.48032H209.54624c-64.7936 0-117.2992-53.5296-117.2992-119.48032V119.48032C92.25216 53.48352 144.75776 0 209.55136 0H594.944z"
+          fill="#F2F3F5"
+          stroke="#A6A6A6"
+          stroke-width="32"
+          stroke-dasharray="72 48"
+          stroke-linecap="round"
+          stroke-linejoin="round"/>
+
+    <!-- 右上折角折痕 -->
+    <path d="M594.944 0v215.82848c0 66.00192 58.46016 125.4912 123.20768 125.4912h211.9168"
+          fill="none"
+          stroke="#A6A6A6"
+          stroke-width="32"
+          stroke-dasharray="72 48"
+          stroke-linecap="round"
+          stroke-linejoin="round"/>
+
+    <!-- 问号：钩部 -->
+    <path d="M400 470A112 112 0 1 1 624 470c0 70-112 82-112 170"
+          fill="none"
+          stroke="#8C8C8C"
+          stroke-width="58"
+          stroke-linecap="round"/>
+
+    <!-- 问号：点 -->
+    <circle cx="512" cy="766" r="36" fill="#8C8C8C"/>
+  </g>
+
+</svg>

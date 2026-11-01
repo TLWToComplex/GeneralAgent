@@ -1,0 +1,717 @@
+/* ============================================================
+   GeneralAgentV2 · 统一登录 — 浅色版（Light / Interactive）
+   纯白底 + 浅灰层次 + 深色墨字。
+   动效策略：保留过渡（transition）与交互动效（hover / focus / 按压 /
+   面板淡入 / 校验反馈 / 加载 / 成功态），删除装饰性的自主循环大动效
+   （星场、星尘、旋臂、指针视差、无限流光扫过）。
+   ============================================================ */
+
+:root{
+  /* ---------- 底色（由浅到深三档，替代原深空三档） ---------- */
+  --void:#f5f7fb;      /* 页面底色 */
+  --void-2:#eef1f7;    /* 次级底 */
+  --void-3:#e5eaf3;    /* 压深一档 */
+
+  /* ---------- 墨色（深→浅，替代原浅色四档） ---------- */
+  --ink-1:#111a2b;     /* 主要文字 */
+  --ink-2:#3d4a60;     /* 次要文字 */
+  --ink-3:#66748c;     /* 弱化文字 */
+  --ink-4:#95a0b4;     /* 占位 / 提示 */
+
+  /* ---------- 品牌色（浅底上加深，保证对比度） ---------- */
+  --gold:#b8761a;
+  --gold-2:#d98a1f;
+  --ember:#c2691a;
+  --cyan:#0d8ba6;
+  --azure:#2f61d8;
+  --violet:#6d4bd8;
+  --teal:#0f8f74;
+
+  --line:rgba(23,33,54,.09);
+  --line-2:rgba(23,33,54,.18);
+  --panel:#ffffff;
+  --panel-2:#fbfcfe;
+
+  /* 字标用 iOS 的系统无衬线栈：macOS / iOS 命中 SF Pro 与苹方，Windows 落到微软雅黑，
+     与正文的宋体构成「黑体标题 + 宋体正文」的层次 */
+  --f-sans:-apple-system,BlinkMacSystemFont,'SF Pro Display','PingFang SC','HarmonyOS Sans SC','Microsoft YaHei','Segoe UI',system-ui,sans-serif;
+  --f-body:'Noto Serif SC','Songti SC','Source Han Serif SC','Microsoft YaHei',serif;
+  --f-mono:'JetBrains Mono',ui-monospace,'Cascadia Mono','Consolas',monospace;
+
+  --r-lg:22px; --r-md:13px; --r-sm:9px;
+
+  /* ---------- 缓动与时长令牌 ---------- */
+  --ease:cubic-bezier(.22,.68,0,1);
+  --ease-out:cubic-bezier(.16,1,.3,1);
+
+  /* ---------- 材质令牌（浅色玻璃 = 半透白 + 发丝描边） ---------- */
+  --lg-fill:rgba(255,255,255,.72);
+  --lg-fill-2:rgba(255,255,255,.42);
+  --lg-spec:rgba(255,255,255,.95);
+  --lg-spec-2:rgba(255,255,255,.70);
+  --lg-rim:rgba(23,33,54,.10);
+  --lg-rim-dim:rgba(23,33,54,.06);
+  --lg-shadow-1:0 1px 2px rgba(24,34,56,.05);
+  --lg-shadow-2:0 8px 22px -12px rgba(24,34,56,.16);
+  --lg-dur:.32s;
+  --lg-ease:cubic-bezier(.32,.72,0,1);
+  --lg-hover:translateY(-3px);
+  --lg-press:scale(.97);
+}
+
+*,*::before,*::after{ box-sizing:border-box; }
+
+html,body{ height:100%; }
+
+body{
+  margin:0;
+  color:var(--ink-1);
+  font-family:var(--f-body);
+  font-size:14px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+  overflow-x:hidden;
+  /* 浅色环境：一层极淡的冷光，不随滚动重排 */
+  background:
+    radial-gradient(120% 76% at 50% -14%,#ffffff 0%,rgba(255,255,255,0) 58%),
+    radial-gradient(72% 54% at 100% 100%,rgba(47,97,216,.055) 0%,rgba(47,97,216,0) 62%),
+    linear-gradient(180deg,#f8fafd 0%,#eef2f8 100%);
+  background-attachment:fixed;
+}
+
+h1,h2,h3,p{ margin:0; }
+button,input{ font:inherit; color:inherit; }
+button{ background:none; border:0; cursor:pointer; }
+a{ color:inherit; text-decoration:none; }
+
+/* ---------- 图标精灵必须隐藏（登录卡片「太靠下」的真正原因）----------
+   <IconDefs> 是一个 300×150 的内联 <svg> 图标精灵，App.vue 在**所有路由**上都渲染它，
+   而它的隐藏规则（.sprite{ position:absolute; width:0; height:0; overflow:hidden }）
+   只写在 console.css 里 —— 那个文件只在控制台路由加载。
+   于是在 /login 上精灵没有被隐藏，按内联 SVG 的默认尺寸占了**正常文档流 150px**
+   （62px 行高 + 两行），把 .stage 整体推到 top=156，
+   表现为「登录卡片太靠下」。
+   这里补上同一条规则。两处都写是有意的：console.css 那份管控制台，
+   这份管登录页，各自不依赖对方是否加载。 */
+.sprite{ position:absolute; width:0; height:0; overflow:hidden; }
+
+::selection{ background:rgba(184,118,26,.20); color:#20160a; }
+
+:focus-visible{
+  outline:1.5px solid rgba(184,118,26,.72);
+  outline-offset:3px;
+  border-radius:6px;
+}
+
+/* ============================================================
+   舞台
+   ============================================================ */
+.stage{
+  position:relative;
+  min-height:100vh;
+  min-height:100svh;
+  display:flex;
+  flex-direction:column;
+  padding:0 clamp(20px,3.2vw,58px);
+  isolation:isolate;
+}
+
+/* ============================================================
+   主体：星核徽标 + 登录
+   ============================================================ */
+.cosmos{
+  position:relative; z-index:5; flex:1;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  /* 让卡片落在视口中心附近，而不是让"整组内容"居中。
+
+     这段位移是什么：卡片上方还压着星核徽标 + 字标。justify-content:center 居中的是
+     [徽标 + 字标 + 卡片] 这**一整组**，所以卡片中心天然比视口中心低
+         D = (卡片高 − 徽标高 − 字标高) / 2
+     把整组上移 D，卡片才真正居中。而 D 随视口变，大致是视口高的 12%–16%。
+
+     这里取 9%（**故意不取满**）：取满会把星核徽标顶出视口 —— 整组高度本来就接近
+     视口高，实测 1440×900 移满时徽标 top=-14。而「徽标完整可见」比
+     「卡片分毫不差居中」重要，所以只补偿一部分，剩下一点偏差可以接受。
+     矮视口（≤800 高）另有更小的一档，见下方媒体查询。
+
+     记三个踩过的坑（都真实发生过，不是假想）：
+       1) clamp 的 min/max 写反时 CSS 取 min，位移会永远停在最小值上，
+          看起来像"补偿没生效"（曾错写成 clamp(-3vh,-10px,-10px)）。
+       2) 别用 var(--lift, -8%) 这种**回退值**做窄屏覆盖：自定义属性只要有值，
+          回退分支就永远不走，覆盖等于没写。
+       3) 位移必须走变量、不能直接写 transform：.cosmos 有入场动画，而 CSS 动画
+          的优先级高于普通声明，所以只覆盖 transform 是没用的 —— 动画一结束
+          仍回到关键帧里的值。改成 --lift 一处分身，普通态与关键帧都读它。
+          变量必须定义在 .cosmos 上（关键帧里的 var() 从被动画的元素自身解析）。 */
+  --lift:-5%;
+  transform:translateY(var(--lift));
+  gap:clamp(10px,1.5vh,20px);
+  padding:clamp(8px,1.2vh,16px) 0;
+  width:100%;
+  /* 入场编排：徽标 / 字标 / 卡片依次落位（一次性，非循环）。 */
+  animation:cosmosIn .72s var(--ease-out) both;
+}
+@keyframes cosmosIn{
+  from{ opacity:0; transform:translateY(calc(var(--lift) + 12px)); }
+  to  { opacity:1; transform:translateY(var(--lift)); }
+}
+
+/* ---------- 星核徽标 ---------- */
+.core{
+  position:relative;
+  /* 同样相对原型收小：原 width:clamp(118px,18.5vh,206px) 在 900 高的视口下给到 166px，
+     是卡片上方的最大一块占位。收到 14.5vh 后约 130px，卡片能再上提一截。 */
+  width:clamp(100px,14.5vh,168px);
+  aspect-ratio:1;
+  display:grid;
+  place-items:center;
+  flex:none;
+}
+.core__mark{
+  position:relative;
+  width:52%;
+  color:var(--gold);
+}
+.core__mark svg{ width:100%; height:auto; display:block; }
+/* 原为金色辉光：浅底上辉光会糊掉图形，改为柔和的浅色底晕 */
+.core__mark::after{
+  content:''; position:absolute; inset:-34%;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(217,138,31,.10) 0%,rgba(217,138,31,0) 62%);
+  pointer-events:none;
+}
+
+/* ---------- 字标 ----------
+   浅底上不再做「白→浅蓝」的发光渐变，改为深墨色的极轻明度衰减：
+   上半近墨黑、下半略淡，保持 iOS 大标题的干净与克制。 */
+.wordmark{ text-align:center; }
+.wordmark h1{
+  font-family:var(--f-sans);
+  font-weight:600;
+  font-size:clamp(30px,4.2vw,60px);
+  line-height:1.1;
+  letter-spacing:-.01em;
+  /* 四个字宽；nowrap 保证任何断点都不折行 */
+  white-space:nowrap;
+  background:linear-gradient(180deg,#0d1524 0%,#0d1524 54%,#3a4761 100%);
+  -webkit-background-clip:text; background-clip:text;
+  -webkit-text-fill-color:transparent; color:transparent;
+  /* 入场：字距由松到紧地「收」一下，落到静止态的 -.01em */
+  animation:wordmarkIn .82s var(--ease-out) both;
+}
+@keyframes wordmarkIn{
+  from{ opacity:0; letter-spacing:.14em; transform:translateY(8px); }
+  to  { opacity:1; letter-spacing:-.01em; transform:none; }
+}
+
+/* ============================================================
+   登录卡片
+   ============================================================ */
+.auth{
+  position:relative;
+  width:min(446px,100%);
+  display:flex; flex-direction:column;
+  min-width:0;
+}
+
+.card{
+  position:relative;
+  border-radius:var(--r-lg);
+  padding:clamp(20px,2.3vw,30px);
+  /* 浅色玻璃本体：半透白 + 顶缘高光 + 冷色环境色 */
+  background:
+    radial-gradient(48% 32% at 11% -7%,rgba(255,255,255,.92) 0%,rgba(255,255,255,0) 100%),
+    linear-gradient(180deg,rgba(255,255,255,.90) 0%,rgba(255,255,255,.62) 22%,rgba(255,255,255,.72) 100%),
+    radial-gradient(132% 98% at 8% -14%,rgba(217,138,31,.07) 0%,rgba(217,138,31,0) 52%),
+    radial-gradient(132% 98% at 96% 114%,rgba(13,139,166,.07) 0%,rgba(13,139,166,0) 54%);
+  backdrop-filter:blur(16px) saturate(120%);
+  -webkit-backdrop-filter:blur(16px) saturate(120%);
+  box-shadow:
+    var(--lg-shadow-1),
+    var(--lg-shadow-2),
+    0 34px 70px -34px rgba(24,34,56,.28),
+    inset 0 1px 0 var(--lg-spec),
+    inset 0 0 0 1px rgba(23,33,54,.07);
+  overflow:hidden;
+  isolation:isolate;
+  /* 交互动效：悬停轻抬、聚焦上浮、投影随之加深 */
+  transition:transform var(--lg-dur) var(--lg-ease),box-shadow var(--lg-dur) var(--lg-ease);
+  transition-delay:120ms;
+  animation:cardIn .8s var(--ease-out) both;
+  animation-delay:120ms;
+}
+@keyframes cardIn{
+  from{ opacity:0; transform:translateY(16px); }
+  to  { opacity:1; transform:none; }
+}
+.card:hover,
+.card:focus-within{
+  transform:var(--lg-hover);
+  box-shadow:
+    var(--lg-shadow-1),
+    0 16px 38px -16px rgba(24,34,56,.22),
+    0 46px 88px -40px rgba(24,34,56,.34),
+    inset 0 1px 0 rgba(255,255,255,1),
+    inset 0 0 0 1px rgba(23,33,54,.10);
+}
+.card:active{ transform:translateY(-1px); }
+
+/* ② 实时镜面高光：跟随指针的柔光斑（main.js 的 pointerFx 写入 --mx/--my） */
+.card::before{
+  content:''; position:absolute; inset:0; z-index:0;
+  background:radial-gradient(440px circle at var(--mx,12%) var(--my,-6%),
+    rgba(255,255,255,.95) 0%,rgba(217,138,31,.10) 34%,rgba(13,139,166,.06) 62%,transparent 74%);
+  opacity:0;
+  transition:opacity var(--lg-dur) var(--lg-ease);
+  pointer-events:none;
+}
+.card:hover::before{ opacity:.85; }
+
+/* 微妙边界：不用实线 border，用 1px 渐变发丝环勾出玻璃厚度 */
+.card::after{
+  content:''; position:absolute; inset:0; z-index:3;
+  border-radius:inherit; padding:1px; pointer-events:none;
+  background:linear-gradient(150deg,
+    rgba(255,255,255,.98) 0%,rgba(255,255,255,.55) 15%,rgba(23,33,54,.05) 38%,
+    rgba(13,139,166,.14) 60%,rgba(109,75,216,.12) 74%,rgba(184,118,26,.16) 88%,
+    rgba(255,255,255,.92) 100%);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;
+  mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  mask-composite:exclude;
+  opacity:.8;
+  transition:opacity var(--lg-dur) var(--lg-ease);
+}
+.card:hover::after{ opacity:1; }
+
+/* 玻璃棱边：纯光不采样背景，悬停时棱边提亮 */
+.card__lens{
+  position:absolute; inset:0; z-index:2;
+  border-radius:inherit;
+  padding:14px;
+  pointer-events:none;
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;
+  mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  mask-composite:exclude;
+  opacity:.9;
+  transition:opacity var(--lg-dur) var(--lg-ease);
+}
+.card:hover .card__lens{ opacity:1; }
+
+/* ---------- 面板 ----------
+   原型的「口令 / 扫码」分段切换（.tabs / .tab / .tabs__ink）已整体删除，
+   卡片里只剩口令登录一个面板，所以 .panel 不再需要 display:none 那套显隐机制。
+   保留 panelIn 入场动画：它让表单有个轻微的落位，视觉上是这套原型的既定语言。
+   注意这里不再挂 .is-active 条件 —— 单独一个面板不需要状态类。 */
+.panel{ position:relative; z-index:1; animation:panelIn .5s var(--lg-ease) both; }
+@keyframes panelIn{
+  from{ opacity:0; transform:translateY(9px); }
+  to  { opacity:1; transform:none; }
+}
+
+/* ============================================================
+   表单
+   ============================================================ */
+.form{ display:flex; flex-direction:column; gap:clamp(13px,1.8vh,18px); }
+
+.field{ display:flex; flex-direction:column; gap:7px; }
+.field__k{
+  font-family:var(--f-mono);
+  font-size:10.5px; letter-spacing:.22em;
+  color:var(--ink-3);
+  transition:color .35s var(--ease);
+}
+.field:focus-within .field__k{ color:var(--gold); }
+
+.field__box{
+  position:relative;
+  display:flex; align-items:center; gap:11px;
+  height:clamp(44px,5.6vh,50px);
+  padding:0 13px;
+  border-radius:var(--r-md);
+  background:#ffffff;
+  box-shadow:
+    inset 0 0 0 1px rgba(23,33,54,.12),
+    0 1px 2px rgba(24,34,56,.04);
+  overflow:hidden;
+  transition:box-shadow var(--lg-dur) var(--lg-ease),background var(--lg-dur) var(--lg-ease);
+}
+.field__box:hover{ background:#fdfefe; box-shadow:inset 0 0 0 1px rgba(23,33,54,.20); }
+.field__ico{ width:17px; height:17px; flex:none; color:var(--ink-4); transition:color var(--lg-dur) var(--lg-ease); }
+.field__box input{
+  flex:1; min-width:0; height:100%;
+  background:none; border:0; outline:none;
+  font-family:var(--f-body);
+  font-size:13.5px; letter-spacing:.04em;
+  color:var(--ink-1);
+  caret-color:var(--azure);
+}
+.field__box input::placeholder{ color:var(--ink-4); letter-spacing:.06em; }
+/* 聚焦时自左向右扫出的高光条（交互动效） */
+.field__scan{
+  position:absolute; left:0; bottom:0; width:100%; height:1px;
+  background:linear-gradient(90deg,transparent,rgba(184,118,26,.55) 28%,rgba(47,97,216,.5) 68%,transparent);
+  transform:scaleX(0); transform-origin:50% 50%;
+  transition:transform .55s var(--lg-ease);
+}
+.field__box.is-focus{
+  background:#ffffff;
+  box-shadow:
+    inset 0 0 0 1px rgba(184,118,26,.55),
+    0 0 0 3px rgba(184,118,26,.10);
+}
+.field__box.is-focus .field__ico{ color:var(--gold); }
+.field__box.is-focus .field__scan{ transform:scaleX(1); }
+
+.field__eye{
+  width:27px; height:27px; flex:none;
+  display:grid; place-items:center;
+  border-radius:7px; color:var(--ink-4);
+  transition:color var(--lg-dur) var(--lg-ease),background var(--lg-dur) var(--lg-ease),transform .18s var(--ease);
+}
+.field__eye svg{ width:17px; height:17px; }
+.field__eye:hover{ color:var(--ink-1); background:#eef1f7; }
+.field__eye:active{ transform:var(--lg-press); }
+.field__eye.is-on{ color:var(--gold); }
+
+.field__err{
+  font-family:var(--f-mono);
+  font-size:10.5px; letter-spacing:.06em;
+  color:#c0364a;
+  opacity:0; transform:translateY(-4px);
+  transition:opacity .35s var(--ease),transform .35s var(--ease);
+}
+.field.is-error .field__err{ opacity:1; transform:none; }
+/* 校验失败：静态描边 + 一次性抖动反馈 */
+.field.is-error .field__box{
+  background:#fff7f8;
+  box-shadow:
+    inset 0 0 0 1px rgba(192,54,74,.60),
+    0 0 0 3px rgba(192,54,74,.08);
+  animation:shake .42s var(--ease);
+}
+@keyframes shake{
+  0%,100%{ transform:translateX(0); }
+  20%{ transform:translateX(-6px); }
+  45%{ transform:translateX(5px); }
+  70%{ transform:translateX(-3px); }
+}
+.field__box input:-webkit-autofill,
+.field__box input:-webkit-autofill:hover,
+.field__box input:-webkit-autofill:focus{
+  -webkit-text-fill-color:var(--ink-1);
+  -webkit-box-shadow:0 0 0 60px #ffffff inset;
+  caret-color:var(--ink-1);
+}
+
+/* ---------- 图形验证码（输入框与图片并排） ---------- */
+.field--captcha .field__row{
+  display:flex; align-items:center; gap:10px;
+}
+.field--captcha .field__row .field__box{ flex:1; min-width:0; }
+
+.captcha{
+  flex:none;
+  width:118px; height:clamp(44px,5.6vh,50px);
+  display:block;
+  padding:0;
+  border:0;
+  border-radius:var(--r-md);
+  background:#ffffff;
+  object-fit:contain;
+  box-shadow:
+    inset 0 0 0 1px rgba(23,33,54,.12),
+    0 1px 2px rgba(24,34,56,.04);
+  cursor:pointer;
+  transition:box-shadow var(--lg-dur) var(--lg-ease),opacity .25s var(--ease);
+}
+.captcha:hover{
+  box-shadow:
+    inset 0 0 0 1px rgba(184,118,26,.55),
+    0 0 0 3px rgba(184,118,26,.10);
+}
+.captcha:focus-visible{
+  outline:1.5px solid rgba(184,118,26,.8); outline-offset:3px;
+}
+.captcha.is-loading{ opacity:.45; }
+/* 图片还没加载出来时的占位（后端不可达 / 首次加载中） */
+.captcha--empty{
+  font-family:var(--f-mono);
+  font-size:10px; letter-spacing:.14em;
+  color:var(--ink-3);
+}
+.captcha--empty:hover{ color:var(--ink-1); }
+
+/* 表单级错误（验证码错误以外的失败：账号锁定、超30天未登录、后端不可达…）
+   字段级错误仍走 .field__err —— 能定位到具体输入框的错误就不该占用整行。 */
+.formerr{
+  margin:2px 0 0;
+  padding:9px 11px;
+  border-radius:var(--r-sm);
+  background:#fff7f8;
+  box-shadow:inset 0 0 0 1px rgba(192,54,74,.28);
+  font-family:var(--f-mono);
+  font-size:10.5px; line-height:1.6; letter-spacing:.04em;
+  color:#c0364a;
+}
+
+/* ---------- 记住设备 / 忘记口令 ---------- */
+.row{
+  display:flex; align-items:center; justify-content:space-between;
+  gap:12px; margin-top:2px;
+}
+.check{
+  display:inline-flex; align-items:center; gap:9px;
+  font-size:12px; color:var(--ink-2); letter-spacing:.04em;
+  cursor:pointer; user-select:none;
+}
+.check input{ position:absolute; opacity:0; width:0; height:0; }
+.check__box{
+  width:16px; height:16px; flex:none;
+  display:grid; place-items:center;
+  border-radius:5px;
+  background:#ffffff;
+  box-shadow:inset 0 0 0 1px rgba(23,33,54,.22);
+  color:#ffffff;
+  transition:background .3s var(--lg-ease),box-shadow .3s var(--lg-ease),transform .18s var(--ease);
+}
+.check__box svg{ width:11px; height:11px; opacity:0; transform:scale(.6); transition:opacity .26s var(--lg-ease),transform .26s var(--lg-ease); }
+.check:hover .check__box{ box-shadow:inset 0 0 0 1px rgba(23,33,54,.36); }
+.check:active .check__box{ transform:var(--lg-press); }
+.check input:checked + .check__box{
+  background:linear-gradient(176deg,#d98a1f 0%,#b8761a 100%);
+  box-shadow:inset 0 0 0 1px rgba(184,118,26,.7);
+}
+.check input:checked + .check__box svg{ opacity:1; transform:none; }
+.check input:focus-visible + .check__box{ outline:1.5px solid rgba(184,118,26,.8); outline-offset:3px; }
+
+.link{
+  font-size:12px; letter-spacing:.05em;
+  color:var(--ink-3);
+  border-bottom:1px solid transparent;
+  transition:color var(--lg-dur) var(--lg-ease),border-color var(--lg-dur) var(--lg-ease);
+}
+.link:hover{ color:var(--gold); border-bottom-color:rgba(184,118,26,.5); }
+
+/* ---------- 提交按钮 ----------
+   浅色版：实心主色按钮（白字）；保留悬停抬升、按压回弹、
+   箭头右移与加载态反馈。 */
+.btn{
+  position:relative;
+  margin-top:clamp(4px,1vh,8px);
+  height:clamp(46px,5.8vh,52px);
+  width:100%;
+  display:flex; align-items:center; justify-content:center; gap:10px;
+  border-radius:var(--r-md);
+  background:linear-gradient(180deg,#2b56c4 0%,#1f47ad 100%);
+  color:#ffffff;
+  font-family:var(--f-body);
+  font-size:13.5px; font-weight:700; letter-spacing:.22em; text-indent:.22em;
+  overflow:hidden;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.26),
+    0 6px 16px -8px rgba(47,97,216,.55);
+  transition:transform var(--lg-dur) var(--lg-ease),box-shadow var(--lg-dur) var(--lg-ease),background var(--lg-dur) var(--lg-ease);
+}
+.btn:hover{
+  transform:translateY(-2px);
+  background:linear-gradient(180deg,#3160d2 0%,#234eb8 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.30),
+    0 14px 30px -12px rgba(47,97,216,.70);
+}
+.btn:active{ transform:translateY(0) var(--lg-press); }
+.btn__arrow{ display:grid; place-items:center; }
+.btn__arrow svg{ width:17px; height:17px; transition:transform .35s var(--ease); }
+.btn:hover .btn__arrow svg{ transform:translateX(4px); }
+.btn__load{
+  position:absolute; left:0; bottom:0; height:2px; width:0;
+  background:rgba(255,255,255,.85);
+  opacity:0;
+}
+.btn.is-loading{ pointer-events:none; }
+.btn.is-loading .btn__label{ opacity:.86; }
+.btn.is-loading .btn__arrow{ opacity:0; }
+.btn.is-loading .btn__load{ opacity:1; animation:loadBar 1.4s var(--ease) infinite; }
+@keyframes loadBar{
+  0%  { width:0;    opacity:.9; }
+  70% { width:100%; opacity:.9; }
+  100%{ width:100%; opacity:0; }
+}
+
+/* ---------- 「其他登录方式」分隔线 + SSO 三入口：已删除 ----------
+   原来这里有 .divider（「其他登录方式」胶囊分隔线）与 .sso / .sso__btn / .sso__g
+   （统一身份认证 / 企业微信 / 飞书三个入口）。按要求连同模板一起删掉了 ——
+   这三个入口本来就是演示态（点了只弹 toast，没接真实身份源），留着反而是假入口。
+   要还原的话，从原型 index.html 第 19–162 行 + main.js 抄回模板，
+   再把这一段 CSS 从原型 console.css / login.css 恢复即可。 */
+
+.card__foot{
+  position:relative; z-index:1;
+  margin-top:clamp(15px,2.1vh,20px);
+  padding-top:clamp(12px,1.7vh,15px);
+  background:linear-gradient(90deg,transparent,rgba(23,33,54,.10) 14%,rgba(23,33,54,.16) 50%,rgba(23,33,54,.10) 86%,transparent) top/100% 1px no-repeat;
+  display:flex; align-items:center; justify-content:center; flex-wrap:wrap;
+  gap:5px;
+  font-size:10.5px; letter-spacing:.06em;
+  color:var(--ink-4);
+}
+.card__foot a{ color:var(--ink-3); border-bottom:1px dashed rgba(23,33,54,.24); transition:color var(--lg-dur) var(--lg-ease),border-color var(--lg-dur) var(--lg-ease); }
+.card__foot a:hover{ color:var(--gold); border-bottom-color:rgba(184,118,26,.6); }
+
+/* ---------- 登录成功 ---------- */
+/* 浅色雾面遮罩 + 环形扩散 + 流光进度条 */
+.done{
+  position:absolute; inset:0; z-index:5;
+  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px;
+  border-radius:inherit;
+  background:
+    radial-gradient(120% 92% at 50% 32%,rgba(217,138,31,.10) 0%,rgba(217,138,31,0) 58%),
+    linear-gradient(180deg,rgba(255,255,255,.94),rgba(248,250,253,.96));
+  box-shadow:
+    inset 0 1px 2px rgba(255,255,255,.9),
+    inset 0 0 0 1px rgba(23,33,54,.08);
+  opacity:0; visibility:hidden;
+  transition:opacity var(--lg-dur) var(--lg-ease),visibility var(--lg-dur);
+}
+.done.is-on{ opacity:1; visibility:visible; }
+.done__ico{ width:44px; height:44px; color:var(--teal); position:relative; z-index:1; }
+.done__ring{
+  position:absolute; width:118px; height:118px; border-radius:50%;
+  border:1px solid rgba(15,143,116,.30);
+  animation:ringPop 2.6s var(--lg-ease) infinite;
+}
+@keyframes ringPop{
+  0%  { transform:scale(.6); opacity:0; }
+  30% { opacity:.9; }
+  100%{ transform:scale(1.5); opacity:0; }
+}
+.done__msg{
+  position:relative; z-index:1;
+  font-size:12.5px; letter-spacing:.14em;
+  color:var(--ink-1);
+}
+.done__bar{
+  position:relative; z-index:1;
+  width:168px; height:2px; border-radius:2px; overflow:hidden;
+  background:#e5eaf3;
+  box-shadow:inset 0 0 0 1px rgba(23,33,54,.08);
+}
+.done__bar::after{
+  content:''; display:block; height:100%; width:40%;
+  background:linear-gradient(90deg,transparent,var(--teal),var(--azure),transparent);
+  animation:barfill 1.5s var(--ease) infinite;
+}
+@keyframes barfill{
+  0%  { transform:translateX(-120%); }
+  100%{ transform:translateX(320%); }
+}
+
+/* ---------- 扫码：已删除 ----------
+   原来这里有 .qr / .qr__frame / .qr__tick* / .qr__side（29×29 点阵二维码框）
+   与 .ghost（「刷新二维码」按钮，.ghost 在登录页只有这一个使用者）。
+   扫码登录整块按要求删除，二维码本来就是 LCG 生成的**演示占位图形**、扫不出真身份，
+   留着会让人以为能扫。要还原见 LoginView.vue 头部注释里的出处。 */
+
+/* ============================================================
+   Toast（滑入 / 滑出）
+   ============================================================ */
+.toast{
+  position:fixed; z-index:20;
+  left:50%; bottom:34px;
+  max-width:min(560px,92vw);
+  padding:12px 20px;
+  border-radius:14px;
+  background:rgba(255,255,255,.96);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  box-shadow:
+    0 14px 34px -18px rgba(24,34,56,.34),
+    inset 0 0 0 1px rgba(23,33,54,.10);
+  font-size:12.5px; letter-spacing:.05em; color:var(--ink-2);
+  text-align:center;
+  opacity:0; visibility:hidden;
+  transform:translate(-50%,18px) scale(.97);
+  transition:opacity .4s var(--lg-ease),transform .55s var(--lg-ease),visibility .4s;
+  pointer-events:none;
+}
+.toast.is-on{ opacity:1; visibility:visible; transform:translate(-50%,0) scale(1); }
+.toast b{ color:var(--gold); font-weight:700; }
+
+/* ============================================================
+   自适应
+   ============================================================ */
+@media (max-height:960px) and (min-width:981px){
+  .cosmos{ gap:clamp(9px,1.4vh,16px); padding:clamp(12px,1.8vh,22px) 0 clamp(5px,.8vh,12px); }
+  .core{ width:clamp(92px,13vh,146px); }
+  .wordmark h1{ font-size:clamp(27px,3.8vw,48px); }
+  .card{ padding:clamp(18px,1.9vw,26px); }
+}
+@media (max-height:800px) and (min-width:981px){
+  .cosmos{ gap:9px; padding:10px 0 4px; }
+  .core{ width:clamp(76px,10.5vh,104px); }
+  .wordmark h1{ font-size:clamp(24px,2.8vw,34px); }
+  .form{ gap:11px; }
+  .field__box{ height:42px; }
+  .field__k{ font-size:10px; }
+  .captcha{ width:104px; height:42px; }
+  .btn{ height:44px; margin-top:2px; }
+  .card__foot{ margin-top:12px; padding-top:10px; }
+}
+@media (max-height:660px) and (min-width:981px){
+  .core{ width:64px; }
+  .wordmark h1{ font-size:22px; }
+  .field__err{ display:none; }
+  .card__foot{ display:none; }
+}
+
+@media (max-width:1180px){
+  .cosmos{ gap:clamp(10px,1.6vh,20px); }
+}
+
+@media (max-width:980px){
+  .stage{ padding:0 18px; }
+  /* 窄屏不再改成"顶部起排"。原来这里写 justify-content:flex-start，
+     本意是给矮视口留滚动空间，但"窄"和"矮"是两件事：
+     900×1000 这种窄而高的窗口内容只有 727px、面板有 848px，
+     顶部起排会在下面白空 121px。交回 flex 居中由 justify-content:center 处理，
+     内容真的超出视口时居中也只是上下各溢出一点，滚动照样可用。 */
+  /* 窄屏单独给一档更小的位移：手机竖屏 [徽标+字标+卡片] 几乎占满视口，
+     5.5vh 会把徽标顶出去（实测 390×844 徽标 top=-17）。
+     这里固定 -4px（等于"几乎不提"），卡片因此会略偏下，但徽标完整可见。
+     同时收窄间距与上下留白。 */
+  .cosmos{ gap:18px; padding:8px 0 20px; }
+  .core{ width:clamp(96px,18vw,132px); }
+}
+
+
+/* 手机竖屏：整组几乎占满视口，-5% 会把星核徽标顶出去（实测 390×844 徽标 top=-21）。
+   这里把位移归零，让 flex 正常居中 —— 卡片因此会偏下约 6% 视口高，
+   但"徽标完整可见"优先。必须写在 max-width:620px 这条之前，
+   让后者只覆盖字号/内边距，不去动位移。 */
+@media (max-width:620px){
+  .cosmos{ --lift:0px; }
+}
+
+@media (max-width:620px){
+  .wordmark h1{ font-size:clamp(25px,8vw,36px); }
+  .card{ padding:18px 16px; }
+  .captcha{ width:96px; }
+  .toast{ bottom:22px; padding:11px 16px; font-size:11.5px; }
+}
+
+/* ============================================================
+   滚动条
+   ============================================================ */
+::-webkit-scrollbar{ width:10px; height:10px; }
+::-webkit-scrollbar-track{ background:#eef1f7; }
+::-webkit-scrollbar-thumb{
+  border:2px solid transparent; background-clip:padding-box;
+  background-color:#c3ccdb; border-radius:8px;
+}
+::-webkit-scrollbar-thumb:hover{ background-color:#a9b5c9; }

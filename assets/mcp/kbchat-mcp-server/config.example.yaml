@@ -1,0 +1,42 @@
+# ChatChat MCP服务器配置文件示例
+# 复制此文件为 config.yaml 并根据需要修改配置
+
+# 服务器配置
+server:
+  host: "0.0.0.0"          # 服务器监听地址
+  port: 8848               # 服务器监听端口
+
+# ChatChat API配置
+chatchat:
+  api_base_url: "http://localhost:7861"  # ChatChat API基础URL
+  api_timeout: 30                        # API请求超时时间（秒）
+
+# 环境配置
+environment:
+  type: "development"      # 环境类型: development 或 production
+
+# 安全配置
+security:
+  max_query_length: 1000           # 最大查询长度限制
+  max_top_k: 50                    # 最大返回结果数量
+  default_score_threshold: 0.5     # 默认相似度阈值
+  max_output_tokens: 30000         # 最大输出token数量
+
+# 日志配置
+logging:
+  level: "INFO"            # 日志级别: DEBUG, INFO, WARNING, ERROR, CRITICAL
+  simplified: true         # 是否启用简化日志
+
+# 生产环境配置示例
+# environment:
+#   type: "production"
+# 
+# security:
+#   max_query_length: 500
+#   max_top_k: 20
+#   default_score_threshold: 0.7
+#   max_output_tokens: 10000
+# 
+# logging:
+#   level: "WARNING"
+#   simplified: true

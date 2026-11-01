@@ -1,0 +1,16 @@
+<section class="cr-section" id="ext-department-expenses">
+<h2>部门发生费用统计（住宿 / 机票 / 火车）</h2>
+<p class="cr-meta">{{NOTE}}。本章节由 <b>department_expenses</b> 模块渲染，纯 HTML/CSS。</p>
+<div class="cr-kpis">
+  <div><span>部门数</span><b>{{DEPT_COUNT}}</b></div>
+  <div><span>总金额（元）</span><b>{{GRAND}}</b></div>
+  <div><span>住宿 / 机票 / 火车</span><b>{{HOTEL_TOTAL}} / {{FLIGHT_TOTAL}} / {{TRAIN_TOTAL}}</b></div>
+  <div><span>记录数</span><b>{{RECORD_COUNT}}</b></div>
+</div>
+<h3>按部门明细（按合计金额降序）</h3>
+<table>
+<thead><tr><th>部门</th><th>住宿（元）</th><th>机票（元）</th><th>火车（元）</th><th>合计（元）</th><th>合计占比</th><th>记录数</th></tr></thead>
+<tbody>{{DEPT_ROWS}}</tbody>
+</table>
+<p class="cr-meta">生成时间：{{GENERATED_AT}}。</p>
+</section>

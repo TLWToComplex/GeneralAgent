@@ -1,0 +1,4 @@
+SKILL.md
+README.md
+scripts/check_completeness.py
+scripts/docio.py

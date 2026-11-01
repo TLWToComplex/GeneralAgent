@@ -1,0 +1,15 @@
+node_modules/
+dist/
+.npm-cache/
+*.local
+.DS_Store
+*.tsbuildinfo
+public/ai-tools/*.exe
+
+# 本地环境文件（内网后端地址等按环境不同，不进仓库）；模板见 .env.example
+.env
+.env.*
+!.env.example
+
+# tools/smoke-login-ui.mjs --shot 输出的截图
+tools/__shots__/

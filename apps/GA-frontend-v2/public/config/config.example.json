@@ -1,0 +1,8 @@
+{
+  "apiBase": "",
+  "dshProxyBase": "",
+  "dshUsernameParam": "username",
+  "loginRememberKey": "aiPlatform.lastUser",
+  "skipLogin": false,
+  "skipLoginUser": ""
+}

@@ -1,0 +1,696 @@
+
+.message {
+    display: flex;
+    border-radius: 12px;
+    position: relative;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 16px 25px 18px 16px;
+}
+
+.message-user {
+    margin-left: auto;
+}
+
+.message-assistant {
+    margin-right: auto;
+}
+
+.message-tool {
+    margin-right: auto;
+}
+
+.message-system {
+    margin-right: auto;
+}
+
+.message-avatar {
+    margin-right: 16px;
+    flex-shrink: 0;
+}
+
+.message-content {
+    flex: 1;
+    min-width: 0;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+    width: 100%;
+}
+
+.message-files {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.message-user .message-files {
+    align-items: flex-end;
+}
+
+.message-role {
+    font-size: 12px;
+    color: #888;
+    margin-bottom: 6px;
+    text-transform: capitalize;
+    letter-spacing: 0.5px;
+    font-weight: 500;
+}
+
+/* 用户气泡昵称保持用户设置的大小写，不自动大写 */
+.message-user .message-role {
+    text-transform: none;
+}
+
+.message-text {
+    line-height: 1.75;
+    font-size: 14px;
+    color: #1f2937;
+    width: 100%;
+    position: relative;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+}
+
+.message-text pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    max-width: 100%;
+    overflow-x: auto;
+}
+
+/* 助手正文段落节奏 */
+.message-assistant .message-text > * > p {
+    margin: 0 0 0.75em;
+}
+
+.message-assistant .message-text > * > p:last-child {
+    margin-bottom: 0;
+}
+
+.reasoning-content {
+    margin-bottom: 10px;
+}
+
+/* 思考内容排版：对齐 aicss Thinking + Reasoning 的 .tr-sentence */
+.reasoning-text {
+    font-size: 13px;
+    line-height: 20px;
+    font-weight: 425;
+    letter-spacing: -0.005em;
+    color: #61666b;
+}
+
+.typing-indicator {
+    display: inline;
+    animation: blink 1s infinite;
+    font-weight: normal;
+    pointer-events: none;
+    user-select: none;
+    position: absolute;
+    z-index: 999;
+    width: 0;
+    overflow: visible;
+}
+
+.markdown-content-with-cursor {
+    display: block;
+    position: relative;
+    min-height: 1.2em;
+}
+
+.markdown-content-with-cursor .typing-indicator {
+    pointer-events: none;
+    user-select: none;
+}
+
+.markdown-content-with-cursor .typing-indicator {
+    transition: none;
+    will-change: auto;
+}
+
+.markdown-content-with-cursor .typing-indicator {
+    display: inline-block;
+    vertical-align: baseline;
+}
+
+.markdown-content-with-cursor .typing-indicator {
+    display: inline-block;
+    vertical-align: baseline;
+    margin-top: 0;
+    margin-left: 0;
+}
+
+
+.code-icon {
+    font-family: monospace;
+    font-size: 14px;
+}
+
+@keyframes blink {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+}
+
+.message-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 1px;
+    padding-top: 5px;
+    margin-bottom: -10px;
+    opacity: 0;
+    transform: translateY(-5px);
+    transition: all 0.2s ease;
+}
+
+.message-user:hover .message-toolbar,
+.message-assistant:hover .message-toolbar,
+.message-toolbar.is-playing {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.message-toolbar.last-assistant-toolbar {
+    opacity: 1;
+    transform: translateY(0);
+    animation: fadeInUp 0.4s ease-out;
+}
+
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.toolbar-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 10px;
+    border: none;
+    background: transparent;
+    border-radius: 8px;
+    color: #494949;
+    cursor: pointer;
+    font-size: 11px;
+    transition: all 0.2s ease;
+    user-select: none;
+}
+
+.toolbar-btn:hover {
+    background: linear-gradient(135deg, #ffffff 0%, #ffffff 100%);
+    color: #494949;
+}
+
+.toolbar-btn svg {
+    flex-shrink: 0;
+}
+
+.btn-text {
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.copy-btn:hover {
+    background: linear-gradient(100deg, #ffffff 0%, #ffffff 100%);
+    color: #494949;
+    border-color: #ffffff;
+}
+
+.retry-btn:hover {
+    background: linear-gradient(100deg, #ffffff 0%, #ffffff 100%);
+    color: #494949;
+    border-color: #ffffff;
+}
+
+.edit-btn:hover {
+    background: linear-gradient(100deg, #ffffff 0%, #ffffff 100%);
+    color: #494949;
+    border-color: #ffffff;
+}
+
+.message-content.selection-single .toolbar-btn,
+.message-content.selection-first .toolbar-btn,
+.message-content.selection-middle .toolbar-btn,
+.message-content.selection-last .toolbar-btn {
+    background: transparent;
+}
+
+.message-content.selection-single .toolbar-btn:hover,
+.message-content.selection-first .toolbar-btn:hover,
+.message-content.selection-middle .toolbar-btn:hover,
+.message-content.selection-last .toolbar-btn:hover {
+    background: rgb(255, 255, 255);
+}
+
+.edit-container {
+    width: 100%;
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    padding: 12px 16px;
+}
+
+.edit-input {
+    width: 100%;
+    border: none !important;
+    box-shadow: none !important;
+    background: transparent !important;
+    resize: none;
+    font-size: 14px;
+    line-height: 1.6;
+    padding: 2px !important;
+    margin-bottom: 12px;
+    min-height: auto !important;
+}
+
+.edit-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    align-items: center;
+}
+
+.cancel-btn {
+    background: #ffffff;
+    border: 1px solid #d9d9d9;
+    color: #666;
+    border-radius: 8px;
+    padding: 6px 21px;
+    font-size: 12px;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cancel-btn:hover {
+    border-color: #bfbfbf;
+    color: #333;
+    background: #ffffff;
+}
+
+.confirm-btn {
+    background: linear-gradient(135deg, #1890ff 0%, #096dd9 100%);
+    border: none;
+    color: white;
+    border-radius: 8px;
+    padding: 6px 21px;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 4px rgba(24, 144, 255, 0.2);
+}
+
+.confirm-btn:hover {
+    background: linear-gradient(135deg, #40a9ff 0%, #1890ff 100%);
+    box-shadow: 0 4px 8px rgba(24, 144, 255, 0.3);
+}
+
+.confirm-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(24, 144, 255, 0.2);
+}
+
+.cancel-btn,
+.confirm-btn {
+    cursor: pointer;
+}
+
+.full-modal .ant-modal {
+    max-width: 100%;
+    top: 0;
+    padding-bottom: 0;
+    margin: 0;
+}
+
+.full-modal .ant-modal-content {
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh);
+    border-radius: 0;
+    background-color: rgba(255, 255, 255, 0.98);
+}
+
+.full-modal .ant-modal-body {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+}
+
+.full-modal .ant-modal-header {
+    margin-bottom: 0;
+    background: transparent;
+    border-bottom: none;
+    padding: 12px 24px;
+}
+
+.full-modal .ant-modal-title {
+    width: 100%;
+}
+
+.full-modal .ant-modal-close {
+    display: none;
+}
+
+.clickable-image {
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.clickable-image:hover {
+    transform: scale(1.01);
+}
+
+/* 停止输出提示样式 */
+.stop-tip {
+    color: rgba(0, 0, 0, 0.45);
+    font-size: 14px;
+    margin: 10px 8px 8px;
+    text-align: left;
+}
+
+/* 选择模式样式 */
+.message.selection-mode {
+    position: relative;
+    margin-left: 40px;
+}
+
+.message-checkbox {
+    position: absolute;
+    left: -30px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+}
+
+.message-checkbox .ant-checkbox-wrapper {
+    margin: 0;
+}
+
+/* 用户消息的选择框样式调整 */
+.message-user.selection-mode .message-checkbox {
+    left: -30px;
+}
+
+/* MessageSelection 相关样式 */
+.message-selection-wrapper {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+}
+
+/* 选择框容器 - 实现固钉效果 */
+.selection-checkbox-container {
+    position: absolute;
+    left: -30px;
+    top: 0;
+    width: 18px;
+    height: 100%;
+    z-index: 10;
+    pointer-events: none; /* 容器不阻挡事件 */
+}
+
+.selection-checkbox {
+    position: sticky;
+    top: 22px;
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    pointer-events: auto; /* 选择框本身可以接收事件 */
+    margin-top: 22px; /* 确保默认状态下与头像对齐 */
+}
+
+.custom-radio {
+    width: 18px;
+    height: 18px;
+    border: 2px solid #d9d9d9;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background-color: #fff;
+}
+
+.custom-radio:hover {
+    border-color: #1890ff;
+}
+
+.custom-radio.selected {
+    border-color: #1890ff;
+    background-color: #1890ff;
+}
+
+.check-icon {
+    width: 12px;
+    height: 12px;
+}
+
+.message-selection-wrapper .message-content {
+    flex: 1;
+}
+
+.message-selection-wrapper .message-content.clickable {
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.message-selection-wrapper .message-content.clickable:hover {
+    background-color: rgba(24, 144, 255, 0.05);
+    border-radius: 16px;
+}
+
+/* hover时考虑相邻选中状态的圆角处理 */
+.message-selection-wrapper .message-content.clickable.selection-first:hover {
+    border-radius: 16px 16px 0 0;
+}
+
+.message-selection-wrapper .message-content.clickable.selection-middle:hover {
+    border-radius: 0;
+}
+
+.message-selection-wrapper .message-content.clickable.selection-last:hover {
+    border-radius: 0 0 16px 16px;
+}
+
+.message-selection-wrapper .message-content.clickable.selection-single:hover {
+    border-radius: 16px;
+}
+
+/* 用户消息特殊样式 */
+.message-selection-wrapper.user-message {
+    flex-direction: row-reverse;
+}
+
+.message-selection-wrapper.user-message .selection-checkbox-container {
+    left: auto;
+    right: -30px;
+}
+
+.message-selection-wrapper.user-message .selection-checkbox {
+    padding-top: 0;
+}
+
+/* 最后一个消息的底部间距 */
+.message-selection-wrapper:last-child {
+    margin-bottom: 10px;
+}
+
+/* 与hover样式一致的选中背景 - 无边框设计 */
+.message-selection-wrapper .message-content.selection-single {
+    background-color: rgba(24, 144, 255, 0.1) !important;
+    border-radius: 16px;
+}
+
+.message-selection-wrapper .message-content.selection-first {
+    background-color: rgba(24, 144, 255, 0.1) !important;
+    border-radius: 16px 16px 0 0;
+}
+
+.message-selection-wrapper .message-content.selection-middle {
+    background-color: rgba(24, 144, 255, 0.1) !important;
+    border-radius: 0;
+}
+
+.message-selection-wrapper .message-content.selection-last {
+    background-color: rgba(24, 144, 255, 0.1) !important;
+    border-radius: 0 0 16px 16px;
+}
+
+/* 已选中消息的hover效果 */
+.message-selection-wrapper .message-content.selection-single:hover {
+    background-color: rgba(24, 144, 255, 0.15) !important;
+}
+
+.message-selection-wrapper .message-content.selection-first:hover {
+    background-color: rgba(24, 144, 255, 0.15) !important;
+}
+
+.message-selection-wrapper .message-content.selection-middle:hover {
+    background-color: rgba(24, 144, 255, 0.15) !important;
+}
+
+.message-selection-wrapper .message-content.selection-last:hover {
+    background-color: rgba(24, 144, 255, 0.15) !important;
+}
+
+/* 对话模式样式（仅调整对齐与方向） */
+.conversation-mode .message-user {
+    flex-direction: row-reverse;
+}
+
+.conversation-mode .message-user .message-avatar {
+    margin-left: 16px;
+    margin-right: 0;
+}
+
+.conversation-mode .message-user .message-role {
+    text-align: right;
+}
+
+.conversation-mode .message-user .message-content {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    flex: 0 1 auto;
+    width: auto;
+    max-width: 88%;
+}
+
+/* 对话模式下，用户消息的工具栏靠右对齐 */
+.conversation-mode .message-user .message-toolbar {
+    justify-content: flex-end;
+}
+
+/* 让用户消息文本在对话模式下不占满整行 */
+.conversation-mode .message-user .message-text {
+    width: auto;
+}
+
+/* 防止 Markdown 内容在对话模式下宽度100%，实现右侧收拢效果 */
+.conversation-mode .message-user :is(.markdown-content, .markdown-content-with-cursor, .plain-text) {
+    width: auto;
+    display: inline-block;
+    text-align: left; /* 文本自身左对齐，整体容器靠右 */
+}
+
+.plain-text {
+    white-space: pre-wrap;
+}
+
+/* 对话模式下，仅为用户消息的 markdown-content 和 plain-text 添加白底、内边距与圆角 */
+.conversation-mode .message-user :is(.markdown-content, .plain-text) {
+    background-color: #ffffff;
+    padding: 12px 18px;
+    border-radius: 16px;
+}
+
+/* 编辑模式下，输入框占满消息可用宽度 */
+.conversation-mode .message-user.is-editing .message-content,
+.document-mode .message-user.is-editing .message-content {
+    align-items: stretch;
+    width: 100%;
+    max-width: none;
+    flex: 1 1 auto;
+    text-align: left;
+}
+
+.conversation-mode .message-user.is-editing :is(.markdown-content, .markdown-content-with-cursor),
+.document-mode .message-user.is-editing :is(.markdown-content, .markdown-content-with-cursor) {
+    width: 100%;
+    display: block;
+    text-align: left;
+}
+
+/* 确保编辑容器在两种展示模式下都不被压缩 */
+.conversation-mode .message-user .edit-container,
+.document-mode .message-user .edit-container {
+    align-self: stretch;
+    width: 100%;
+}
+
+.conversation-mode .message-user.is-editing .edit-container .edit-input,
+.document-mode .message-user.is-editing .edit-container .edit-input {
+    width: 100%;
+}
+
+/* 文档模式下,artifact-card 显示在左侧 */
+.document-mode .message-assistant .artifact-card-wrapper {
+    text-align: left;
+    margin-left: 0;
+    margin-right: auto;
+}
+
+.document-mode .message-assistant .artifact-card {
+    margin-left: 0;
+    margin-right: auto;
+}
+
+/* 文档模式下,用户消息中的文件也显示在左侧 */
+.document-mode .message-user {
+    margin-left: 0 !important;
+    margin-right: auto !important;
+}
+
+.document-mode .message-user .message-files {
+    align-items: flex-start !important;
+}
+
+.document-mode .message-user .artifact-card {
+    margin-left: 0 !important;
+    margin-right: auto !important;
+}
+
+/* 文档模式下，用户消息的气泡样式（与对话模式一致但左对齐） */
+.document-mode .message-user .message-content {
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex: 0 1 auto;
+    width: auto;
+    max-width: 88%;
+}
+
+/* 文档模式下，用户消息的工具栏靠左对齐 */
+.document-mode .message-user .message-toolbar {
+    justify-content: flex-start;
+}
+
+/* 让用户消息文本在文档模式下不占满整行 */
+.document-mode .message-user .message-text {
+    width: auto;
+}
+
+/* 防止 Markdown 内容在文档模式下宽度100%，实现左侧收拢效果 */
+.document-mode .message-user :is(.markdown-content, .markdown-content-with-cursor, .plain-text) {
+    width: auto;
+    display: inline-block;
+    text-align: left;
+}
+
+/* 文档模式下，为用户消息的 markdown-content 和 plain-text 添加白底、内边距与圆角 */
+.document-mode .message-user :is(.markdown-content, .plain-text) {
+    background-color: #ffffff;
+    padding: 12px 18px;
+    border-radius: 16px;
+}

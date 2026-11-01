@@ -1,0 +1,9 @@
+<section class="cr-section" id="ext-city-ten-day-high-price">
+<h2>同一城市{{WINDOW_DAYS}}天内价格偏高订单（单晚价高于窗口均价）</h2>
+<p class="cr-meta">{{DEFINITION}}。共 <b>{{MATCHED}}</b> 笔偏高订单，按高出比例降序展示前 {{SHOW_COUNT}} 笔（完整明细见 extension_analysis.json 的 city_ten_day_high_price.details）。</p>
+<table>
+<thead><tr><th>#</th><th>城市</th><th>酒店</th><th>乘机人 / 部门</th><th>入住日</th><th>晚数</th><th>单晚价（元）</th><th>实收实付（元）</th><th>住宿标准（元/晚）</th><th>是否超标</th><th>窗口订单</th><th>窗口均价（元/晚）</th><th>高出窗口</th></tr></thead>
+<tbody>{{DETAIL_ROWS}}</tbody>
+</table>
+<p class="cr-meta">明细行列出各订单的 预订时间 / 离店日 / 订单号 / 消费记录唯一值（前8位）/ 票面价 / 服务费 / 退改签类型。本章节由 <b>city_ten_day_high_price</b> 模块渲染，纯 HTML/CSS。生成时间：{{GENERATED_AT}}。</p>
+</section>

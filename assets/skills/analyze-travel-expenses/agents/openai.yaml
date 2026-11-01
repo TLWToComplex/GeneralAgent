@@ -1,0 +1,7 @@
+interface:
+  display_name: "差旅消费综合分析"
+  short_description: "合并、校验并汇总大规模差旅消费明细"
+  default_prompt: "Use $analyze-travel-expenses to analyze these exported travel-expense tables and produce a validated report."
+
+policy:
+  allow_implicit_invocation: true

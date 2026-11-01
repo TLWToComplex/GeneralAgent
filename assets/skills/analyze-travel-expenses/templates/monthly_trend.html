@@ -1,0 +1,17 @@
+<section class="cr-section" id="ext-monthly-trend">
+<h2>每月出差费用曲线（近30个月）</h2>
+<p class="cr-meta">{{NOTE}}；无月份字段可解析的记录 {{MISSING}} 条未计入。曲线为纯 SVG 绘制（无图表库依赖）。</p>
+<div class="cr-kpis">
+  <div><span>月份数</span><b>{{MONTH_COUNT}}</b></div>
+  <div><span>总金额（元）</span><b>{{GRAND}}</b></div>
+  <div><span>峰值月份</span><b style="font-size:16px">{{PEAK_MONTH}}</b></div>
+  <div><span>缺失月份记录</span><b>{{MISSING}}</b></div>
+</div>
+<div class="mt-chart">{{SVG}}</div>
+<h3>月度明细</h3>
+<table>
+<thead><tr><th>月份</th><th>住宿（元）</th><th>机票（元）</th><th>火车（元）</th><th>合计（元）</th></tr></thead>
+<tbody>{{MONTH_ROWS}}</tbody>
+</table>
+<p class="cr-meta">生成时间：{{GENERATED_AT}}。</p>
+</section>

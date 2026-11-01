@@ -1,0 +1,141 @@
+{
+  "templateName": "默认电气原理图模板",
+  "templateId": "default_schematic",
+  "description": "标准航空电气原理图风格，白色设备框、连接器J3/J4/J1、引脚编号、接地符号、正交连线",
+  "version": "1.0",
+  "createdAt": "2026-03-18T08:20:00.000Z",
+  "canvas": {
+    "width": 900,
+    "height": 650,
+    "backgroundColor": "#ffffff",
+    "gridSize": 20,
+    "showGrid": true
+  },
+  "layout": {
+    "type": "fixed",
+    "direction": "horizontal",
+    "deviceSpacing": 100,
+    "layerSpacing": 200
+  },
+  "styles": {
+    "device": {
+      "fill": "white",
+      "stroke": "black",
+      "strokeWidth": 1.5,
+      "fontFamily": "Arial",
+      "fontSize": 11,
+      "textColor": "black"
+    },
+    "connector": {
+      "fill": "white",
+      "stroke": "black",
+      "strokeWidth": 1,
+      "fontSize": 9,
+      "width": 20,
+      "height": 40
+    },
+    "pin": {
+      "radius": 3,
+      "fill": "white",
+      "stroke": "black",
+      "strokeWidth": 1,
+      "fontSize": 8
+    },
+    "ground": {
+      "symbolType": "standard",
+      "strokeWidth": 1,
+      "fontSize": 10
+    },
+    "connection": {
+      "stroke": "black",
+      "strokeWidth": 1,
+      "style": "orthogonal",
+      "cornerRadius": 0
+    },
+    "signalLabel": {
+      "fontFamily": "Arial",
+      "fontSize": 9,
+      "fill": "black"
+    }
+  },
+  "deviceTypes": {
+    "RPDU": {
+      "width": 140,
+      "height": 120,
+      "connectorPosition": "right",
+      "connectorIds": ["J3", "J4"],
+      "pinIds": ["10", "20"]
+    },
+    "SEAT": {
+      "width": 140,
+      "height": 140,
+      "connectorPosition": "left",
+      "connectorIds": ["J1"],
+      "pinIds": ["A", "B", "C", "D", "E", "F"]
+    },
+    "GND": {
+      "symbolType": "ground",
+      "labels": ["GND-601", "GND-600", "GND-602", "GND-603"]
+    }
+  },
+  "positions": {
+    "RPDU1": { "x": 60, "y": 80 },
+    "RPDU2": { "x": 60, "y": 380 },
+    "GND-601": { "x": 130, "y": 240 },
+    "GND-600": { "x": 130, "y": 290 },
+    "GND-602": { "x": 130, "y": 540 },
+    "GND-603": { "x": 130, "y": 590 },
+    "2501U2201": { "x": 650, "y": 80 },
+    "2501U2203": { "x": 650, "y": 350 }
+  },
+  "connections": [
+    {
+      "id": "conn_1",
+      "from": { "device": "RPDU1", "connector": "J3", "pin": "10" },
+      "to": { "device": "2501U2201", "connector": "J1", "pin": "A" },
+      "waypoints": [[203, 145], [280, 145], [280, 125], [647, 125]],
+      "label": "1LN ESS D N"
+    },
+    {
+      "id": "conn_2",
+      "from": { "device": "GND-601", "pin": "center" },
+      "to": { "device": "2501U2201", "connector": "J1", "pin": "B" },
+
+      "waypoints": [[130, 255], [280, 255], [280, 145], [647, 145]],
+      "label": "1LN ESS D N"
+    },
+    {
+      "id": "conn_3",
+      "from": { "device": "GND-600", "pin": "center" },
+      "to": { "device": "2501U2201", "connector": "J1", "pin": "C" },
+      "waypoints": [[130, 305], [280, 305], [280, 165], [647, 165]],
+      "label": "CG ESS Z N"
+    },
+    {
+      "id": "conn_4",
+      "from": { "device": "RPDU2", "connector": "J4", "pin": "20" },
+      "to": { "device": "2501U2203", "connector": "J1", "pin": "D" },
+      "waypoints": [[203, 445], [280, 445], [280, 395], [647, 395]],
+      "label": "1LN ESS D N"
+    },
+    {
+      "id": "conn_5",
+      "from": { "device": "GND-602", "pin": "center" },
+      "to": { "device": "2501U2203", "connector": "J1", "pin": "E" },
+      "waypoints": [[130, 555], [280, 555], [280, 415], [647, 415]],
+      "label": "1LN ESS D N"
+    },
+    {
+      "id": "conn_6",
+      "from": { "device": "GND-603", "pin": "center" },
+      "to": { "device": "2501U2203", "connector": "J1", "pin": "F" },
+      "waypoints": [[130, 605], [280, 605], [280, 435], [647, 435]],
+      "label": "CG ESS Z N"
+    }
+  ],
+  "metadata": {
+    "author": "system",
+    "isDefault": true,
+    "tags": ["schematic", "aviation", "default"]
+  }
+}

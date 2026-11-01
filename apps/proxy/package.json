@@ -1,0 +1,14 @@
+{
+  "name": "dsh-validate-proxy",
+  "private": true,
+  "version": "0.0.1",
+  "type": "commonjs",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "smoke": "node tools/smoke.mjs"
+  },
+  "dependencies": {
+    "http-proxy": "^1.18.1"
+  }
+}

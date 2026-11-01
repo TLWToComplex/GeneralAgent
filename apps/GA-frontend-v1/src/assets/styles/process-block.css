@@ -1,0 +1,188 @@
+/**
+ * 过程块（ProcessBlock）设计 token
+ *
+ * 统一"思考 / 工具调用 / 任务清单 / 审批"四类过程性元信息的视觉语言。
+ * 基准取自 ChatMessage.vue 里的 .tr（aicss.dev Thinking + Reasoning 原版）：
+ * 13px/18px、#61666b、无边框、grid 折叠、chevron 旋转。
+ *
+ * 视觉重量分三层：
+ *   Layer 1 正文回答    14px / #1f2937 / 满宽         ← 最重
+ *   Layer 2 过程块      13px / #61666b / ghost|row    ← 降权
+ *   Layer 3 块内详情    12px / 代码块 / 缩进          ← 最轻
+ *   例外   审批(alert)  琥珀左边框，唯一允许"重"的过程块
+ *
+ * row 变体（Run Trace 时间线）：状态图标 + 标签 + 徽章 + 右对齐等宽耗时，
+ * 图标上下各画一段 1px 轨道线把步骤串成一列，动效只出现在活动行。
+ */
+
+:root {
+  /* ---- 排版 ---- */
+  --pb-font: 13px;
+  --pb-line: 18px;
+  --pb-weight: 400;
+  --pb-tracking: -0.005em;
+  --pb-detail-font: 12px;
+
+  /* ---- 文字层级 ---- */
+  --pb-label: #777e87;
+  --pb-verb: #6d6d6d;
+  --pb-subject: #3f4448;
+  --pb-meta: #858d98;
+  --pb-count: #8b9095;
+
+  /* ---- 结构 ---- */
+  --pb-gap: 6px;
+  --pb-indicator-size: 18px;
+  --pb-indent: 24px;            /* indicator 18 + gap 6，详情与标题左对齐 */
+  --pb-radius: 8px;
+  --pb-header-h: 20px;          /* 头部基准高度：图标据此垂直居中，时间线线段据此对齐 */
+  --pb-row-gap: 6px;            /* row 行间距：上下线段各延伸这么多以首尾相接 */
+
+  /* ---- 动效：与 .tr 完全一致 ---- */
+  --pb-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --pb-dur: 320ms;
+  --pb-chevron-dur: 280ms;
+
+  /* ---- 状态色 ---- */
+  --pb-c-running: #2f54eb;
+  --pb-c-done: #16a34a;
+  --pb-c-error: #dc2626;
+  --pb-c-warn: #d97706;
+  --pb-c-idle: #d1d5db;
+
+  /* ---- 轨道线 / 容器 ---- */
+  --pb-rail: rgba(0, 0, 0, 0.1);
+  --pb-surface: transparent;
+  --pb-row-hover: #1f2937;
+
+  /* ---- 徽章 chip（服务器名等技术标识）---- */
+  --pb-chip-bg: rgba(0, 0, 0, 0.035);
+  --pb-chip-border: rgba(0, 0, 0, 0.08);
+  --pb-chip-fg: #8b9095;
+
+  /* ---- 扫光（shimmer）---- */
+  --pb-shine-base: #61666b;
+  --pb-shine-dim: rgba(179, 179, 179, 0.45);
+
+  /* ---- 详情区滚动条 ---- */
+  --pb-sb: rgba(0, 0, 0, 0.15);
+  --pb-sb-active: rgba(0, 0, 0, 0.25);
+
+  /* ---- 代码块 ---- */
+  --pb-code-bg: #f8f9fb;
+  --pb-code-border: rgba(0, 0, 0, 0.06);
+  --pb-code-fg: #24292f;
+}
+
+[data-theme='dark'] {
+  --pb-label: #8a8a8a;
+  --pb-verb: #b5b5b5;
+  --pb-subject: #d4d4d4;
+  --pb-meta: #7a7a7a;
+  --pb-count: #8a8a8a;
+
+  --pb-c-running: #6d8dff;
+  --pb-c-done: #4ade80;
+  --pb-c-error: #f87171;
+  --pb-c-warn: #fbbf24;
+  --pb-c-idle: #4b5563;
+
+  --pb-rail: rgba(255, 255, 255, 0.13);
+  --pb-row-hover: #f0f0f0;
+
+  --pb-chip-bg: rgba(255, 255, 255, 0.06);
+  --pb-chip-border: rgba(255, 255, 255, 0.1);
+  --pb-chip-fg: #8a8a8a;
+
+  --pb-shine-base: #b5b5b5;
+  --pb-shine-dim: rgba(181, 181, 181, 0.45);
+
+  --pb-sb: rgba(255, 255, 255, 0.15);
+  --pb-sb-active: rgba(255, 255, 255, 0.25);
+
+  --pb-code-bg: rgba(255, 255, 255, 0.05);
+  --pb-code-border: rgba(255, 255, 255, 0.09);
+  --pb-code-fg: #d4d4d4;
+}
+
+/* ---- 让既有 .tr 思考块复用同一套 token，实现"同源"而非"相似" ---- */
+.reasoning-content.tr {
+  --tre-label: var(--pb-label);
+  --tre-verb: var(--pb-verb);
+  --tre-chevron: var(--pb-label);
+  --tr-sb: var(--pb-sb);
+  --tr-sb-active: var(--pb-sb-active);
+  --tr-shine-base: var(--pb-shine-base);
+  --tr-shine-dim: var(--pb-shine-dim);
+}
+
+/* 共享扫光动画：思考块与过程块用同一个 keyframes，避免多套并存 */
+@keyframes pb-shine {
+  0%, 18%   { background-position: 100% 0; }
+  82%, 100% { background-position: 0% 0; }
+}
+
+.pb-shimmer {
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  background-image: linear-gradient(90deg,
+      var(--pb-shine-base) 0%, var(--pb-shine-base) 35%,
+      var(--pb-shine-dim) 45%, var(--pb-shine-dim) 55%,
+      var(--pb-shine-base) 65%, var(--pb-shine-base) 100%);
+  background-size: 300% 100%;
+  background-repeat: no-repeat;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: pb-shine 2.25s cubic-bezier(0.25, 0.1, 0.25, 1) infinite;
+}
+
+/* ---- 过程块内通用代码块（参数 / 结果 / 审批参数）---- */
+.pb-code {
+  font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
+  font-size: var(--pb-detail-font);
+  line-height: 1.6;
+  color: var(--pb-code-fg);
+  background: var(--pb-code-bg);
+  border: 1px solid var(--pb-code-border);
+  border-radius: 6px;
+  padding: 8px 10px;
+  margin: 0;
+  white-space: pre-wrap;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+
+/* 打字光标：统一用 inline-block，替代原先 position:absolute + z-index:999 的错位 hack */
+.pb-caret {
+  display: inline-block;
+  width: 0;
+  overflow: visible;
+  font-weight: 400;
+  pointer-events: none;
+  user-select: none;
+  animation: pb-blink 1s step-end infinite;
+}
+
+@keyframes pb-blink {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pb-shimmer,
+  .pb-caret {
+    animation: none !important;
+  }
+}
+
+/* Motion reduction must not imply completion or leave animated text transparent. */
+@media (prefers-reduced-motion: reduce) {
+  .pb-shimmer {
+    background: none;
+    color: var(--pb-verb);
+    -webkit-text-fill-color: currentColor;
+  }
+  .reasoning-content .tr-collapsible,
+  .reasoning-content .tr-viewport,
+  .reasoning-content .tr-stream { transition: none !important; }
+}

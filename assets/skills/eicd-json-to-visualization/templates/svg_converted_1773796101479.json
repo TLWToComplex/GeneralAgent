@@ -1,0 +1,212 @@
+{
+  "templateName": "用户编辑的 从SVG转换的模板 - EICD数据表-ATA25设备装饰-01-驾驶员座椅 (1)_from_template",
+  "templateId": "svg_converted_1773796101479",
+  "description": "用户自定义编辑的 从 EICD数据表-ATA25设备装饰-01-驾驶员座椅 (1)_from_template.svg 转换的电气原理图模板",
+  "version": "1.0",
+  "createdAt": "2026-03-18T01:08:21.479Z",
+  "canvas": {
+    "width": 900,
+    "height": 650,
+    "backgroundColor": "#ffffff",
+    "gridSize": 20,
+    "showGrid": true
+  },
+  "layout": {
+    "type": "fixed",
+    "direction": "horizontal",
+    "deviceSpacing": 100,
+    "layerSpacing": 200
+  },
+  "styles": {
+    "device": {
+      "fill": "white",
+      "stroke": "black",
+      "strokeWidth": 1.5,
+      "fontFamily": "Arial",
+      "fontSize": 11,
+      "textColor": "black"
+    },
+    "connector": {
+      "fill": "white",
+      "stroke": "black",
+      "strokeWidth": 1,
+      "fontSize": 9,
+      "width": 20,
+      "height": 40
+    },
+    "pin": {
+      "radius": 3,
+      "fill": "white",
+      "stroke": "black",
+      "strokeWidth": 1,
+      "fontSize": 8
+    },
+    "ground": {
+      "symbolType": "standard",
+      "strokeWidth": 1,
+      "fontSize": 10
+    },
+    "connection": {
+      "stroke": "black",
+      "strokeWidth": 1,
+      "style": "orthogonal",
+      "cornerRadius": 0
+    },
+    "signalLabel": {
+      "fontFamily": "Arial",
+      "fontSize": 9,
+      "fill": "black"
+    }
+  },
+  "deviceTypes": {
+    "RPDU": {
+      "width": 140,
+      "height": 120,
+      "connectorPosition": "right",
+      "connectorIds": [
+        "J3",
+        "J4"
+      ],
+      "pinIds": [
+        "10",
+        "20"
+      ]
+    },
+    "SEAT": {
+      "width": 140,
+      "height": 140,
+      "connectorPosition": "left",
+      "connectorIds": [
+        "J1"
+      ],
+      "pinIds": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F"
+      ]
+    },
+    "GND": {
+      "symbolType": "ground",
+      "labels": [
+        "GND-601",
+        "GND-600",
+        "GND-602",
+        "GND-603"
+      ]
+    }
+  },
+  "positions": {
+    "RPDU1": {
+      "x": 80,
+      "y": 80
+    },
+    "RPDU2": {
+      "x": 60,
+      "y": 380
+    },
+    "GND-601": {
+      "x": 650,
+      "y": 90
+    },
+    "2501U2203": {
+      "x": 650,
+      "y": 350
+    }
+  },
+  "connections": [
+    {
+      "id": "conn_1",
+      "waypoints": [
+        [
+          203,
+          280
+        ],
+        [
+          280,
+          647
+        ]
+      ],
+      "label": ""
+    },
+    {
+      "id": "conn_2",
+      "waypoints": [
+        [
+          130,
+          280
+        ],
+        [
+          280,
+          647
+        ]
+      ],
+      "label": ""
+    },
+    {
+      "id": "conn_3",
+      "waypoints": [
+        [
+          130,
+          280
+        ],
+        [
+          280,
+          647
+        ]
+      ],
+      "label": ""
+    },
+    {
+      "id": "conn_4",
+      "waypoints": [
+        [
+          203,
+          280
+        ],
+        [
+          280,
+          647
+        ]
+      ],
+      "label": ""
+    },
+    {
+      "id": "conn_5",
+      "waypoints": [
+        [
+          130,
+          280
+        ],
+        [
+          280,
+          647
+        ]
+      ],
+      "label": ""
+    },
+    {
+      "id": "conn_6",
+      "waypoints": [
+        [
+          130,
+          280
+        ],
+        [
+          280,
+          647
+        ]
+      ],
+      "label": ""
+    }
+  ],
+  "metadata": {
+    "author": "svg_converter",
+    "isDefault": false,
+    "sourceFile": "EICD数据表-ATA25设备装饰-01-驾驶员座椅 (1)_from_template.svg",
+    "conversionDate": "2026-03-18T01:08:21.479Z"
+  },
+  "editedAt": "2026-03-18T01:08:21.479Z"
+}

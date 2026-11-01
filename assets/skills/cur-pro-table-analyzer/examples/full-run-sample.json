@@ -1,0 +1,436 @@
+{
+  "stage_outputs": {
+    "collect_input": {
+      "stage": "collect_input",
+      "task_goal": "分析住宿与机票报销异常并生成含图HTML报告",
+      "confidence_score": 0.95,
+      "next_action": "continue"
+    },
+    "ingest_structured_data": {
+      "stage": "ingest_structured_data",
+      "raw_rows": [
+        {
+          "员工": "张三",
+          "职级": "P6",
+          "费用类型": "住宿",
+          "酒店": "A酒店",
+          "房型": "大床房",
+          "日期": "2026-04-03",
+          "金额": 880
+        },
+        {
+          "员工": "李四",
+          "职级": "P7",
+          "费用类型": "机票",
+          "航线": "SHA-PEK",
+          "日期": "2026-04-05",
+          "金额": 2450
+        }
+      ],
+      "confidence_score": 0.94,
+      "next_action": "continue"
+    },
+    "validate_and_normalize": {
+      "stage": "validate_and_normalize",
+      "normalized_rows": [
+        {
+          "员工": "张三",
+          "职级": "P6",
+          "费用类型": "住宿",
+          "酒店": "A酒店",
+          "房型": "大床房",
+          "日期": "2026-04-03",
+          "金额": 880.0
+        },
+        {
+          "员工": "李四",
+          "职级": "P7",
+          "费用类型": "机票",
+          "航线": "SHA-PEK",
+          "日期": "2026-04-05",
+          "金额": 2450.0
+        }
+      ],
+      "cleaning_log": [
+        {
+          "field": "金额",
+          "before": "880",
+          "after": "880.0",
+          "reason": "type_cast"
+        }
+      ],
+      "confidence_score": 0.93,
+      "next_action": "continue"
+    },
+    "detect_anomalies": {
+      "stage": "detect_anomalies",
+      "anomaly_records": [
+        {
+          "record_id": "r2",
+          "anomaly_type": "airfare_outlier",
+          "severity": "medium",
+          "evidence": [
+            "同航线均价偏高"
+          ],
+          "rule": "zscore>1.5"
+        }
+      ],
+      "confidence_score": 0.9,
+      "next_action": "continue"
+    },
+    "analyze_patterns": {
+      "stage": "analyze_patterns",
+      "statistics": {
+        "adr_by_month": [
+          {
+            "月份": "2026-04",
+            "ADR": 880
+          }
+        ],
+        "adr_by_hotel": [
+          {
+            "酒店": "A酒店",
+            "月度平均价格": 880
+          }
+        ],
+        "person_grade_deviation": [
+          {
+            "员工": "张三",
+            "职级": "P6",
+            "delta_daily_reimb_vs_baseline": -120
+          }
+        ],
+        "roomtype_yoy_mom": [
+          {
+            "房型": "大床房",
+            "mom_change": 0.22
+          }
+        ],
+        "airfare_route_stats": [
+          {
+            "航线": "SHA-PEK",
+            "均价": 2450
+          }
+        ]
+      },
+      "analysis_result": {
+        "key_findings": [
+          "大床房环比上涨22%",
+          "机票存在中风险异常"
+        ],
+        "risk_clusters": [
+          "高职级机票波动"
+        ]
+      },
+      "confidence_score": 0.91,
+      "next_action": "continue"
+    },
+    "generate_report": {
+      "stage": "generate_report",
+      "report": {
+        "summary": "本期住宿与机票报销总体可控，但存在房型波动与机票异常。",
+        "key_findings": [
+          "大床房环比上涨22%",
+          "SHA-PEK机票偏高"
+        ],
+        "anomalies": [
+          "机票异常（中风险）"
+        ],
+        "recommendations": [
+          "设定航线价格阈值",
+          "对房型涨幅>20%进行复核"
+        ]
+      },
+      "chart_recommendations": [
+        {
+          "chart_type": "bar",
+          "purpose": "酒店均价对比",
+          "x": "酒店",
+          "y": "月度平均价格",
+          "why_this_chart": "直观比较"
+        }
+      ],
+      "vchart_handoff": {
+        "charts": [
+          {
+            "chart_id": "hotel_monthly_avg_bar",
+            "chart_type": "bar",
+            "title": "各酒店月度均价对比",
+            "x_field": "酒店",
+            "y_field": "月度平均价格",
+            "group_field": "月份",
+            "data_slice": [
+              {
+                "酒店": "A酒店",
+                "月份": "2026-04",
+                "月度平均价格": 880
+              }
+            ],
+            "display_intent": "compare"
+          },
+          {
+            "chart_id": "grade_expense_grouped_bar",
+            "chart_type": "bar",
+            "title": "职级×费用类型对比",
+            "x_field": "职级",
+            "y_field": "金额",
+            "group_field": "费用类型",
+            "data_slice": [
+              {
+                "职级": "P6",
+                "费用类型": "住宿",
+                "金额": 880
+              },
+              {
+                "职级": "P7",
+                "费用类型": "机票",
+                "金额": 2450
+              }
+            ],
+            "display_intent": "compare"
+          },
+          {
+            "chart_id": "employee_daily_reimb_delta_ranking",
+            "chart_type": "bar",
+            "title": "员工日均报销偏差排名",
+            "x_field": "员工",
+            "y_field": "delta_daily_reimb_vs_baseline",
+            "group_field": "职级",
+            "data_slice": [
+              {
+                "员工": "张三",
+                "职级": "P6",
+                "delta_daily_reimb_vs_baseline": -120
+              }
+            ],
+            "display_intent": "risk_density"
+          },
+          {
+            "chart_id": "monthly_adr_trend_line",
+            "chart_type": "line",
+            "title": "月度ADR趋势",
+            "x_field": "月份",
+            "y_field": "ADR",
+            "group_field": "酒店",
+            "data_slice": [
+              {
+                "月份": "2026-04",
+                "酒店": "A酒店",
+                "ADR": 880
+              }
+            ],
+            "display_intent": "trend"
+          }
+        ]
+      },
+      "final_export": {
+        "markdown_table": "",
+        "csv_text": "",
+        "json_rows": []
+      },
+      "confidence_score": 0.9,
+      "next_action": "continue"
+    },
+    "build_vchart_specs": {
+      "stage": "build_vchart_specs",
+      "vchart_specs": [
+        {
+          "chart_id": "hotel_monthly_avg_bar",
+          "chart_type": "bar",
+          "title": "各酒店月度均价对比",
+          "spec": {
+            "type": "bar"
+          },
+          "data_contract": {
+            "x_field": "酒店",
+            "y_field": "月度平均价格",
+            "group_field": "月份"
+          },
+          "validation": {
+            "is_renderable": true,
+            "warnings": []
+          }
+        },
+        {
+          "chart_id": "grade_expense_grouped_bar",
+          "chart_type": "bar",
+          "title": "职级×费用类型对比",
+          "spec": {
+            "type": "bar"
+          },
+          "data_contract": {
+            "x_field": "职级",
+            "y_field": "金额",
+            "group_field": "费用类型"
+          },
+          "validation": {
+            "is_renderable": true,
+            "warnings": []
+          }
+        },
+        {
+          "chart_id": "employee_daily_reimb_delta_ranking",
+          "chart_type": "bar",
+          "title": "员工日均报销偏差排名",
+          "spec": {
+            "type": "bar"
+          },
+          "data_contract": {
+            "x_field": "员工",
+            "y_field": "delta_daily_reimb_vs_baseline",
+            "group_field": "职级"
+          },
+          "validation": {
+            "is_renderable": true,
+            "warnings": []
+          }
+        },
+        {
+          "chart_id": "monthly_adr_trend_line",
+          "chart_type": "line",
+          "title": "月度ADR趋势",
+          "spec": {
+            "type": "line"
+          },
+          "data_contract": {
+            "x_field": "月份",
+            "y_field": "ADR",
+            "group_field": "酒店"
+          },
+          "validation": {
+            "is_renderable": true,
+            "warnings": []
+          }
+        }
+      ],
+      "render_summary": {
+        "required_chart_count": 4,
+        "generated_chart_count": 4,
+        "missing_charts": []
+      },
+      "confidence_score": 0.92,
+      "next_action": "continue"
+    },
+    "final_export_html": {
+      "stage": "final_export_html",
+      "html_report": "<!doctype html><html><head><meta charset='utf-8'><title>报销分析报告</title></head><body><h1>报销分析报告</h1><section><h2>摘要</h2><p>本期住宿与机票报销总体可控，但存在房型波动与机票异常。</p></section><section><h2>图表</h2><div id='chart_hotel_monthly_avg_bar' style='width:800px;height:360px;'></div><div id='chart_grade_expense_grouped_bar' style='width:800px;height:360px;'></div><div id='chart_employee_daily_reimb_delta_ranking' style='width:800px;height:360px;'></div><div id='chart_monthly_adr_trend_line' style='width:800px;height:360px;'></div><script>const specs=window.__VCHART_SPECS__||[];/* 将 specs[i] 绑定至对应容器并渲染 */</script></section></body></html>",
+      "csv_text": "员工,职级,费用类型,金额\n张三,P6,住宿,880\n李四,P7,机票,2450",
+      "json_rows": [
+        {
+          "员工": "张三",
+          "职级": "P6",
+          "费用类型": "住宿",
+          "金额": 880.0
+        },
+        {
+          "员工": "李四",
+          "职级": "P7",
+          "费用类型": "机票",
+          "金额": 2450.0
+        }
+      ],
+      "confidence_score": 0.89,
+      "next_action": "done"
+    }
+  },
+  "final_output": {
+    "normalized_rows": [
+      {
+        "员工": "张三",
+        "职级": "P6",
+        "费用类型": "住宿",
+        "酒店": "A酒店",
+        "房型": "大床房",
+        "日期": "2026-04-03",
+        "金额": 880.0
+      },
+      {
+        "员工": "李四",
+        "职级": "P7",
+        "费用类型": "机票",
+        "航线": "SHA-PEK",
+        "日期": "2026-04-05",
+        "金额": 2450.0
+      }
+    ],
+    "cleaning_log": [
+      {
+        "field": "金额",
+        "before": "880",
+        "after": "880.0",
+        "reason": "type_cast"
+      }
+    ],
+    "anomaly_records": [
+      {
+        "record_id": "r2",
+        "anomaly_type": "airfare_outlier",
+        "severity": "medium",
+        "evidence": [
+          "同航线均价偏高"
+        ],
+        "rule": "zscore>1.5"
+      }
+    ],
+    "analysis_result": {
+      "key_findings": [
+        "大床房环比上涨22%",
+        "SHA-PEK机票偏高"
+      ]
+    },
+    "report": {
+      "summary": "本期住宿与机票报销总体可控，但存在房型波动与机票异常。"
+    },
+    "chart_recommendations": [
+      {
+        "chart_type": "bar",
+        "purpose": "酒店均价对比",
+        "x": "酒店",
+        "y": "月度平均价格",
+        "why_this_chart": "直观比较"
+      }
+    ],
+    "vchart_specs": [
+      {
+        "chart_id": "hotel_monthly_avg_bar",
+        "spec": {
+          "type": "bar"
+        }
+      },
+      {
+        "chart_id": "grade_expense_grouped_bar",
+        "spec": {
+          "type": "bar"
+        }
+      },
+      {
+        "chart_id": "employee_daily_reimb_delta_ranking",
+        "spec": {
+          "type": "bar"
+        }
+      },
+      {
+        "chart_id": "monthly_adr_trend_line",
+        "spec": {
+          "type": "line"
+        }
+      }
+    ],
+    "html_report": "<!doctype html><html><body><h1>报销分析报告</h1><div id='chart_hotel_monthly_avg_bar'></div><div id='chart_grade_expense_grouped_bar'></div><div id='chart_employee_daily_reimb_delta_ranking'></div><div id='chart_monthly_adr_trend_line'></div></body></html>",
+    "csv_text": "员工,职级,费用类型,金额\n张三,P6,住宿,880\n李四,P7,机票,2450",
+    "json_rows": [
+      {
+        "员工": "张三",
+        "职级": "P6",
+        "费用类型": "住宿",
+        "金额": 880.0
+      },
+      {
+        "员工": "李四",
+        "职级": "P7",
+        "费用类型": "机票",
+        "金额": 2450.0
+      }
+    ]
+  }
+}

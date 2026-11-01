@@ -1,0 +1,7 @@
+select device-2501U2201
+move device-2501U2201 right 50
+select device-2501U2203
+move device-2501U2203 left 30
+list
+save 用户编辑模板 "用户自定义的驾驶员座椅布局"
+export "商飞座椅项目"

@@ -1,0 +1,14 @@
+node_modules/
+dist/
+
+# 真实配置（含内部密钥，按环境不同，绝不进仓库）；模板见 config.example.js
+config.js
+# 放在别处的配置（node server.js --config /etc/dsh/proxy.js）
+proxy-config.js
+
+# dsh 启动令牌（每台机器不同，绝不进仓库）
+tokens.d/
+# dsh 会话缓存
+sessions.json
+# tools/smoke.mjs 的临时目录
+tools/.tmp-smoke/

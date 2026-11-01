@@ -1,0 +1,762 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<title>__REPORT_TITLE__</title>
+<style>
+  :root {
+    --primary: #4f46e5;
+    --primary-soft: #eef2ff;
+    --text: #1f2937;
+    --muted: #6b7280;
+    --border: #e5e7eb;
+    --success: #16a34a;
+    --warning: #d97706;
+    --info: #0284c7;
+    --bg: #f8fafc;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, "PingFang SC", "Microsoft YaHei", Segoe UI, Roboto, sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+  .container {
+    max-width: 1400px;
+    margin: 24px auto;
+    padding: 0 20px 48px;
+  }
+  header.report {
+    background: linear-gradient(135deg, var(--primary), #7c3aed);
+    color: #fff;
+    border-radius: 14px;
+    padding: 24px 28px;
+    box-shadow: 0 8px 24px -12px rgba(79,70,229,.5);
+  }
+  header.report h1 {
+    margin: 0 0 6px;
+    font-size: 22px;
+    font-weight: 600;
+  }
+  header.report .meta {
+    font-size: 13px;
+    opacity: .85;
+  }
+  header.report .meta span + span::before { content: " · "; }
+  .section {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-top: 20px;
+    padding: 20px 24px;
+  }
+  .section h2 {
+    margin: 0 0 14px;
+    font-size: 16px;
+    color: var(--primary);
+    border-left: 4px solid var(--primary);
+    padding-left: 10px;
+  }
+  /* feedback table */
+  .toolbar {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 14px;
+  }
+  .toolbar input[type=text],
+  .toolbar select {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 6px 10px;
+    font-size: 13px;
+    font-family: inherit;
+    min-width: 140px;
+  }
+  .toolbar .grow { flex: 1; min-width: 180px; }
+  .hint { color: var(--muted); font-size: 12px; }
+  /* multi-select filter */
+  .multi-select {
+    position: relative;
+    min-width: 140px;
+  }
+  .multi-select .ms-trigger {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 6px 28px 6px 10px;
+    font-size: 13px;
+    font-family: inherit;
+    background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E") no-repeat right 8px center;
+    cursor: pointer;
+    user-select: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: var(--text);
+  }
+  .multi-select .ms-trigger:hover { border-color: var(--primary); }
+  .multi-select .ms-panel {
+    display: none;
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    box-shadow: 0 4px 12px -4px rgba(0,0,0,.12);
+    z-index: 20;
+    min-width: 100%;
+    padding: 4px 0;
+    max-height: 240px;
+    overflow-y: auto;
+  }
+  .multi-select .ms-panel.open { display: block; }
+  .multi-select .ms-toggle {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 12px;
+    font-size: 12px;
+    color: var(--primary);
+    cursor: pointer;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 2px;
+  }
+  .multi-select .ms-toggle:hover { background: var(--primary-soft); }
+  .multi-select .ms-option {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px;
+    font-size: 13px;
+    cursor: pointer;
+  }
+  .multi-select .ms-option:hover { background: var(--primary-soft); }
+  .multi-select .ms-option input[type=checkbox] {
+    accent-color: var(--primary);
+    width: 14px;
+    height: 14px;
+    cursor: pointer;
+  }
+  table.feedback {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    table-layout: fixed;
+  }
+  table.feedback th, table.feedback td {
+    border-bottom: 1px solid var(--border);
+    padding: 8px 6px;
+    vertical-align: top;
+    text-align: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  table.feedback th {
+    background: var(--primary-soft);
+    color: var(--primary);
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  table.feedback th:nth-child(1) { width: 40px; }
+  table.feedback th:nth-child(3) { width: 60px; }
+  table.feedback th:nth-child(4) { width: 78px; }
+  table.feedback th:nth-child(5) { width: 100px; }
+  table.feedback th:nth-child(7) { width: 120px; }
+  table.feedback th:nth-child(8) { width: 110px; }
+  table.feedback th:nth-child(9) { width: 100px; }
+  table.feedback th:nth-child(10) { width: 100px; }
+  table.feedback td.content { overflow: hidden; text-overflow: ellipsis; }
+  .badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-size: 12px;
+    line-height: 1.4;
+    background: var(--primary-soft);
+    color: var(--primary);
+    white-space: nowrap;
+  }
+  .badge.priority-高 { background: #fee2e2; color: #b91c1c; }
+  .badge.priority-中 { background: #fef3c7; color: #b45309; }
+  .badge.priority-低 { background: #dcfce7; color: #166534; }
+  .badge.status-已上线 { background: #dcfce7; color: var(--success); }
+  .badge.status-开发中 { background: #e0f2fe; color: var(--info); }
+  .badge.status-需求确认 { background: #fef3c7; color: var(--warning); }
+  .badge.status-已关闭 { background: #f3f4f6; color: #6b7280; }
+  .progress {
+    position: relative;
+    height: 8px;
+    background: var(--border);
+    border-radius: 999px;
+    overflow: hidden;
+    min-width: 80px;
+  }
+  .progress > span {
+    display: block;
+    height: 100%;
+    background: var(--success);
+    border-radius: 999px;
+  }
+  .progress-text { font-size: 12px; color: var(--muted); margin-top: 2px; }
+  /* kb cards */
+  .kb-card {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin-bottom: 12px;
+    background: #fafafa;
+  }
+  .kb-card .kb-title {
+    font-weight: 600;
+    color: var(--primary);
+    margin-bottom: 4px;
+    word-break: break-all;
+  }
+  .kb-card .kb-meta {
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+  .kb-card .kb-content {
+    white-space: pre-wrap;
+    background: #fff;
+    border: 1px dashed var(--border);
+    border-radius: 8px;
+    padding: 10px 12px;
+    color: #374151;
+    max-height: 240px;
+    overflow: auto;
+  }
+  /* metrics */
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 14px;
+  }
+  .stat-card {
+    background: var(--primary-soft);
+    border-radius: 10px;
+    padding: 16px 18px;
+  }
+  .stat-card .label { color: var(--muted); font-size: 12px; }
+  .stat-card .value {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--primary);
+    margin-top: 4px;
+  }
+  .ranking { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .ranking th, .ranking td {
+    border-bottom: 1px solid var(--border);
+    padding: 8px 10px;
+    text-align: left;
+  }
+  .ranking th { background: var(--primary-soft); color: var(--primary); }
+  .ranking td.bar-cell { width: 40%; }
+  .bar {
+    background: var(--border);
+    height: 10px;
+    border-radius: 999px;
+    overflow: hidden;
+  }
+  .bar > span {
+    display: block;
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary), #7c3aed);
+  }
+  .timeline li {
+    border-left: 2px solid var(--primary-soft);
+    padding: 6px 0 6px 14px;
+    margin-left: 6px;
+    list-style: none;
+    position: relative;
+  }
+  .timeline li::before {
+    content: "";
+    position: absolute; left: -6px; top: 12px;
+    width: 10px; height: 10px; border-radius: 50%;
+    background: var(--primary);
+  }
+  .empty {
+    color: var(--muted);
+    text-align: center;
+    padding: 32px 0;
+  }
+  /* pagination */
+  .pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    margin-top: 16px;
+    flex-wrap: wrap;
+  }
+  .pagination button {
+    min-width: 32px;
+    height: 32px;
+    padding: 0 8px;
+    font-size: 13px;
+    background: #fff;
+    border: 1px solid var(--border);
+    color: var(--text);
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .pagination button:hover:not([disabled]) {
+    border-color: var(--primary);
+    color: var(--primary);
+  }
+  .pagination button.active {
+    background: var(--primary);
+    color: #fff;
+    border-color: var(--primary);
+  }
+  .pagination button[disabled] {
+    opacity: .5;
+    cursor: not-allowed;
+  }
+  .pagination .page-info {
+    font-size: 13px;
+    color: var(--muted);
+    margin: 0 8px;
+  }
+  pre.raw {
+    background: #0f172a; color: #e2e8f0;
+    padding: 12px; border-radius: 8px;
+    overflow: auto; max-height: 320px;
+    font-size: 12px;
+  }
+  footer.report {
+    text-align: center;
+    color: var(--muted);
+    font-size: 12px;
+    margin-top: 24px;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <header class="report">
+    <h1 id="r-title">__REPORT_TITLE__</h1>
+    <div class="meta">
+      <span id="r-type">__REPORT_TYPE_LABEL__</span>
+      <span id="r-generated"></span>
+    </div>
+  </header>
+  <main id="root"></main>
+</div>
+
+<script id="report-data" type="application/x-report-data">__REPORT_DATA_JSON__</script>
+<script>
+(function () {
+  const payload = JSON.parse(document.getElementById('report-data').textContent || '{}');
+  const root = document.getElementById('root');
+  const reportType = payload.reportType || 'unknown';
+  document.getElementById('r-generated').textContent =
+    '生成时间 ' + (payload.generatedAt || new Date().toISOString().slice(0, 19).replace('T', ' '));
+
+  function el(tag, attrs, ...children) {
+    const node = document.createElement(tag);
+    if (attrs) {
+      for (const [k, v] of Object.entries(attrs)) {
+        if (k === 'class') node.className = v;
+        else if (k === 'html') node.innerHTML = v;
+        else if (v !== null && v !== undefined) node.setAttribute(k, v);
+      }
+    }
+    for (const child of children.flat()) {
+      if (child === null || child === undefined) continue;
+      node.append(child.nodeType ? child : document.createTextNode(child));
+    }
+    return node;
+  }
+
+  function section(title, body) {
+    const sec = el('section', { class: 'section' }, el('h2', null, title));
+    if (Array.isArray(body)) body.forEach(b => b && sec.appendChild(b));
+    else if (body) sec.appendChild(body);
+    return sec;
+  }
+
+  function emptyHint(text) {
+    return el('div', { class: 'empty' }, text || '暂无数据');
+  }
+
+  function renderFeedback(data) {
+    const allItems = data.items || [];
+    const summary = el('p', null, `共 ${data.total ?? allItems.length} 条匹配记录`);
+
+    const selectedStatus = new Set();
+    const selectedPriority = new Set();
+    const PAGE_SIZE = 20;
+    let currentPage = 1;
+
+    const searchBox = el('input', { type: 'text', class: 'grow', placeholder: '按反馈内容 / 改进措施 / 备注 关键字过滤' });
+    const countHint = el('span', { class: 'hint' });
+
+    // 状态多选
+    const statusWrap = el('div', { class: 'multi-select' });
+    const statusTrigger = el('div', { class: 'ms-trigger' }, '全部状态');
+    const statusPanel = el('div', { class: 'ms-panel' });
+    const statusSet = new Set();
+    allItems.forEach(it => { if (it.status) statusSet.add(it.status); });
+    const statusOptions = Array.from(statusSet).sort();
+
+    const statusToggle = el('div', { class: 'ms-toggle' }, '全选 / 清空');
+    statusToggle.addEventListener('click', e => {
+      e.stopPropagation();
+      const cbs = statusPanel.querySelectorAll('input[type=checkbox]');
+      const allChecked = [...cbs].every(cb => cb.checked);
+      cbs.forEach(cb => { cb.checked = !allChecked; });
+      syncSel(statusPanel, selectedStatus);
+      updateTrigger(statusTrigger, selectedStatus, '全部状态');
+      currentPage = 1;
+      doRender();
+    });
+    statusPanel.appendChild(statusToggle);
+    statusOptions.forEach(opt => {
+      const label = el('label', { class: 'ms-option' });
+      const cb = el('input', { type: 'checkbox' });
+      cb.value = opt;
+      cb.addEventListener('change', e => {
+        e.stopPropagation();
+        if (cb.checked) selectedStatus.add(opt); else selectedStatus.delete(opt);
+        updateTrigger(statusTrigger, selectedStatus, '全部状态');
+        currentPage = 1;
+        doRender();
+      });
+      label.appendChild(cb);
+      label.appendChild(document.createTextNode(opt));
+      statusPanel.appendChild(label);
+    });
+    statusTrigger.addEventListener('click', e => {
+      e.stopPropagation();
+      statusPanel.classList.toggle('open');
+      document.querySelectorAll('.ms-panel.open').forEach(p => { if (p !== statusPanel) p.classList.remove('open'); });
+    });
+    statusWrap.appendChild(statusTrigger);
+    statusWrap.appendChild(statusPanel);
+
+    // 优先级多选
+    const priorityWrap = el('div', { class: 'multi-select' });
+    const priorityTrigger = el('div', { class: 'ms-trigger' }, '全部优先级');
+    const priorityPanel = el('div', { class: 'ms-panel' });
+    const priorityOptions = ['高', '中', '低'];
+
+    const priorityToggle = el('div', { class: 'ms-toggle' }, '全选 / 清空');
+    priorityToggle.addEventListener('click', e => {
+      e.stopPropagation();
+      const cbs = priorityPanel.querySelectorAll('input[type=checkbox]');
+      const allChecked = [...cbs].every(cb => cb.checked);
+      cbs.forEach(cb => { cb.checked = !allChecked; });
+      syncSel(priorityPanel, selectedPriority);
+      updateTrigger(priorityTrigger, selectedPriority, '全部优先级');
+      currentPage = 1;
+      doRender();
+    });
+    priorityPanel.appendChild(priorityToggle);
+    priorityOptions.forEach(opt => {
+      const label = el('label', { class: 'ms-option' });
+      const cb = el('input', { type: 'checkbox' });
+      cb.value = opt;
+      cb.addEventListener('change', e => {
+        e.stopPropagation();
+        if (cb.checked) selectedPriority.add(opt); else selectedPriority.delete(opt);
+        updateTrigger(priorityTrigger, selectedPriority, '全部优先级');
+        currentPage = 1;
+        doRender();
+      });
+      label.appendChild(cb);
+      label.appendChild(document.createTextNode(opt));
+      priorityPanel.appendChild(label);
+    });
+    priorityTrigger.addEventListener('click', e => {
+      e.stopPropagation();
+      priorityPanel.classList.toggle('open');
+      document.querySelectorAll('.ms-panel.open').forEach(p => { if (p !== priorityPanel) p.classList.remove('open'); });
+    });
+    priorityWrap.appendChild(priorityTrigger);
+    priorityWrap.appendChild(priorityPanel);
+
+    const toolbar = el('div', { class: 'toolbar' }, searchBox, statusWrap, priorityWrap, countHint);
+    const tableWrap = el('div', { id: 'report-table-wrap' });
+    const paginationWrap = el('div', { class: 'pagination' });
+    const sec = section('用户反馈与改进追溯', [summary, toolbar, tableWrap, paginationWrap]);
+
+    function syncSel(panel, set) {
+      set.clear();
+      panel.querySelectorAll('input[type=checkbox]').forEach(cb => { if (cb.checked) set.add(cb.value); });
+    }
+
+    function updateTrigger(trigger, set, placeholder) {
+      if (set.size === 0) trigger.textContent = placeholder;
+      else if (set.size <= 2) trigger.textContent = [...set].join('、');
+      else trigger.textContent = `已选 ${set.size} 项`;
+    }
+
+    function getFilteredItems() {
+      const kw = (searchBox.value || '').trim().toLowerCase();
+      return allItems.filter(it => {
+        if (selectedStatus.size && !selectedStatus.has(it.status)) return false;
+        if (selectedPriority.size && !selectedPriority.has(it.priority)) return false;
+        if (kw) {
+          const hay = [it.feedback_content, it.improvement_plan, it.verify_result, it.remark, it.source]
+            .filter(Boolean).join(' ').toLowerCase();
+          if (!hay.includes(kw)) return false;
+        }
+        return true;
+      });
+    }
+
+    function renderPaginationControls(totalFiltered) {
+      paginationWrap.innerHTML = '';
+      const totalPages = Math.max(1, Math.ceil(totalFiltered / PAGE_SIZE));
+      if (currentPage > totalPages) currentPage = totalPages;
+
+      const prevBtn = el('button', null, '‹ 上一页');
+      if (currentPage <= 1) prevBtn.disabled = true;
+      prevBtn.addEventListener('click', () => { if (currentPage > 1) { currentPage--; doRender(); } });
+      paginationWrap.appendChild(prevBtn);
+
+      const maxVisible = 7;
+      let startPage = Math.max(1, currentPage - Math.floor(maxVisible / 2));
+      let endPage = Math.min(totalPages, startPage + maxVisible - 1);
+      if (endPage - startPage < maxVisible - 1) startPage = Math.max(1, endPage - maxVisible + 1);
+
+      if (startPage > 1) {
+        const btn1 = el('button', null, '1');
+        btn1.addEventListener('click', () => { currentPage = 1; doRender(); });
+        paginationWrap.appendChild(btn1);
+        if (startPage > 2) paginationWrap.appendChild(el('span', { class: 'page-info' }, '…'));
+      }
+      for (let p = startPage; p <= endPage; p++) {
+        const btn = el('button', p === currentPage ? { class: 'active' } : {}, String(p));
+        btn.addEventListener('click', () => { currentPage = p; doRender(); });
+        paginationWrap.appendChild(btn);
+      }
+      if (endPage < totalPages) {
+        if (endPage < totalPages - 1) paginationWrap.appendChild(el('span', { class: 'page-info' }, '…'));
+        const btnLast = el('button', null, String(totalPages));
+        btnLast.addEventListener('click', () => { currentPage = totalPages; doRender(); });
+        paginationWrap.appendChild(btnLast);
+      }
+
+      const nextBtn = el('button', null, '下一页 ›');
+      if (currentPage >= totalPages) nextBtn.disabled = true;
+      nextBtn.addEventListener('click', () => { if (currentPage < totalPages) { currentPage++; doRender(); } });
+      paginationWrap.appendChild(nextBtn);
+
+      paginationWrap.appendChild(el('span', { class: 'page-info' }, `共 ${totalFiltered} 条 / ${totalPages} 页`));
+    }
+
+    function doRender() {
+      const filtered = getFilteredItems();
+      const totalFiltered = filtered.length;
+
+      countHint.textContent = `共 ${allItems.length} 条，过滤后 ${totalFiltered} 条`;
+      tableWrap.innerHTML = '';
+
+      if (!totalFiltered) {
+        tableWrap.appendChild(emptyHint('没有符合条件的反馈记录'));
+        renderPaginationControls(0);
+        return;
+      }
+
+      const startIdx = (currentPage - 1) * PAGE_SIZE;
+      const pageItems = filtered.slice(startIdx, startIdx + PAGE_SIZE);
+
+      const table = el('table', { class: 'feedback' });
+      table.appendChild(el('thead', null, el('tr', null,
+        el('th', null, '#'),
+        el('th', null, '反馈内容'),
+        el('th', null, '优先级'),
+        el('th', null, '状态'),
+        el('th', null, '进度'),
+        el('th', null, '改进措施'),
+        el('th', null, '需求来源'),
+        el('th', null, '备注'),
+        el('th', null, '提出时间'),
+        el('th', null, '完成时间'),
+      )));
+      const tbody = el('tbody');
+      pageItems.forEach((it, idx) => {
+        const progressPct = Math.round((Number(it.progress) || 0) * 100);
+        tbody.appendChild(el('tr', null,
+          el('td', null, String(startIdx + idx + 1)),
+          el('td', { class: 'content' }, it.feedback_content || ''),
+          el('td', null, it.priority
+            ? el('span', { class: 'badge priority-' + it.priority }, it.priority)
+            : '-'),
+          el('td', null, it.status
+            ? el('span', { class: 'badge status-' + it.status }, it.status)
+            : '-'),
+          el('td', null,
+            el('div', { class: 'progress' }, el('span', { style: `width:${progressPct}%` })),
+            el('div', { class: 'progress-text' }, progressPct + '%'),
+          ),
+          el('td', { class: 'content' }, it.improvement_plan || '-'),
+          el('td', null, it.source || '-'),
+          el('td', { class: 'content' }, it.remark || '-'),
+          el('td', null, (it.start_time || '').replace('T', ' ').slice(0, 19) || '-'),
+          el('td', null, (it.finish_time || '').replace('T', ' ').slice(0, 19) || '-'),
+        ));
+      });
+      table.appendChild(tbody);
+      tableWrap.appendChild(table);
+      renderPaginationControls(totalFiltered);
+    }
+
+    searchBox.addEventListener('input', () => { currentPage = 1; doRender(); });
+    document.addEventListener('click', () => { statusPanel.classList.remove('open'); priorityPanel.classList.remove('open'); });
+    statusPanel.addEventListener('click', e => e.stopPropagation());
+    priorityPanel.addEventListener('click', e => e.stopPropagation());
+
+    doRender();
+    root.appendChild(sec);
+  }
+
+  function renderKb(data) {
+    const query = data.query || '';
+    const docs = data.docs || [];
+
+    const head = el('p', null,
+      el('strong', null, '检索关键词：'),
+      query || '(未提供)',
+      docs.length ? `  共命中 ${docs.length} 段文档。` : ''
+    );
+
+    if (!docs.length) {
+      root.appendChild(section('知识库检索结果', [head, emptyHint('知识库未命中相关文档')]));
+      return;
+    }
+
+    const list = el('div');
+    docs.forEach((d, i) => {
+      const card = el('div', { class: 'kb-card' },
+        el('div', { class: 'kb-title' }, `#${i + 1} ${d.file_name || d.source || '未命名文档'}`),
+        el('div', { class: 'kb-meta' },
+          d.score !== undefined ? `相似度: ${Number(d.score).toFixed(3)}` : '',
+          d.kb_name ? `  知识库: ${d.kb_name}` : '',
+          d.page !== undefined ? `  页码: ${d.page}` : ''
+        ),
+        el('div', { class: 'kb-content' }, d.page_content || d.content || '')
+      );
+      list.appendChild(card);
+    });
+
+    root.appendChild(section('知识库检索结果', [head, list]));
+  }
+
+  function renderMetricsSummary(data) {
+    const cards = el('div', { class: 'stat-grid' },
+      stat('总会话数 (traces)', data.totalTraces),
+      stat('去重用户数', data.uniqueUsers),
+      stat('活跃天数', data.activeDays),
+    );
+    const meta = el('p', { class: 'kb-meta' },
+      `时间窗口：${data.fromDate || '-'} ~ ${data.toDate || '-'}`
+    );
+    root.appendChild(section('平台使用概览', [meta, cards]));
+  }
+
+  function renderMetricsTopUsers(data) {
+    const meta = el('p', { class: 'kb-meta' },
+      `时间窗口：${data.fromDate || '-'} ~ ${data.toDate || '-'}  共 ${data.totalUsers ?? 0} 位用户`
+    );
+    const ranking = data.ranking || [];
+    if (!ranking.length) {
+      root.appendChild(section('用户使用排行', [meta, emptyHint('暂无 trace 数据')]));
+      return;
+    }
+    const table = el('table', { class: 'ranking' });
+    table.appendChild(el('thead', null, el('tr', null,
+      el('th', null, '排名'),
+      el('th', null, '用户'),
+      el('th', null, '次数'),
+      el('th', null, '最后活跃'),
+    )));
+    const tbody = el('tbody');
+    ranking.forEach((row, idx) => {
+      tbody.appendChild(el('tr', null,
+        el('td', null, String(idx + 1)),
+        el('td', null, row.userName ? `${row.userName} (${row.userId})` : (row.userId || '-')),
+        el('td', null, String(row.traceCount ?? 0)),
+        el('td', null, (row.lastSeen || '').replace('T', ' ').slice(0, 19) || '-'),
+      ));
+    });
+    table.appendChild(tbody);
+    root.appendChild(section('用户使用排行', [meta, table]));
+  }
+
+  function renderMetricsUserActivity(data) {
+    // 后端 user_activity 返回 data 为数组（同名可能对应多个 user_uuid），兼容单对象写法
+    const entries = Array.isArray(data) ? data : [data];
+    if (!entries.length) {
+      root.appendChild(section('用户活动详情', emptyHint('未查到该用户的活动数据')));
+      return;
+    }
+
+    entries.forEach((entry, idx) => {
+      const e = entry || {};
+      const head = el('p', { class: 'kb-meta' },
+        `用户：${e.userName ? e.userName + (e.userId ? ' (' + e.userId + ')' : '') : (e.userId || '-')}`,
+        ` ｜ 时间窗口：${e.fromDate || '-'} ~ ${e.toDate || '-'}`
+      );
+      const cards = el('div', { class: 'stat-grid' },
+        stat('Trace 总数', e.traceCount),
+        stat('首次活跃', (e.firstSeen || '').replace('T', ' ').slice(0, 19) || '-'),
+        stat('最近活跃', (e.lastSeen || '').replace('T', ' ').slice(0, 19) || '-'),
+      );
+      const sample = e.sample || [];
+      const body = [head, cards];
+      if (sample.length) {
+        const ul = el('ul', { class: 'timeline' });
+        sample.forEach(s => {
+          ul.appendChild(el('li', null,
+            el('div', null, el('strong', null, s.name || '(unnamed)')),
+            el('div', { class: 'kb-meta' },
+              (s.timestamp || '').replace('T', ' ').slice(0, 19),
+              s.sessionId ? `  session: ${s.sessionId}` : '',
+              s.id ? `  trace: ${s.id}` : ''
+            ),
+          ));
+        });
+        body.push(el('div', null,
+          el('h2', { style: 'font-size:14px;color:var(--muted);margin-top:18px' }, '最近活动'),
+          ul));
+      }
+
+      const title = entries.length > 1
+        ? `用户活动详情 #${idx + 1}`
+        : '用户活动详情';
+      root.appendChild(section(title, body));
+    });
+  }
+
+  function stat(label, value) {
+    return el('div', { class: 'stat-card' },
+      el('div', { class: 'label' }, label),
+      el('div', { class: 'value' }, value === undefined || value === null ? '-' : String(value)),
+    );
+  }
+
+  switch (reportType) {
+    case 'feedback':           renderFeedback(payload.data || {}); break;
+    case 'kb':                 renderKb(payload.data || {}); break;
+    case 'metrics-summary':    renderMetricsSummary(payload.data || {}); break;
+    case 'metrics-top-users':  renderMetricsTopUsers(payload.data || {}); break;
+    case 'metrics-user-activity': renderMetricsUserActivity(payload.data || {}); break;
+    default:
+      root.appendChild(section('原始数据',
+        el('pre', { class: 'raw' }, JSON.stringify(payload.data || payload, null, 2))));
+  }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,1 @@
+# Tools package for Sequential Thinking MCP Server

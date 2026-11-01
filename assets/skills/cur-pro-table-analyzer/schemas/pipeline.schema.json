@@ -1,0 +1,239 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Cur Pro Table Analyzer Pipeline Output",
+  "type": "object",
+  "required": [
+    "stage_outputs",
+    "final_output"
+  ],
+  "properties": {
+    "stage_outputs": {
+      "type": "object",
+      "required": [
+        "collect_input",
+        "ingest_structured_data",
+        "validate_and_normalize",
+        "detect_anomalies",
+        "analyze_patterns",
+        "generate_report",
+        "build_chart_specs",
+        "final_export_html"
+      ],
+      "properties": {
+        "collect_input": {
+          "type": "object",
+          "required": [
+            "stage",
+            "task_goal",
+            "confidence_score",
+            "next_action"
+          ]
+        },
+        "ingest_structured_data": {
+          "type": "object",
+          "required": [
+            "stage",
+            "raw_rows",
+            "confidence_score",
+            "next_action"
+          ]
+        },
+        "validate_and_normalize": {
+          "type": "object",
+          "required": [
+            "stage",
+            "normalized_rows",
+            "cleaning_log",
+            "confidence_score",
+            "next_action"
+          ]
+        },
+        "detect_anomalies": {
+          "type": "object",
+          "required": [
+            "stage",
+            "anomaly_records",
+            "confidence_score",
+            "next_action"
+          ]
+        },
+        "analyze_patterns": {
+          "type": "object",
+          "required": [
+            "stage",
+            "statistics",
+            "analysis_result",
+            "confidence_score",
+            "next_action"
+          ]
+        },
+        "generate_report": {
+          "type": "object",
+          "required": [
+            "stage",
+            "report",
+            "chart_recommendations",
+            "chart_handoff",
+            "final_export",
+            "confidence_score",
+            "next_action"
+          ]
+        },
+        "build_chart_specs": {
+          "type": "object",
+          "required": [
+            "stage",
+            "chart_library",
+            "chart_specs",
+            "render_summary",
+            "confidence_score",
+            "next_action"
+          ],
+          "properties": {
+            "chart_library": {
+              "type": "string",
+              "enum": [
+                "chartjs"
+              ]
+            },
+            "chart_specs": {
+              "type": "array",
+              "minItems": 4
+            }
+          },
+          "additionalProperties": true
+        },
+        "final_export_html": {
+          "type": "object",
+          "required": [
+            "stage",
+            "html_report",
+            "html_render_checks",
+            "csv_text",
+            "json_rows",
+            "confidence_score",
+            "next_action"
+          ],
+          "properties": {
+            "html_render_checks": {
+              "type": "object",
+              "required": [
+                "passed",
+                "failed_checks",
+                "required_canvas_ids",
+                "chart_constructor_count",
+                "forbidden_token_hits"
+              ],
+              "properties": {
+                "passed": {
+                  "type": "boolean"
+                },
+                "failed_checks": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "required_canvas_ids": {
+                  "type": "array",
+                  "minItems": 4,
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "chart_constructor_count": {
+                  "type": "integer",
+                  "minimum": 4
+                },
+                "forbidden_token_hits": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": true
+    },
+    "final_output": {
+      "type": "object",
+      "required": [
+        "normalized_rows",
+        "cleaning_log",
+        "anomaly_records",
+        "analysis_result",
+        "report",
+        "chart_recommendations",
+        "chart_library",
+        "chart_specs",
+        "html_report",
+        "html_render_checks",
+        "csv_text",
+        "json_rows"
+      ],
+      "properties": {
+        "normalized_rows": {
+          "type": "array"
+        },
+        "cleaning_log": {
+          "type": "array"
+        },
+        "anomaly_records": {
+          "type": "array"
+        },
+        "analysis_result": {
+          "type": "object"
+        },
+        "report": {
+          "type": "object"
+        },
+        "chart_recommendations": {
+          "type": "array"
+        },
+        "chart_library": {
+          "type": "string",
+          "enum": [
+            "chartjs"
+          ]
+        },
+        "chart_specs": {
+          "type": "array",
+          "minItems": 4
+        },
+        "html_report": {
+          "type": "string"
+        },
+        "html_render_checks": {
+          "type": "object",
+          "required": [
+            "passed",
+            "failed_checks"
+          ],
+          "properties": {
+            "passed": {
+              "type": "boolean"
+            },
+            "failed_checks": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "csv_text": {
+          "type": "string"
+        },
+        "json_rows": {
+          "type": "array"
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true
+}

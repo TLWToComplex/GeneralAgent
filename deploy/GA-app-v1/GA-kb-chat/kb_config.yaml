@@ -1,0 +1,246 @@
+# 知识库系统统一配置
+# 整合了基础配置、知识库配置和模型配置
+
+
+# 是否开启日志详细信息
+LOG_VERBOSE: true
+
+# HTTP请求默认超时时间（秒）
+HTTPX_DEFAULT_TIMEOUT: 300.0
+
+# 是否开启跨域支持
+OPEN_CROSS_DOMAIN: true
+
+# API服务器监听地址
+API_SERVER_HOST: 0.0.0.0
+
+# API服务器端口
+API_SERVER_PORT: 7861
+
+# API服务器外部监听地址
+API_SERVER_HOST_EXTERNAL: 127.0.0.1
+
+# API服务器外部端口
+API_SERVER_PORT_EXTERNAL: 17861
+
+# 默认向量库/全文检索引擎类型
+# 可选值：['faiss', 'milvus', 'es']
+DEFAULT_VS_TYPE: es
+
+# 默认图数据库
+# 可选值：['neo4j']
+DEFAULT_KG_TYPE: neo4j
+
+# 是否启用知识图谱
+ENABLE_GRAPH_RAG: true
+
+# 启用知识图谱时是否进行实体对齐。如果大模型太弱，则实体对其效果不佳，会把无关的实体合并成一个实体
+ENABLE_ENTITY_ALIGNMENT: false
+
+# 是否进行图谱社区发现。如果图谱太大，每次更新社区比较耗时
+ENABLE_GRAPH_COMMUNITY: false
+
+# 使用知识图谱时是否用 LLM 从用户问题中提取实体做查询（通常这样效果更好）。若不提取就直接用用户问题做查询
+ENABLE_EXTRACT_QUERY_ENTITIES: true
+
+# 知识库中单段文本长度(不适用MarkdownHeaderTextSplitter)
+CHUNK_SIZE: 750
+
+# 知识库中相邻文本重合长度(不适用MarkdownHeaderTextSplitter)
+OVERLAP_SIZE: 150
+
+# 向量库每批处理的文档数配置
+EMBEDDING_BATCH: 5
+
+# 知识库匹配向量数量
+VECTOR_SEARCH_TOP_K: 3
+
+# 知识图谱局部匹配数量
+GRAPH_LOCAL_SEARCH_TOP_K: 3
+
+# 知识图谱全局匹配社区数量
+GRAPH_GLOBAL_SEARCH_TOP_K: 5
+
+# 知识库匹配相关度阈值，取值范围在0-2之间，SCORE越小，相关度越高，取到2相当于不筛选，建议设置在0.5左右
+SCORE_THRESHOLD: 0.3
+
+# 是否开启中文标题加强，以及标题增强的相关配置
+ZH_TITLE_ENHANCE: false
+
+# PDF OCR 控制：只对宽高超过页面一定比例（图片宽/页面宽，图片高/页面高）的图片进行 OCR。
+# 这样可以避免 PDF 中一些小图片的干扰，提高非扫描版 PDF 处理速度
+PDF_OCR_THRESHOLD:
+  - 0.6
+  - 0.6
+
+# 是否启用 MinerU 服务进行文件解析（将文件转为 Markdown 后再分块）
+ENABLE_MINERU: true
+
+# MinerU 解析接口地址
+MINERU_URL: http://127.0.0.1:18200/api/parse_to_markdown
+
+# MinerU 请求超时时间（秒）
+MINERU_TIMEOUT: 600.0
+
+# MinerU 支持的文件扩展名（doc 会先转 docx 再交由 MinerU 解析）
+MINERU_SUPPORTED_EXTS:
+  - .pdf
+  - .docx
+  - .pptx
+  - .png
+  - .jpg
+  - .jpeg
+  - .bmp
+  - .xlsx
+
+# 可选向量库类型及对应配置
+kbs_config:
+  faiss: {}
+  milvus:
+    host: ''
+    port: '19530'
+    user: aisix
+    password: '123456'
+    secure: false
+  es:
+    host: 127.0.0.1
+    port: '19200'
+    index_name: test_index
+    user: elastic
+    password: 'GA@123456'
+    dims_length: ''
+    search_boost:
+      context: 1.5
+      title: 1.0
+      vector: 2.5
+  milvus_kwargs:
+    search_params:
+      metric_type: COSINE
+      params:
+        nprobe: 10
+    index_params:
+      metric_type: COSINE
+      index_type: HNSW
+      params:
+        M: 16
+        efConstruction: 200
+
+# 可选图数据库类型及对应配置
+kgs_config:
+  neo4j:
+    host: 127.0.0.1
+    port: 17687
+    user: neo4j
+    password: GA@123456
+    dims_length: 2560
+
+# TextSplitter配置项，如果你不明白其中的含义，就不要修改。
+# source 如果选择tiktoken则使用openai的方法 "huggingface"
+text_splitter_dict:
+  ChineseRecursiveTextSplitter:
+    source: ''
+    tokenizer_name_or_path: ''
+  SpacyTextSplitter:
+    source: huggingface
+    tokenizer_name_or_path: gpt2
+  RecursiveCharacterTextSplitter:
+    source: tiktoken
+    tokenizer_name_or_path: cl100k_base
+  MarkdownHeaderTextSplitter:
+    headers_to_split_on:
+      -   - '#'
+          - head1
+      -   - '##'
+          - head2
+      -   - '###'
+          - head3
+      -   - '####'
+          - head4
+
+# TEXT_SPLITTER 名称
+TEXT_SPLITTER_NAME: ChineseRecursiveTextSplitter
+
+# 默认选用的 LLM 名称
+DEFAULT_LLM_MODEL: qwen3.8-27b
+
+# 知识图谱相关任务默认选用的 LLM 名称
+KG_LLM_MODEL: qwen3.8-27b
+
+# 默认选用的 Embedding 名称
+DEFAULT_EMBEDDING_MODEL: Qwen3-Embedding-4B
+
+# 默认历史对话轮数
+HISTORY_LEN: 3
+
+# 大模型最长支持的长度，如果不填写，则使用模型默认的最大长度，如果填写，则为用户设定的最大长度
+MAX_TOKENS:
+
+# LLM通用对话参数
+TEMPERATURE: 0.7
+
+# 模型平台配置
+MODEL_PLATFORMS:
+  - platform_name: custom_llm
+    platform_type: custom openai
+    api_base_url: http://127.0.0.1:8666/v1
+    api_key: ""
+    api_proxy: ''
+    api_concurrencies: 10
+    auto_detect_model: false
+    llm_models:
+      - qwen3.8-27b
+    kg_llm_models: []
+    embed_models: []
+    text2image_models: []
+    image2text_models: []
+    rerank_models: []
+    speech2text_models: []
+    text2speech_models: []
+  - platform_name: custom_kg_llm
+    platform_type: custom openai
+    api_base_url: http://127.0.0.1:8666/v1
+    api_key: ""
+    api_proxy: ''
+    api_concurrencies: 10
+    auto_detect_model: false
+    llm_models: []
+    kg_llm_models:
+      - qwen3.8-27b
+    embed_models: []
+    text2image_models: []
+    image2text_models: []
+    rerank_models: []
+    speech2text_models: []
+    text2speech_models: []
+  - platform_name: custom_embedding
+    platform_type: custom openai
+    api_base_url: http://127.0.0.1:6667/v1
+    api_key: ""
+    api_proxy: ''
+    api_concurrencies: 10
+    auto_detect_model: false
+    llm_models: []
+    kg_llm_models: []
+    embed_models:
+      - Qwen3-Embedding-4B
+    text2image_models: []
+    image2text_models: []
+    rerank_models: []
+    speech2text_models: []
+    text2speech_models: []
+  - platform_name: custom_rerank
+    platform_type: custom openai
+    api_base_url: http://127.0.0.1:6657/v1
+    api_key: ""
+    api_proxy: ''
+    api_concurrencies: 10
+    auto_detect_model: false
+    llm_models: []
+    kg_llm_models: []
+    embed_models: []
+    text2image_models: []
+    image2text_models: []
+    rerank_models:
+      - Qwen3-Reranker-4B
+    speech2text_models: []
+    text2speech_models: []

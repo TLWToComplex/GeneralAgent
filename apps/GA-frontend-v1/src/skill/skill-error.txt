@@ -1,0 +1,1107 @@
+user_id 8d09b4ed-a8d7-457e-a6ad-5e19ee1f6a40
+ChatView.vue?t=1787631370860:500 [ChatView][artifact-watcher] lastMsg role: assistant contentToParse length: 0 has ```map: false artifacts found: 0 types: []
+ChatView.vue?t=1787631370860:500 [ChatView][artifact-watcher] lastMsg role: assistant contentToParse length: 0 has ```map: false artifacts found: 0 types: []
+ChatView.vue?t=1787631370860:500 [ChatView][artifact-watcher] lastMsg role: assistant contentToParse length: 0 has ```map: false artifacts found: 0 types: []
+ChatView.vue?t=1787631370860:500 [ChatView][artifact-watcher] lastMsg role: assistant contentToParse length: 0 has ```map: false artifacts found: 0 types: []
+ChatView.vue?t=1787631370860:500 [ChatView][artifact-watcher] lastMsg role: assistant contentToParse length: 0 has ```map: false artifacts found: 0 types: []
+ChatView.vue?t=1787631370860:500 [ChatView][artifact-watcher] lastMsg role: assistant contentToParse length: 29 has ```map: false artifacts found: 0 types: []
+ChatView.vue?t=1787631370860:500 [ChatView][artifact-watcher] lastMsg role: assistant contentToParse length: 29 has ```map: false artifacts found: 0 types: []
+ChatView.vue?t=1787631370860:500 [ChatView][artifact-watcher] lastMsg role: assistant contentToParse length: 29 has ```map: false artifacts found: 0 types: []
+ChatView.vue?t=1787631370860:500 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 81 has ```map: false artifacts found: 0 types: []length: 0[[Prototype]]: Array(0)
+ChatView.vue?t=1787631370860:500 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 870 has ```map: false artifacts found: 0 types: []
+ChatView.vue?t=1787631370860:500 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 870 has ```map: false artifacts found: 0 types: []
+ChatView.vue?t=1787631370860:500 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 870 has ```map: false artifacts found: 0 types: []
+ChatView.vue?t=1787631370860:500 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 248 has ```map: false artifacts found: 0 types: []
+ChatView.vue?t=1787631370860:500 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 248 has ```map: false artifacts found: 0 types: []
+ChatView.vue?t=1787631370860:500 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 248 has ```map: false artifacts found: 0 types: []
+ChatView.vue?t=1787631370860:500 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 1344 has ```map: true artifacts found: 0 types: []
+ChatView.vue?t=1787631370860:500 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 1344 has ```map: true artifacts found: 0 types: []
+ChatView.vue?t=1787631370860:500 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 1344 has ```map: true artifacts found: 0 types: []
+ChatView.vue?t=1787631370860:500 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 3554 has ```map: true artifacts found: 0 types: []
+ChatView.vue?t=1787631370860:500 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 3554 has ```map: true artifacts found: 0 types: []
+ChatView.vue?t=1787631370860:500 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 3554 has ```map: true artifacts found: 0 types: []
+ChatView.vue?t=1787631370860:500 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 3554 has ```map: true artifacts found: 0 types: []
+ChatView.vue?t=1787631370860:500 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 3554 has ```map: true artifacts found: 0 types: []
+ChatView.vue?t=1787631370860:500 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 3554 has ```map: true artifacts found: 0 types: []
+ChatView.vue?t=1787631370860:500 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 3554 has ```map: true artifacts found: 0 types: []
+ChatView.vue?t=1787631370860:500 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 3554 has ```map: true artifacts found: 0 types: []
+ChatView.vue?t=1787631370860:500 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 1532 has ```map: true artifacts found: 0 types: []
+ChatView.vue?t=1787631370860:500 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 1532 has ```map: true artifacts found: 0 types: []
+ChatView.vue?t=1787631370860:500 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 1532 has ```map: true artifacts found: 0 types: []
+ChatView.vue?t=1787631370860:500 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 1532 has ```map: true artifacts found: 0 types: []
+ChatView.vue?t=1787631370860:500 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 2056 has ```map: false artifacts found: 0 types: []
+ChatView.vue?t=1787631370860:500 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 2056 has ```map: false artifacts found: 0 types: []
+ChatView.vue?t=1787631370860:500 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 2056 has ```map: false artifacts found: 0 types: []
+ChatView.vue?t=1787631370860:500 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 2056 has ```map: false artifacts found: 0 types: []
+ChatView.vue?t=1787631370860:500 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 2056 has ```map: false artifacts found: 0 types: []
+ChatView.vue?t=1787631370860:500 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 197 has ```map: false artifacts found: 0 types: []
+ChatView.vue?t=1787631370860:500 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 197 has ```map: false artifacts found: 0 types: []
+ChatView.vue?t=1787631370860:500 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 197 has ```map: false artifacts found: 0 types: []
+ChatView.vue?t=1787631370860:500 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 2091 has ```map: false artifacts found: 0 types: []
+ChatView.vue?t=1787631370860:500 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 2091 has ```map: false artifacts found: 0 types: []
+ChatView.vue?t=1787631370860:500 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 2091 has ```map: false artifacts found: 0 types: []
+ChatView.vue?t=1787631370860:500 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 2091 has ```map: false artifacts found: 0 types: []
+ChatView.vue?t=1787631370860:500 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 2091 has ```map: false artifacts found: 0 types: []
+ChatView.vue?t=1787631370860:500 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 2091 has ```map: false artifacts found: 0 types: []
+ChatView.vue?t=1787631370860:500 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 6231 has ```map: false artifacts found: 0 types: []
+ChatView.vue?t=1787631370860:500 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 6231 has ```map: false artifacts found: 0 types: []
+ChatView.vue?t=1787631370860:500 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 6231 has ```map: false artifacts found: 0 types: []
+ChatView.vue?t=1787631370860:500 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 6231 has ```map: false artifacts found: 0 types: []
+ChatView.vue?t=1787631370860:500 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 6231 has ```map: false artifacts found: 0 types: []
+ChatView.vue?t=1787631370860:500 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 6231 has ```map: false artifacts found: 0 types: []
+ChatView.vue?t=1787631370860:500 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 6231 has ```map: false artifacts found: 0 types: []
+ChatView.vue?t=1787631370860:500 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 6231 has ```map: false artifacts found: 0 types: []
+ChatView.vue?t=1787631370860:500 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 6231 has ```map: false artifacts found: 0 types: []
+ChatView.vue?t=1787631370860:500 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 6231 has ```map: false artifacts found: 0 types: []
+ChatView.vue?t=1787631370860:500 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 6231 has ```map: false artifacts found: 0 types: []
+ChatView.vue?t=1787631370860:500 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 6231 has ```map: false artifacts found: 0 types: []
+ChatView.vue?t=1787631370860:500 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 6231 has ```map: false artifacts found: 0 types: []
+ChatView.vue?t=1787631370860:500 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 6231 has ```map: false artifacts found: 0 types: []
+ChatView.vue?t=1787631370860:500 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 6231 has ```map: false artifacts found: 0 types: []
+ChatView.vue?t=1787631370860:500 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 6231 has ```map: false artifacts found: 0 types: []
+ChatView.vue?t=1787631370860:500 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 6231 has ```map: false artifacts found: 0 types: []
+ChatView.vue?t=1787631370860:500 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 6231 has ```map: false artifacts found: 0 types: []
+useOrchestratorChat.ts:526 user_id 8d09b4ed-a8d7-457e-a6ad-5e19ee1f6a40
+ChatView.vue:807 [ChatView][artifact-watcher] lastMsg role: assistant contentToParse length: 0 has ```map: false artifacts found: 0 types: []
+ChatView.vue:807 [ChatView][artifact-watcher] lastMsg role: assistant contentToParse length: 0 has ```map: false artifacts found: 0 types: []
+ChatView.vue:807 [ChatView][artifact-watcher] lastMsg role: assistant contentToParse length: 0 has ```map: false artifacts found: 0 types: []
+ChatView.vue:807 [ChatView][artifact-watcher] lastMsg role: assistant contentToParse length: 31 has ```map: false artifacts found: 0 types: []
+ChatView.vue:807 [ChatView][artifact-watcher] lastMsg role: assistant contentToParse length: 31 has ```map: false artifacts found: 0 types: []
+ChatView.vue:807 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 81 has ```map: false artifacts found: 0 types: []
+ChatView.vue:807 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 81 has ```map: false artifacts found: 0 types: []
+ChatView.vue:807 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 81 has ```map: false artifacts found: 0 types: []
+ChatView.vue:807 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 248 has ```map: false artifacts found: 0 types: []
+ChatView.vue:807 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 248 has ```map: false artifacts found: 0 types: []
+ChatView.vue:807 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 248 has ```map: false artifacts found: 0 types: []
+ChatView.vue:807 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 248 has ```map: false artifacts found: 0 types: []
+ChatView.vue:807 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 248 has ```map: false artifacts found: 0 types: []
+ChatView.vue:807 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 1344 has ```map: true artifacts found: 0 types: []
+ChatView.vue:811 [ChatView][DEBUG] contentToParse first 300 chars: "     1\\t---\\n     2\\tname: supermap-camera-query\\n     3\\tdescription: \"SuperMap 摄像头周边查询与地图可视化服务，支持查询指定经纬度及半径范围内的摄像头，并自动在地图上高亮展示\"\\n     4\\tversion: 1.0.0\\n     5\\tmetadata:\\n     6\\t  openclaw:\\n     7\\t    requires:\\n     8\\t      bins:\\n     9\\t        - node\\n    10\\t    install:\\n    11\\t      -"
+ChatView.vue:812 [ChatView][DEBUG] contentToParse last 200 chars: "，系统会自动解析并打开 Canvas 面板。\\n    36\\t\\n    37\\t```javascript\\n    38\\tconst result = await queryAndMap({ lng: 108.689005, lat: 33.972476, radius: 5000 });\\n    39\\t// result.markdown 包含完整的地图配置\\n    40\\t```"
+ChatView.vue:819 [ChatView][DEBUG] fence matches count: 0 fences: []
+ChatView.vue:807 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 1344 has ```map: true artifacts found: 0 types: []
+ChatView.vue:811 [ChatView][DEBUG] contentToParse first 300 chars: "     1\\t---\\n     2\\tname: supermap-camera-query\\n     3\\tdescription: \"SuperMap 摄像头周边查询与地图可视化服务，支持查询指定经纬度及半径范围内的摄像头，并自动在地图上高亮展示\"\\n     4\\tversion: 1.0.0\\n     5\\tmetadata:\\n     6\\t  openclaw:\\n     7\\t    requires:\\n     8\\t      bins:\\n     9\\t        - node\\n    10\\t    install:\\n    11\\t      -"
+ChatView.vue:812 [ChatView][DEBUG] contentToParse last 200 chars: "，系统会自动解析并打开 Canvas 面板。\\n    36\\t\\n    37\\t```javascript\\n    38\\tconst result = await queryAndMap({ lng: 108.689005, lat: 33.972476, radius: 5000 });\\n    39\\t// result.markdown 包含完整的地图配置\\n    40\\t```"
+ChatView.vue:819 [ChatView][DEBUG] fence matches count: 0 fences: []
+ChatView.vue:807 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 1344 has ```map: true artifacts found: 0 types: []
+ChatView.vue:811 [ChatView][DEBUG] contentToParse first 300 chars: "     1\\t---\\n     2\\tname: supermap-camera-query\\n     3\\tdescription: \"SuperMap 摄像头周边查询与地图可视化服务，支持查询指定经纬度及半径范围内的摄像头，并自动在地图上高亮展示\"\\n     4\\tversion: 1.0.0\\n     5\\tmetadata:\\n     6\\t  openclaw:\\n     7\\t    requires:\\n     8\\t      bins:\\n     9\\t        - node\\n    10\\t    install:\\n    11\\t      -"
+ChatView.vue:812 [ChatView][DEBUG] contentToParse last 200 chars: "，系统会自动解析并打开 Canvas 面板。\\n    36\\t\\n    37\\t```javascript\\n    38\\tconst result = await queryAndMap({ lng: 108.689005, lat: 33.972476, radius: 5000 });\\n    39\\t// result.markdown 包含完整的地图配置\\n    40\\t```"
+ChatView.vue:819 [ChatView][DEBUG] fence matches count: 0 fences: []
+ChatView.vue:807 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 3554 has ```map: true artifacts found: 0 types: []
+ChatView.vue:811 [ChatView][DEBUG] contentToParse first 300 chars: "content=\"   101\\t    lat,\\n   102\\t    radius\\n   103\\t  });\\n   104\\t\\n   105\\t  if (!queryResult.success || queryResult.features.length === 0) {\\n   106\\t    console.log(`\\\\n❌ 未找到匹配的摄像头数据`);\\n   107\\t    return {\\n   108\\t      success: false,\\n   109\\t      markdown: `❌ 在坐标(${lng}, ${lat})附近 ${ra"
+ChatView.vue:812 [ChatView][DEBUG] contentToParse last 200 chars: "   198\\t// ============================================================\\n   199\\tif (require.main === module) {\\n   200\\t  (async () => {\" name='read_file' tool_call_id='call_cccb0200be82454a9655c2af'"
+ChatView.vue:819 [ChatView][DEBUG] fence matches count: 0 fences: []
+ChatView.vue:807 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 3554 has ```map: true artifacts found: 0 types: []
+ChatView.vue:811 [ChatView][DEBUG] contentToParse first 300 chars: "content=\"   101\\t    lat,\\n   102\\t    radius\\n   103\\t  });\\n   104\\t\\n   105\\t  if (!queryResult.success || queryResult.features.length === 0) {\\n   106\\t    console.log(`\\\\n❌ 未找到匹配的摄像头数据`);\\n   107\\t    return {\\n   108\\t      success: false,\\n   109\\t      markdown: `❌ 在坐标(${lng}, ${lat})附近 ${ra"
+ChatView.vue:812 [ChatView][DEBUG] contentToParse last 200 chars: "   198\\t// ============================================================\\n   199\\tif (require.main === module) {\\n   200\\t  (async () => {\" name='read_file' tool_call_id='call_cccb0200be82454a9655c2af'"
+ChatView.vue:819 [ChatView][DEBUG] fence matches count: 0 fences: []
+ChatView.vue:807 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 3554 has ```map: true artifacts found: 0 types: []
+ChatView.vue:811 [ChatView][DEBUG] contentToParse first 300 chars: "content=\"   101\\t    lat,\\n   102\\t    radius\\n   103\\t  });\\n   104\\t\\n   105\\t  if (!queryResult.success || queryResult.features.length === 0) {\\n   106\\t    console.log(`\\\\n❌ 未找到匹配的摄像头数据`);\\n   107\\t    return {\\n   108\\t      success: false,\\n   109\\t      markdown: `❌ 在坐标(${lng}, ${lat})附近 ${ra"
+ChatView.vue:812 [ChatView][DEBUG] contentToParse last 200 chars: "   198\\t// ============================================================\\n   199\\tif (require.main === module) {\\n   200\\t  (async () => {\" name='read_file' tool_call_id='call_cccb0200be82454a9655c2af'"
+ChatView.vue:819 [ChatView][DEBUG] fence matches count: 0 fences: []
+ChatView.vue:807 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 3554 has ```map: true artifacts found: 0 types: []
+ChatView.vue:811 [ChatView][DEBUG] contentToParse first 300 chars: "content=\"   101\\t    lat,\\n   102\\t    radius\\n   103\\t  });\\n   104\\t\\n   105\\t  if (!queryResult.success || queryResult.features.length === 0) {\\n   106\\t    console.log(`\\\\n❌ 未找到匹配的摄像头数据`);\\n   107\\t    return {\\n   108\\t      success: false,\\n   109\\t      markdown: `❌ 在坐标(${lng}, ${lat})附近 ${ra"
+ChatView.vue:812 [ChatView][DEBUG] contentToParse last 200 chars: "   198\\t// ============================================================\\n   199\\tif (require.main === module) {\\n   200\\t  (async () => {\" name='read_file' tool_call_id='call_cccb0200be82454a9655c2af'"
+ChatView.vue:819 [ChatView][DEBUG] fence matches count: 0 fences: []
+ChatView.vue:807 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 3554 has ```map: true artifacts found: 0 types: []
+ChatView.vue:811 [ChatView][DEBUG] contentToParse first 300 chars: "content=\"   101\\t    lat,\\n   102\\t    radius\\n   103\\t  });\\n   104\\t\\n   105\\t  if (!queryResult.success || queryResult.features.length === 0) {\\n   106\\t    console.log(`\\\\n❌ 未找到匹配的摄像头数据`);\\n   107\\t    return {\\n   108\\t      success: false,\\n   109\\t      markdown: `❌ 在坐标(${lng}, ${lat})附近 ${ra"
+ChatView.vue:812 [ChatView][DEBUG] contentToParse last 200 chars: "   198\\t// ============================================================\\n   199\\tif (require.main === module) {\\n   200\\t  (async () => {\" name='read_file' tool_call_id='call_cccb0200be82454a9655c2af'"
+ChatView.vue:819 [ChatView][DEBUG] fence matches count: 0 fences: []
+ChatView.vue:807 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 259 has ```map: false artifacts found: 0 types: []
+ChatView.vue:807 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 259 has ```map: false artifacts found: 0 types: []
+ChatView.vue:807 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 259 has ```map: false artifacts found: 0 types: []
+ChatView.vue:807 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 259 has ```map: false artifacts found: 0 types: []
+ChatView.vue:807 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 827 has ```map: false artifacts found: 0 types: []
+ChatView.vue:807 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 827 has ```map: false artifacts found: 0 types: []
+ChatView.vue:807 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 827 has ```map: false artifacts found: 0 types: []
+ChatView.vue:807 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 827 has ```map: false artifacts found: 0 types: []
+ChatView.vue:807 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 827 has ```map: false artifacts found: 0 types: []
+ChatView.vue:807 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 827 has ```map: false artifacts found: 0 types: []
+ChatView.vue:807 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 827 has ```map: false artifacts found: 0 types: []
+ChatView.vue:807 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 1477 has ```map: true artifacts found: 0 types: []
+ChatView.vue:811 [ChatView][DEBUG] contentToParse first 300 chars: "\\n🗺️  SuperMap 摄像头查询与地图可视化\\n   =========================================\\n🔍 正在查询摄像头数据...\\n   中心点: [108.689005, 33.972476], 半径: 5000米\\n✅ 查询成功，共找到 50 个摄像头\\n\\n✅ 查询完成，共找到 50 条记录\\n📍 已生成地图配置（轻量级，不含几何数据），将触发 Canvas 渲染\\n📍 中心点: [33.972476, 108.689005]\\n📝 Canvas 将根据查询参数 (lng=108.689005, lat=33.972476, ra"
+ChatView.vue:812 [ChatView][DEBUG] contentToParse last 200 chars: "queryParams\": {\\n    \"lng\": 108.689005,\\n    \"lat\": 33.972476,\\n    \"radius\": 5000\\n  },\\n  \"summary\": {\\n    \"count\": 50,\\n    \"hasResult\": true\\n  }\\n}\\n```\\n\\n\\n[Command succeeded with exit code 0]"
+ChatView.vue:819 [ChatView][DEBUG] fence matches count: 0 fences: []
+ChatView.vue:807 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 1477 has ```map: true artifacts found: 0 types: []
+ChatView.vue:811 [ChatView][DEBUG] contentToParse first 300 chars: "\\n🗺️  SuperMap 摄像头查询与地图可视化\\n   =========================================\\n🔍 正在查询摄像头数据...\\n   中心点: [108.689005, 33.972476], 半径: 5000米\\n✅ 查询成功，共找到 50 个摄像头\\n\\n✅ 查询完成，共找到 50 条记录\\n📍 已生成地图配置（轻量级，不含几何数据），将触发 Canvas 渲染\\n📍 中心点: [33.972476, 108.689005]\\n📝 Canvas 将根据查询参数 (lng=108.689005, lat=33.972476, ra"
+ChatView.vue:812 [ChatView][DEBUG] contentToParse last 200 chars: "queryParams\": {\\n    \"lng\": 108.689005,\\n    \"lat\": 33.972476,\\n    \"radius\": 5000\\n  },\\n  \"summary\": {\\n    \"count\": 50,\\n    \"hasResult\": true\\n  }\\n}\\n```\\n\\n\\n[Command succeeded with exit code 0]"
+ChatView.vue:819 [ChatView][DEBUG] fence matches count: 0 fences: []
+ChatView.vue:807 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 1477 has ```map: true artifacts found: 0 types: []
+ChatView.vue:811 [ChatView][DEBUG] contentToParse first 300 chars: "\\n🗺️  SuperMap 摄像头查询与地图可视化\\n   =========================================\\n🔍 正在查询摄像头数据...\\n   中心点: [108.689005, 33.972476], 半径: 5000米\\n✅ 查询成功，共找到 50 个摄像头\\n\\n✅ 查询完成，共找到 50 条记录\\n📍 已生成地图配置（轻量级，不含几何数据），将触发 Canvas 渲染\\n📍 中心点: [33.972476, 108.689005]\\n📝 Canvas 将根据查询参数 (lng=108.689005, lat=33.972476, ra"
+ChatView.vue:812 [ChatView][DEBUG] contentToParse last 200 chars: "queryParams\": {\\n    \"lng\": 108.689005,\\n    \"lat\": 33.972476,\\n    \"radius\": 5000\\n  },\\n  \"summary\": {\\n    \"count\": 50,\\n    \"hasResult\": true\\n  }\\n}\\n```\\n\\n\\n[Command succeeded with exit code 0]"
+ChatView.vue:819 [ChatView][DEBUG] fence matches count: 0 fences: []
+ChatView.vue:807 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 1477 has ```map: true artifacts found: 0 types: []
+ChatView.vue:811 [ChatView][DEBUG] contentToParse first 300 chars: "\\n🗺️  SuperMap 摄像头查询与地图可视化\\n   =========================================\\n🔍 正在查询摄像头数据...\\n   中心点: [108.689005, 33.972476], 半径: 5000米\\n✅ 查询成功，共找到 50 个摄像头\\n\\n✅ 查询完成，共找到 50 条记录\\n📍 已生成地图配置（轻量级，不含几何数据），将触发 Canvas 渲染\\n📍 中心点: [33.972476, 108.689005]\\n📝 Canvas 将根据查询参数 (lng=108.689005, lat=33.972476, ra"
+ChatView.vue:812 [ChatView][DEBUG] contentToParse last 200 chars: "queryParams\": {\\n    \"lng\": 108.689005,\\n    \"lat\": 33.972476,\\n    \"radius\": 5000\\n  },\\n  \"summary\": {\\n    \"count\": 50,\\n    \"hasResult\": true\\n  }\\n}\\n```\\n\\n\\n[Command succeeded with exit code 0]"
+ChatView.vue:819 [ChatView][DEBUG] fence matches count: 0 fences: []
+ChatView.vue:807 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 1477 has ```map: true artifacts found: 0 types: []
+ChatView.vue:811 [ChatView][DEBUG] contentToParse first 300 chars: "\\n🗺️  SuperMap 摄像头查询与地图可视化\\n   =========================================\\n🔍 正在查询摄像头数据...\\n   中心点: [108.689005, 33.972476], 半径: 5000米\\n✅ 查询成功，共找到 50 个摄像头\\n\\n✅ 查询完成，共找到 50 条记录\\n📍 已生成地图配置（轻量级，不含几何数据），将触发 Canvas 渲染\\n📍 中心点: [33.972476, 108.689005]\\n📝 Canvas 将根据查询参数 (lng=108.689005, lat=33.972476, ra"
+ChatView.vue:812 [ChatView][DEBUG] contentToParse last 200 chars: "queryParams\": {\\n    \"lng\": 108.689005,\\n    \"lat\": 33.972476,\\n    \"radius\": 5000\\n  },\\n  \"summary\": {\\n    \"count\": 50,\\n    \"hasResult\": true\\n  }\\n}\\n```\\n\\n\\n[Command succeeded with exit code 0]"
+ChatView.vue:819 [ChatView][DEBUG] fence matches count: 0 fences: []
+ChatView.vue:807 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 1477 has ```map: true artifacts found: 0 types: []
+ChatView.vue:811 [ChatView][DEBUG] contentToParse first 300 chars: "\\n🗺️  SuperMap 摄像头查询与地图可视化\\n   =========================================\\n🔍 正在查询摄像头数据...\\n   中心点: [108.689005, 33.972476], 半径: 5000米\\n✅ 查询成功，共找到 50 个摄像头\\n\\n✅ 查询完成，共找到 50 条记录\\n📍 已生成地图配置（轻量级，不含几何数据），将触发 Canvas 渲染\\n📍 中心点: [33.972476, 108.689005]\\n📝 Canvas 将根据查询参数 (lng=108.689005, lat=33.972476, ra"
+ChatView.vue:812 [ChatView][DEBUG] contentToParse last 200 chars: "queryParams\": {\\n    \"lng\": 108.689005,\\n    \"lat\": 33.972476,\\n    \"radius\": 5000\\n  },\\n  \"summary\": {\\n    \"count\": 50,\\n    \"hasResult\": true\\n  }\\n}\\n```\\n\\n\\n[Command succeeded with exit code 0]"
+ChatView.vue:819 [ChatView][DEBUG] fence matches count: 0 fences: []
+ChatView.vue:807 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 1477 has ```map: true artifacts found: 0 types: []
+ChatView.vue:811 [ChatView][DEBUG] contentToParse first 300 chars: "\\n🗺️  SuperMap 摄像头查询与地图可视化\\n   =========================================\\n🔍 正在查询摄像头数据...\\n   中心点: [108.689005, 33.972476], 半径: 5000米\\n✅ 查询成功，共找到 50 个摄像头\\n\\n✅ 查询完成，共找到 50 条记录\\n📍 已生成地图配置（轻量级，不含几何数据），将触发 Canvas 渲染\\n📍 中心点: [33.972476, 108.689005]\\n📝 Canvas 将根据查询参数 (lng=108.689005, lat=33.972476, ra"
+ChatView.vue:812 [ChatView][DEBUG] contentToParse last 200 chars: "queryParams\": {\\n    \"lng\": 108.689005,\\n    \"lat\": 33.972476,\\n    \"radius\": 5000\\n  },\\n  \"summary\": {\\n    \"count\": 50,\\n    \"hasResult\": true\\n  }\\n}\\n```\\n\\n\\n[Command succeeded with exit code 0]"
+ChatView.vue:819 [ChatView][DEBUG] fence matches count: 0 fences: []
+ChatView.vue:807 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 1477 has ```map: true artifacts found: 0 types: []
+ChatView.vue:811 [ChatView][DEBUG] contentToParse first 300 chars: "\\n🗺️  SuperMap 摄像头查询与地图可视化\\n   =========================================\\n🔍 正在查询摄像头数据...\\n   中心点: [108.689005, 33.972476], 半径: 5000米\\n✅ 查询成功，共找到 50 个摄像头\\n\\n✅ 查询完成，共找到 50 条记录\\n📍 已生成地图配置（轻量级，不含几何数据），将触发 Canvas 渲染\\n📍 中心点: [33.972476, 108.689005]\\n📝 Canvas 将根据查询参数 (lng=108.689005, lat=33.972476, ra"
+ChatView.vue:812 [ChatView][DEBUG] contentToParse last 200 chars: "queryParams\": {\\n    \"lng\": 108.689005,\\n    \"lat\": 33.972476,\\n    \"radius\": 5000\\n  },\\n  \"summary\": {\\n    \"count\": 50,\\n    \"hasResult\": true\\n  }\\n}\\n```\\n\\n\\n[Command succeeded with exit code 0]"
+ChatView.vue:819 [ChatView][DEBUG] fence matches count: 0 fences: []
+ChatView.vue:807 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 1477 has ```map: true artifacts found: 0 types: []
+ChatView.vue:811 [ChatView][DEBUG] contentToParse first 300 chars: "\\n🗺️  SuperMap 摄像头查询与地图可视化\\n   =========================================\\n🔍 正在查询摄像头数据...\\n   中心点: [108.689005, 33.972476], 半径: 5000米\\n✅ 查询成功，共找到 50 个摄像头\\n\\n✅ 查询完成，共找到 50 条记录\\n📍 已生成地图配置（轻量级，不含几何数据），将触发 Canvas 渲染\\n📍 中心点: [33.972476, 108.689005]\\n📝 Canvas 将根据查询参数 (lng=108.689005, lat=33.972476, ra"
+ChatView.vue:812 [ChatView][DEBUG] contentToParse last 200 chars: "queryParams\": {\\n    \"lng\": 108.689005,\\n    \"lat\": 33.972476,\\n    \"radius\": 5000\\n  },\\n  \"summary\": {\\n    \"count\": 50,\\n    \"hasResult\": true\\n  }\\n}\\n```\\n\\n\\n[Command succeeded with exit code 0]"
+ChatView.vue:819 [ChatView][DEBUG] fence matches count: 0 fences: []
+ChatView.vue:807 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 1477 has ```map: true artifacts found: 0 types: []
+ChatView.vue:811 [ChatView][DEBUG] contentToParse first 300 chars: "\\n🗺️  SuperMap 摄像头查询与地图可视化\\n   =========================================\\n🔍 正在查询摄像头数据...\\n   中心点: [108.689005, 33.972476], 半径: 5000米\\n✅ 查询成功，共找到 50 个摄像头\\n\\n✅ 查询完成，共找到 50 条记录\\n📍 已生成地图配置（轻量级，不含几何数据），将触发 Canvas 渲染\\n📍 中心点: [33.972476, 108.689005]\\n📝 Canvas 将根据查询参数 (lng=108.689005, lat=33.972476, ra"
+ChatView.vue:812 [ChatView][DEBUG] contentToParse last 200 chars: "queryParams\": {\\n    \"lng\": 108.689005,\\n    \"lat\": 33.972476,\\n    \"radius\": 5000\\n  },\\n  \"summary\": {\\n    \"count\": 50,\\n    \"hasResult\": true\\n  }\\n}\\n```\\n\\n\\n[Command succeeded with exit code 0]"
+ChatView.vue:819 [ChatView][DEBUG] fence matches count: 0 fences: []
+ChatView.vue:807 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 1477 has ```map: true artifacts found: 0 types: []
+ChatView.vue:811 [ChatView][DEBUG] contentToParse first 300 chars: "\\n🗺️  SuperMap 摄像头查询与地图可视化\\n   =========================================\\n🔍 正在查询摄像头数据...\\n   中心点: [108.689005, 33.972476], 半径: 5000米\\n✅ 查询成功，共找到 50 个摄像头\\n\\n✅ 查询完成，共找到 50 条记录\\n📍 已生成地图配置（轻量级，不含几何数据），将触发 Canvas 渲染\\n📍 中心点: [33.972476, 108.689005]\\n📝 Canvas 将根据查询参数 (lng=108.689005, lat=33.972476, ra"
+ChatView.vue:812 [ChatView][DEBUG] contentToParse last 200 chars: "queryParams\": {\\n    \"lng\": 108.689005,\\n    \"lat\": 33.972476,\\n    \"radius\": 5000\\n  },\\n  \"summary\": {\\n    \"count\": 50,\\n    \"hasResult\": true\\n  }\\n}\\n```\\n\\n\\n[Command succeeded with exit code 0]"
+ChatView.vue:819 [ChatView][DEBUG] fence matches count: 0 fences: []
+ChatView.vue:807 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 1477 has ```map: true artifacts found: 0 types: []
+ChatView.vue:811 [ChatView][DEBUG] contentToParse first 300 chars: "\\n🗺️  SuperMap 摄像头查询与地图可视化\\n   =========================================\\n🔍 正在查询摄像头数据...\\n   中心点: [108.689005, 33.972476], 半径: 5000米\\n✅ 查询成功，共找到 50 个摄像头\\n\\n✅ 查询完成，共找到 50 条记录\\n📍 已生成地图配置（轻量级，不含几何数据），将触发 Canvas 渲染\\n📍 中心点: [33.972476, 108.689005]\\n📝 Canvas 将根据查询参数 (lng=108.689005, lat=33.972476, ra"
+ChatView.vue:812 [ChatView][DEBUG] contentToParse last 200 chars: "queryParams\": {\\n    \"lng\": 108.689005,\\n    \"lat\": 33.972476,\\n    \"radius\": 5000\\n  },\\n  \"summary\": {\\n    \"count\": 50,\\n    \"hasResult\": true\\n  }\\n}\\n```\\n\\n\\n[Command succeeded with exit code 0]"
+ChatView.vue:819 [ChatView][DEBUG] fence matches count: 0 fences: []
+ChatView.vue:807 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 1477 has ```map: true artifacts found: 0 types: []
+ChatView.vue:811 [ChatView][DEBUG] contentToParse first 300 chars: "\\n🗺️  SuperMap 摄像头查询与地图可视化\\n   =========================================\\n🔍 正在查询摄像头数据...\\n   中心点: [108.689005, 33.972476], 半径: 5000米\\n✅ 查询成功，共找到 50 个摄像头\\n\\n✅ 查询完成，共找到 50 条记录\\n📍 已生成地图配置（轻量级，不含几何数据），将触发 Canvas 渲染\\n📍 中心点: [33.972476, 108.689005]\\n📝 Canvas 将根据查询参数 (lng=108.689005, lat=33.972476, ra"
+ChatView.vue:812 [ChatView][DEBUG] contentToParse last 200 chars: "queryParams\": {\\n    \"lng\": 108.689005,\\n    \"lat\": 33.972476,\\n    \"radius\": 5000\\n  },\\n  \"summary\": {\\n    \"count\": 50,\\n    \"hasResult\": true\\n  }\\n}\\n```\\n\\n\\n[Command succeeded with exit code 0]"
+ChatView.vue:819 [ChatView][DEBUG] fence matches count: 0 fences: []
+ChatView.vue:807 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 1477 has ```map: true artifacts found: 0 types: []
+ChatView.vue:811 [ChatView][DEBUG] contentToParse first 300 chars: "\\n🗺️  SuperMap 摄像头查询与地图可视化\\n   =========================================\\n🔍 正在查询摄像头数据...\\n   中心点: [108.689005, 33.972476], 半径: 5000米\\n✅ 查询成功，共找到 50 个摄像头\\n\\n✅ 查询完成，共找到 50 条记录\\n📍 已生成地图配置（轻量级，不含几何数据），将触发 Canvas 渲染\\n📍 中心点: [33.972476, 108.689005]\\n📝 Canvas 将根据查询参数 (lng=108.689005, lat=33.972476, ra"
+ChatView.vue:812 [ChatView][DEBUG] contentToParse last 200 chars: "queryParams\": {\\n    \"lng\": 108.689005,\\n    \"lat\": 33.972476,\\n    \"radius\": 5000\\n  },\\n  \"summary\": {\\n    \"count\": 50,\\n    \"hasResult\": true\\n  }\\n}\\n```\\n\\n\\n[Command succeeded with exit code 0]"
+ChatView.vue:819 [ChatView][DEBUG] fence matches count: 0 fences: []
+ChatView.vue:807 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 1477 has ```map: true artifacts found: 0 types: []
+ChatView.vue:811 [ChatView][DEBUG] contentToParse first 300 chars: "\\n🗺️  SuperMap 摄像头查询与地图可视化\\n   =========================================\\n🔍 正在查询摄像头数据...\\n   中心点: [108.689005, 33.972476], 半径: 5000米\\n✅ 查询成功，共找到 50 个摄像头\\n\\n✅ 查询完成，共找到 50 条记录\\n📍 已生成地图配置（轻量级，不含几何数据），将触发 Canvas 渲染\\n📍 中心点: [33.972476, 108.689005]\\n📝 Canvas 将根据查询参数 (lng=108.689005, lat=33.972476, ra"
+ChatView.vue:812 [ChatView][DEBUG] contentToParse last 200 chars: "queryParams\": {\\n    \"lng\": 108.689005,\\n    \"lat\": 33.972476,\\n    \"radius\": 5000\\n  },\\n  \"summary\": {\\n    \"count\": 50,\\n    \"hasResult\": true\\n  }\\n}\\n```\\n\\n\\n[Command succeeded with exit code 0]"
+ChatView.vue:819 [ChatView][DEBUG] fence matches count: 0 fences: []
+6The resource <URL> was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally.
+ChatView.vue:807 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 1477 has ```map: true artifacts found: 0 types: []
+ChatView.vue:811 [ChatView][DEBUG] contentToParse first 300 chars: "\\n🗺️  SuperMap 摄像头查询与地图可视化\\n   =========================================\\n🔍 正在查询摄像头数据...\\n   中心点: [108.689005, 33.972476], 半径: 5000米\\n✅ 查询成功，共找到 50 个摄像头\\n\\n✅ 查询完成，共找到 50 条记录\\n📍 已生成地图配置（轻量级，不含几何数据），将触发 Canvas 渲染\\n📍 中心点: [33.972476, 108.689005]\\n📝 Canvas 将根据查询参数 (lng=108.689005, lat=33.972476, ra"
+ChatView.vue:812 [ChatView][DEBUG] contentToParse last 200 chars: "queryParams\": {\\n    \"lng\": 108.689005,\\n    \"lat\": 33.972476,\\n    \"radius\": 5000\\n  },\\n  \"summary\": {\\n    \"count\": 50,\\n    \"hasResult\": true\\n  }\\n}\\n```\\n\\n\\n[Command succeeded with exit code 0]"
+ChatView.vue:819 [ChatView][DEBUG] fence matches count: 0 fences: []
+ChatView.vue:807 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 1477 has ```map: true artifacts found: 0 types: []
+ChatView.vue:811 [ChatView][DEBUG] contentToParse first 300 chars: "\\n🗺️  SuperMap 摄像头查询与地图可视化\\n   =========================================\\n🔍 正在查询摄像头数据...\\n   中心点: [108.689005, 33.972476], 半径: 5000米\\n✅ 查询成功，共找到 50 个摄像头\\n\\n✅ 查询完成，共找到 50 条记录\\n📍 已生成地图配置（轻量级，不含几何数据），将触发 Canvas 渲染\\n📍 中心点: [33.972476, 108.689005]\\n📝 Canvas 将根据查询参数 (lng=108.689005, lat=33.972476, ra"
+ChatView.vue:812 [ChatView][DEBUG] contentToParse last 200 chars: "queryParams\": {\\n    \"lng\": 108.689005,\\n    \"lat\": 33.972476,\\n    \"radius\": 5000\\n  },\\n  \"summary\": {\\n    \"count\": 50,\\n    \"hasResult\": true\\n  }\\n}\\n```\\n\\n\\n[Command succeeded with exit code 0]"
+ChatView.vue:819 [ChatView][DEBUG] fence matches count: 0 fences: []
+ChatView.vue:807 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 1477 has ```map: true artifacts found: 0 types: []
+ChatView.vue:811 [ChatView][DEBUG] contentToParse first 300 chars: "\\n🗺️  SuperMap 摄像头查询与地图可视化\\n   =========================================\\n🔍 正在查询摄像头数据...\\n   中心点: [108.689005, 33.972476], 半径: 5000米\\n✅ 查询成功，共找到 50 个摄像头\\n\\n✅ 查询完成，共找到 50 条记录\\n📍 已生成地图配置（轻量级，不含几何数据），将触发 Canvas 渲染\\n📍 中心点: [33.972476, 108.689005]\\n📝 Canvas 将根据查询参数 (lng=108.689005, lat=33.972476, ra"
+ChatView.vue:812 [ChatView][DEBUG] contentToParse last 200 chars: "queryParams\": {\\n    \"lng\": 108.689005,\\n    \"lat\": 33.972476,\\n    \"radius\": 5000\\n  },\\n  \"summary\": {\\n    \"count\": 50,\\n    \"hasResult\": true\\n  }\\n}\\n```\\n\\n\\n[Command succeeded with exit code 0]"
+ChatView.vue:819 [ChatView][DEBUG] fence matches count: 0 fences: []
+ChatView.vue:807 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 1477 has ```map: true artifacts found: 0 types: []
+ChatView.vue:811 [ChatView][DEBUG] contentToParse first 300 chars: "\\n🗺️  SuperMap 摄像头查询与地图可视化\\n   =========================================\\n🔍 正在查询摄像头数据...\\n   中心点: [108.689005, 33.972476], 半径: 5000米\\n✅ 查询成功，共找到 50 个摄像头\\n\\n✅ 查询完成，共找到 50 条记录\\n📍 已生成地图配置（轻量级，不含几何数据），将触发 Canvas 渲染\\n📍 中心点: [33.972476, 108.689005]\\n📝 Canvas 将根据查询参数 (lng=108.689005, lat=33.972476, ra"
+ChatView.vue:812 [ChatView][DEBUG] contentToParse last 200 chars: "queryParams\": {\\n    \"lng\": 108.689005,\\n    \"lat\": 33.972476,\\n    \"radius\": 5000\\n  },\\n  \"summary\": {\\n    \"count\": 50,\\n    \"hasResult\": true\\n  }\\n}\\n```\\n\\n\\n[Command succeeded with exit code 0]"
+ChatView.vue:819 [ChatView][DEBUG] fence matches count: 0 fences: []
+ChatView.vue:807 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 1477 has ```map: true artifacts found: 0 types: []
+ChatView.vue:811 [ChatView][DEBUG] contentToParse first 300 chars: "\\n🗺️  SuperMap 摄像头查询与地图可视化\\n   =========================================\\n🔍 正在查询摄像头数据...\\n   中心点: [108.689005, 33.972476], 半径: 5000米\\n✅ 查询成功，共找到 50 个摄像头\\n\\n✅ 查询完成，共找到 50 条记录\\n📍 已生成地图配置（轻量级，不含几何数据），将触发 Canvas 渲染\\n📍 中心点: [33.972476, 108.689005]\\n📝 Canvas 将根据查询参数 (lng=108.689005, lat=33.972476, ra"
+ChatView.vue:812 [ChatView][DEBUG] contentToParse last 200 chars: "queryParams\": {\\n    \"lng\": 108.689005,\\n    \"lat\": 33.972476,\\n    \"radius\": 5000\\n  },\\n  \"summary\": {\\n    \"count\": 50,\\n    \"hasResult\": true\\n  }\\n}\\n```\\n\\n\\n[Command succeeded with exit code 0]"
+ChatView.vue:819 [ChatView][DEBUG] fence matches count: 0 fences: []
+ChatView.vue:807 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 1477 has ```map: true artifacts found: 0 types: []
+ChatView.vue:811 [ChatView][DEBUG] contentToParse first 300 chars: "\\n🗺️  SuperMap 摄像头查询与地图可视化\\n   =========================================\\n🔍 正在查询摄像头数据...\\n   中心点: [108.689005, 33.972476], 半径: 5000米\\n✅ 查询成功，共找到 50 个摄像头\\n\\n✅ 查询完成，共找到 50 条记录\\n📍 已生成地图配置（轻量级，不含几何数据），将触发 Canvas 渲染\\n📍 中心点: [33.972476, 108.689005]\\n📝 Canvas 将根据查询参数 (lng=108.689005, lat=33.972476, ra"
+ChatView.vue:812 [ChatView][DEBUG] contentToParse last 200 chars: "queryParams\": {\\n    \"lng\": 108.689005,\\n    \"lat\": 33.972476,\\n    \"radius\": 5000\\n  },\\n  \"summary\": {\\n    \"count\": 50,\\n    \"hasResult\": true\\n  }\\n}\\n```\\n\\n\\n[Command succeeded with exit code 0]"
+ChatView.vue:819 [ChatView][DEBUG] fence matches count: 0 fences: []
+ChatView.vue:807 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 1477 has ```map: true artifacts found: 0 types: []
+ChatView.vue:811 [ChatView][DEBUG] contentToParse first 300 chars: "\\n🗺️  SuperMap 摄像头查询与地图可视化\\n   =========================================\\n🔍 正在查询摄像头数据...\\n   中心点: [108.689005, 33.972476], 半径: 5000米\\n✅ 查询成功，共找到 50 个摄像头\\n\\n✅ 查询完成，共找到 50 条记录\\n📍 已生成地图配置（轻量级，不含几何数据），将触发 Canvas 渲染\\n📍 中心点: [33.972476, 108.689005]\\n📝 Canvas 将根据查询参数 (lng=108.689005, lat=33.972476, ra"
+ChatView.vue:812 [ChatView][DEBUG] contentToParse last 200 chars: "queryParams\": {\\n    \"lng\": 108.689005,\\n    \"lat\": 33.972476,\\n    \"radius\": 5000\\n  },\\n  \"summary\": {\\n    \"count\": 50,\\n    \"hasResult\": true\\n  }\\n}\\n```\\n\\n\\n[Command succeeded with exit code 0]"
+ChatView.vue:819 [ChatView][DEBUG] fence matches count: 0 fences: []
+ChatView.vue:807 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 1477 has ```map: true artifacts found: 0 types: []
+ChatView.vue:811 [ChatView][DEBUG] contentToParse first 300 chars: "\\n🗺️  SuperMap 摄像头查询与地图可视化\\n   =========================================\\n🔍 正在查询摄像头数据...\\n   中心点: [108.689005, 33.972476], 半径: 5000米\\n✅ 查询成功，共找到 50 个摄像头\\n\\n✅ 查询完成，共找到 50 条记录\\n📍 已生成地图配置（轻量级，不含几何数据），将触发 Canvas 渲染\\n📍 中心点: [33.972476, 108.689005]\\n📝 Canvas 将根据查询参数 (lng=108.689005, lat=33.972476, ra"
+ChatView.vue:812 [ChatView][DEBUG] contentToParse last 200 chars: "queryParams\": {\\n    \"lng\": 108.689005,\\n    \"lat\": 33.972476,\\n    \"radius\": 5000\\n  },\\n  \"summary\": {\\n    \"count\": 50,\\n    \"hasResult\": true\\n  }\\n}\\n```\\n\\n\\n[Command succeeded with exit code 0]"
+ChatView.vue:819 [ChatView][DEBUG] fence matches count: 0 fences: []
+ChatView.vue:807 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 1477 has ```map: true artifacts found: 0 types: []
+ChatView.vue:811 [ChatView][DEBUG] contentToParse first 300 chars: "\\n🗺️  SuperMap 摄像头查询与地图可视化\\n   =========================================\\n🔍 正在查询摄像头数据...\\n   中心点: [108.689005, 33.972476], 半径: 5000米\\n✅ 查询成功，共找到 50 个摄像头\\n\\n✅ 查询完成，共找到 50 条记录\\n📍 已生成地图配置（轻量级，不含几何数据），将触发 Canvas 渲染\\n📍 中心点: [33.972476, 108.689005]\\n📝 Canvas 将根据查询参数 (lng=108.689005, lat=33.972476, ra"
+ChatView.vue:812 [ChatView][DEBUG] contentToParse last 200 chars: "queryParams\": {\\n    \"lng\": 108.689005,\\n    \"lat\": 33.972476,\\n    \"radius\": 5000\\n  },\\n  \"summary\": {\\n    \"count\": 50,\\n    \"hasResult\": true\\n  }\\n}\\n```\\n\\n\\n[Command succeeded with exit code 0]"
+ChatView.vue:819 [ChatView][DEBUG] fence matches count: 0 fences: []
+ChatView.vue:807 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 1477 has ```map: true artifacts found: 0 types: []
+ChatView.vue:811 [ChatView][DEBUG] contentToParse first 300 chars: "\\n🗺️  SuperMap 摄像头查询与地图可视化\\n   =========================================\\n🔍 正在查询摄像头数据...\\n   中心点: [108.689005, 33.972476], 半径: 5000米\\n✅ 查询成功，共找到 50 个摄像头\\n\\n✅ 查询完成，共找到 50 条记录\\n📍 已生成地图配置（轻量级，不含几何数据），将触发 Canvas 渲染\\n📍 中心点: [33.972476, 108.689005]\\n📝 Canvas 将根据查询参数 (lng=108.689005, lat=33.972476, ra"
+ChatView.vue:812 [ChatView][DEBUG] contentToParse last 200 chars: "queryParams\": {\\n    \"lng\": 108.689005,\\n    \"lat\": 33.972476,\\n    \"radius\": 5000\\n  },\\n  \"summary\": {\\n    \"count\": 50,\\n    \"hasResult\": true\\n  }\\n}\\n```\\n\\n\\n[Command succeeded with exit code 0]"
+ChatView.vue:819 [ChatView][DEBUG] fence matches count: 0 fences: []
+ChatView.vue:807 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 1477 has ```map: true artifacts found: 0 types: []
+ChatView.vue:811 [ChatView][DEBUG] contentToParse first 300 chars: "\\n🗺️  SuperMap 摄像头查询与地图可视化\\n   =========================================\\n🔍 正在查询摄像头数据...\\n   中心点: [108.689005, 33.972476], 半径: 5000米\\n✅ 查询成功，共找到 50 个摄像头\\n\\n✅ 查询完成，共找到 50 条记录\\n📍 已生成地图配置（轻量级，不含几何数据），将触发 Canvas 渲染\\n📍 中心点: [33.972476, 108.689005]\\n📝 Canvas 将根据查询参数 (lng=108.689005, lat=33.972476, ra"
+ChatView.vue:812 [ChatView][DEBUG] contentToParse last 200 chars: "queryParams\": {\\n    \"lng\": 108.689005,\\n    \"lat\": 33.972476,\\n    \"radius\": 5000\\n  },\\n  \"summary\": {\\n    \"count\": 50,\\n    \"hasResult\": true\\n  }\\n}\\n```\\n\\n\\n[Command succeeded with exit code 0]"
+ChatView.vue:819 [ChatView][DEBUG] fence matches count: 0 fences: []
+ChatView.vue:807 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 1477 has ```map: true artifacts found: 0 types: []
+ChatView.vue:811 [ChatView][DEBUG] contentToParse first 300 chars: "\\n🗺️  SuperMap 摄像头查询与地图可视化\\n   =========================================\\n🔍 正在查询摄像头数据...\\n   中心点: [108.689005, 33.972476], 半径: 5000米\\n✅ 查询成功，共找到 50 个摄像头\\n\\n✅ 查询完成，共找到 50 条记录\\n📍 已生成地图配置（轻量级，不含几何数据），将触发 Canvas 渲染\\n📍 中心点: [33.972476, 108.689005]\\n📝 Canvas 将根据查询参数 (lng=108.689005, lat=33.972476, ra"
+ChatView.vue:812 [ChatView][DEBUG] contentToParse last 200 chars: "queryParams\": {\\n    \"lng\": 108.689005,\\n    \"lat\": 33.972476,\\n    \"radius\": 5000\\n  },\\n  \"summary\": {\\n    \"count\": 50,\\n    \"hasResult\": true\\n  }\\n}\\n```\\n\\n\\n[Command succeeded with exit code 0]"
+ChatView.vue:819 [ChatView][DEBUG] fence matches count: 0 fences: []
+ChatView.vue:807 [ChatView][artifact-watcher] lastMsg role: tool contentToParse length: 1477 has ```map: true artifacts found: 0 types: []
+ChatView.vue:811 [ChatView][DEBUG] contentToParse first 300 chars: "\\n🗺️  SuperMap 摄像头查询与地图可视化\\n   =========================================\\n🔍 正在查询摄像头数据...\\n   中心点: [108.689005, 33.972476], 半径: 5000米\\n✅ 查询成功，共找到 50 个摄像头\\n\\n✅ 查询完成，共找到 50 条记录\\n📍 已生成地图配置（轻量级，不含几何数据），将触发 Canvas 渲染\\n📍 中心点: [33.972476, 108.689005]\\n📝 Canvas 将根据查询参数 (lng=108.689005, lat=33.972476, ra"
+ChatView.vue:812 [ChatView][DEBUG] contentToParse last 200 chars: "queryParams\": {\\n    \"lng\": 108.689005,\\n    \"lat\": 33.972476,\\n    \"radius\": 5000\\n  },\\n  \"summary\": {\\n    \"count\": 50,\\n    \"hasResult\": true\\n  }\\n}\\n```\\n\\n\\n[Command succeeded with exit code 0]"
+ChatView.vue:819 [ChatView][DEBUG] fence matches count: 0 fences: []
+ChaotuCanvasUI.vue:1599 [SuperMapRendererChaotu] props.content 变化: {isComplete: false, newLength: 2, oldLength: undefined, newHead: '{\n'}
+ChaotuCanvasUI.vue:1573 [SuperMapRendererChaotu] tryRenderContent 跳过: map 未初始化
+tryRenderContent @ ChaotuCanvasUI.vue:1573
+(匿名) @ ChaotuCanvasUI.vue:1605
+callWithErrorHandling @ runtime-core.esm-bundler.js:199
+callWithAsyncErrorHandling @ runtime-core.esm-bundler.js:206
+(匿名) @ runtime-core.esm-bundler.js:887
+(匿名) @ reactivity.esm-bundler.js:1929
+watch @ reactivity.esm-bundler.js:1964
+doWatch @ runtime-core.esm-bundler.js:915
+watch @ runtime-core.esm-bundler.js:848
+setup @ ChaotuCanvasUI.vue:1596
+callWithErrorHandling @ runtime-core.esm-bundler.js:199
+setupStatefulComponent @ runtime-core.esm-bundler.js:8144
+setupComponent @ runtime-core.esm-bundler.js:8106
+(匿名) @ runtime-core.esm-bundler.js:6018
+(匿名) @ runtime-core.esm-bundler.js:5984
+(匿名) @ runtime-core.esm-bundler.js:5483
+(匿名) @ runtime-core.esm-bundler.js:6132
+run @ reactivity.esm-bundler.js:260
+(匿名) @ runtime-core.esm-bundler.js:6260
+(匿名) @ runtime-core.esm-bundler.js:6032
+(匿名) @ runtime-core.esm-bundler.js:5984
+(匿名) @ runtime-core.esm-bundler.js:5483
+(匿名) @ runtime-core.esm-bundler.js:6132
+run @ reactivity.esm-bundler.js:260
+(匿名) @ runtime-core.esm-bundler.js:6260
+(匿名) @ runtime-core.esm-bundler.js:6032
+(匿名) @ runtime-core.esm-bundler.js:5984
+(匿名) @ runtime-core.esm-bundler.js:5483
+(匿名) @ runtime-core.esm-bundler.js:5734
+(匿名) @ runtime-core.esm-bundler.js:5650
+(匿名) @ runtime-core.esm-bundler.js:5605
+(匿名) @ runtime-core.esm-bundler.js:5471
+(匿名) @ runtime-core.esm-bundler.js:6132
+run @ reactivity.esm-bundler.js:260
+(匿名) @ runtime-core.esm-bundler.js:6260
+(匿名) @ runtime-core.esm-bundler.js:6032
+(匿名) @ runtime-core.esm-bundler.js:5984
+(匿名) @ runtime-core.esm-bundler.js:5483
+(匿名) @ runtime-core.esm-bundler.js:6132
+run @ reactivity.esm-bundler.js:260
+(匿名) @ runtime-core.esm-bundler.js:6260
+(匿名) @ runtime-core.esm-bundler.js:6032
+(匿名) @ runtime-core.esm-bundler.js:5984
+(匿名) @ runtime-core.esm-bundler.js:5483
+(匿名) @ runtime-core.esm-bundler.js:5734
+(匿名) @ runtime-core.esm-bundler.js:5650
+(匿名) @ runtime-core.esm-bundler.js:5605
+(匿名) @ runtime-core.esm-bundler.js:5471
+(匿名) @ runtime-core.esm-bundler.js:6212
+run @ reactivity.esm-bundler.js:260
+(匿名) @ runtime-core.esm-bundler.js:1419
+(匿名) @ runtime-core.esm-bundler.js:6739
+(匿名) @ runtime-core.esm-bundler.js:1596
+(匿名) @ runtime-dom.esm-bundler.js:183
+(匿名) @ runtime-dom.esm-bundler.js:214
+(匿名) @ runtime-dom.esm-bundler.js:290
+(匿名) @ runtime-dom.esm-bundler.js:304
+(匿名) @ runtime-dom.esm-bundler.js:308
+ChaotuCanvasUI.vue:294 [Vue warn]: Failed to resolve component: el-dialog
+If this is a native custom element, make sure to exclude it from component resolution via compilerOptions.isCustomElement. 
+  at <ChaotuCanvasUI ref="chaotuCanvasUIRef" key="chaotu-canvas-892d64fa-21f3-494f-b2fd-af496f5c7bad-art-0" content="{\n"  ... > 
+  at <BaseTransition mode="out-in" appear=false persisted=false  ... > 
+  at <Transition name="scale-fade" mode="out-in" > 
+  at <BaseTransition mode="out-in" appear=false persisted=false  ... > 
+  at <Transition name="slide-fade" mode="out-in" > 
+  at <BaseTransition mode="out-in" appear=false persisted=false  ... > 
+  at <Transition name="fade" mode="out-in" > 
+  at <CanvasPanel key=0 ref="canvasPanelRef" visible=true  ... > 
+  at <BaseTransition onBeforeEnter=fn<onBeforeEnter> onAfterEnter=fn<onCanvasTransitionEnd> onBeforeLeave=fn<onCanvasTransitionStart>  ... > 
+  at <Transition name="canvas-expand" onBeforeEnter=fn<onCanvasTransitionStart> onAfterEnter=fn<onCanvasTransitionEnd>  ... > 
+  at <ChatView onVnodeUnmounted=fn<onVnodeUnmounted> ref=Ref< Proxy(Object) {__v_skip: true} > key="/chat" > 
+  at <KeepAlive> 
+  at <BaseTransition mode="out-in" appear=true persisted=false  ... > 
+  at <Transition name="page-fade" mode="out-in" appear="" > 
+  at <RouterView> 
+  at <Anonymous hasSider=undefined prefixCls="ant-layout-content" tagName="main"  ... > 
+  at <ALayoutContent class="content" > 
+  at <Anonymous hasSider=undefined prefixCls="ant-layout" tagName="section" > 
+  at <ALayout> 
+  at <Anonymous hasSider=undefined prefixCls="ant-layout" tagName="section"  ... > 
+  at <ALayout class="layout" > 
+  at <ALocaleProvider locale= {locale: 'zh-cn', Pagination: {…}, DatePicker: {…}, TimePicker: {…}, Calendar: {…}, …} ANT_MARK__="internalMark" > 
+  at <LocaleReceiver children=fn<children> > 
+  at <AConfigProvider locale= {locale: 'zh-cn', Pagination: {…}, DatePicker: {…}, TimePicker: {…}, Calendar: {…}, …} > 
+  at <App>
+warn$1 @ runtime-core.esm-bundler.js:51
+resolveAsset @ runtime-core.esm-bundler.js:3154
+resolveComponent @ runtime-core.esm-bundler.js:3116
+_sfc_render @ ChaotuCanvasUI.vue:294
+renderComponentRoot @ runtime-core.esm-bundler.js:4560
+(匿名) @ runtime-core.esm-bundler.js:6125
+run @ reactivity.esm-bundler.js:260
+(匿名) @ runtime-core.esm-bundler.js:6260
+(匿名) @ runtime-core.esm-bundler.js:6032
+(匿名) @ runtime-core.esm-bundler.js:5984
+(匿名) @ runtime-core.esm-bundler.js:5483
+(匿名) @ runtime-core.esm-bundler.js:6132
+run @ reactivity.esm-bundler.js:260
+(匿名) @ runtime-core.esm-bundler.js:6260
+(匿名) @ runtime-core.esm-bundler.js:6032
+(匿名) @ runtime-core.esm-bundler.js:5984
+(匿名) @ runtime-core.esm-bundler.js:5483
+(匿名) @ runtime-core.esm-bundler.js:6132
+run @ reactivity.esm-bundler.js:260
+(匿名) @ runtime-core.esm-bundler.js:6260
+(匿名) @ runtime-core.esm-bundler.js:6032
+(匿名) @ runtime-core.esm-bundler.js:5984
+(匿名) @ runtime-core.esm-bundler.js:5483
+(匿名) @ runtime-core.esm-bundler.js:5734
+(匿名) @ runtime-core.esm-bundler.js:5650
+(匿名) @ runtime-core.esm-bundler.js:5605
+(匿名) @ runtime-core.esm-bundler.js:5471
+(匿名) @ runtime-core.esm-bundler.js:6132
+run @ reactivity.esm-bundler.js:260
+(匿名) @ runtime-core.esm-bundler.js:6260
+(匿名) @ runtime-core.esm-bundler.js:6032
+(匿名) @ runtime-core.esm-bundler.js:5984
+(匿名) @ runtime-core.esm-bundler.js:5483
+(匿名) @ runtime-core.esm-bundler.js:6132
+run @ reactivity.esm-bundler.js:260
+(匿名) @ runtime-core.esm-bundler.js:6260
+(匿名) @ runtime-core.esm-bundler.js:6032
+(匿名) @ runtime-core.esm-bundler.js:5984
+(匿名) @ runtime-core.esm-bundler.js:5483
+(匿名) @ runtime-core.esm-bundler.js:5734
+(匿名) @ runtime-core.esm-bundler.js:5650
+(匿名) @ runtime-core.esm-bundler.js:5605
+(匿名) @ runtime-core.esm-bundler.js:5471
+(匿名) @ runtime-core.esm-bundler.js:6212
+run @ reactivity.esm-bundler.js:260
+(匿名) @ runtime-core.esm-bundler.js:1419
+(匿名) @ runtime-core.esm-bundler.js:6739
+(匿名) @ runtime-core.esm-bundler.js:1596
+(匿名) @ runtime-dom.esm-bundler.js:183
+(匿名) @ runtime-dom.esm-bundler.js:214
+(匿名) @ runtime-dom.esm-bundler.js:290
+(匿名) @ runtime-dom.esm-bundler.js:304
+(匿名) @ runtime-dom.esm-bundler.js:308
+ChaotuCanvasUI.vue:812 鹰眼图插件未安装
+initMap @ ChaotuCanvasUI.vue:812
+(匿名) @ ChaotuCanvasUI.vue:1637
+(匿名) @ runtime-core.esm-bundler.js:3091
+callWithErrorHandling @ runtime-core.esm-bundler.js:199
+callWithAsyncErrorHandling @ runtime-core.esm-bundler.js:206
+(匿名) @ runtime-core.esm-bundler.js:3071
+flushPostFlushCbs @ runtime-core.esm-bundler.js:385
+flushJobs @ runtime-core.esm-bundler.js:427
+Promise.then
+queueFlush @ runtime-core.esm-bundler.js:322
+queuePostFlushCb @ runtime-core.esm-bundler.js:336
+queueEffectWithSuspense @ runtime-core.esm-bundler.js:7554
+(匿名) @ runtime-core.esm-bundler.js:5692
+(匿名) @ runtime-core.esm-bundler.js:5605
+(匿名) @ runtime-core.esm-bundler.js:5471
+(匿名) @ runtime-core.esm-bundler.js:5734
+(匿名) @ runtime-core.esm-bundler.js:5650
+(匿名) @ runtime-core.esm-bundler.js:5605
+(匿名) @ runtime-core.esm-bundler.js:5471
+(匿名) @ runtime-core.esm-bundler.js:5734
+(匿名) @ runtime-core.esm-bundler.js:5650
+(匿名) @ runtime-core.esm-bundler.js:5605
+(匿名) @ runtime-core.esm-bundler.js:5471
+(匿名) @ runtime-core.esm-bundler.js:5734
+(匿名) @ runtime-core.esm-bundler.js:5650
+(匿名) @ runtime-core.esm-bundler.js:5605
+(匿名) @ runtime-core.esm-bundler.js:5471
+(匿名) @ runtime-core.esm-bundler.js:6132
+run @ reactivity.esm-bundler.js:260
+(匿名) @ runtime-core.esm-bundler.js:6260
+(匿名) @ runtime-core.esm-bundler.js:6032
+(匿名) @ runtime-core.esm-bundler.js:5984
+(匿名) @ runtime-core.esm-bundler.js:5483
+(匿名) @ runtime-core.esm-bundler.js:6132
+run @ reactivity.esm-bundler.js:260
+(匿名) @ runtime-core.esm-bundler.js:6260
+(匿名) @ runtime-core.esm-bundler.js:6032
+(匿名) @ runtime-core.esm-bundler.js:5984
+(匿名) @ runtime-core.esm-bundler.js:5483
+(匿名) @ runtime-core.esm-bundler.js:5734
+(匿名) @ runtime-core.esm-bundler.js:5650
+(匿名) @ runtime-core.esm-bundler.js:5605
+(匿名) @ runtime-core.esm-bundler.js:5471
+(匿名) @ runtime-core.esm-bundler.js:5734
+(匿名) @ runtime-core.esm-bundler.js:5650
+(匿名) @ runtime-core.esm-bundler.js:5605
+(匿名) @ runtime-core.esm-bundler.js:5471
+(匿名) @ runtime-core.esm-bundler.js:6132
+run @ reactivity.esm-bundler.js:260
+(匿名) @ runtime-core.esm-bundler.js:6260
+(匿名) @ runtime-core.esm-bundler.js:6032
+(匿名) @ runtime-core.esm-bundler.js:5984
+(匿名) @ runtime-core.esm-bundler.js:5483
+(匿名) @ runtime-core.esm-bundler.js:6132
+run @ reactivity.esm-bundler.js:260
+(匿名) @ runtime-core.esm-bundler.js:6260
+(匿名) @ runtime-core.esm-bundler.js:6032
+(匿名) @ runtime-core.esm-bundler.js:5984
+(匿名) @ runtime-core.esm-bundler.js:5483
+(匿名) @ runtime-core.esm-bundler.js:6132
+run @ reactivity.esm-bundler.js:260
+(匿名) @ runtime-core.esm-bundler.js:6260
+(匿名) @ runtime-core.esm-bundler.js:6032
+(匿名) @ runtime-core.esm-bundler.js:5984
+(匿名) @ runtime-core.esm-bundler.js:5483
+(匿名) @ runtime-core.esm-bundler.js:5734
+(匿名) @ runtime-core.esm-bundler.js:5650
+(匿名) @ runtime-core.esm-bundler.js:5605
+(匿名) @ runtime-core.esm-bundler.js:5471
+(匿名) @ runtime-core.esm-bundler.js:6132
+run @ reactivity.esm-bundler.js:260
+(匿名) @ runtime-core.esm-bundler.js:6260
+(匿名) @ runtime-core.esm-bundler.js:6032
+(匿名) @ runtime-core.esm-bundler.js:5984
+(匿名) @ runtime-core.esm-bundler.js:5483
+(匿名) @ runtime-core.esm-bundler.js:6132
+run @ reactivity.esm-bundler.js:260
+(匿名) @ runtime-core.esm-bundler.js:6260
+(匿名) @ runtime-core.esm-bundler.js:6032
+(匿名) @ runtime-core.esm-bundler.js:5984
+(匿名) @ runtime-core.esm-bundler.js:5483
+(匿名) @ runtime-core.esm-bundler.js:5734
+(匿名) @ runtime-core.esm-bundler.js:5650
+(匿名) @ runtime-core.esm-bundler.js:5605
+(匿名) @ runtime-core.esm-bundler.js:5471
+(匿名) @ runtime-core.esm-bundler.js:6212
+run @ reactivity.esm-bundler.js:260
+(匿名) @ runtime-core.esm-bundler.js:1419
+(匿名) @ runtime-core.esm-bundler.js:6739
+(匿名) @ runtime-core.esm-bundler.js:1596
+(匿名) @ runtime-dom.esm-bundler.js:183
+(匿名) @ runtime-dom.esm-bundler.js:214
+(匿名) @ runtime-dom.esm-bundler.js:290
+(匿名) @ runtime-dom.esm-bundler.js:304
+(匿名) @ runtime-dom.esm-bundler.js:308
+ChaotuCanvasUI.vue:1577 [SuperMapRendererChaotu] tryRenderContent 开始解析: {isComplete: false, contentLength: 2}
+ChaotuCanvasUI.vue:1132 [SuperMapRendererChaotu] parseMapConfig 收到 content: {type: 'string', length: 2, head: '{\n', tail: '{\n'}
+ChaotuCanvasUI.vue:1171 [SuperMapRendererChaotu] JSON.parse 失败: {message: "Expected property name or '}' in JSON at position 1 (line 1 column 2)", contentLength: 2, errorPosition: 1, isTruncated: true, contextAroundError: '{\n', …}
+parseMapConfig @ ChaotuCanvasUI.vue:1171
+tryRenderContent @ ChaotuCanvasUI.vue:1582
+(匿名) @ ChaotuCanvasUI.vue:1640
+(匿名) @ runtime-core.esm-bundler.js:3091
+callWithErrorHandling @ runtime-core.esm-bundler.js:199
+callWithAsyncErrorHandling @ runtime-core.esm-bundler.js:206
+(匿名) @ runtime-core.esm-bundler.js:3071
+flushPostFlushCbs @ runtime-core.esm-bundler.js:385
+flushJobs @ runtime-core.esm-bundler.js:427
+Promise.then
+queueFlush @ runtime-core.esm-bundler.js:322
+queuePostFlushCb @ runtime-core.esm-bundler.js:336
+queueEffectWithSuspense @ runtime-core.esm-bundler.js:7554
+(匿名) @ runtime-core.esm-bundler.js:5692
+(匿名) @ runtime-core.esm-bundler.js:5605
+(匿名) @ runtime-core.esm-bundler.js:5471
+(匿名) @ runtime-core.esm-bundler.js:5734
+(匿名) @ runtime-core.esm-bundler.js:5650
+(匿名) @ runtime-core.esm-bundler.js:5605
+(匿名) @ runtime-core.esm-bundler.js:5471
+(匿名) @ runtime-core.esm-bundler.js:5734
+(匿名) @ runtime-core.esm-bundler.js:5650
+(匿名) @ runtime-core.esm-bundler.js:5605
+(匿名) @ runtime-core.esm-bundler.js:5471
+(匿名) @ runtime-core.esm-bundler.js:5734
+(匿名) @ runtime-core.esm-bundler.js:5650
+(匿名) @ runtime-core.esm-bundler.js:5605
+(匿名) @ runtime-core.esm-bundler.js:5471
+(匿名) @ runtime-core.esm-bundler.js:6132
+run @ reactivity.esm-bundler.js:260
+(匿名) @ runtime-core.esm-bundler.js:6260
+(匿名) @ runtime-core.esm-bundler.js:6032
+(匿名) @ runtime-core.esm-bundler.js:5984
+(匿名) @ runtime-core.esm-bundler.js:5483
+(匿名) @ runtime-core.esm-bundler.js:6132
+run @ reactivity.esm-bundler.js:260
+(匿名) @ runtime-core.esm-bundler.js:6260
+(匿名) @ runtime-core.esm-bundler.js:6032
+(匿名) @ runtime-core.esm-bundler.js:5984
+(匿名) @ runtime-core.esm-bundler.js:5483
+(匿名) @ runtime-core.esm-bundler.js:5734
+(匿名) @ runtime-core.esm-bundler.js:5650
+(匿名) @ runtime-core.esm-bundler.js:5605
+(匿名) @ runtime-core.esm-bundler.js:5471
+(匿名) @ runtime-core.esm-bundler.js:5734
+(匿名) @ runtime-core.esm-bundler.js:5650
+(匿名) @ runtime-core.esm-bundler.js:5605
+(匿名) @ runtime-core.esm-bundler.js:5471
+(匿名) @ runtime-core.esm-bundler.js:6132
+run @ reactivity.esm-bundler.js:260
+(匿名) @ runtime-core.esm-bundler.js:6260
+(匿名) @ runtime-core.esm-bundler.js:6032
+(匿名) @ runtime-core.esm-bundler.js:5984
+(匿名) @ runtime-core.esm-bundler.js:5483
+(匿名) @ runtime-core.esm-bundler.js:6132
+run @ reactivity.esm-bundler.js:260
+(匿名) @ runtime-core.esm-bundler.js:6260
+(匿名) @ runtime-core.esm-bundler.js:6032
+(匿名) @ runtime-core.esm-bundler.js:5984
+(匿名) @ runtime-core.esm-bundler.js:5483
+(匿名) @ runtime-core.esm-bundler.js:6132
+run @ reactivity.esm-bundler.js:260
+(匿名) @ runtime-core.esm-bundler.js:6260
+(匿名) @ runtime-core.esm-bundler.js:6032
+(匿名) @ runtime-core.esm-bundler.js:5984
+(匿名) @ runtime-core.esm-bundler.js:5483
+(匿名) @ runtime-core.esm-bundler.js:5734
+(匿名) @ runtime-core.esm-bundler.js:5650
+(匿名) @ runtime-core.esm-bundler.js:5605
+(匿名) @ runtime-core.esm-bundler.js:5471
+(匿名) @ runtime-core.esm-bundler.js:6132
+run @ reactivity.esm-bundler.js:260
+(匿名) @ runtime-core.esm-bundler.js:6260
+(匿名) @ runtime-core.esm-bundler.js:6032
+(匿名) @ runtime-core.esm-bundler.js:5984
+(匿名) @ runtime-core.esm-bundler.js:5483
+(匿名) @ runtime-core.esm-bundler.js:6132
+run @ reactivity.esm-bundler.js:260
+(匿名) @ runtime-core.esm-bundler.js:6260
+(匿名) @ runtime-core.esm-bundler.js:6032
+(匿名) @ runtime-core.esm-bundler.js:5984
+(匿名) @ runtime-core.esm-bundler.js:5483
+(匿名) @ runtime-core.esm-bundler.js:5734
+(匿名) @ runtime-core.esm-bundler.js:5650
+(匿名) @ runtime-core.esm-bundler.js:5605
+(匿名) @ runtime-core.esm-bundler.js:5471
+(匿名) @ runtime-core.esm-bundler.js:6212
+run @ reactivity.esm-bundler.js:260
+(匿名) @ runtime-core.esm-bundler.js:1419
+(匿名) @ runtime-core.esm-bundler.js:6739
+(匿名) @ runtime-core.esm-bundler.js:1596
+(匿名) @ runtime-dom.esm-bundler.js:183
+(匿名) @ runtime-dom.esm-bundler.js:214
+(匿名) @ runtime-dom.esm-bundler.js:290
+(匿名) @ runtime-dom.esm-bundler.js:304
+(匿名) @ runtime-dom.esm-bundler.js:308
+ChaotuCanvasUI.vue:1198 [SuperMapRendererChaotu] 截断 JSON 未提取到 name 字段
+parseMapConfig @ ChaotuCanvasUI.vue:1198
+tryRenderContent @ ChaotuCanvasUI.vue:1582
+(匿名) @ ChaotuCanvasUI.vue:1640
+(匿名) @ runtime-core.esm-bundler.js:3091
+callWithErrorHandling @ runtime-core.esm-bundler.js:199
+callWithAsyncErrorHandling @ runtime-core.esm-bundler.js:206
+(匿名) @ runtime-core.esm-bundler.js:3071
+flushPostFlushCbs @ runtime-core.esm-bundler.js:385
+flushJobs @ runtime-core.esm-bundler.js:427
+Promise.then
+queueFlush @ runtime-core.esm-bundler.js:322
+queuePostFlushCb @ runtime-core.esm-bundler.js:336
+queueEffectWithSuspense @ runtime-core.esm-bundler.js:7554
+(匿名) @ runtime-core.esm-bundler.js:5692
+(匿名) @ runtime-core.esm-bundler.js:5605
+(匿名) @ runtime-core.esm-bundler.js:5471
+(匿名) @ runtime-core.esm-bundler.js:5734
+(匿名) @ runtime-core.esm-bundler.js:5650
+(匿名) @ runtime-core.esm-bundler.js:5605
+(匿名) @ runtime-core.esm-bundler.js:5471
+(匿名) @ runtime-core.esm-bundler.js:5734
+(匿名) @ runtime-core.esm-bundler.js:5650
+(匿名) @ runtime-core.esm-bundler.js:5605
+(匿名) @ runtime-core.esm-bundler.js:5471
+(匿名) @ runtime-core.esm-bundler.js:5734
+(匿名) @ runtime-core.esm-bundler.js:5650
+(匿名) @ runtime-core.esm-bundler.js:5605
+(匿名) @ runtime-core.esm-bundler.js:5471
+(匿名) @ runtime-core.esm-bundler.js:6132
+run @ reactivity.esm-bundler.js:260
+(匿名) @ runtime-core.esm-bundler.js:6260
+(匿名) @ runtime-core.esm-bundler.js:6032
+(匿名) @ runtime-core.esm-bundler.js:5984
+(匿名) @ runtime-core.esm-bundler.js:5483
+(匿名) @ runtime-core.esm-bundler.js:6132
+run @ reactivity.esm-bundler.js:260
+(匿名) @ runtime-core.esm-bundler.js:6260
+(匿名) @ runtime-core.esm-bundler.js:6032
+(匿名) @ runtime-core.esm-bundler.js:5984
+(匿名) @ runtime-core.esm-bundler.js:5483
+(匿名) @ runtime-core.esm-bundler.js:5734
+(匿名) @ runtime-core.esm-bundler.js:5650
+(匿名) @ runtime-core.esm-bundler.js:5605
+(匿名) @ runtime-core.esm-bundler.js:5471
+(匿名) @ runtime-core.esm-bundler.js:5734
+(匿名) @ runtime-core.esm-bundler.js:5650
+(匿名) @ runtime-core.esm-bundler.js:5605
+(匿名) @ runtime-core.esm-bundler.js:5471
+(匿名) @ runtime-core.esm-bundler.js:6132
+run @ reactivity.esm-bundler.js:260
+(匿名) @ runtime-core.esm-bundler.js:6260
+(匿名) @ runtime-core.esm-bundler.js:6032
+(匿名) @ runtime-core.esm-bundler.js:5984
+(匿名) @ runtime-core.esm-bundler.js:5483
+(匿名) @ runtime-core.esm-bundler.js:6132
+run @ reactivity.esm-bundler.js:260
+(匿名) @ runtime-core.esm-bundler.js:6260
+(匿名) @ runtime-core.esm-bundler.js:6032
+(匿名) @ runtime-core.esm-bundler.js:5984
+(匿名) @ runtime-core.esm-bundler.js:5483
+(匿名) @ runtime-core.esm-bundler.js:6132
+run @ reactivity.esm-bundler.js:260
+(匿名) @ runtime-core.esm-bundler.js:6260
+(匿名) @ runtime-core.esm-bundler.js:6032
+(匿名) @ runtime-core.esm-bundler.js:5984
+(匿名) @ runtime-core.esm-bundler.js:5483
+(匿名) @ runtime-core.esm-bundler.js:5734
+(匿名) @ runtime-core.esm-bundler.js:5650
+(匿名) @ runtime-core.esm-bundler.js:5605
+(匿名) @ runtime-core.esm-bundler.js:5471
+(匿名) @ runtime-core.esm-bundler.js:6132
+run @ reactivity.esm-bundler.js:260
+(匿名) @ runtime-core.esm-bundler.js:6260
+(匿名) @ runtime-core.esm-bundler.js:6032
+(匿名) @ runtime-core.esm-bundler.js:5984
+(匿名) @ runtime-core.esm-bundler.js:5483
+(匿名) @ runtime-core.esm-bundler.js:6132
+run @ reactivity.esm-bundler.js:260
+(匿名) @ runtime-core.esm-bundler.js:6260
+(匿名) @ runtime-core.esm-bundler.js:6032
+(匿名) @ runtime-core.esm-bundler.js:5984
+(匿名) @ runtime-core.esm-bundler.js:5483
+(匿名) @ runtime-core.esm-bundler.js:5734
+(匿名) @ runtime-core.esm-bundler.js:5650
+(匿名) @ runtime-core.esm-bundler.js:5605
+(匿名) @ runtime-core.esm-bundler.js:5471
+(匿名) @ runtime-core.esm-bundler.js:6212
+run @ reactivity.esm-bundler.js:260
+(匿名) @ runtime-core.esm-bundler.js:1419
+(匿名) @ runtime-core.esm-bundler.js:6739
+(匿名) @ runtime-core.esm-bundler.js:1596
+(匿名) @ runtime-dom.esm-bundler.js:183
+(匿名) @ runtime-dom.esm-bundler.js:214
+(匿名) @ runtime-dom.esm-bundler.js:290
+(匿名) @ runtime-dom.esm-bundler.js:304
+(匿名) @ runtime-dom.esm-bundler.js:308
+ChaotuCanvasUI.vue:1207 [SuperMapRendererChaotu] 正则提取也未找到 JSON 对象
+parseMapConfig @ ChaotuCanvasUI.vue:1207
+tryRenderContent @ ChaotuCanvasUI.vue:1582
+(匿名) @ ChaotuCanvasUI.vue:1640
+(匿名) @ runtime-core.esm-bundler.js:3091
+callWithErrorHandling @ runtime-core.esm-bundler.js:199
+callWithAsyncErrorHandling @ runtime-core.esm-bundler.js:206
+(匿名) @ runtime-core.esm-bundler.js:3071
+flushPostFlushCbs @ runtime-core.esm-bundler.js:385
+flushJobs @ runtime-core.esm-bundler.js:427
+Promise.then
+queueFlush @ runtime-core.esm-bundler.js:322
+queuePostFlushCb @ runtime-core.esm-bundler.js:336
+queueEffectWithSuspense @ runtime-core.esm-bundler.js:7554
+(匿名) @ runtime-core.esm-bundler.js:5692
+(匿名) @ runtime-core.esm-bundler.js:5605
+(匿名) @ runtime-core.esm-bundler.js:5471
+(匿名) @ runtime-core.esm-bundler.js:5734
+(匿名) @ runtime-core.esm-bundler.js:5650
+(匿名) @ runtime-core.esm-bundler.js:5605
+(匿名) @ runtime-core.esm-bundler.js:5471
+(匿名) @ runtime-core.esm-bundler.js:5734
+(匿名) @ runtime-core.esm-bundler.js:5650
+(匿名) @ runtime-core.esm-bundler.js:5605
+(匿名) @ runtime-core.esm-bundler.js:5471
+(匿名) @ runtime-core.esm-bundler.js:5734
+(匿名) @ runtime-core.esm-bundler.js:5650
+(匿名) @ runtime-core.esm-bundler.js:5605
+(匿名) @ runtime-core.esm-bundler.js:5471
+(匿名) @ runtime-core.esm-bundler.js:6132
+run @ reactivity.esm-bundler.js:260
+(匿名) @ runtime-core.esm-bundler.js:6260
+(匿名) @ runtime-core.esm-bundler.js:6032
+(匿名) @ runtime-core.esm-bundler.js:5984
+(匿名) @ runtime-core.esm-bundler.js:5483
+(匿名) @ runtime-core.esm-bundler.js:6132
+run @ reactivity.esm-bundler.js:260
+(匿名) @ runtime-core.esm-bundler.js:6260
+(匿名) @ runtime-core.esm-bundler.js:6032
+(匿名) @ runtime-core.esm-bundler.js:5984
+(匿名) @ runtime-core.esm-bundler.js:5483
+(匿名) @ runtime-core.esm-bundler.js:5734
+(匿名) @ runtime-core.esm-bundler.js:5650
+(匿名) @ runtime-core.esm-bundler.js:5605
+(匿名) @ runtime-core.esm-bundler.js:5471
+(匿名) @ runtime-core.esm-bundler.js:5734
+(匿名) @ runtime-core.esm-bundler.js:5650
+(匿名) @ runtime-core.esm-bundler.js:5605
+(匿名) @ runtime-core.esm-bundler.js:5471
+(匿名) @ runtime-core.esm-bundler.js:6132
+run @ reactivity.esm-bundler.js:260
+(匿名) @ runtime-core.esm-bundler.js:6260
+(匿名) @ runtime-core.esm-bundler.js:6032
+(匿名) @ runtime-core.esm-bundler.js:5984
+(匿名) @ runtime-core.esm-bundler.js:5483
+(匿名) @ runtime-core.esm-bundler.js:6132
+run @ reactivity.esm-bundler.js:260
+(匿名) @ runtime-core.esm-bundler.js:6260
+(匿名) @ runtime-core.esm-bundler.js:6032
+(匿名) @ runtime-core.esm-bundler.js:5984
+(匿名) @ runtime-core.esm-bundler.js:5483
+(匿名) @ runtime-core.esm-bundler.js:6132
+run @ reactivity.esm-bundler.js:260
+(匿名) @ runtime-core.esm-bundler.js:6260
+(匿名) @ runtime-core.esm-bundler.js:6032
+(匿名) @ runtime-core.esm-bundler.js:5984
+(匿名) @ runtime-core.esm-bundler.js:5483
+(匿名) @ runtime-core.esm-bundler.js:5734
+(匿名) @ runtime-core.esm-bundler.js:5650
+(匿名) @ runtime-core.esm-bundler.js:5605
+(匿名) @ runtime-core.esm-bundler.js:5471
+(匿名) @ runtime-core.esm-bundler.js:6132
+run @ reactivity.esm-bundler.js:260
+(匿名) @ runtime-core.esm-bundler.js:6260
+(匿名) @ runtime-core.esm-bundler.js:6032
+(匿名) @ runtime-core.esm-bundler.js:5984
+(匿名) @ runtime-core.esm-bundler.js:5483
+(匿名) @ runtime-core.esm-bundler.js:6132
+run @ reactivity.esm-bundler.js:260
+(匿名) @ runtime-core.esm-bundler.js:6260
+(匿名) @ runtime-core.esm-bundler.js:6032
+(匿名) @ runtime-core.esm-bundler.js:5984
+(匿名) @ runtime-core.esm-bundler.js:5483
+(匿名) @ runtime-core.esm-bundler.js:5734
+(匿名) @ runtime-core.esm-bundler.js:5650
+(匿名) @ runtime-core.esm-bundler.js:5605
+(匿名) @ runtime-core.esm-bundler.js:5471
+(匿名) @ runtime-core.esm-bundler.js:6212
+run @ reactivity.esm-bundler.js:260
+(匿名) @ runtime-core.esm-bundler.js:1419
+(匿名) @ runtime-core.esm-bundler.js:6739
+(匿名) @ runtime-core.esm-bundler.js:1596
+(匿名) @ runtime-dom.esm-bundler.js:183
+(匿名) @ runtime-dom.esm-bundler.js:214
+(匿名) @ runtime-dom.esm-bundler.js:290
+(匿名) @ runtime-dom.esm-bundler.js:304
+(匿名) @ runtime-dom.esm-bundler.js:308
+ChaotuCanvasUI.vue:1591 [SuperMapRendererChaotu] parseMapConfig 返回 null, 但 isComplete === false (流式生成中), 不显示错误
+ChaotuCanvasUI.vue:294 [Vue warn]: Failed to resolve component: el-dialog
+If this is a native custom element, make sure to exclude it from component resolution via compilerOptions.isCustomElement. 
+  at <ChaotuCanvasUI ref="chaotuCanvasUIRef" key="chaotu-canvas-892d64fa-21f3-494f-b2fd-af496f5c7bad-art-0" content="{\n"  ... > 
+  at <BaseTransition mode="out-in" appear=false persisted=false  ... > 
+  at <Transition name="scale-fade" mode="out-in" > 
+  at <BaseTransition mode="out-in" appear=false persisted=false  ... > 
+  at <Transition name="slide-fade" mode="out-in" > 
+  at <BaseTransition mode="out-in" appear=false persisted=false  ... > 
+  at <Transition name="fade" mode="out-in" > 
+  at <CanvasPanel key=0 ref="canvasPanelRef" visible=true  ... > 
+  at <BaseTransition onBeforeEnter=fn<onBeforeEnter> onAfterEnter=fn<onCanvasTransitionEnd> onBeforeLeave=fn<onCanvasTransitionStart>  ... > 
+  at <Transition name="canvas-expand" onBeforeEnter=fn<onCanvasTransitionStart> onAfterEnter=fn<onCanvasTransitionEnd>  ... > 
+  at <ChatView onVnodeUnmounted=fn<onVnodeUnmounted> ref=Ref< Proxy(Object) {__v_skip: true} > key="/chat" > 
+  at <KeepAlive> 
+  at <BaseTransition mode="out-in" appear=true persisted=false  ... > 
+  at <Transition name="page-fade" mode="out-in" appear="" > 
+  at <RouterView> 
+  at <Anonymous hasSider=undefined prefixCls="ant-layout-content" tagName="main"  ... > 
+  at <ALayoutContent class="content" > 
+  at <Anonymous hasSider=undefined prefixCls="ant-layout" tagName="section" > 
+  at <ALayout> 
+  at <Anonymous hasSider=undefined prefixCls="ant-layout" tagName="section"  ... > 
+  at <ALayout class="layout" > 
+  at <ALocaleProvider locale= {locale: 'zh-cn', Pagination: {…}, DatePicker: {…}, TimePicker: {…}, Calendar: {…}, …} ANT_MARK__="internalMark" > 
+  at <LocaleReceiver children=fn<children> > 
+  at <AConfigProvider locale= {locale: 'zh-cn', Pagination: {…}, DatePicker: {…}, TimePicker: {…}, Calendar: {…}, …} > 
+  at <App>
+warn$1 @ runtime-core.esm-bundler.js:51
+resolveAsset @ runtime-core.esm-bundler.js:3154
+resolveComponent @ runtime-core.esm-bundler.js:3116
+_sfc_render @ ChaotuCanvasUI.vue:294
+renderComponentRoot @ runtime-core.esm-bundler.js:4560
+(匿名) @ runtime-core.esm-bundler.js:6203
+run @ reactivity.esm-bundler.js:260
+runIfDirty @ reactivity.esm-bundler.js:298
+callWithErrorHandling @ runtime-core.esm-bundler.js:199
+flushJobs @ runtime-core.esm-bundler.js:408
+flushJobs @ runtime-core.esm-bundler.js:430
+Promise.then
+queueFlush @ runtime-core.esm-bundler.js:322
+queuePostFlushCb @ runtime-core.esm-bundler.js:336
+queueEffectWithSuspense @ runtime-core.esm-bundler.js:7554
+(匿名) @ runtime-core.esm-bundler.js:5692
+(匿名) @ runtime-core.esm-bundler.js:5605
+(匿名) @ runtime-core.esm-bundler.js:5471
+(匿名) @ runtime-core.esm-bundler.js:5734
+(匿名) @ runtime-core.esm-bundler.js:5650
+(匿名) @ runtime-core.esm-bundler.js:5605
+(匿名) @ runtime-core.esm-bundler.js:5471
+(匿名) @ runtime-core.esm-bundler.js:5734
+(匿名) @ runtime-core.esm-bundler.js:5650
+(匿名) @ runtime-core.esm-bundler.js:5605
+(匿名) @ runtime-core.esm-bundler.js:5471
+(匿名) @ runtime-core.esm-bundler.js:5734
+(匿名) @ runtime-core.esm-bundler.js:5650
+(匿名) @ runtime-core.esm-bundler.js:5605
+(匿名) @ runtime-core.esm-bundler.js:5471
+(匿名) @ runtime-core.esm-bundler.js:6132
+run @ reactivity.esm-bundler.js:260
+(匿名) @ runtime-core.esm-bundler.js:6260
+(匿名) @ runtime-core.esm-bundler.js:6032
+(匿名) @ runtime-core.esm-bundler.js:5984
+(匿名) @ runtime-core.esm-bundler.js:5483
+(匿名) @ runtime-core.esm-bundler.js:6132
+run @ reactivity.esm-bundler.js:260
+(匿名) @ runtime-core.esm-bundler.js:6260
+(匿名) @ runtime-core.esm-bundler.js:6032
+(匿名) @ runtime-core.esm-bundler.js:5984
+(匿名) @ runtime-core.esm-bundler.js:5483
+(匿名) @ runtime-core.esm-bundler.js:5734
+(匿名) @ runtime-core.esm-bundler.js:5650
+(匿名) @ runtime-core.esm-bundler.js:5605
+(匿名) @ runtime-core.esm-bundler.js:5471
+(匿名) @ runtime-core.esm-bundler.js:5734
+(匿名) @ runtime-core.esm-bundler.js:5650
+(匿名) @ runtime-core.esm-bundler.js:5605
+(匿名) @ runtime-core.esm-bundler.js:5471
+(匿名) @ runtime-core.esm-bundler.js:6132
+run @ reactivity.esm-bundler.js:260
+(匿名) @ runtime-core.esm-bundler.js:6260
+(匿名) @ runtime-core.esm-bundler.js:6032
+(匿名) @ runtime-core.esm-bundler.js:5984
+(匿名) @ runtime-core.esm-bundler.js:5483
+(匿名) @ runtime-core.esm-bundler.js:6132
+run @ reactivity.esm-bundler.js:260
+(匿名) @ runtime-core.esm-bundler.js:6260
+(匿名) @ runtime-core.esm-bundler.js:6032
+(匿名) @ runtime-core.esm-bundler.js:5984
+(匿名) @ runtime-core.esm-bundler.js:5483
+(匿名) @ runtime-core.esm-bundler.js:6132
+run @ reactivity.esm-bundler.js:260
+(匿名) @ runtime-core.esm-bundler.js:6260
+(匿名) @ runtime-core.esm-bundler.js:6032
+(匿名) @ runtime-core.esm-bundler.js:5984
+(匿名) @ runtime-core.esm-bundler.js:5483
+(匿名) @ runtime-core.esm-bundler.js:5734
+(匿名) @ runtime-core.esm-bundler.js:5650
+(匿名) @ runtime-core.esm-bundler.js:5605
+(匿名) @ runtime-core.esm-bundler.js:5471
+(匿名) @ runtime-core.esm-bundler.js:6132
+run @ reactivity.esm-bundler.js:260
+(匿名) @ runtime-core.esm-bundler.js:6260
+(匿名) @ runtime-core.esm-bundler.js:6032
+(匿名) @ runtime-core.esm-bundler.js:5984
+(匿名) @ runtime-core.esm-bundler.js:5483
+(匿名) @ runtime-core.esm-bundler.js:6132
+run @ reactivity.esm-bundler.js:260
+(匿名) @ runtime-core.esm-bundler.js:6260
+(匿名) @ runtime-core.esm-bundler.js:6032
+(匿名) @ runtime-core.esm-bundler.js:5984
+(匿名) @ runtime-core.esm-bundler.js:5483
+(匿名) @ runtime-core.esm-bundler.js:5734
+(匿名) @ runtime-core.esm-bundler.js:5650
+(匿名) @ runtime-core.esm-bundler.js:5605
+(匿名) @ runtime-core.esm-bundler.js:5471
+(匿名) @ runtime-core.esm-bundler.js:6212
+run @ reactivity.esm-bundler.js:260
+(匿名) @ runtime-core.esm-bundler.js:1419
+(匿名) @ runtime-core.esm-bundler.js:6739
+(匿名) @ runtime-core.esm-bundler.js:1596
+(匿名) @ runtime-dom.esm-bundler.js:183
+(匿名) @ runtime-dom.esm-bundler.js:214
+(匿名) @ runtime-dom.esm-bundler.js:290
+(匿名) @ runtime-dom.esm-bundler.js:304
+(匿名) @ runtime-dom.esm-bundler.js:308
+ChaotuCanvasUI.vue:294 [Vue warn]: Failed to resolve component: el-dialog
+If this is a native custom element, make sure to exclude it from component resolution via compilerOptions.isCustomElement. 
+  at <ChaotuCanvasUI ref="chaotuCanvasUIRef" key="chaotu-canvas-892d64fa-21f3-494f-b2fd-af496f5c7bad-art-0" content="{\n"  ... > 
+  at <BaseTransition mode="out-in" appear=false persisted=false  ... > 
+  at <Transition name="scale-fade" mode="out-in" > 
+  at <BaseTransition mode="out-in" appear=false persisted=false  ... > 
+  at <Transition name="slide-fade" mode="out-in" > 
+  at <BaseTransition mode="out-in" appear=false persisted=false  ... > 
+  at <Transition name="fade" mode="out-in" > 
+  at <CanvasPanel key=0 ref="canvasPanelRef" visible=true  ... > 
+  at <BaseTransition onBeforeEnter=fn<onBeforeEnter> onAfterEnter=fn<onCanvasTransitionEnd> onBeforeLeave=fn<onCanvasTransitionStart>  ... > 
+  at <Transition name="canvas-expand" onBeforeEnter=fn<onCanvasTransitionStart> onAfterEnter=fn<onCanvasTransitionEnd>  ... > 
+  at <ChatView onVnodeUnmounted=fn<onVnodeUnmounted> ref=Ref< Proxy(Object) {__v_skip: true} > key="/chat" > 
+  at <KeepAlive> 
+  at <BaseTransition mode="out-in" appear=true persisted=false  ... > 
+  at <Transition name="page-fade" mode="out-in" appear="" > 
+  at <RouterView> 
+  at <Anonymous hasSider=undefined prefixCls="ant-layout-content" tagName="main"  ... > 
+  at <ALayoutContent class="content" > 
+  at <Anonymous hasSider=undefined prefixCls="ant-layout" tagName="section" > 
+  at <ALayout> 
+  at <Anonymous hasSider=undefined prefixCls="ant-layout" tagName="section"  ... > 
+  at <ALayout class="layout" > 
+  at <ALocaleProvider locale= {locale: 'zh-cn', Pagination: {…}, DatePicker: {…}, TimePicker: {…}, Calendar: {…}, …} ANT_MARK__="internalMark" > 
+  at <LocaleReceiver children=fn<children> > 
+  at <AConfigProvider locale= {locale: 'zh-cn', Pagination: {…}, DatePicker: {…}, TimePicker: {…}, Calendar: {…}, …} > 
+  at <App>
+warn$1 @ runtime-core.esm-bundler.js:51
+resolveAsset @ runtime-core.esm-bundler.js:3154
+resolveComponent @ runtime-core.esm-bundler.js:3116
+_sfc_render @ ChaotuCanvasUI.vue:294
+renderComponentRoot @ runtime-core.esm-bundler.js:4560
+(匿名) @ runtime-core.esm-bundler.js:6203
+run @ reactivity.esm-bundler.js:260
+(匿名) @ runtime-core.esm-bundler.js:6061
+(匿名) @ runtime-core.esm-bundler.js:5995
+(匿名) @ runtime-core.esm-bundler.js:5483
+(匿名) @ runtime-core.esm-bundler.js:6212
+run @ reactivity.esm-bundler.js:260
+runIfDirty @ reactivity.esm-bundler.js:298
+callWithErrorHandling @ runtime-core.esm-bundler.js:199
+flushJobs @ runtime-core.esm-bundler.js:408
+Promise.then
+queueFlush @ runtime-core.esm-bundler.js:322
+queueJob @ runtime-core.esm-bundler.js:317
+(匿名) @ runtime-core.esm-bundler.js:6254
+trigger @ reactivity.esm-bundler.js:288
+endBatch @ reactivity.esm-bundler.js:346
+notify @ reactivity.esm-bundler.js:637
+trigger @ reactivity.esm-bundler.js:611
+value @ reactivity.esm-bundler.js:1542
+(匿名) @ ChatView.vue:250
+callWithErrorHandling @ runtime-core.esm-bundler.js:199
+callWithAsyncErrorHandling @ runtime-core.esm-bundler.js:206
+(匿名) @ runtime-core.esm-bundler.js:1505
+(匿名) @ runtime-core.esm-bundler.js:1566
+(匿名) @ runtime-dom.esm-bundler.js:176
+(匿名) @ runtime-dom.esm-bundler.js:188
+(匿名) @ runtime-dom.esm-bundler.js:290
+(匿名) @ runtime-dom.esm-bundler.js:304
+(匿名) @ runtime-dom.esm-bundler.js:313
+setTimeout
+whenTransitionEnds @ runtime-dom.esm-bundler.js:311
+(匿名) @ runtime-dom.esm-bundler.js:194
+requestAnimationFrame
+(匿名) @ runtime-dom.esm-bundler.js:282
+requestAnimationFrame
+nextFrame @ runtime-dom.esm-bundler.js:281
+(匿名) @ runtime-dom.esm-bundler.js:190
+callWithErrorHandling @ runtime-core.esm-bundler.js:199
+callWithAsyncErrorHandling @ runtime-core.esm-bundler.js:206
+(匿名) @ runtime-core.esm-bundler.js:1505
+(匿名) @ runtime-core.esm-bundler.js:1514
+enter @ runtime-core.esm-bundler.js:1575
+mounted @ runtime-dom.esm-bundler.js:401
+callWithErrorHandling @ runtime-core.esm-bundler.js:199
+callWithAsyncErrorHandling @ runtime-core.esm-bundler.js:206
+invokeDirectiveHook @ runtime-core.esm-bundler.js:767
+(匿名) @ runtime-core.esm-bundler.js:5698
+flushPostFlushCbs @ runtime-core.esm-bundler.js:385
+flushJobs @ runtime-core.esm-bundler.js:427
+Promise.then
+queueFlush @ runtime-core.esm-bundler.js:322
+queueJob @ runtime-core.esm-bundler.js:317
+(匿名) @ runtime-core.esm-bundler.js:899
+(匿名) @ reactivity.esm-bundler.js:1945
+trigger @ reactivity.esm-bundler.js:288
+endBatch @ reactivity.esm-bundler.js:346
+notify @ reactivity.esm-bundler.js:637
+trigger @ reactivity.esm-bundler.js:611
+value @ reactivity.esm-bundler.js:1542
+(匿名) @ ChatView.vue:632
+callWithErrorHandling @ runtime-core.esm-bundler.js:199
+callWithAsyncErrorHandling @ runtime-core.esm-bundler.js:206
+emit @ runtime-core.esm-bundler.js:4443
+(匿名) @ runtime-core.esm-bundler.js:8336
+handleOpenArtifact @ ChatHistroy.vue:51
+callWithErrorHandling @ runtime-core.esm-bundler.js:199
+callWithAsyncErrorHandling @ runtime-core.esm-bundler.js:206
+emit @ runtime-core.esm-bundler.js:4443
+(匿名) @ runtime-core.esm-bundler.js:8336
+handleOpenArtifact @ ChatMessage.vue:651
+callWithErrorHandling @ runtime-core.esm-bundler.js:199
+callWithAsyncErrorHandling @ runtime-core.esm-bundler.js:206
+emit @ runtime-core.esm-bundler.js:4443
+(匿名) @ runtime-core.esm-bundler.js:8336
+handleArtifactOpen @ MarkdownRenderer.vue:961
+(匿名) @ MarkdownRenderer.vue:1016
+mountArtifactComponents @ MarkdownRenderer.vue:969
+(匿名) @ MarkdownRenderer.vue:618
+Promise.then
+nextTick @ runtime-core.esm-bundler.js:289
+(匿名) @ MarkdownRenderer.vue:615
+(匿名) @ index.js:287
+(匿名) @ index.js:364
+(匿名) @ index.js:373
+(匿名) @ index.js:287
+wrapper @ index.js:286
+(匿名) @ MarkdownRenderer.vue:625
+callWithErrorHandling @ runtime-core.esm-bundler.js:199
+callWithAsyncErrorHandling @ runtime-core.esm-bundler.js:206
+(匿名) @ runtime-core.esm-bundler.js:887
+(匿名) @ reactivity.esm-bundler.js:1929
+flushPreFlushCbs @ runtime-core.esm-bundler.js:356
+(匿名) @ runtime-core.esm-bundler.js:6270
+(匿名) @ runtime-core.esm-bundler.js:6189
+run @ reactivity.esm-bundler.js:260
+(匿名) @ runtime-core.esm-bundler.js:6061
+(匿名) @ runtime-core.esm-bundler.js:5995
+(匿名) @ runtime-core.esm-bundler.js:5483
+(匿名) @ runtime-core.esm-bundler.js:5856
+(匿名) @ runtime-core.esm-bundler.js:5774
+(匿名) @ runtime-core.esm-bundler.js:5621
+(匿名) @ runtime-core.esm-bundler.js:5471
+(匿名) @ runtime-core.esm-bundler.js:5856
+(匿名) @ runtime-core.esm-bundler.js:5932
+(匿名) @ runtime-core.esm-bundler.js:5457
+(匿名) @ runtime-core.esm-bundler.js:6403
+(匿名) @ runtime-core.esm-bundler.js:6280
+(匿名) @ runtime-core.esm-bundler.js:5958
+(匿名) @ runtime-core.esm-bundler.js:5457
+(匿名) @ runtime-core.esm-bundler.js:5856
+(匿名) @ runtime-core.esm-bundler.js:5932
+(匿名) @ runtime-core.esm-bundler.js:5457
+(匿名) @ runtime-core.esm-bundler.js:5856
+(匿名) @ runtime-core.esm-bundler.js:5932
+(匿名) @ runtime-core.esm-bundler.js:5457
+(匿名) @ runtime-core.esm-bundler.js:5856
+(匿名) @ runtime-core.esm-bundler.js:5774
+(匿名) @ runtime-core.esm-bundler.js:5621
+(匿名) @ runtime-core.esm-bundler.js:5471
+(匿名) @ runtime-core.esm-bundler.js:6212
+run @ reactivity.esm-bundler.js:260
+runIfDirty @ reactivity.esm-bundler.js:298
+callWithErrorHandling @ runtime-core.esm-bundler.js:199
+flushJobs @ runtime-core.esm-bundler.js:408
+Promise.then
+queueFlush @ runtime-core.esm-bundler.js:322
+queueJob @ runtime-core.esm-bundler.js:317
+(匿名) @ runtime-core.esm-bundler.js:899
+(匿名) @ reactivity.esm-bundler.js:1945
+trigger @ reactivity.esm-bundler.js:288
+endBatch @ reactivity.esm-bundler.js:346
+trigger @ reactivity.esm-bundler.js:764
+set @ reactivity.esm-bundler.js:1090
+(匿名) @ useOrchestratorChat.ts:105
+(匿名) @ useOrchestratorChat.ts:174
+(匿名) @ useOrchestratorChat.ts:438
+await in (匿名)
+(匿名) @ useOrchestratorChat.ts:650
+(匿名) @ useMessageManager.ts:405
+(匿名) @ chatMessagesStore.ts:67
+(匿名) @ pinia.mjs:1394
+(匿名) @ pinia.mjs:946
+(匿名) @ chat-store.ts:105
+(匿名) @ pinia.mjs:1394
+(匿名) @ pinia.mjs:946
+(匿名) @ ChatInput.vue:3125
+await in (匿名)
+callWithErrorHandling @ runtime-core.esm-bundler.js:199
+callWithAsyncErrorHandling @ runtime-core.esm-bundler.js:206
+emit @ runtime-core.esm-bundler.js:4443
+(匿名) @ runtime-core.esm-bundler.js:8336
+(匿名) @ TextArea.js:127
+callWithErrorHandling @ runtime-core.esm-bundler.js:199
+callWithAsyncErrorHandling @ runtime-core.esm-bundler.js:206
+emit @ runtime-core.esm-bundler.js:4443
+(匿名) @ runtime-core.esm-bundler.js:8336
+(匿名) @ BaseInput.js:90
+callWithErrorHandling @ runtime-core.esm-bundler.js:199
+callWithAsyncErrorHandling @ runtime-core.esm-bundler.js:206
+(匿名) @ runtime-dom.esm-bundler.js:769
+ChaotuCanvasUI.vue:294 [Vue warn]: Failed to resolve component: el-dialog
+If this is a native custom element, make sure to exclude it from component resolution via compilerOptions.isCustomElement. 
+  at <ChaotuCanvasUI ref="chaotuCanvasUIRef" key="chaotu-canvas-892d64fa-21f3-494f-b2fd-af496f5c7bad-art-0" content="{\n"  ... > 
+  at <BaseTransition mode="out-in" appear=false persisted=false  ... > 
+  at <Transition name="scale-fade" mode="out-in" > 
+  at <BaseTransition mode="out-in" appear=false persisted=false  ... > 
+  at <Transition name="slide-fade" mode="out-in" > 
+  at <BaseTransition mode="out-in" appear=false persisted=false  ... > 
+  at <Transition name="fade" mode="out-in" > 
+  at <CanvasPanel key=0 ref="canvasPanelRef" visible=true  ... > 
+  at <BaseTransition onBeforeEnter=fn<onBeforeEnter> onAfterEnter=fn<onCanvasTransitionEnd> onBeforeLeave=fn<onCanvasTransitionStart>  ... > 
+  at <Transition name="canvas-expand" onBeforeEnter=fn<onCanvasTransitionStart> onAfterEnter=fn<onCanvasTransitionEnd>  ... > 
+  at <ChatView onVnodeUnmounted=fn<onVnodeUnmounted> ref=Ref< Proxy(Object) {__v_skip: true} > key="/chat" > 
+  at <KeepAlive> 
+  at <BaseTransition mode="out-in" appear=true persisted=false  ... > 
+  at <Transition name="page-fade" mode="out-in" appear="" > 
+  at <RouterView> 
+  at <Anonymous hasSider=undefined prefixCls="ant-layout-content" tagName="main"  ... > 
+  at <ALayoutContent class="content" > 
+  at <Anonymous hasSider=undefined prefixCls="ant-layout" tagName="section" > 
+  at <ALayout> 
+  at <Anonymous hasSider=undefined prefixCls="ant-layout" tagName="section"  ... > 
+  at <ALayout class="layout" > 
+  at <ALocaleProvider locale= {locale: 'zh-cn', Pagination: {…}, DatePicker: {…}, TimePicker: {…}, Calendar: {…}, …} ANT_MARK__="internalMark" > 
+  at <LocaleReceiver children=fn<children> > 
+  at <AConfigProvider locale= {locale: 'zh-cn', Pagination: {…}, DatePicker: {…}, TimePicker: {…}, Calendar: {…}, …} > 
+  at <App>

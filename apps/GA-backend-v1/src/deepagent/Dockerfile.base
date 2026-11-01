@@ -1,0 +1,80 @@
+# =============================================================================
+# 沙箱基础镜像（apt-only）—— Dockerfile.base
+# -----------------------------------------------------------------------------
+# 用途：在【公网构建机】上打一个“基础包”，只预装 apt 系统层依赖；
+#       pip / npm 的业务包【不预装】，改由【运行时】从内网镜像源按需安装。
+#
+# 与完整沙箱镜像（同目录 Dockerfile）的区别：
+#   保留：apt 源配置、bootstrap 工具、Node.js、文档/图像/OCR 工具(sandbox-apt-packages.txt)
+#   去掉：npm config + npm install -g、pip config + pip install -r、playwright 浏览器
+#   原因：内网 apt 源未提供 → 系统工具必须构建时(公网)预装进镜像；
+#         而 pip/npm 走内网镜像源，运行时由后端注入 env 后按需安装，无需烤进镜像。
+#
+# 运行时如何拿到 pip/npm 包（package_mode=mirror）：
+#   后端 sandbox_backend.py 创建容器时注入
+#     PIP_INDEX_URL / PIP_TRUSTED_HOST （pip 内网源 + HTTP 信任主机）
+#     npm_config_registry              （npm 内网源）
+#   env 优先级高于镜像内任何 pip/npm 配置 → 模型在沙箱里 pip/npm install 即走内网源。
+#
+# 构建（公网机，构建上下文 = 本目录 src/deepagent/）：
+#   docker build -f Dockerfile.base -t skill-agent:latest .
+#   # 若构建机也需指定 apt 源： --build-arg APT_MIRROR=http://<apt基址>
+# 导出 → 内网导入：
+#   docker save skill-agent:latest -o skill-agent-base.tar
+#   docker load -i skill-agent-base.tar
+#
+# 注意：playwright/浏览器自动化未预装。内网若需要，pip 装 playwright 后浏览器二进制
+#       仍从公网 CDN 下载（内网不可达），需另行镜像化浏览器，本基础包不含。
+# =============================================================================
+
+FROM python:3.11-slim-bookworm
+
+# 构建机在公网 → 默认公网 Debian 源；apt 系统工具全部在此阶段装好。
+ARG APT_MIRROR=https://deb.debian.org
+
+RUN echo "deb ${APT_MIRROR}/debian/ bookworm main non-free non-free-firmware contrib" > /etc/apt/sources.list && \
+    echo "deb ${APT_MIRROR}/debian-security/ bookworm-security main" >> /etc/apt/sources.list && \
+    echo "deb ${APT_MIRROR}/debian/ bookworm-updates main non-free non-free-firmware contrib" >> /etc/apt/sources.list && \
+    rm -rf /etc/apt/sources.list.d/*
+
+# Install bootstrap tools + Node.js 20.x（基础设施，不列入提示词清单）
+#   node/npm 工具本身必须在此预装：运行时模型要用 npm 从内网源装全局包，没有 npm 就无从装起。
+#   gcc：供 soffice.py 的 _ensure_shim() 在沙箱禁用 AF_UNIX socket 时现场编译 LD_PRELOAD shim；
+#        Docker 默认不禁用故通常不触发、python-slim 也不带 gcc，预装作廉价保险（内部构建依赖，不进提示词）。
+RUN apt-get update --allow-releaseinfo-change && apt-get install -y --no-install-recommends \
+    ca-certificates \
+    curl \
+    gnupg \
+    sudo \
+    gcc \
+    && mkdir -p /etc/apt/keyrings \
+    && curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg \
+    && echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_20.x nodistro main" | tee /etc/apt/sources.list.d/nodesource.list \
+    && apt-get update && apt-get install -y --no-install-recommends \
+    nodejs \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install document/system tools（文档/图像/OCR 工具）
+# 清单抽离到 sandbox-apt-packages.txt，与系统提示词第 6 条共用同一份（单一事实来源）。
+# 构建上下文 = src/deepagent/（本目录），故 COPY 用裸文件名。
+COPY sandbox-apt-packages.txt /tmp/sandbox-apt-packages.txt
+# tr -d '\r'：清单可能在 Windows 上被编辑成 CRLF；不去掉 \r 会让包名带尾随回车（如 "pandoc\r"），
+# 导致 apt-get 找不到包而装不上（即“空的”）。加这道后无论 LF/CRLF 都能正确解析。
+RUN apt-get update && \
+    pkgs=$(sed 's/#.*//' /tmp/sandbox-apt-packages.txt | tr -d '\r' | grep -vE '^[[:space:]]*$' | tr '\n' ' ') && \
+    if [ -n "$pkgs" ]; then apt-get install -y --no-install-recommends $pkgs; fi && \
+    rm -rf /var/lib/apt/lists/*
+
+# -----------------------------------------------------------------------------
+# 【刻意不在此预装 pip / npm 业务包】
+#   - python/pip 已在基础镜像中；node/npm 工具已由上面 apt 装好。
+#   - sandbox-requirements.txt(pip) 与 sandbox-npm-packages.txt(npm) 改由运行时从内网源按需安装。
+#   - 故这里不 COPY 那两个 txt、不 pip install、不 npm install -g、不装 playwright。
+# -----------------------------------------------------------------------------
+
+# 运行时 npm install -g 装的全局包需能被 node 解析到。
+ENV NODE_PATH=/usr/lib/node_modules
+
+WORKDIR /workspace
+
+CMD ["tail", "-f", "/dev/null"]

@@ -1,0 +1,1897 @@
+.delivery-center {
+  container: delivery / inline-size;
+  position: relative;
+  /* 与 DeliveryCenterView.vue 的 TURN_MS 保持一致，纸张与内容共用同一条时间轴。 */
+  --dc-turn-ms: 880ms;
+  --dc-ink: #34415a;
+  --dc-muted: #8490a5;
+  --dc-accent: #566bb4;
+  --dc-line: #dde4ef;
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+  color: var(--dc-ink);
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Microsoft YaHei', sans-serif;
+}
+
+.delivery-center *,
+.delivery-center *::before,
+.delivery-center *::after {
+  box-sizing: border-box;
+}
+
+.delivery-center button,
+.delivery-center input,
+.delivery-center select {
+  font: inherit;
+}
+
+.delivery-center button {
+  cursor: pointer;
+}
+
+.delivery-center button:disabled {
+  opacity: .5;
+  cursor: not-allowed;
+}
+
+.delivery-center button:focus-visible,
+.delivery-center select:focus-visible {
+  outline: 2px solid #869acb;
+  outline-offset: 3px;
+}
+
+.dc-workspace {
+  max-width: 1320px;
+  height: 100%;
+  /* 顶部留白随容器宽度连续变化：侧栏开合时容器宽度会往复约 324px
+     （64px 左内边距瞬时切换 + 260px 宽度过渡），若靠断点在 18px/26px 之间硬切，
+     跨越的那一帧整块工作台会上下跳 8px。这里用斜坡取值，
+     在 760/1100/1200/1600 上与原有断点值一致，中间宽度平滑过渡。 */
+  padding: clamp(14px, calc(2cqi - 6px), 26px) 20px 14px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.dc-masthead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding-bottom: 28px;
+  flex-shrink: 0;
+}
+
+.dc-heading {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.dc-mark {
+  width: 43px;
+  height: 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: .3em;
+  padding: 0 .5em;
+  border: 1px solid #c9d3e6;
+  border-radius: 3px 11px 3px 3px;
+  color: #798cb7;
+  font-size: 22px;
+  transform: rotate(-6deg);
+  box-shadow: 4px 4px 0 #e5eaf4;
+}
+
+/* 纸面横线：尺寸跟随 font-size，阅读态缩小标记时无需重复定义 */
+.dc-mark i {
+  display: block;
+  height: .12em;
+  border-radius: .12em;
+  background: currentColor;
+  opacity: .45;
+}
+
+.dc-mark i:first-child {
+  width: 58%;
+  opacity: .8;
+}
+
+.dc-mark i:last-child {
+  width: 76%;
+}
+
+.dc-heading h1 {
+  margin: 0;
+  font-family: 'SmileySansOblique', 'Microsoft YaHei', sans-serif;
+  font-size: 31px;
+  font-weight: 400;
+  letter-spacing: 2px;
+  color: #303b58;
+}
+
+.dc-heading p {
+  margin: 5px 0 0;
+  font-size: 12px;
+  color: var(--dc-muted);
+  letter-spacing: 1px;
+}
+
+.dc-collection-note {
+  color: #7f8ba3;
+  font-size: 12px;
+}
+
+.dc-icon-button {
+  display: inline-grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 30px;
+  height: 30px;
+  border: 0;
+  border-radius: 7px;
+  background: transparent;
+  color: #8493af;
+}
+
+.dc-icon-button:hover {
+  background: #e8edf6;
+  color: var(--dc-accent);
+}
+
+.dc-layout {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  min-width: 0;
+}
+
+.dc-catalog {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  flex: 1;
+}
+
+.dc-search-tools {
+  display: flex;
+  align-items: center;
+  width: 260px;
+  min-width: 0;
+  padding: 3px;
+  border: 1px solid #d8e1ef;
+  border-radius: 10px;
+  background: #ffffff70;
+  transition: border-color .18s ease, background .18s ease, box-shadow .18s ease;
+}
+
+.dc-search-tools:focus-within {
+  border-color: #869acb;
+  background: #ffffffb3;
+  box-shadow: 0 0 0 3px #869acb14;
+}
+
+.dc-search {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #7183a3;
+  flex: 1;
+  min-width: 0;
+  padding: 6px 9px;
+}
+
+.dc-refresh {
+  position: relative;
+  width: 32px;
+  height: 32px;
+  color: #7183a3;
+  font-size: 14px;
+}
+
+.dc-refresh::before {
+  content: '';
+  position: absolute;
+  left: -2px;
+  height: 16px;
+  border-left: 1px solid #d8e1ef;
+}
+
+.dc-search input {
+  min-width: 0;
+  width: 100%;
+  border: 0;
+  outline: none;
+  background: transparent;
+  color: var(--dc-ink);
+  font-size: 13px;
+}
+
+.dc-search input::placeholder {
+  color: #78869e;
+}
+
+/* 一级归档工具栏：独立搜索与刷新，阅读态沿用紧凑组合控件。 */
+.delivery-center:not(.is-reading) .dc-index-bar {
+  flex-wrap: wrap;
+  row-gap: 12px;
+}
+
+.delivery-center:not(.is-reading) .dc-index-side {
+  max-width: 100%;
+  flex-wrap: wrap;
+  gap: 10px 18px;
+  padding: 0;
+}
+
+.delivery-center:not(.is-reading) .dc-search-tools {
+  width: 200px;
+  max-width: 100%;
+  gap: 8px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.delivery-center:not(.is-reading) .dc-search {
+  position: relative;
+  height: 32px;
+  gap: 8px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  transition: color .18s ease;
+}
+
+.delivery-center:not(.is-reading) .dc-search::after {
+  content: '';
+  position: absolute;
+  inset: auto 0 0;
+  height: 1px;
+  background: #c5d0e3;
+  pointer-events: none;
+  transition: background .18s ease;
+}
+
+.delivery-center:not(.is-reading) .dc-search:hover::after {
+  background: #95a8cb;
+}
+
+.delivery-center:not(.is-reading) .dc-search:focus-within::after {
+  background: var(--dc-accent);
+}
+
+.delivery-center:not(.is-reading) .dc-search:hover {
+  color: #4e67a2;
+}
+
+.delivery-center:not(.is-reading) .dc-search:focus-within {
+  color: #4e67a2;
+  box-shadow: none;
+}
+
+.delivery-center:not(.is-reading) .dc-search input {
+  height: 20px;
+  padding: 0;
+  background: transparent;
+  font-size: 12px;
+  line-height: 20px;
+}
+
+.delivery-center:not(.is-reading) .dc-search > .anticon,
+.delivery-center:not(.is-reading) .dc-refresh > .anticon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 12px;
+  width: 12px;
+  height: 12px;
+  font-size: 12px;
+  line-height: 0;
+  vertical-align: middle;
+}
+
+/* 清除内联 SVG 的基线空隙，让图标按实际尺寸居中。 */
+.delivery-center:not(.is-reading) .dc-search > .anticon :deep(svg),
+.delivery-center:not(.is-reading) .dc-refresh > .anticon :deep(svg) {
+  display: block;
+  width: 12px;
+  height: 12px;
+}
+
+.delivery-center:not(.is-reading) .dc-refresh {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: #657ca8;
+  font-size: 13px;
+  transition: background .18s ease, color .18s ease;
+}
+
+.delivery-center:not(.is-reading) .dc-refresh::before {
+  display: none;
+}
+
+.delivery-center:not(.is-reading) .dc-refresh:hover:not(:disabled) {
+  background: #fafcff;
+  color: #4e67a2;
+}
+
+.delivery-center:not(.is-reading) .dc-refresh:active:not(:disabled) {
+  background: #d3def2;
+}
+
+.dc-index-bar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  border-bottom: 1px solid var(--dc-line);
+}
+
+/* 静默刷新指示：贴着工具栏下边缘走一条细光带，不占布局、不遮挡内容。 */
+.dc-refresh-progress {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 2px;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.dc-refresh-progress::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -40%;
+  width: 40%;
+  border-radius: 2px;
+  background: linear-gradient(90deg, transparent, var(--dc-accent), transparent);
+  animation: dc-refresh-slide 1.2s ease-in-out infinite;
+}
+
+@keyframes dc-refresh-slide {
+  to {
+    transform: translateX(350%);
+  }
+}
+
+.dc-categories {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+.dc-categories button {
+  position: relative;
+  border: 0;
+  padding: 12px 0 14px;
+  background: transparent;
+  color: #8894aa;
+  font-size: 13px;
+  white-space: nowrap;
+  transition: color .25s ease;
+}
+
+.dc-categories button.active {
+  color: var(--dc-accent);
+}
+
+/* 页签滑块：只保留底部一条墨线在页签间弹性滑动，
+   位置与尺寸由组件测量后写入 --tab-x/y/w/h 四个变量 */
+.dc-tab-slider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--tab-w, 0px);
+  height: 2px;
+  transform: translate(var(--tab-x, 0px), calc(var(--tab-y, 0px) + var(--tab-h, 0px) - 1px));
+  border-radius: 2px;
+  background: #7f93c5;
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    transform .5s cubic-bezier(.34, 1.3, .64, 1),
+    width .5s cubic-bezier(.34, 1.3, .64, 1),
+    opacity .3s ease;
+}
+
+.dc-categories.slider-ready .dc-tab-slider {
+  opacity: 1;
+}
+
+.dc-categories sup {
+  margin-left: 5px;
+  font-size: 9px;
+  color: #9ba9c1;
+}
+
+.dc-index-side {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-shrink: 0;
+}
+
+/* 归档页码：数字沿用卷宗序号的衬线斜体，当前页只用底部一条短墨线标记，
+   与页签滑块、dc-folio-number 保持同一套视觉语言；
+   整套覆写不带边框与填充色，去掉组件库默认的方框胶囊。 */
+.dc-index-pager {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  flex-shrink: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.dc-index-pager :deep(li) {
+  min-width: 0;
+  height: auto;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  line-height: 1;
+}
+
+.dc-index-pager :deep(.ant-pagination-item) {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+}
+
+.dc-index-pager :deep(.ant-pagination-item a) {
+  display: block;
+  padding: 0;
+  color: #8e9cb4;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-style: italic;
+  font-size: 18px;
+  line-height: 1;
+  transition: color .2s ease;
+}
+
+/* 墨线：hover 是浅灰草稿线，当前页是主题色实线，回弹曲线与页签滑块一致。 */
+.dc-index-pager :deep(.ant-pagination-item)::after {
+  content: '';
+  position: absolute;
+  bottom: 2px;
+  left: 50%;
+  width: 12px;
+  height: 2px;
+  border-radius: 2px;
+  background: #dfe6f1;
+  opacity: 0;
+  transform: translateX(-50%) scaleX(.4);
+  transition:
+    opacity .2s ease,
+    background .2s ease,
+    transform .34s cubic-bezier(.34, 1.3, .64, 1);
+}
+
+.dc-index-pager :deep(.ant-pagination-item:hover a),
+.dc-index-pager :deep(.ant-pagination-item:focus-visible a) {
+  color: #5c72a8;
+}
+
+.dc-index-pager :deep(.ant-pagination-item:hover)::after,
+.dc-index-pager :deep(.ant-pagination-item:focus-visible)::after {
+  opacity: 1;
+  transform: translateX(-50%) scaleX(1);
+}
+
+.dc-index-pager :deep(.ant-pagination-item-active a),
+.dc-index-pager :deep(.ant-pagination-item-active:hover a) {
+  color: var(--dc-accent);
+}
+
+.dc-index-pager :deep(.ant-pagination-item-active)::after {
+  background: #7f93c5;
+  opacity: 1;
+  transform: translateX(-50%) scaleX(1);
+}
+
+/* 前后翻页与省略号：只留图标本体，不套边框、不加底色，悬停才浮出一层极浅的纸面。 */
+.dc-index-pager :deep(.ant-pagination-prev),
+.dc-index-pager :deep(.ant-pagination-next),
+.dc-index-pager :deep(.ant-pagination-jump-prev),
+.dc-index-pager :deep(.ant-pagination-jump-next) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 26px;
+}
+
+.dc-index-pager :deep(.ant-pagination-prev),
+.dc-index-pager :deep(.ant-pagination-next) {
+  width: 24px;
+}
+
+.dc-index-pager :deep(.ant-pagination-jump-prev),
+.dc-index-pager :deep(.ant-pagination-jump-next) {
+  width: 20px;
+}
+
+.dc-index-pager :deep(.ant-pagination-item-link) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  border: 0;
+  border-radius: 7px;
+  background: transparent;
+  color: #93a1b8;
+  font-size: 10px;
+  transition: color .2s ease, background .2s ease;
+}
+
+/* 省略号槽位比翻页按钮窄，链接宽度跟着收，避免溢出 li 撞上下游页码。 */
+.dc-index-pager :deep(.ant-pagination-jump-prev .ant-pagination-item-link),
+.dc-index-pager :deep(.ant-pagination-jump-next .ant-pagination-item-link) {
+  width: 20px;
+  height: 22px;
+  border-radius: 0;
+}
+
+/* 图标与省略号里的内联 SVG 都有基线空隙，按实际尺寸居中。 */
+.dc-index-pager :deep(.ant-pagination-item-link .anticon) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  line-height: 0;
+}
+
+.dc-index-pager :deep(.ant-pagination-item-link .anticon svg) {
+  display: block;
+  width: 10px;
+  height: 10px;
+}
+
+/* 省略号靠 inset:0 + margin:auto 居中，字号与字距都牵动它的 textIndent 补偿，
+   这里只换颜色，不动度量，免得整串点号偏出中线。 */
+.dc-index-pager :deep(.ant-pagination-item-ellipsis) {
+  color: #b9c4d7;
+}
+
+.dc-index-pager :deep(.ant-pagination-prev:hover .ant-pagination-item-link),
+.dc-index-pager :deep(.ant-pagination-next:hover .ant-pagination-item-link) {
+  background: #eef3fc;
+  color: var(--dc-accent);
+}
+
+.dc-index-pager :deep(.ant-pagination-disabled .ant-pagination-item-link),
+.dc-index-pager :deep(.ant-pagination-disabled:hover .ant-pagination-item-link) {
+  background: transparent;
+  color: #ccd5e4;
+}
+
+/* 焦点落在 li 上（tabindex=0），但可见面是里面的链接/省略号，描边得跟着挪进去，
+   否则键盘翻页时看不到任何指示。 */
+.dc-index-pager :deep(.ant-pagination-prev:focus-visible .ant-pagination-item-link),
+.dc-index-pager :deep(.ant-pagination-next:focus-visible .ant-pagination-item-link),
+.dc-index-pager :deep(.ant-pagination-jump-prev:focus-visible),
+.dc-index-pager :deep(.ant-pagination-jump-next:focus-visible) {
+  outline: 2px solid #869acb;
+  outline-offset: 1px;
+  border-radius: 7px;
+}
+
+/* —— 特异性兜底 ——
+   ant-design-vue v4 的分页样式由 cssinjs 在运行时注入 <head>，晚于本页 scoped 样式表，
+   特异性一旦打平就由它胜出。以下默认行为与本页"无边框、无填充、仅底部墨线"的设计相冲：
+     · mini 尺寸把页码/翻页钮强定成 24px 方块并带 8px 外边距，盖掉这里的 26px + gap 布局；
+     · 未选中页码 hover/active 补灰底（colorBgTextHover / colorBgTextActive）；
+     · 当前页描上主题色边框（borderColor: colorPrimary），变成蓝框胶囊；
+     · 前后翻页钮 hover 浮灰底，而非本页的浅蓝纸面 #eef3fc。
+   故用重复类名 .dc-index-pager.dc-index-pager 把特异性整体抬到其上，确保覆写稳定生效、
+   不依赖样式表注入先后。尺寸数值与上方设计规则一致，调整时需两处同步。 */
+.dc-index-pager.dc-index-pager :deep(.ant-pagination-item) {
+  width: 26px;
+  height: 26px;
+  min-width: 0;
+  margin: 0;
+  border: 0;
+  background: transparent;
+  line-height: 1;
+}
+
+.dc-index-pager.dc-index-pager :deep(.ant-pagination-item:not(.ant-pagination-item-active):hover),
+.dc-index-pager.dc-index-pager :deep(.ant-pagination-item:not(.ant-pagination-item-active):active) {
+  background: transparent;
+}
+
+.dc-index-pager.dc-index-pager :deep(.ant-pagination-item-active a),
+.dc-index-pager.dc-index-pager :deep(.ant-pagination-item-active:hover a) {
+  color: var(--dc-accent);
+}
+
+.dc-index-pager.dc-index-pager :deep(.ant-pagination-prev),
+.dc-index-pager.dc-index-pager :deep(.ant-pagination-next) {
+  width: 24px;
+  height: 26px;
+  min-width: 0;
+  margin: 0;
+}
+
+.dc-index-pager.dc-index-pager :deep(.ant-pagination-jump-prev),
+.dc-index-pager.dc-index-pager :deep(.ant-pagination-jump-next) {
+  width: 20px;
+  height: 26px;
+  min-width: 0;
+  margin: 0;
+}
+
+.dc-index-pager.dc-index-pager :deep(.ant-pagination-prev .ant-pagination-item-link),
+.dc-index-pager.dc-index-pager :deep(.ant-pagination-next .ant-pagination-item-link) {
+  width: 22px;
+  height: 22px;
+  border: 0;
+  border-radius: 7px;
+  background: transparent;
+}
+
+/* 省略号槽位更窄，链接宽度跟着收，排在通用翻页钮之后以覆盖之。 */
+.dc-index-pager.dc-index-pager :deep(.ant-pagination-jump-prev .ant-pagination-item-link),
+.dc-index-pager.dc-index-pager :deep(.ant-pagination-jump-next .ant-pagination-item-link) {
+  width: 20px;
+  height: 22px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+
+.dc-index-pager.dc-index-pager :deep(.ant-pagination-prev:hover .ant-pagination-item-link),
+.dc-index-pager.dc-index-pager :deep(.ant-pagination-next:hover .ant-pagination-item-link),
+.dc-index-pager.dc-index-pager :deep(.ant-pagination-prev:active .ant-pagination-item-link),
+.dc-index-pager.dc-index-pager :deep(.ant-pagination-next:active .ant-pagination-item-link) {
+  background: #eef3fc;
+  border-color: transparent;
+}
+
+.dc-index-pager.dc-index-pager :deep(.ant-pagination-item-container .ant-pagination-item-ellipsis) {
+  color: #b9c4d7;
+}
+
+.dc-catalog-scroll {
+  flex: 1;
+  overflow-y: auto;
+  min-height: 0;
+  padding-right: 10px;
+  padding-bottom: 22px;
+  margin-right: -10px;
+  scrollbar-width: thin;
+  scrollbar-color: #cdd6e5 transparent;
+  transition: opacity .22s ease;
+}
+
+/* 刷新期间列表留在原位，只轻微降透明，滚动位置与展开状态都不丢失。 */
+.dc-catalog-scroll.is-refreshing {
+  opacity: .55;
+}
+
+.dc-dossier {
+  display: grid;
+  grid-template-columns: 200px minmax(0, 1fr);
+  gap: 30px;
+  padding: 32px 0;
+  border-bottom: 1px solid var(--dc-line);
+}
+
+.dc-dossier-heading {
+  display: flex;
+  align-items: baseline;
+  gap: 13px;
+  padding-top: 9px;
+  min-width: 0;
+}
+
+.dc-folio-number {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 23px;
+  font-style: italic;
+  color: #a7b5ce;
+  line-height: 1;
+  padding-top: 0;
+  min-width: 27px;
+}
+
+.dc-dossier-meta {
+  min-width: 0;
+}
+
+.dc-agent {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #8290a8;
+  min-width: 0;
+}
+
+.dc-agent>span:last-child {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.dc-agent-icon {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+  display: block;
+}
+
+.dc-origin {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: 0;
+  background: transparent;
+  color: #53627e;
+  padding: 10px 0;
+  text-align: left;
+  font-size: 13px;
+  line-height: 1.65;
+  max-width: 100%;
+}
+
+.dc-origin>span:first-child {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  overflow-wrap: anywhere;
+}
+
+.dc-origin>.anticon {
+  font-size: 10px;
+  flex-shrink: 0;
+  transform: rotate(45deg);
+  color: #97a7c1;
+}
+
+.dc-origin:hover {
+  color: var(--dc-accent);
+}
+
+.dc-dossier-count {
+  font-size: 10px;
+  color: #9ba7ba;
+  letter-spacing: .4px;
+}
+
+.dc-documents {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(185px, 1fr));
+  gap: 17px;
+  align-items: start;
+}
+
+.dc-document {
+  /* 三层共用一条缓动曲线，靠不同的时长与延迟拉开层次 */
+  --paper-ease: cubic-bezier(.22, .68, .32, 1);
+  position: relative;
+  min-width: 0;
+  border: 1px solid #e0e6ef;
+  border-radius: 3px 15px 3px 3px;
+  background: #ffffffd9;
+  box-shadow: 0 3px 7px #50638405;
+  transition: transform .3s var(--paper-ease), box-shadow .3s ease, border-color .2s ease;
+}
+
+.dc-document::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 5px;
+  right: 5px;
+  height: 4px;
+  border: 1px solid #e0e6ef;
+  border-top: 0;
+  background: #f9fbfe;
+  border-radius: 0 0 2px 2px;
+  pointer-events: none;
+  /* 以左上角为轴：顶边只会往下倾斜，不会翘上去盖住封面下沿 */
+  transform-origin: 0 0;
+  transition: transform .4s var(--paper-ease) .05s, border-color .2s ease;
+}
+
+.dc-document:hover {
+  /* 沿左上方向抬升，阴影甩到右下，整张卡片带一点手放的歪斜 */
+  transform: translate(-2px, -5px) rotate(-.5deg);
+  border-color: #bfcde4;
+  box-shadow: 9px 14px 24px #586f9712;
+}
+
+/* 底层纸张慢半拍，往右下错开并转出一点角度，像被抽歪的第二张纸 */
+.dc-document:hover::after {
+  transform: translateX(5px) rotate(1deg) scaleY(1.9);
+  border-color: #cdd8e9;
+}
+
+.dc-document-open {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 112px;
+  text-align: left;
+  border: 0;
+  border-radius: inherit;
+  background: transparent;
+  padding: 13px 16px 11px;
+  color: var(--dc-ink);
+  transition: transform .44s var(--paper-ease) .06s;
+}
+
+/* 纸面上的内容比封面再慢一拍，往右下滞留，和卡片的左上位移形成夹角 */
+.dc-document:hover .dc-document-open {
+  transform: translate(1.5px, 1.5px);
+}
+
+.dc-document-top {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+/* 直接复用 artifact 卡片的彩色文件图标 */
+.dc-format {
+  display: block;
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+}
+
+.dc-document-name {
+  display: block;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.45;
+  margin: 10px 0 9px;
+  width: 100%;
+}
+
+.dc-document-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: auto;
+  width: 100%;
+  color: #97a3b7;
+  font-size: 10px;
+}
+
+.dc-open-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  opacity: 0;
+  color: #7086b5;
+  transition: opacity .2s;
+  white-space: nowrap;
+}
+
+.dc-document:hover .dc-open-hint,
+.dc-document:focus-within .dc-open-hint {
+  opacity: 1;
+}
+
+.dc-document-download {
+  position: absolute;
+  top: 11px;
+  right: 8px;
+  font-size: 13px;
+}
+
+.dc-download-icon {
+  display: block;
+  width: 16px;
+  height: 16px;
+}
+
+.dc-button {
+  display: inline-flex;
+  gap: 7px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #dce3ef;
+  border-radius: 8px;
+  background: transparent;
+  color: #687da9;
+  padding: 7px 12px;
+  font-size: 12px;
+}
+
+.dc-button:hover {
+  background: #edf2fb;
+}
+
+.dc-state {
+  display: flex;
+  min-height: 280px;
+  height: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 13px;
+  text-align: center;
+  padding: 30px;
+}
+
+.dc-state>.anticon {
+  font-size: 28px;
+  color: #97a9c9;
+}
+
+.dc-state h3 {
+  font-size: 15px;
+  font-weight: 400;
+  color: #627493;
+  margin: 3px 0 0;
+}
+
+.dc-state p {
+  font-size: 12px;
+  line-height: 1.8;
+  color: #8b99ae;
+  max-width: 380px;
+  overflow-wrap: anywhere;
+  margin: 0;
+}
+
+.dc-state-actions {
+  display: flex;
+  gap: 10px;
+}
+
+/* 打开文件后，归档页收为目录，阅读区占据主要空间；始终处于同一工作区。 */
+.is-reading .dc-workspace {
+  max-width: none;
+  padding: 16px 18px 14px;
+}
+
+.is-reading .dc-masthead {
+  padding-bottom: 21px;
+}
+
+.is-reading .dc-heading h1 {
+  font-size: 25px;
+}
+
+.is-reading .dc-heading p {
+  display: none;
+}
+
+.is-reading .dc-mark {
+  width: 30px;
+  height: 33px;
+  font-size: 17px;
+}
+
+.is-reading .dc-layout {
+  gap: 28px;
+}
+
+.is-reading .dc-catalog {
+  flex: 0 0 255px;
+}
+
+.is-reading .dc-index-bar {
+  flex-wrap: wrap;
+  gap: 12px;
+  padding-bottom: 14px;
+}
+
+.is-reading .dc-index-side {
+  flex: 1 1 100%;
+  flex-wrap: wrap;
+  gap: 9px 14px;
+}
+
+.is-reading .dc-collection-note {
+  display: none;
+}
+
+.is-reading .dc-search-tools {
+  flex: 1 1 120px;
+  width: auto;
+  min-width: 0;
+}
+
+/* 阅读态侧栏只有 215~255px，页码整体收紧，避免与搜索控件挤成两行。 */
+.is-reading .dc-index-pager {
+  order: 1;
+  gap: 0;
+}
+
+.is-reading .dc-index-pager :deep(.ant-pagination-item) {
+  width: 21px;
+  height: 22px;
+}
+
+.is-reading .dc-index-pager :deep(.ant-pagination-item a) {
+  font-size: 13px;
+}
+
+.is-reading .dc-index-pager :deep(.ant-pagination-item)::after {
+  bottom: 0;
+  width: 10px;
+}
+
+.is-reading .dc-index-pager :deep(.ant-pagination-prev),
+.is-reading .dc-index-pager :deep(.ant-pagination-next) {
+  width: 20px;
+  height: 22px;
+}
+
+.is-reading .dc-index-pager :deep(.ant-pagination-jump-prev),
+.is-reading .dc-index-pager :deep(.ant-pagination-jump-next) {
+  width: 16px;
+  height: 22px;
+}
+
+.is-reading .dc-index-pager :deep(.ant-pagination-item-link) {
+  width: 18px;
+  height: 18px;
+}
+
+.is-reading .dc-index-pager :deep(.ant-pagination-jump-prev .ant-pagination-item-link),
+.is-reading .dc-index-pager :deep(.ant-pagination-jump-next .ant-pagination-item-link) {
+  width: 16px;
+  height: 18px;
+}
+
+.is-reading .dc-categories {
+  gap: 13px;
+}
+
+.is-reading .dc-categories button {
+  font-size: 12px;
+  padding: 8px 0;
+}
+
+.is-reading .dc-categories sup {
+  display: none;
+}
+
+.is-reading .dc-dossier {
+  display: block;
+  padding: 20px 0 16px;
+  border-bottom-color: #e4e9f2;
+}
+
+.is-reading .dc-dossier-heading {
+  align-items: flex-start;
+  gap: 9px;
+  padding-top: 0;
+  margin-bottom: 9px;
+}
+
+.is-reading .dc-folio-number {
+  font-size: 17px;
+  line-height: 20px;
+  min-width: 21px;
+}
+
+.is-reading .dc-agent {
+  height: 20px;
+  line-height: 20px;
+  font-size: 13px;
+  color: #647590;
+}
+
+.is-reading .dc-dossier-meta {
+  flex: 1;
+}
+
+.is-reading .dc-origin {
+  font-size: 12px;
+  padding: 4px 0;
+}
+
+.is-reading .dc-origin>span:first-child {
+  -webkit-line-clamp: 1;
+  line-clamp: 1;
+}
+
+.is-reading .dc-dossier-count {
+  display: none;
+}
+
+.is-reading .dc-documents {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin-left: 29px;
+}
+
+.is-reading .dc-document {
+  width: 100%;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  box-shadow: none;
+}
+
+.is-reading .dc-document::after {
+  display: none;
+}
+
+.is-reading .dc-document:hover {
+  transform: none;
+  background: #eef2f9;
+}
+
+/* 阅读态是扁平列表，不需要纸张层错位 */
+.is-reading .dc-document:hover .dc-document-open {
+  transform: none;
+}
+
+.is-reading .dc-document.selected {
+  background: #e8edf8;
+  border-color: #dce4f5;
+}
+
+.is-reading .dc-document-open {
+  display: grid;
+  grid-template-columns: 30px minmax(0, 1fr);
+  min-height: 25px;
+  align-items: center;
+  gap: 5px;
+  padding: 9px 31px 9px 12px;
+}
+
+.is-reading .dc-document-top {
+  display: flex;
+  align-items: center;
+}
+
+.is-reading .dc-document-bottom {
+  display: none;
+}
+
+.is-reading .dc-format {
+  width: 24px;
+  height: 24px;
+}
+
+.is-reading .dc-document-name {
+  display: block;
+  font-size: 13px;
+  font-weight: 400;
+  margin: 0;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.is-reading .dc-document.selected .dc-document-name {
+  color: #5269a4;
+}
+
+.is-reading .dc-document-download {
+  top: 50%;
+  transform: translateY(-50%);
+  right: 6px;
+}
+
+.dc-reader {
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  border-left: 1px solid #dce4ef;
+  padding-left: 27px;
+  /* 阅读态内切换文档时的渐隐渐显：渐显走较长的 ease-out，收尾柔和；
+     渐隐由 .is-fading 覆盖为较短的 ease-in，起手干脆。 */
+  transition: opacity .28s cubic-bezier(0, 0, .2, 1);
+}
+
+.dc-reader.is-fading {
+  opacity: 0;
+  transition: opacity .18s cubic-bezier(.4, 0, 1, 1);
+  /* 提升到合成层，避免后续重挂载文档组件时掉帧。 */
+  will-change: opacity;
+}
+
+.dc-reader-tools {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 35px;
+  flex-shrink: 0;
+}
+
+/* 返回按钮：保留原先轻盈的文字链接气质，但把箭头放进一枚圆形小徽章，
+   并用主题色替代灰色，让返回入口一眼可辨又不显得笨重。 */
+.dc-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: 0;
+  padding: 6px 12px 6px 6px;
+  border-radius: 999px;
+  font-size: 12px;
+  color: var(--dc-accent);
+  transition: background .18s ease, color .18s ease;
+}
+
+.dc-back .anticon {
+  display: inline-grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 1px solid #d5def2;
+  background: linear-gradient(130deg, #fffdfd, #e6ecfd);
+  font-size: 12px;
+  color: var(--dc-accent);
+  box-shadow: inset 0 1px 1px #fff;
+  transition: background .18s ease, border-color .18s ease, color .18s ease;
+}
+
+.dc-back:hover {
+  background: #eef3fc;
+  color: #43569b;
+}
+
+.dc-back:hover .anticon {
+  background: #e2eafb;
+  border-color: #c3d0ee;
+  color: #43569b;
+}
+
+.dc-reader-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+/* 与知识库界面 .kw-create-button（新建知识库）保持同一套浅蓝描边视觉 */
+.dc-download {
+  padding: 9px 14px;
+  border-color: #c6daff;
+  border-radius: 12px;
+  background: linear-gradient(130deg, #fffdfd, #e6ecfd);
+  color: #5a6caa;
+  box-shadow: 0 3px 9px #627bad0d, inset 0 1px 1px #fff;
+  white-space: nowrap;
+}
+
+.dc-download:hover {
+  background: linear-gradient(130deg, #fffdfd, #e6ecfd);
+  box-shadow: 0 5px 15px #627bad1c;
+}
+
+.dc-reader-heading {
+  position: relative;
+  padding: 5px 0 10px;
+  flex-shrink: 0;
+}
+
+.dc-reader-format {
+  flex-shrink: 0;
+  color: #8c9cba;
+  font-size: 10px;
+  letter-spacing: 1.8px;
+}
+
+.dc-reader-heading h2 {
+  font-family: 'SmileySansOblique', 'Microsoft YaHei', sans-serif;
+  color: #374561;
+  font-size: 34px;
+  font-weight: 400;
+  line-height: 1.4;
+  margin: 0 0 6px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.dc-reader-heading h2:focus {
+  outline: none;
+}
+
+.dc-reader-heading p {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  color: #8e9ab0;
+  font-size: 12px;
+  min-width: 0;
+}
+
+.dc-reader-heading p>span:nth-child(2) {
+  flex-shrink: 0;
+  max-width: 40%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.dc-reader-heading p>span:last-child {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.dc-meta-dot {
+  color: #b4bfd1;
+}
+
+.dc-reading-surface {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid #e0e6ef;
+  border-radius: 16px;
+  box-shadow: 0 5px 16px #566a8e06;
+}
+
+.dc-reading-scroll {
+  height: 100%;
+  overflow: auto;
+  scrollbar-width: thin;
+}
+
+.dc-reading-surface iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: white;
+}
+
+.dc-reading-surface.is-image {
+  background-color: #f7f9fc;
+  background-image: radial-gradient(#dce3ef 1px, transparent 1px);
+  background-size: 16px 16px;
+}
+
+.dc-reading-scroll>img {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  margin: auto;
+}
+
+.dc-reading-surface :deep(.docx-container-scroll) {
+  height: 100%;
+}
+
+.dc-reading-surface :deep(.docx-wrapper) {
+  background: #f5f7fb;
+  padding-top: 24px;
+  padding-bottom: 24px;
+}
+
+.dc-text-content {
+  min-height: 100%;
+  padding: 32px 36px;
+}
+
+.dc-text-content pre {
+  font-family: 'Cascadia Code', Consolas, 'Microsoft YaHei', monospace;
+  font-size: 13px;
+  line-height: 1.95;
+  color: #4d5e7c;
+  margin: 0;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  tab-size: 2;
+}
+
+/* Excel / PPT 画布组件以 absolute inset:0 铺满定位父级，容器需要提供确定的高度。 */
+.dc-office-canvas {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  contain: layout style;
+}
+
+/* Markdown 排版复用对话与 Canvas 的全局样式（markdown.css），此处只负责阅读区的版心与留白。 */
+.dc-markdown-content {
+  max-width: 880px;
+  min-height: 100%;
+  margin: 0 auto;
+  padding: 32px 40px 48px;
+  text-align: left;
+}
+
+.dc-paper-loading {
+  width: 62px;
+  height: 78px;
+  padding: 20px 12px;
+  border: 1px solid #dce3ef;
+  box-shadow: 4px 4px 0 #f0f3f9;
+  border-radius: 2px;
+}
+
+.dc-paper-loading i {
+  display: block;
+  height: 2px;
+  background: #dce4f1;
+  margin: 8px 0;
+  animation: paper-pulse 1.4s ease-in-out infinite;
+}
+
+.dc-paper-loading i:nth-child(2) {
+  width: 80%;
+  animation-delay: .15s;
+}
+
+.dc-paper-loading i:nth-child(3) {
+  width: 50%;
+  animation-delay: .3s;
+}
+
+@keyframes paper-pulse {
+  50% {
+    opacity: .3;
+  }
+}
+
+/* 纸张移开后，阅读区按「工具条 → 标题 → 出处 → 纸面」的顺序轻轻浮起。
+   阅读区在过场中点（440ms）挂载，纸张 61% 处才开始移开，
+   因此延迟整体压在 .12s 之后，浮起刚好跟着纸张掀开的节奏。 */
+@keyframes dc-reader-rise {
+  from {
+    opacity: 0;
+    transform: translateY(13px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.dc-reader-tools,
+.dc-reader-heading h2,
+.dc-reader-heading p,
+.dc-reading-surface {
+  animation: dc-reader-rise .46s cubic-bezier(.2, .7, .3, 1) both;
+}
+
+.dc-reader-heading h2 {
+  animation-delay: .12s;
+}
+
+.dc-reader-heading p {
+  animation-delay: .18s;
+}
+
+.dc-reading-surface {
+  animation-delay: .24s;
+}
+
+/* 渐隐渐显：纸张遮住画面之前，工作区先溶解掉；纸张移开时再浮现。
+   0%~41% 淡出、41%~60% 全隐、60%~100% 淡入。全隐窗口刻意收在纸张完全遮住的
+   39%~61% 之内，布局切换发生在中点 50%，两头都留出余量。 */
+@keyframes dc-workspace-dissolve {
+  from {
+    opacity: 1;
+  }
+
+  41%,
+  60% {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.delivery-center.is-turning .dc-workspace {
+  animation: dc-workspace-dissolve var(--dc-turn-ms) ease-in-out both;
+}
+
+/* 抽页过场：一张横格纸扫过整个视口，遮住画面的中点完成布局切换。
+   元素被 Teleport 到 body，因此这里用 fixed 铺满视口，并自带 --dc-turn-ms
+   （脱离 .delivery-center 后不再继承它上面的同名变量）。 */
+.dc-page-turn {
+  --dc-turn-dir: 1;
+  /* 与 DeliveryCenterView.vue 的 TURN_MS 保持一致，数值需与 .delivery-center 上的定义相同。 */
+  --dc-turn-ms: 880ms;
+  position: fixed;
+  inset: 0;
+  /* 盖住头部与工作区侧栏，但低于弹窗、图片查看器等模态层。 */
+  z-index: 1200;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.dc-page-turn.is-back {
+  --dc-turn-dir: -1;
+}
+
+.dc-page-turn-sheet {
+  position: absolute;
+  /* 超出容器 26px：停留段圆角与叠纸阴影都被裁掉，不会漏出底下的内容。 */
+  inset: -26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 clamp(28px, 9vw, 140px);
+  border-radius: 3px 26px 26px 3px;
+  background-color: #f7f9fd;
+  background-image:
+    repeating-linear-gradient(to bottom, #e3e9f400 0 26px, #e3e9f459 26px 27px),
+    linear-gradient(104deg, #fdfeff 0%, #f4f7fc 48%, #e9eef8 100%);
+  /* 前缘探出的几道纸边，延续档案卡片的错位投影语言。 */
+  box-shadow:
+    inset 0 0 0 1px #d9e1ef,
+    calc(var(--dc-turn-dir) * 13px) 0 0 -5px #eaeff8,
+    calc(var(--dc-turn-dir) * 24px) 0 0 -11px #f3f7fd,
+    calc(var(--dc-turn-dir) * 30px) 0 30px -16px #46597e33;
+  animation: dc-page-turn var(--dc-turn-ms) cubic-bezier(.4, .1, .2, 1) both;
+}
+
+.dc-page-turn.is-back .dc-page-turn-sheet {
+  border-radius: 26px 3px 3px 26px;
+}
+
+/* 纸张自身也淡入淡出：20% 前凝实、82% 后化开，扫过时是一道纱而不是一堵墙。
+   39%~61% 是停留段，画面被完全遮住，布局切换就在这段的中点发生。
+   入场用较长的减速段，纸张早早「贴住」画面中央，标签还没停稳就已经能读了。 */
+@keyframes dc-page-turn {
+  from {
+    transform: translateX(calc(var(--dc-turn-dir) * -104%));
+    opacity: 0;
+  }
+
+  20% {
+    opacity: 1;
+  }
+
+  39%,
+  61% {
+    transform: translateX(0);
+    opacity: 1;
+    /* 出场反过来：先在中央迟疑一下再被抽走，把可读时间尽量往后留。 */
+    animation-timing-function: cubic-bezier(.5, .02, .68, .35);
+  }
+
+  82% {
+    opacity: 1;
+  }
+
+  to {
+    transform: translateX(calc(var(--dc-turn-dir) * 104%));
+    opacity: 0;
+  }
+}
+
+.dc-page-turn-label {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  width: min(520px, 100%);
+  padding: 21px 27px 23px;
+  border: 1px solid #dde4ef;
+  border-radius: 3px 15px 3px 3px;
+  background: #ffffffee;
+  box-shadow: 5px 5px 0 #e5eaf4;
+  animation: dc-page-turn-label var(--dc-turn-ms) cubic-bezier(.36, .1, .3, 1) both;
+}
+
+/* 标签在纸面上原地浮起、原地化开，不跟着纸一起滑出画面边缘。
+   完全不透明的窗口拉到 33%~67%（约 300ms），加上前后两段淡入淡出，
+   整段可读时间接近半秒，够把「格式 / 文件名 / 状态」三行看完。 */
+@keyframes dc-page-turn-label {
+  from {
+    transform: translateY(10px);
+    opacity: 0;
+  }
+
+  14% {
+    transform: translateY(10px);
+    opacity: 0;
+  }
+
+  33%,
+  67% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  84% {
+    transform: translateY(-8px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(-8px);
+    opacity: 0;
+  }
+}
+
+.dc-page-turn-format {
+  align-self: flex-start;
+  padding-bottom: 4px;
+  border-bottom: 2px solid #7f95c1;
+  color: #6f83ad;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 2.2px;
+}
+
+.dc-page-turn-name {
+  font-family: 'SmileySansOblique', 'Microsoft YaHei', sans-serif;
+  font-size: clamp(21px, 3vw, 32px);
+  font-weight: 400;
+  letter-spacing: 2px;
+  color: #303b58;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.dc-page-turn-note {
+  color: #8b98ae;
+  font-size: 11px;
+  letter-spacing: 1.4px;
+}
+
+/* 过场层已传送到 body，脱离了 delivery 容器，窄屏适配改用视口查询。 */
+@media (max-width: 760px) {
+  .dc-page-turn-sheet {
+    padding: 0 clamp(18px, 6vw, 40px);
+  }
+
+  .dc-page-turn-label {
+    gap: 7px;
+    padding: 16px 19px 18px;
+    box-shadow: 4px 4px 0 #e5eaf4;
+  }
+}
+
+@container delivery (min-width: 1600px) {
+  .is-reading .dc-catalog {
+    flex-basis: 285px;
+  }
+}
+
+@container delivery (max-width: 1100px) {
+  /* 只收窄左右与底部留白，顶部留白交给 .dc-workspace 的连续斜坡，避免纵向台阶。 */
+  .dc-workspace {
+    padding-inline: 16px;
+    padding-bottom: 12px;
+  }
+
+  .dc-dossier {
+    grid-template-columns: 160px minmax(0, 1fr);
+    gap: 20px;
+  }
+
+  .dc-categories {
+    gap: 18px;
+  }
+
+  .is-reading .dc-workspace {
+    padding-inline: 14px;
+    padding-bottom: 12px;
+  }
+
+  .is-reading .dc-layout {
+    gap: 18px;
+  }
+
+  .is-reading .dc-catalog {
+    flex-basis: 215px;
+  }
+
+  .dc-reader {
+    padding-left: 18px;
+  }
+
+  .dc-reader-heading h2 {
+    font-size: 26px;
+  }
+
+  .dc-reader-actions {
+    gap: 8px;
+  }
+
+  .dc-download {
+    gap: 5px;
+    padding: 8px 11px;
+  }
+}
+
+@container delivery (max-width: 760px) {
+  .dc-workspace {
+    padding-inline: 12px;
+    padding-bottom: 10px;
+  }
+
+  .dc-masthead {
+    padding-bottom: 23px;
+  }
+
+  .dc-heading h1 {
+    font-size: 27px;
+  }
+
+  .dc-mark {
+    display: none;
+  }
+
+  .dc-collection-note {
+    font-size: 10px;
+    line-height: 1.7;
+  }
+
+  .dc-dossier {
+    display: block;
+    padding: 24px 0;
+  }
+
+  .dc-dossier-heading {
+    margin-bottom: 20px;
+    padding-top: 0;
+  }
+
+  .dc-dossier-count {
+    display: none;
+  }
+
+  .dc-origin {
+    padding: 4px 0 0;
+  }
+
+  .dc-documents {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 13px;
+  }
+
+  .dc-document-open {
+    min-height: 104px;
+    padding: 11px 12px;
+  }
+
+  .dc-document-name {
+    font-size: 13px;
+    margin: 8px 0 7px;
+  }
+
+  .dc-document-bottom {
+    font-size: 9px;
+  }
+
+  .dc-open-hint {
+    display: none;
+  }
+
+  .dc-categories {
+    gap: 17px;
+  }
+
+  .dc-categories button {
+    font-size: 12px;
+  }
+
+  .dc-index-bar {
+    flex-wrap: wrap;
+  }
+
+  .dc-index-side {
+    flex: 1 1 100%;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 10px 14px;
+  }
+
+  .dc-search-tools {
+    flex: 1 1 140px;
+    width: auto;
+    min-width: 0;
+  }
+
+  .is-reading .dc-catalog {
+    display: none;
+  }
+
+  .dc-reader {
+    border: 0;
+    padding-left: 0;
+  }
+
+  .dc-reader-heading {
+    padding: 17px 0;
+  }
+
+  .dc-reader-heading h2 {
+    font-size: 25px;
+  }
+
+  .dc-reader-actions {
+    gap: 12px;
+  }
+
+  .dc-reader-tools {
+    gap: 8px;
+  }
+
+  .dc-text-content {
+    padding: 22px;
+  }
+
+  .dc-markdown-content {
+    padding: 24px 22px 36px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .dc-document,
+  .dc-document::after,
+  .dc-document-open,
+  .dc-open-hint,
+  .dc-catalog-scroll,
+  .dc-index-pager :deep(li),
+  .dc-index-pager :deep(.ant-pagination-item)::after,
+  .dc-index-pager :deep(.ant-pagination-item a),
+  .dc-index-pager :deep(.ant-pagination-item-link) {
+    transition: none;
+  }
+
+  .dc-page-turn-sheet,
+  .dc-page-turn-label,
+  .delivery-center.is-turning .dc-workspace,
+  .dc-reader-tools,
+  .dc-reader-heading h2,
+  .dc-reader-heading p,
+  .dc-reading-surface,
+  .dc-paper-loading i,
+  .dc-refresh-progress::after {
+    animation: none;
+  }
+
+  /* 不做滑动动画时，用一条静止的细线表示正在刷新。 */
+  .dc-refresh-progress::after {
+    left: 0;
+    width: 100%;
+  }
+}

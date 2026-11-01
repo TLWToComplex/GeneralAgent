@@ -1,0 +1,161 @@
+# ============================================
+# LLM-OPS（大模型集 / 统一网关）— 服务编排（ARM64 / aarch64）
+# 6 个服务，使用自定义 bridge 网络 llm-net，服务间通过容器名 DNS 互联
+#（config/ 中引用 llm-mysql / llm-litellm / llm-prometheus / llm-backend / postgres）
+# 对外端口（宿主机:容器内）：mysql 23306:3306 / postgres 25432:15432
+#           litellm 24000:4000 / prometheus 29090:9090
+#           backend 28038:8038 / frontend(nginx) 25173:5173
+# 每个服务固定 platform: linux/arm64
+# x86_64 服务器请使用 docker-compose.yml（import-and-start.sh 自动选择）
+# 说明：各服务均加 security_opt: seccomp:unconfined —— 旧版 Docker（<20.10.10）
+# 默认 seccomp 对 clone3 返回 EPERM，导致新 glibc 镜像（postgres:16 / mysql:8.3 /
+# node 等）派生子进程失败（postgres 表现为 initdb "popen failure: Operation not
+# permitted"）。升级宿主机 Docker 到 20.10.10+（建议 24+）后可移除，详见指南 Q11。
+# ============================================
+services:
+
+  # ---- MySQL（后端数据库）----
+  mysql:
+    image: mysql:8.3
+    platform: linux/arm64
+    container_name: llm-mysql
+    restart: unless-stopped
+    security_opt:
+      - seccomp:unconfined
+    networks:
+      - llm-net
+    ports:
+      - "23306:3306"
+    environment:
+      TZ: Asia/Shanghai
+      MYSQL_ROOT_PASSWORD: "123456"
+      MYSQL_DATABASE: ai_service
+      MYSQLD_OPTS: "--lower-case-table-names=1 --character-set-server=utf8mb4 --collation-server=utf8mb4_0900_ai_ci --max_connections=1000 --innodb_buffer_pool_size=24G --innodb_flush_log_at_trx_commit=0 --innodb_log_file_size=512M --max_allowed_packet=256M"
+    volumes:
+      - ./data/mysql:/var/lib/mysql
+      - ./sql/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./logs/mysql:/var/log/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p123456"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  # ---- PostgreSQL（LiteLLM 数据库）----
+  postgres:
+    image: postgres:16
+    platform: linux/arm64
+    container_name: llm-postgres
+    restart: unless-stopped
+    security_opt:
+      - seccomp:unconfined
+    networks:
+      - llm-net
+    ports:
+      - "25432:15432"
+    environment:
+      TZ: Asia/Shanghai
+      POSTGRES_DB: litellm
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: "1qaz2wsx3edc"
+      PGPORT: 15432
+    volumes:
+      - ./data/pgdata:/var/lib/postgresql/data
+      - ./logs/postgres:/var/log/postgresql
+    command: ["-c", "logging_collector=on", "-c", "log_directory=/var/log/postgresql"]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U admin -d litellm -p 15432"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  # ---- LiteLLM 统一网关 ----
+  litellm:
+    image: docker.litellm.ai/berriai/litellm:main-latest
+    platform: linux/arm64
+    container_name: llm-litellm
+    restart: unless-stopped
+    security_opt:
+      - seccomp:unconfined
+    networks:
+      - llm-net
+    ports:
+      - "24000:4000"
+    environment:
+      TZ: Asia/Shanghai
+      DATABASE_URL: "postgresql://admin:1qaz2wsx3edc@postgres:15432/litellm"
+      LITELLM_MASTER_KEY: "sk-master-1234"
+      STORE_MODEL_IN_DB: "True"
+      LITELLM_PROMETHEUS: "True"
+      LITELLM_TELEMETRY: "False"
+      LITELLM_LOCAL_MODEL_COST_MAP: "true"
+      LITELLM_LOGGING_CALLBACKS: '["prometheus"]'
+    volumes:
+      - ./config/litellm.yaml:/app/config.yaml
+    command: ["--config", "/app/config.yaml"]
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  # ---- Prometheus（监控）----
+  prometheus:
+    image: prom/prometheus:latest
+    platform: linux/arm64
+    container_name: llm-prometheus
+    restart: unless-stopped
+    security_opt:
+      - seccomp:unconfined
+    networks:
+      - llm-net
+    ports:
+      - "29090:9090"
+    environment:
+      TZ: Asia/Shanghai
+    volumes:
+      - ./config/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./config/prometheus/litellm_alerts.yml:/etc/prometheus/litellm_alerts.yml
+
+  # ---- 后台管理（Flask API）----
+  backend:
+    image: llm-backend:latest
+    platform: linux/arm64
+    container_name: llm-backend
+    restart: unless-stopped
+    security_opt:
+      - seccomp:unconfined
+    networks:
+      - llm-net
+    ports:
+      - "28038:8038"
+    volumes:
+      - ./config/config.yaml:/code/config.yaml
+      - ./logs/backend:/code/logs
+    environment:
+      PYTHONUNBUFFERED: "1"
+    command: ["sh", "-c", "python main.py 2>&1 | tee -a /code/logs/backend.log"]
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+  # ---- 前端（Nginx + Vue）----
+  frontend:
+    image: llm-frontend:latest
+    platform: linux/arm64
+    container_name: llm-frontend
+    restart: unless-stopped
+    security_opt:
+      - seccomp:unconfined
+    networks:
+      - llm-net
+    ports:
+      - "25173:5173"
+    volumes:
+      - ./config/nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - ./config/config.js:/usr/share/nginx/html/config.js
+      - ./logs/nginx:/var/log/nginx
+    depends_on:
+      - backend
+
+networks:
+  llm-net:
+    driver: bridge

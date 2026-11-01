@@ -1,0 +1,9 @@
+# MirrorHub x86_64 离线安装包 — SHA256 校验清单
+# 生成时间: 2026-10-15 10:10:26
+# 校验方法: sha256sum -c SHA256SUMS
+
+eeaeecfbec569786341e5711c3540fb998d2b37df6bb5c89b676e86aa87c579a  images/mirrorhub-backend.tar
+71009722b91d7bf1e6f5410a99f0022de655d4a30aa8c01beaa249a90079e647  images/mirrorhub-devpi.tar
+dda689342248d9da629e9bae301ef35f9b6c352e29a93c7ef3529af45764fcce  images/mirrorhub-verdaccio.tar
+03370be4372eef7ae7dab9eabc06a685869c2f74f611996c60f13973d1fc7292  images/nginx-1.28.0.tar
+e334e9909d350b10fa080228285d619779e413780ef1ce5a2ac36bf9db7a7340  images/postgres-16.tar

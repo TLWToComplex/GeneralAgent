@@ -1,0 +1,86 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.pyc
+*.pyo
+__init__.py
+
+# Virtual environment
+venv/
+env/
+.venv/
+.venv3/
+.idea/
+
+# Compiled source
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+
+# Logs and databases
+*.log
+*.sqlite
+
+# Caches
+__pycache__/
+.cache/
+
+# Temporary files
+*.bak
+*.swp
+*.tmp
+
+# IDE specific files
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# pycodestyle, pyflakes, coverage
+.coverage
+.tox
+nosetests.xml
+coverage.xml
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+
+# Environments
+.env
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Django development
+*.log
+
+# PyInstaller
+build/
+dist/
+*.spec
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+
+# Sphinx documentation
+docs/_build/
+.doctrees/
+*.inv
+*.out
+
+# MyPy
+.mypy_cache/
+.dmypy.json
+
+# Pyright
+.pyright
+
+# Data directory
+*.db
+*.db-shm
+*.db-wal

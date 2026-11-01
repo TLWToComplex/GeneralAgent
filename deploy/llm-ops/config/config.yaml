@@ -1,0 +1,40 @@
+# Server config
+server:
+  host: "0.0.0.0"
+  port: 8038
+
+# Database config
+database:
+  url: "mysql+pymysql://root:123456@127.0.0.1:23306/ai_service?charset=utf8mb4"
+  track_modifications: false
+
+# User database config
+user_database:
+  url: "mysql+pymysql://root:123456@127.0.0.1:23306/chat_history?charset=utf8mb4"
+  track_modifications: false
+
+# Logging config
+logging:
+  level: "INFO"
+  simplified: true
+
+# SSO config
+sso:
+  url: "LOCAL_NO_AUTHZ"
+
+# Gateway config
+gateway:
+  base_url: "http://llm-litellm:4000"
+  auth_token: ""
+
+# Monitor config
+monitor:
+  base_url: "http://llm-prometheus:9090"
+
+# PostgreSQL config
+postgres:
+  host: "postgres"
+  port: 15432
+  database: "litellm"
+  user: "admin"
+  password: "1qaz2wsx3edc"

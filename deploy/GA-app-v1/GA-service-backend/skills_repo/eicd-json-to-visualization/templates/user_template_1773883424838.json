@@ -1,0 +1,272 @@
+{
+  "templateName": "new2",
+  "templateId": "user_template_1773883424838",
+  "description": "",
+  "version": "1.0",
+  "createdAt": "2026-03-19T01:23:44.838Z",
+  "canvas": {
+    "width": 1200,
+    "height": 800,
+    "backgroundColor": "#ffffff",
+    "gridSize": 20,
+    "showGrid": true
+  },
+  "layout": {
+    "type": "fixed",
+    "direction": "horizontal"
+  },
+  "styles": {
+    "device": {
+      "fill": "white",
+      "stroke": "black",
+      "strokeWidth": 1.5,
+      "fontFamily": "Arial",
+      "fontSize": 11
+    },
+    "connection": {
+      "stroke": "black",
+      "strokeWidth": 1,
+      "style": "orthogonal"
+    }
+  },
+  "positions": {
+    "2501U2201": {
+      "x": 550,
+      "y": 80
+    },
+    "2501U2203": {
+      "x": 550,
+      "y": 350
+    },
+    "RPDU1": {
+      "x": 60,
+      "y": 80
+    },
+    "RPDU2": {
+      "x": 60,
+      "y": 350
+    },
+    "GND-601": {
+      "x": 130,
+      "y": 240
+    },
+    "GND-600": {
+      "x": 130,
+      "y": 300
+    },
+    "GND-602": {
+      "x": 130,
+      "y": 540
+    },
+    "GND-603": {
+      "x": 130,
+      "y": 600
+    }
+  },
+  "connections": [
+    {
+      "id": "conn_0",
+      "from": {
+        "device": "",
+        "pin": ""
+      },
+      "to": {
+        "device": "",
+        "pin": ""
+      },
+      "waypoints": [
+        [
+          220,
+          145
+        ],
+        [
+          280,
+          145
+        ],
+        [
+          280,
+          130
+        ],
+        [
+          530,
+          130
+        ]
+      ],
+      "label": "1LN ESS D N"
+    },
+    {
+      "id": "conn_1",
+      "from": {
+        "device": "",
+        "pin": ""
+      },
+      "to": {
+        "device": "",
+        "pin": ""
+      },
+      "waypoints": [
+        [
+          130,
+          255
+        ],
+        [
+          130,
+          300
+        ],
+        [
+          400,
+          300
+        ],
+        [
+          400,
+          150
+        ],
+        [
+          530,
+          150
+        ]
+      ],
+      "label": ""
+    },
+    {
+      "id": "conn_2",
+      "from": {
+        "device": "",
+        "pin": ""
+      },
+      "to": {
+        "device": "",
+        "pin": ""
+      },
+      "waypoints": [
+        [
+          130,
+          315
+        ],
+        [
+          130,
+          330
+        ],
+        [
+          440,
+          330
+        ],
+        [
+          440,
+          170
+        ],
+        [
+          530,
+          170
+        ]
+      ],
+      "label": ""
+    },
+    {
+      "id": "conn_3",
+      "from": {
+        "device": "",
+        "pin": ""
+      },
+      "to": {
+        "device": "",
+        "pin": ""
+      },
+      "waypoints": [
+        [
+          220,
+          415
+        ],
+        [
+          280,
+          415
+        ],
+        [
+          280,
+          400
+        ],
+        [
+          530,
+          400
+        ]
+      ],
+      "label": "1LN ESS D N"
+    },
+    {
+      "id": "conn_4",
+      "from": {
+        "device": "",
+        "pin": ""
+      },
+      "to": {
+        "device": "",
+        "pin": ""
+      },
+      "waypoints": [
+        [
+          130,
+          555
+        ],
+        [
+          130,
+          600
+        ],
+        [
+          400,
+          600
+        ],
+        [
+          400,
+          420
+        ],
+        [
+          530,
+          420
+        ]
+      ],
+      "label": ""
+    },
+    {
+      "id": "conn_5",
+      "from": {
+        "device": "",
+        "pin": ""
+      },
+      "to": {
+        "device": "",
+        "pin": ""
+      },
+      "waypoints": [
+        [
+          130,
+          615
+        ],
+        [
+          130,
+          630
+        ],
+        [
+          440,
+          630
+        ],
+        [
+          440,
+          440
+        ],
+        [
+          530,
+          440
+        ]
+      ],
+      "label": ""
+    }
+  ],
+  "metadata": {
+    "author": "user",
+    "isDefault": false,
+    "tags": [
+      "custom",
+      "user"
+    ]
+  }
+}

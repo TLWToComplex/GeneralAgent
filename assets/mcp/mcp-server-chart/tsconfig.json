@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+    // 指定编译后的 JS 代码支持的版本（现代 Node.js 支持 ES2020+）
+    "target": "ES2020",
+
+    // 指定模块系统，Node.js 20+ 支持 ESNext + ESM 模块
+    "module": "ESNext",
+
+    // 模块解析策略适配 Node.js（尤其是使用 import/export 时）
+    "moduleResolution": "NodeNext",
+
+    // 输入文件夹（TS 源码）
+    "rootDir": "src",
+
+    // 输出文件夹（编译后的 JS）
+    "outDir": "dist",
+
+    // 严格模式（建议开启）
+    "strict": true,
+
+    // 允许默认导入 CommonJS 模块（如 express）
+    "esModuleInterop": true,
+
+    // 允许使用 `import fs from 'fs'`，否则需要写 `import * as fs from 'fs'`
+    "allowSyntheticDefaultImports": true,
+
+    // 编译时忽略库类型检查，提升性能
+    "skipLibCheck": true
+  },
+  "include": ["src"]
+}
+

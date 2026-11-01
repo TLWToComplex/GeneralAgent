@@ -1,0 +1,15 @@
+# GeneralAgent V2 身份认证与实例路由服务 —— 运行期依赖
+# 只迁移了「用户登录」相关能力，因此依赖保持最小集合。
+
+fastapi>=0.115,<1.0
+# 显式约束：FastAPI 目前要求 starlette<0.51，若环境里被装了 starlette 1.x，
+# 启动时会直接报 `Router.__init__() got an unexpected keyword argument 'on_startup'`
+starlette>=0.40,<0.51
+uvicorn[standard]>=0.30
+SQLAlchemy>=2.0.30,<3.0
+PyMySQL>=1.1.0
+PyJWT>=2.8.0
+Werkzeug>=3.0.1
+Pillow>=10.0.0
+PyYAML>=6.0
+python-dotenv>=1.0.1

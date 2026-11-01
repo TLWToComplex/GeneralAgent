@@ -1,0 +1,93 @@
+server:
+  host: 0.0.0.0
+  port: 8038
+  reload: false
+  public_host: localhost
+  public_port: 8038
+database:
+  url: mysql+pymysql://ga_user@127.0.0.1:3306/ai_service?charset=utf8mb4
+  track_modifications: false
+environment:
+  type: production
+logging:
+  level: INFO
+  simplified: true
+sso:
+  url: LOCAL_NO_AUTHZ
+kb_chat:
+  base_url: http://localhost:7861
+file_processing:
+  service_url: http://localhost:8200/api/process
+  timeout: 600
+screenshot:
+  save_dir: ./data/screenshots
+  default_width: 1280
+  default_height: 720
+  default_timeout: 30000
+deepagent:
+  skills:
+    path: D:/skills_repo
+    sandbox_path: /workspace/skills_repo
+    host_path: D:/skills_repo
+  checkpoint:
+    path_local: ./deepagent.db
+  llm:
+    model_context_size_ratio: 0.6
+  execution:
+    mode: docker
+    docker_image: skill-agent:latest
+    docker_container_name: skill-agent-sandbox
+    mount_skills: true
+    work_dir: /workspace
+    temp_dir: temp
+    package_mode: preinstalled
+    pip_mirror_url: http://127.0.0.1/pypi/root/local/+simple/
+    npm_mirror_url: http://127.0.0.1/npm/
+  memory:
+    host_path: D:/agent_memory
+    container_path: /code/agent_memory
+    sandbox_path: /workspace/agent_memory
+    files:
+    - AGENTS.md
+    - preferences.md
+    - knowledge.md
+travel_planner:
+  llm:
+    api_base_url: https://dashscope.aliyuncs.com/compatible-mode/v1
+    api_key: ''
+    model_name: qwen3-next-80b-a3b-instruct
+  checkpoint:
+    path_local: D:/zrq/cxzx/03 code/ai-service-backend/travel_planner.db
+  service_configs:
+    flights:
+      transport: sse
+      url: https://dashscope.aliyuncs.com/api/v1/mcps/Aviation/sse
+      headers:
+        Authorization: ''
+    railways:
+      transport: sse
+      url: http://58.87.70.82:8850/sse
+    hotels:
+      transport: sse
+      url: https://hotel.gqmg.com/sse/
+    gaode_map:
+      transport: sse
+      url: http://58.87.70.82:8849/sse
+langfuse:
+  enabled: false
+  host: http://127.0.0.1:3000
+  public_key: ''
+  secret_key: ''
+  project: SkillAgent
+chat_record:
+  retention_days: 180
+  cleanup_hour: 3
+  file:
+    host_path: D:/ai-service-backend/chat_record_files
+    container_path: D:/ai-service-backend/chat_record_files
+    sandbox_path: /workspace
+default_admin:
+  username: admin
+  password: Aa123456
+  realname: 管理员
+  email: admin@qq.com

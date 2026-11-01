@@ -1,0 +1,183 @@
+##############################################################################
+# 模型服务（GPU 版）Docker Compose 部署文件 —— 独立部署包
+# 适用环境：Ubuntu 22.04 LTS + Docker 29.1.0+ / Compose v2.40.0+
+#           + NVIDIA 驱动 + nvidia-container-toolkit
+# 使用方式：sudo bash import-and-start.sh（推荐）或 docker compose up -d
+#
+# 服务清单（5 个：4 个 GPU 推理服务 + 1 个 CPU 语音识别服务）：
+#   llm            Qwen3.8-27B 大语言模型      vllm/vllm-openai:v0.20.0     端口 8666        GPU [0,1,2,3] (TP=4)
+#   embedding      Qwen3-Embedding-4B 向量模型  vllm/vllm-openai:v0.20.0     端口 6667        GPU [4]
+#   reranker       Qwen3-Reranker-4B 重排模型   vllm/vllm-openai:v0.20.0     端口 6657        GPU [4]
+#   mineru-router  MinerU 文档解析路由          mineru:latest               端口 18002       GPU [5]
+#   funasr         FunASR 语音识别(ASR)         funasr:20260520             端口 10095/10096  CPU（无 GPU 预留）
+#
+# GPU 分配（device_ids，按 8 卡服务器规划，可在各服务下自行调整）：
+#   GPU 0,1,2,3 → llm（张量并行 4 卡）
+#   GPU 4       → embedding + reranker（4B 小模型共卡，各占 ~0.45 显存）
+#   GPU 5       → mineru-router
+#   GPU 6,7     → 预留空闲
+#   funasr      → 不占用 GPU（CPU 推理；如需 GPU 加速可自行添加 deploy.resources 预留）
+#
+# 说明：本包与 GA 应用系统（../GA-app/）完全独立，通过宿主机端口对外提供
+#       OpenAI 兼容 HTTP 接口（llm/embedding/reranker 的 /v1）、MinerU 解析接口
+#       与 FunASR 语音识别接口（websocket）。部署详情见 deployment_guide.md。
+##############################################################################
+
+services:
+
+  # ---- llm (Qwen3.8-27B 大语言模型，OpenAI 兼容，张量并行 4 卡) ----
+  # 服务地址: http://<服务器IP>:8666/v1   served-model-name: qwen3.8-27b
+  # 模型目录(宿主机): /data/llm/model/Qwen3.8-27B
+  llm:
+    image: vllm/vllm-openai:v0.20.0
+    container_name: vllm-qwen3.8-27b
+    restart: unless-stopped
+    ipc: host
+    ports:
+      - "8666:8666"
+    volumes:
+      - /data/llm/model/Qwen3.8-27B:/app/model
+    command:
+      - "--model"
+      - "/app/model"
+      - "--served-model-name"
+      - "qwen3.8-27b"
+      - "--host"
+      - "0.0.0.0"
+      - "--port"
+      - "8666"
+      - "--tensor-parallel-size"
+      - "4"
+      - "--gpu-memory-utilization"
+      - "0.9"
+      - "--max-model-len"
+      - "262144"
+      - "--trust-remote-code"
+      - "--enable-auto-tool-choice"
+      - "--tool-call-parser"
+      - "qwen3_coder"
+      - "--reasoning-parser"
+      - "qwen3"
+      - "--dtype"
+      - "auto"
+    ulimits:
+      memlock: -1
+      stack: 67108864
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              device_ids: [ "0", "1", "2", "3" ]    # 张量并行 4 卡
+              capabilities: [ gpu ]
+
+  # ---- embedding (Qwen3-Embedding-4B 向量模型，OpenAI 兼容) ----
+  # 服务地址: http://<服务器IP>:6667/v1   served-model-name: Qwen3-Embedding-4B
+  # 模型目录(宿主机): /data/embedding/model/Qwen3-Embedding-4B
+  embedding:
+    image: vllm/vllm-openai:v0.20.0
+    container_name: Qwen3-Embedding-4B
+    restart: unless-stopped
+    ipc: host
+    ports:
+      - "6667:8000"
+    volumes:
+      - /data/embedding/model:/models
+    command:
+      - "--model"
+      - "/models/Qwen3-Embedding-4B"
+      - "--served-model-name"
+      - "Qwen3-Embedding-4B"
+      - "--gpu-memory-utilization"
+      - "0.45"
+      - "--max-num-seqs"
+      - "16"
+      - "--no-enable-chunked-prefill"
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              device_ids: [ "4" ]    # 与 reranker 共卡
+              capabilities: [ gpu ]
+
+  # ---- reranker (Qwen3-Reranker-4B 重排模型，OpenAI 兼容) ----
+  # 服务地址: http://<服务器IP>:6657/v1   served-model-name: Qwen3-Reranker-4B
+  # 模型目录(宿主机): /data/reranker/model/Qwen3-Reranker-4B
+  reranker:
+    image: vllm/vllm-openai:v0.20.0
+    container_name: Qwen3-Reranker-4B
+    restart: unless-stopped
+    ipc: host
+    ports:
+      - "6657:8000"
+    volumes:
+      - /data/reranker/model:/models
+    command:
+      - "--model"
+      - "/models/Qwen3-Reranker-4B"
+      - "--served-model-name"
+      - "Qwen3-Reranker-4B"
+      - "--gpu-memory-utilization"
+      - "0.45"
+      - "--hf_overrides"
+      - '{"architectures": ["Qwen3ForSequenceClassification"], "classifier_from_token": ["no", "yes"], "is_original_qwen3_reranker": true}'
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              device_ids: [ "4" ]    # 与 embedding 共卡
+              capabilities: [ gpu ]
+
+  # ---- mineru-router (MinerU 文档解析路由，GPU 版) ----
+  # 服务地址: http://<服务器IP>:18002   健康检查: /health   解析接口: /file_parse
+  # 依赖: 宿主机模型目录 /data/mineru/models + 配置 /data/mineru/mineru.json
+  mineru-router:
+    image: mineru:latest
+    container_name: mineru-router
+    restart: unless-stopped
+    ports:
+      - "18002:8002"
+    environment:
+      MINERU_MODEL_SOURCE: local
+    volumes:
+      - /data/mineru/models:/models:ro                     # 模型（只读）
+      - /data/mineru/mineru.json:/root/mineru.json:ro      # 配置文件
+    entrypoint: mineru-router
+    # --local-gpus auto: 自动探测可见 GPU 并分配 worker
+    # --gpu-memory-utilization: vLLM KV cache 显存占比，显存不足时可降至 0.4 或更低
+    command: [ "--host", "0.0.0.0", "--port", "8002", "--local-gpus", "auto", "--gpu-memory-utilization", "0.5" ]
+    ulimits:
+      memlock: -1
+      stack: 67108864
+    ipc: host
+    healthcheck:
+      test: [ "CMD-SHELL", "curl -f http://localhost:8002/health || exit 1" ]
+      interval: 15s
+      timeout: 5s
+      retries: 10
+      start_period: 60s
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              device_ids: [ "5" ]
+              capabilities: [ gpu ]
+
+  # ---- funasr (FunASR 语音识别 / ASR，CPU 推理) ----
+  # 服务地址: ws://<服务器IP>:10095（在线/2pass websocket）, 10096（备用端口）
+  # 依赖: 宿主机模型目录 /data/funasr/models
+  # 说明: 默认不占用 GPU；如需 GPU 加速可自行添加 deploy.resources.reservations.devices
+  funasr:
+    image: funasr:20260520
+    container_name: funasr-online-server
+    restart: unless-stopped
+    ports:
+      - "10095:10095"
+      - "10096:10096"
+    environment:
+      FUNASR_OFFLINE: "1"
+    volumes:
+      - /data/funasr/models:/workspace/models

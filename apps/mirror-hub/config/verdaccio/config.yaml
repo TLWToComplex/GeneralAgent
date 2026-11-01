@@ -1,0 +1,41 @@
+listen:
+  - 0.0.0.0:4873
+
+storage: /verdaccio/storage
+plugins: /verdaccio/plugins
+
+# 发布大 tarball（如 sharp 原生二进制 8MB+）base64 后超过默认 10mb，
+# 会报 "request entity too large"，放开到 1gb。
+max_body_size: 1gb
+
+web:
+  title: 镜像源 - npm
+  enable: true
+  primary_color: "#1a1a2e"
+
+auth:
+  htpasswd:
+    file: /verdaccio/storage/htpasswd
+
+# 纯离线模式：不配置 uplinks / proxy。
+# 所有包都通过「导入」写入本地；镜像里没有的包直接 404，客户端报错，
+# 不会偷偷回源公网 —— 保证「内网装依赖」演示的真实性。
+packages:
+  '@*/*':
+    access: $all
+    publish: $authenticated
+    unpublish: $authenticated
+  '**':
+    access: $all
+    publish: $authenticated
+    unpublish: $authenticated
+
+server:
+  keepAliveTimeout: 60
+
+middlewares:
+  audit:
+    enabled: true
+
+logs:
+  - { type: stdout, format: pretty, level: http }

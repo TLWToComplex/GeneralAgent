@@ -1,0 +1,16 @@
+<section class="cr-section" id="ext-top-cities">
+<h2>前二十大城市及其他（按到达地）</h2>
+<p class="cr-meta">{{NOTE}}。本章节由 <b>top_cities</b> 模块渲染，纯 HTML/CSS。</p>
+<div class="cr-kpis">
+  <div><span>覆盖城市数</span><b>{{CITY_COUNT}}</b></div>
+  <div><span>总间夜</span><b>{{TOTAL_NIGHTS}}</b></div>
+  <div><span>总金额（元）</span><b>{{TOTAL_AMOUNT}}</b></div>
+  <div><span>整体平均房价（元/晚）</span><b>{{AVG_RATE}}</b></div>
+</div>
+<h3>城市明细（按间夜数降序，第21名起合并为“其他”）</h3>
+<table>
+<thead><tr><th>排名</th><th>城市</th><th>间夜数</th><th>间夜占比</th><th>金额（元）</th><th>金额占比</th><th>平均房价（元/晚）</th><th>订单数</th></tr></thead>
+<tbody>{{CITY_ROWS}}</tbody>
+</table>
+<p class="cr-meta">生成时间：{{GENERATED_AT}}。</p>
+</section>

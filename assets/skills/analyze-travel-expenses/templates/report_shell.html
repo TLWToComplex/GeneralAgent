@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>财务分析报告</title>
+<style>
+body{font:14px/1.6 "Microsoft YaHei",system-ui;margin:32px;color:#172033;background:#fff}
+h1{color:#17365d}
+h2{color:#17365d;margin-top:36px;border-left:4px solid #17365d;padding-left:10px}
+h3{color:#17365d;margin-bottom:8px}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px}
+.cards div{background:#edf3f8;padding:14px;border-radius:8px}
+.cards span{display:block;font-size:20px;margin-top:6px}
+table{border-collapse:collapse;width:100%;margin-bottom:28px}
+th,td{border:1px solid #ccd5df;padding:7px;text-align:right}
+th:first-child,td:first-child{text-align:left}
+th{background:#17365d;color:white}
+
+/* ===== 扩展模块章节（纯 CSS，无图表依赖） ===== */
+.cr-section{margin-top:48px;padding:24px 28px;background:#f7f9fc;border:1px solid #d7dfe9;border-radius:10px}
+.cr-section h2{margin-top:0;color:#17365d;border-left:4px solid #c0392b;padding-left:12px;font-size:22px}
+.cr-meta{color:#5a6b80;font-size:12.5px;margin:8px 0 18px;line-height:1.7}
+.cr-meta b{color:#17365d}
+.cr-section h3{color:#17365d;font-size:16px;margin:26px 0 10px;padding-bottom:6px;border-bottom:1px solid #ccd5df}
+.cr-kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:14px 0 8px}
+.cr-kpis div{background:#fff;border:1px solid #d7dfe9;border-radius:8px;padding:12px 14px}
+.cr-kpis b{display:block;font-size:22px;color:#c0392b;margin-top:4px}
+.cr-kpis span{font-size:12px;color:#5a6b80}
+.cr-section table{width:100%;border-collapse:collapse;margin:0 0 8px;background:#fff}
+.cr-section th{background:#17365d;color:#fff;font-weight:600;padding:8px 10px;border:1px solid #2a4a74;text-align:center}
+.cr-section td{border:1px solid #ccd5df;padding:6px 10px;text-align:right;font-size:13px}
+.cr-section td.cr-left{text-align:left}
+.cr-section td.cr-num{font-variant-numeric:tabular-nums}
+.cr-section tr.cr-sub td{background:#eef3f9;font-weight:700;color:#17365d}
+.cr-section td.cr-dept{background:#eef3f9;font-weight:700;color:#17365d;vertical-align:middle;text-align:center}
+.cr-section tr.cr-hot td{background:#fdf3f0}
+.cr-section td.cr-hot-num{color:#c0392b;font-weight:700}
+.cr-section tfoot td{background:#17365d;color:#fff;font-weight:700}
+
+/* 月度费用曲线（纯 SVG） */
+.mt-chart{background:#fff;border:1px solid #d7dfe9;border-radius:8px;padding:10px;margin:10px 0 18px}
+.mt-svg{width:100%;height:auto;display:block}
+.mt-detail td{font-size:12px;color:#5a6b80;background:#fbfcfe;padding:4px 10px}
+
+/* CSS 占比条（无图表依赖） */
+.cr-bar{position:relative;display:block;width:100%;min-width:70px;height:18px;background:#e8edf3;border-radius:4px;overflow:hidden}
+.cr-bar i{position:absolute;left:0;top:0;bottom:0;width:var(--w);background:var(--c);opacity:.28;border-radius:4px}
+.cr-bar b{position:relative;display:block;text-align:right;font-size:12px;font-weight:600;color:#172033;line-height:18px;padding-right:6px}
+@media (max-width:900px){.cr-kpis{grid-template-columns:repeat(2,1fr)}.cards{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+<h1>差旅消费综合分析</h1>
+{{MAIN_REPORT}}
+</body>
+</html>
