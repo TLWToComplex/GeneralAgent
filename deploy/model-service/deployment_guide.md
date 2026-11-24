@@ -113,6 +113,21 @@ docker compose logs -f llm                     # 查看日志
 
 > funasr 为 websocket 服务，不能用 `curl /health` 探测；用 `docker compose ps` 确认 `funasr-online-server` 为 running，并查看其日志确认 10095/10096 端口已监听。
 
+健康检查后执行真实推理验证，检查 Chat Completions、结构化工具调用、Embedding 和 Rerank 返回的内容与结构；任意失败时脚本返回非零退出码：
+
+```bash
+python3 verify_models.py
+```
+
+也可以从业务后端所在的机器执行，并使用 GPU 服务器的内网地址：
+
+```bash
+python3 verify_models.py --llm-url http://<服务器IP>:8666/v1 \
+  --embedding-url http://<服务器IP>:6667/v1 --rerank-url http://<服务器IP>:6657/v1
+```
+
+仅验证对话模型可加 `--llm-only`；启用了 API Key 的服务可通过环境变量 `VLLM_API_KEY` 提供凭据。
+
 llm 接口连通性测试：
 
 ```bash
